@@ -12,6 +12,8 @@ addons:
       - google-chrome
     packages:
       - google-chrome-stable
+  sonarcloud:
+    organization: bassages-github
 
 cache:
   directories:
