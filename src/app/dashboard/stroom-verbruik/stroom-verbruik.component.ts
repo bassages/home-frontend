@@ -64,7 +64,7 @@ export class StroomVerbruikComponent implements OnInit, OnDestroy {
     this.opgenomenVermogenObserver = this.stompService.watch('/topic/opgenomen-vermogen');
     this.opgenomenVermogenSubscription = this.opgenomenVermogenObserver.subscribe(
       (message) => {
-        let opgenomenVermogen = new OpgenomenVermogen();
+        const opgenomenVermogen = new OpgenomenVermogen();
         opgenomenVermogen.watt = message['watt'];
         opgenomenVermogen.tariefIndicator = message['tariefIndicator'];
         opgenomenVermogen.datumtijd = message['datumtijd'];
