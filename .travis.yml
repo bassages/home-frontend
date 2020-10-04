@@ -14,6 +14,8 @@ addons:
       - google-chrome-stable
   sonarcloud:
     organization: bassages-github
+    token:
+      secure: "XWadQbDwQMA/dilMy6xdlgvrs4jymWJGNtd1NGfSzCvqTZTkSTX5tCb+zDJme0j1WI/AGflQgM+bAgSvs97+Y0osrouanVc/tI3TBI0ysP0hOIfG1r934mlAydgiXOQlrsSmP0TmpwCy5sSxFJM4UgqyyQMrZKmXF1fAJKpWncx6if8Bv2JcX9eIogOEajH9xh3mtTMFryxZgu3f3Bp1u/0LHrhtMTMWOR63liJ+bxOoxHxWFADkVWBaquwvV9tiPeI2qLmiBCgntkUEH2V70k7yORBuwLOZmDyxQIsmqWhUyYZgP7zv01AVjHfckjkEr8fMpoFzTmJ7CghlOSP4hhvZ4M/d7t9+d6gpW+wwpIqn3miB3fxKetrvBF2V15yNCMNKbH193w56Ywc3V4B/YpIhep9gk8FJ0NICaL4ZfJJGWmR604Zw9sTdtXSZSLemZfHirU9yU1Gwyg+anyVH16UFOwDH7bUnloXO7ahI3I3oqL5LkSb2UqnvQOUeD+lcEhh4z/yANtg97h3dPEnqwhMl48hy3mvL5ITV49J5SlQ8rao0jUdsVtMKYs3zKNDdqlf1XmnXi/jmHAcNNKQN6OdCKq7eIqYrGJAwhI2+Uwk9ENOQkmQ4YFbPXZVq0W48Esp3nCvFf2bq5/iaegAzhIAoYXAniH5BnRmDYIxK7n0="
 
 cache:
   directories:
