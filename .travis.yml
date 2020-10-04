@@ -30,7 +30,7 @@ deploy:
   file_glob: true
   api_key:
     secure: n/3pQEM0nIC7/nFB0rzm4OEmnThQGhk8eQUJnkjbblrSMXbeSA1MuW0FaNWI3yO5figGlKy0H28aV2W15D2Sf7pX+qvkZ66yc/LCADmCIYcPA5yryH5OUoAWygmIppjq6m/+2IBKhm6/PAocTFvuReHuSoHrY3/1HWd6zJc34a+ASx5AI9QZfYooSpAnYkr93CmNYh+Npk773m7g76Utch+SqXriUYOQg9ussZBti7CWI4FxItDZ84d75B+kFTK9i/493cs8itgzcgvHtEisooa81pdqfk/ksPGlwlpLJh1RvLYNuBR3DhqvUfwV/A9R9+KiRl5xQ9exmUBAH9R2KbgzLQPbAMF6aF0fBRl4fK8CG17ZirnoYftnqYmC0Y65iKhBa7YRttNP4icS05qPfb77XbtjcdOISJnCFo6ddCr1X/4qmOziVvo6awbshRga3wg4WZX38xCcaqqS44lMk3HAyKDynWpXVHDQEaIDJZQeH/7oN6QTiD2NYJ7YpSN+n8QmzHWa/NAlLH4bxFF85dqkyo4Z4W82xtrhPT0GcyuTQRZfT2aoVITE6PW/jrV7stqlK/DH8MEudgRmi/h8MbSJgmff0MSHQn0mBh3fF+BdZLK5p0ukIbdWtmEnNtEiOAl2GXQwMZoopkyRXEr8vXgDz+IKNK/sL5Lny4N2vdE=
-  file: home-frontend/dist/home-frontend.zip
+  file: dist/home-frontend.zip
   on:
     repo: bassages/home-frontend
     tags: true
