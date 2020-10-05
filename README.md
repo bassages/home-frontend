@@ -16,13 +16,13 @@
 ## Impressie
 
 ### Actueel overzicht
-![Alt text](../home-frontend/documentation/screenshots/actueel-xl.jpg?raw=true "Actueel")
+![Alt text](documentation/screenshots/actueel-xl.jpg?raw=true "Actueel")
 
 ### Opgenomen vermogen
-![Alt text](../home-frontend/documentation/screenshots/opgenomen-vermogen.jpg?raw=true "Actueel")
+![Alt text](documentation/screenshots/opgenomen-vermogen.jpg?raw=true "Actueel")
 
 ### Kosten per dag in maand
-![Alt text](../home-frontend/documentation/screenshots/kosten-dag-xl.jpg?raw=true "Kosten per maand in jaar")
+![Alt text](documentation/screenshots/kosten-dag-xl.jpg?raw=true "Kosten per maand in jaar")
 
 ### Klimaat
-![Alt text](../home-frontend/documentation/screenshots/temperatuur.jpg?raw=true "Temperatuur")
+![Alt text](documentation/screenshots/temperatuur.jpg?raw=true "Temperatuur")
