@@ -19,10 +19,10 @@
       <li class="ml-auto mr-auto">
         <div class="btn-group btn-group-toggle">
           <label class="btn btn-outline-secondary" [ngClass]="{'active': isEnergieSoortSelected('stroom')}">
-            <input type="checkbox" [checked]="isEnergieSoortSelected('stroom')" (click)="toggleEnergiesoort('stroom')"><i class="fas fa-bolt"></i> Stroom
+            <input type="checkbox" [checked]="isEnergieSoortSelected('stroom')" (click)="toggleEnergiesoort('stroom')"><i class="fas fa-bolt" aria-hidden="true"></i> Stroom
           </label>
           <label class="btn btn-outline-secondary" [ngClass]="{'active': isEnergieSoortSelected('gas')}">
-            <input type="checkbox" [checked]="isEnergieSoortSelected('gas')" (change)="toggleEnergiesoort('gas')">&nbsp;&nbsp; <i class="fas fa-fire"></i> Gas&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" [checked]="isEnergieSoortSelected('gas')" (change)="toggleEnergiesoort('gas')">&nbsp;&nbsp; <i class="fas fa-fire" aria-hidden="true"></i> Gas&nbsp;&nbsp;&nbsp;
           </label>
         </div>
       </li>
@@ -50,10 +50,10 @@
   <!-- Energiesoort selection  -->
   <div class="row mb-2">
     <div class="col-6 pl-2 pr-1 pl-sm-0">
-      <button class="btn btn-outline-secondary btn-sm btn-block" [ngClass]="{'active': isEnergieSoortSelected('stroom')}" (click)="toggleEnergiesoort('stroom')"><i class="fas fa-bolt"></i> Stroom</button>
+      <button class="btn btn-outline-secondary btn-sm btn-block" [ngClass]="{'active': isEnergieSoortSelected('stroom')}" (click)="toggleEnergiesoort('stroom')"><i class="fas fa-bolt" aria-hidden="true"></i> Stroom</button>
     </div>
     <div class="col-6 pl-1 pr-2 pr-sm-0">
-      <button class="btn btn-outline-secondary btn-sm btn-block" [ngClass]="{'active': isEnergieSoortSelected('gas')}" (click)="toggleEnergiesoort('gas')"><i class="fas fa-fire"></i> Gas</button>
+      <button class="btn btn-outline-secondary btn-sm btn-block" [ngClass]="{'active': isEnergieSoortSelected('gas')}" (click)="toggleEnergiesoort('gas')"><i class="fas fa-fire" aria-hidden="true"></i> Gas</button>
     </div>
   </div>
 
