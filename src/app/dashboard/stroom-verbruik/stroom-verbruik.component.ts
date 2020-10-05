@@ -64,10 +64,11 @@ export class StroomVerbruikComponent implements OnInit, OnDestroy {
     this.opgenomenVermogenObserver = this.stompService.watch('/topic/opgenomen-vermogen');
     this.opgenomenVermogenSubscription = this.opgenomenVermogenObserver.subscribe(
       (message) => {
+        const json = JSON.parse(message.body);
         const opgenomenVermogen = new OpgenomenVermogen();
-        opgenomenVermogen.watt = message['watt'];
-        opgenomenVermogen.tariefIndicator = message['tariefIndicator'];
-        opgenomenVermogen.datumtijd = message['datumtijd'];
+        opgenomenVermogen.watt = json['watt'];
+        opgenomenVermogen.tariefIndicator = json['tariefIndicator'];
+        opgenomenVermogen.datumtijd = new Date(json['datumtijd']);
         this.setOpgenomenVermogen(opgenomenVermogen);
       }
     );
