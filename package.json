@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng lint && ng serve --open --proxy-config proxy.conf.json",
     "build": "ng lint && ng test --code-coverage --watch=false --browsers=ChromeHeadless && ng build --prod && cd dist && zip -r home-frontend.zip .",
-    "clean": "rm -rf node_modules",
+    "clean": "rm -rf node_modules && rm -rf dist && rm -rf coverage",
     "reinstall": "npm run clean && npm install",
     "rebuild": "npm run clean && npm install && npm run build",
     "test": "ng test",
