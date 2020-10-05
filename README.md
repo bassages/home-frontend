@@ -1,27 +1,28 @@
-# HomeServerFrontend
+# home-frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.1.
+<a href="https://travis-ci.com/bassages/home-frontend" taget="_blank"><img src="https://travis-ci.org/bassages/home-server.svg?branch=master" alt="Travis CI badge"></a>
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=bassages_home-frontend&metric=coverage)](https://sonarcloud.io/dashboard?id=bassages_home-frontend)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=bassages_home-frontend&metric=code_smells)](https://sonarcloud.io/dashboard?id=bassages_home-frontend)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=bassages_home-frontend&metric=bugs)](https://sonarcloud.io/dashboard?id=bassages_home-frontend)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=bassages_home-frontend&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=bassages_home-frontend)
 
-## Development server
+## Features
+- Beschikbaar stellen van slimme meter data uit [home-server](https://github.com/bassages/home-server) via een (reponsive) web interface
+- Beschikbaar stellen van klimaat sensor data uit [home-server](https://github.com/bassages/home-server) via een (reponsive) web interface
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Links
+[home-server](https://github.com/bassages/home-server)
 
-## Code scaffolding
+## Impressie
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Actueel overzicht
+![Alt text](../home-frontend/documentation/screenshots/actueel-xl.jpg?raw=true "Actueel")
 
-## Build
+### Opgenomen vermogen
+![Alt text](../home-frontend/documentation/screenshots/opgenomen-vermogen.jpg?raw=true "Actueel")
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+### Kosten per dag in maand
+![Alt text](../home-frontend/documentation/screenshots/kosten-dag-xl.jpg?raw=true "Kosten per maand in jaar")
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### Klimaat
+![Alt text](../home-frontend/documentation/screenshots/temperatuur.jpg?raw=true "Temperatuur")
