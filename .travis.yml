@@ -26,6 +26,9 @@ install:
 
 script:
   - npm run build
+# Run the sonar-scanner (available because under "addons" the "sonarcloud" addon is present)
+# Please note that automatic scanning must be disabled on the project in SonarCloud, to do that:
+# Go to your project’s Administration > Analysis Method page and turn Automatic Analysis off.
   - sonar-scanner
 
 deploy:
