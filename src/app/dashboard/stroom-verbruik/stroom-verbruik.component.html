@@ -11,10 +11,10 @@
     <div class="h3">
       {{opgenomenVermogen ? opgenomenVermogen.watt : '-'}} Watt
       <span ngbTooltip="Daltarief">
-        <i *ngIf="opgenomenVermogen?.tariefIndicator == 'DAL'" class="fas fa-moon"></i>
+        <i *ngIf="opgenomenVermogen?.tariefIndicator == 'DAL'" class="fas fa-moon" aria-hidden="true"></i>
       </span>
       <span ngbTooltip="Normaaltarief">
-        <i *ngIf="opgenomenVermogen?.tariefIndicator == 'NORMAAL'" class="fas fa-sun"></i>
+        <i *ngIf="opgenomenVermogen?.tariefIndicator == 'NORMAAL'" class="fas fa-sun" aria-hidden="true"></i>
       </span>
     </div>
 
