@@ -26,6 +26,7 @@ install:
 
 script:
   - npm run build
+  - sonar-scanner
 
 deploy:
   provider: releases
