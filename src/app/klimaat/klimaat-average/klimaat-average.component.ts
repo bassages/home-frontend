@@ -11,8 +11,7 @@ import {KlimaatSensorService} from '../klimaatsensor.service';
 
 @Component({
   selector: 'home-klimaat-average',
-  templateUrl: './klimaat-average.component.html',
-  styleUrls: ['./klimaat-average.component.scss']
+  templateUrl: './klimaat-average.component.html'
 })
 export class KlimaatAverageComponent implements OnInit {
 

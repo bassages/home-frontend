@@ -5,8 +5,7 @@ import isUndefined from 'lodash/isUndefined';
 
 @Component({
   selector: 'home-loading-indicator',
-  templateUrl: './loading-indicator.component.html',
-  styleUrls: ['./loading-indicator.component.scss']
+  templateUrl: './loading-indicator.component.html'
 })
 export class LoadingIndicatorComponent implements OnInit {
 

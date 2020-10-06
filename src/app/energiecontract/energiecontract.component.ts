@@ -15,8 +15,7 @@ const pricePattern = /^\d(,\d{1,6})*$/;
 
 @Component({
   selector: 'home-energiecontract',
-  templateUrl: './energiecontract.component.html',
-  styleUrls: ['./energiecontract.component.scss']
+  templateUrl: './energiecontract.component.html'
 })
 export class EnergiecontractComponent implements OnInit {
 

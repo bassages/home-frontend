@@ -8,8 +8,7 @@ const authenticatieTokenMaxLengthValidator = Validators.maxLength(255);
 
 @Component({
   selector: 'home-mindergasnl',
-  templateUrl: './mindergasnl.component.html',
-  styleUrls: ['./mindergasnl.component.scss']
+  templateUrl: './mindergasnl.component.html'
 })
 export class MindergasnlComponent implements OnInit {
 

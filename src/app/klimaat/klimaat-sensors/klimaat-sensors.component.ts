@@ -10,8 +10,7 @@ import {KlimaatSensorService} from '../klimaatsensor.service';
 
 @Component({
   selector: 'home-klimaat-sensors',
-  templateUrl: './klimaat-sensors.component.html',
-  styleUrls: ['./klimaat-sensors.component.scss']
+  templateUrl: './klimaat-sensors.component.html'
 })
 export class KlimaatSensorsComponent implements OnInit {
 

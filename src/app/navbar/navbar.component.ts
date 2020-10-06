@@ -4,8 +4,7 @@ import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'home-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  templateUrl: './navbar.component.html'
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   public isCollapsed = true;

@@ -24,8 +24,7 @@ const periodeToDateNavigatorModeMapping: Map<string, string> =
 
 @Component({
   selector: 'home-energie-verbruik',
-  templateUrl: './energie-verbruik.component.html',
-  styleUrls: ['./energie-verbruik.component.scss']
+  templateUrl: './energie-verbruik.component.html'
 })
 export class EnergieVerbruikComponent implements OnInit {
   public showChart = false;

@@ -25,8 +25,7 @@ import {KlimaatSensorService} from '../klimaatsensor.service';
 
 @Component({
   selector: 'home-klimaat-historie',
-  templateUrl: './klimaat-historie.component.html',
-  styleUrls: ['./klimaat-historie.component.scss']
+  templateUrl: './klimaat-historie.component.html'
 })
 export class KlimaatHistorieComponent implements OnInit {
 

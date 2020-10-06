@@ -19,8 +19,7 @@ import {ChartStatisticsService} from '../chart/statistics/chart-statistics.servi
 
 @Component({
   selector: 'home-opgenomen-vermogen',
-  templateUrl: './opgenomen-vermogen.component.html',
-  styleUrls: ['./opgenomen-vermogen.component.scss']
+  templateUrl: './opgenomen-vermogen.component.html'
 })
 export class OpgenomenVermogenComponent implements OnInit {
 

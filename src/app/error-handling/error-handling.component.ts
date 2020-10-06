@@ -5,8 +5,7 @@ import {Error} from './error';
 
 @Component({
   selector: 'home-error-handler',
-  templateUrl: './error-handling.component.html',
-  styleUrls: ['./error-handling.component.scss']
+  templateUrl: './error-handling.component.html'
 })
 export class ErrorHandlingComponent implements OnInit {
 

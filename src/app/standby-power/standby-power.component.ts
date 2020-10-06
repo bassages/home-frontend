@@ -8,8 +8,7 @@ import {Moment} from 'moment';
 
 @Component({
   selector: 'home-standby-power',
-  templateUrl: './standby-power.component.html',
-  styleUrls: ['./standby-power.component.scss']
+  templateUrl: './standby-power.component.html'
 })
 export class StandbyPowerComponent implements OnInit {
 

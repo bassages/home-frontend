@@ -9,8 +9,7 @@ import {ErrorHandingService} from '../error-handling/error-handing.service';
 
 @Component({
   selector: 'home-meterstand',
-  templateUrl: './meterstand.component.html',
-  styleUrls: ['./meterstand.component.scss'],
+  templateUrl: './meterstand.component.html'
 })
 export class MeterstandComponent implements OnInit {
 

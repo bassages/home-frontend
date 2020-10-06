@@ -13,8 +13,7 @@ import {KlimaatSensorService} from '../klimaatsensor.service';
 
 @Component({
   selector: 'home-klimaat-highest-lowest',
-  templateUrl: './klimaat-highest-lowest.component.html',
-  styleUrls: ['./klimaat-highest-lowest.component.scss']
+  templateUrl: './klimaat-highest-lowest.component.html'
 })
 export class KlimaatHighestLowestComponent implements OnInit {
   public sensors: KlimaatSensor[];
