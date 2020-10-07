@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {filter, map} from 'rxjs/operators';
 import * as moment from 'moment';
@@ -63,8 +63,10 @@ export class KlimaatService {
   }
 
   public getKlimaat(sensorCode: string, from: Moment, to: Moment): Observable<Klimaat[]> {
-    const url = `/api/klimaat/${sensorCode}?from=${from.format('YYYY-MM-DD')}&to=${to.format('YYYY-MM-DD')}`;
-    return this.http.get<BackendKlimaat[]>(url).pipe(map(KlimaatService.mapAllToKlimaat));
+    const url = `/api/klimaat/${sensorCode}`;
+    const params = new HttpParams().set('from', from.format('YYYY-MM-DD'))
+                                   .set('to', to.format('YYYY-MM-DD'));
+    return this.http.get<BackendKlimaat[]>(url, {params: params}).pipe(map(KlimaatService.mapAllToKlimaat));
   }
 
   public getMostRecent(sensorCode: string): Observable<RealtimeKlimaat> {
