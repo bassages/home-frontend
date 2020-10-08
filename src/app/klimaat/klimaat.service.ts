@@ -76,10 +76,12 @@ export class KlimaatService {
   }
 
   public getTop(sensorCode: string, sensorType: string, topType: string, from: Moment, to: Moment, limit: number): Observable<Klimaat[]> {
-    const formattedTo = to.format('YYYY-MM-DD');
-    const formattedForm = from.format('YYYY-MM-DD');
-    const url = `api/klimaat/${sensorCode}/${topType}?from=${formattedForm}&to=${formattedTo}&sensorType=${sensorType}&limit=${limit}`;
-    return this.http.get<BackendKlimaat[]>(url)
+    const params = new HttpParams().set('from', from.format('YYYY-MM-DD'))
+                                   .set('to', to.format('YYYY-MM-DD'))
+                                   .set('sensorType', sensorType)
+                                   .set('limit', limit.toString());
+    const url = `/api/klimaat/${sensorCode}/${topType}`;
+    return this.http.get<BackendKlimaat[]>(url, {params: params})
                     .pipe(map(KlimaatService.mapAllToKlimaat));
   }
 
