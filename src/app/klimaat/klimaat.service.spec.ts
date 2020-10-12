@@ -3,7 +3,6 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 import {KlimaatService} from './klimaat.service';
 import {Klimaat} from './klimaat';
 import * as moment from 'moment';
-import {GemiddeldeKlimaatPerMaand} from './gemiddeldeKlimaatPerMaand';
 
 describe('OpgenomenVermogenService', () => {
 
