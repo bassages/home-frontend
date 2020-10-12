@@ -86,8 +86,10 @@ export class KlimaatService {
   }
 
   public getGemiddeldeKlimaatPerMaand(sensorCode: string, sensorType: string, year: number): Observable<GemiddeldeKlimaatPerMaand[]> {
-    const url = `api/klimaat/${sensorCode}/gemiddeld-per-maand-in-jaar?jaar=${year}&sensorType=${sensorType}`;
-    return this.http.get<BackendGemiddeldeKlimaatPerMaand[][]>(url)
+    const params = new HttpParams().set('jaar', year.toString())
+                                   .set('sensorType', sensorType);
+    const url = `/api/klimaat/${sensorCode}/gemiddeld-per-maand-in-jaar`;
+    return this.http.get<BackendGemiddeldeKlimaatPerMaand[][]>(url, {params})
                     .pipe(map(KlimaatService.mapAllToGemiddeldeKlimaatPerMaand));
   }
 

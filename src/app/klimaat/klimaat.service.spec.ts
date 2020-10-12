@@ -3,6 +3,7 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 import {KlimaatService} from './klimaat.service';
 import {Klimaat} from './klimaat';
 import * as moment from 'moment';
+import {GemiddeldeKlimaatPerMaand} from './gemiddeldeKlimaatPerMaand';
 
 describe('OpgenomenVermogenService', () => {
 
@@ -60,6 +61,37 @@ describe('OpgenomenVermogenService', () => {
         const klimaat1: Klimaat = new Klimaat();
         const klimaat2: Klimaat = new Klimaat();
         const result = [klimaat1, klimaat2];
+        req.flush(result);
+      })
+  );
+
+  it('should get average per month in a given year for a sensorcode and sensorType by getting it from the backend api',
+    inject([HttpTestingController, KlimaatService],
+      (httpMock: HttpTestingController, service: KlimaatService) => {
+
+        // Call the service
+        service.getGemiddeldeKlimaatPerMaand('someSensorCode', 'someSensorType', 2017)
+          .subscribe(data => {
+            expect(data.length).toBe(2);
+            expect(data[0].gemiddelde).toEqual(10.32);
+            expect(data[0].maand.format('Y-MM-DD')).toEqual('2017-01-01');
+            expect(data[1].gemiddelde).toEqual(12.32);
+            expect(data[1].maand.format('Y-MM-DD')).toEqual("2017-02-01");
+          });
+
+        // Set the expectations for the HttpClient mock
+        const req = httpMock.expectOne( '/api/klimaat/someSensorCode/gemiddeld-per-maand-in-jaar?jaar=2017&sensorType=someSensorType');
+        expect(req.request.method).toEqual('GET');
+
+        // Set the fake data to be returned by the mock
+        const result = [[
+          {
+            maand: "2017-01-01",
+            gemiddelde: 10.32
+          }, {
+            maand: "2017-02-01",
+            gemiddelde: 12.32
+          }]];
         req.flush(result);
       })
   );
