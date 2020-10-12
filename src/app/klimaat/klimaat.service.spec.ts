@@ -76,7 +76,7 @@ describe('OpgenomenVermogenService', () => {
             expect(data[0].gemiddelde).toEqual(10.32);
             expect(data[0].maand.format('Y-MM-DD')).toEqual('2017-01-01');
             expect(data[1].gemiddelde).toEqual(12.32);
-            expect(data[1].maand.format('Y-MM-DD')).toEqual("2017-02-01");
+            expect(data[1].maand.format('Y-MM-DD')).toEqual('2017-02-01');
           });
 
         // Set the expectations for the HttpClient mock
@@ -86,14 +86,14 @@ describe('OpgenomenVermogenService', () => {
         // Set the fake data to be returned by the mock
         const result = [[
           {
-            maand: "2017-01-01",
+            maand: '2017-01-01',
             gemiddelde: 10.32
           }, {
-            maand: "2017-02-01",
+            maand: '2017-02-01',
             gemiddelde: 12.32
-          }]];
+          }
+        ]];
         req.flush(result);
       })
   );
-
 });
