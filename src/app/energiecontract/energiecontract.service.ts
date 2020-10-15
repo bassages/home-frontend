@@ -19,7 +19,11 @@ class BackendEnergiecontract {
 @Injectable()
 export class EnergiecontractService {
 
-static toEnergieContract(backendEnergieContract: BackendEnergiecontract): Energiecontract {
+  constructor(private http: HttpClient) { }
+
+  private readonly energycontractApiUrl = '/api/energycontract';
+
+  static toEnergieContract(backendEnergieContract: BackendEnergiecontract): Energiecontract {
     const energiecontract: Energiecontract = new Energiecontract();
     energiecontract.id = backendEnergieContract.id;
     energiecontract.leverancier = backendEnergieContract.leverancier;
@@ -48,10 +52,8 @@ static toEnergieContract(backendEnergieContract: BackendEnergiecontract): Energi
     return backendEnergiecontract;
   }
 
-  constructor(private http: HttpClient) { }
-
   public getAll(): Observable<Energiecontract[]> {
-    return this.http.get<BackendEnergiecontract[]>('/api/energiecontract')
+    return this.http.get<BackendEnergiecontract[]>(this.energycontractApiUrl)
                     .pipe(map(EnergiecontractService.allToEnergieContract));
   }
 
@@ -60,7 +62,7 @@ static toEnergieContract(backendEnergieContract: BackendEnergiecontract): Energi
   }
 
   public save(energieContract: Energiecontract): Observable<Energiecontract> {
-    return this.http.post<BackendEnergiecontract>('/api/energiecontract', EnergiecontractService.toBackendEnergieContract(energieContract))
+    return this.http.post<BackendEnergiecontract>(this.energycontractApiUrl, EnergiecontractService.toBackendEnergieContract(energieContract))
       .pipe(map(EnergiecontractService.toEnergieContract));
   }
 }
