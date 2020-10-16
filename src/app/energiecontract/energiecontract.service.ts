@@ -58,11 +58,12 @@ export class EnergiecontractService {
   }
 
   public delete(id: number): Observable<Object> {
-    return this.http.delete(`/api/energiecontract/${id}`);
+    return this.http.delete(`${this.energycontractApiUrl}/${id}`);
   }
 
   public save(energieContract: Energiecontract): Observable<Energiecontract> {
-    return this.http.post<BackendEnergiecontract>(this.energycontractApiUrl, EnergiecontractService.toBackendEnergieContract(energieContract))
+    return this.http.post<BackendEnergiecontract>(
+        this.energycontractApiUrl, EnergiecontractService.toBackendEnergieContract(energieContract))
       .pipe(map(EnergiecontractService.toEnergieContract));
   }
 }
