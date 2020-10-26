@@ -14,7 +14,7 @@ export class AuthService {
 
   constructor(private http: HttpClient,
               private router: Router,
-              private spinnerService: NgxSpinnerService,) {
+              private spinnerService: NgxSpinnerService) {
   }
 
   public determineCurrentLoginStatus() {
