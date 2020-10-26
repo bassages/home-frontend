@@ -7,12 +7,12 @@ import {Moment} from 'moment';
 import capitalize from 'lodash/capitalize';
 import isEqual from 'lodash/isEqual';
 import {ErrorHandingService} from '../error-handling/error-handing.service';
-import {LoadingIndicatorService} from '../loading-indicator/loading-indicator.service';
 import {DecimalPipe} from '@angular/common';
 import {combineLatest} from 'rxjs';
 import {EnergieVerbruikHistorieService} from './energie-verbruik-historie.service';
 import {EnergieVerbruikHistorieServiceProvider} from './energie-verbruik-historie-service-provider';
 import {VerbruikKostenOverzicht} from './verbruikKostenOverzicht';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 const periodeToDateNavigatorModeMapping: Map<string, string> =
   new Map<string, string>([
@@ -42,7 +42,7 @@ export class EnergieVerbruikComponent implements OnInit {
   private energieVerbruikHistorieService: EnergieVerbruikHistorieService<any>;
 
   constructor(private energieVerbruikChartServiceProvider: EnergieVerbruikHistorieServiceProvider,
-              private loadingIndicatorService: LoadingIndicatorService,
+              private spinnerService: NgxSpinnerService,
               private errorHandlingService: ErrorHandingService,
               private decimalPipe: DecimalPipe,
               private activatedRoute: ActivatedRoute,
@@ -94,12 +94,12 @@ export class EnergieVerbruikComponent implements OnInit {
   private getAndLoadData() {
     this.verbruiken = [];
 
-    this.loadingIndicatorService.open();
+    this.spinnerService.show();
 
     this.energieVerbruikHistorieService.getVerbruiken(this.selectedDate).subscribe(
       verbruiken => this.loadData(verbruiken),
       error => this.errorHandlingService.handleError('Het verbruik kon niet worden opgehaald', error),
-      () => this.loadingIndicatorService.close()
+      () => this.spinnerService.hide()
     );
   }
 

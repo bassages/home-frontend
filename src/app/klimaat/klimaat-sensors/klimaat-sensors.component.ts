@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {KlimaatService} from '../klimaat.service';
 import {ErrorHandingService} from '../../error-handling/error-handing.service';
-import {LoadingIndicatorService} from '../../loading-indicator/loading-indicator.service';
 import {KlimaatSensor} from '../klimaatSensor';
 import sortBy from 'lodash/sortBy';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {KlimaatSensorService} from '../klimaatsensor.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'home-klimaat-sensors',
@@ -23,7 +23,7 @@ export class KlimaatSensorsComponent implements OnInit {
 
   constructor(private klimaatService: KlimaatService,
               private klimaatSensorService: KlimaatSensorService,
-              private loadingIndicatorService: LoadingIndicatorService,
+              private spinnerService: NgxSpinnerService,
               private errorHandlingService: ErrorHandingService,
               private modalService: NgbModal) {
   }
@@ -41,14 +41,14 @@ export class KlimaatSensorsComponent implements OnInit {
   }
 
   private getKlimaatSensors(): void {
-    this.loadingIndicatorService.open();
+    this.spinnerService.show();
 
     this.klimaatSensorService.list().subscribe(
       response => {
         this.sensors = sortBy<KlimaatSensor>(response, ['code']);
       },
       error => this.errorHandlingService.handleError('De klimaat sensors konden nu niet worden opgehaald', error),
-      () => this.loadingIndicatorService.close()
+      () => this.spinnerService.hide()
     );
   }
 
@@ -69,7 +69,7 @@ export class KlimaatSensorsComponent implements OnInit {
   }
 
   public save(): void {
-    this.loadingIndicatorService.open();
+    this.spinnerService.show();
 
     const sensorToSave: KlimaatSensor = new KlimaatSensor();
     sensorToSave.code = this.code.value;
@@ -84,12 +84,12 @@ export class KlimaatSensorsComponent implements OnInit {
       error => {
         this.errorHandlingService.handleError('De wijzingen konden nu niet worden opgeslagen', error);
       },
-      () => this.loadingIndicatorService.close()
+      () => this.spinnerService.hide()
     );
   }
 
   public delete() {
-    this.loadingIndicatorService.open();
+    this.spinnerService.show();
 
     this.klimaatSensorService.delete(this.selectedSensor).subscribe(
       () => {
@@ -98,7 +98,7 @@ export class KlimaatSensorsComponent implements OnInit {
         this.editMode = false;
       },
       error => this.errorHandlingService.handleError('De klimaatsensor kon niet worden verwijderd', error),
-      () => this.loadingIndicatorService.close()
+      () => this.spinnerService.hide()
     );
   }
 

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MindergasnlService} from './mindergasnl.service';
-import {LoadingIndicatorService} from '../loading-indicator/loading-indicator.service';
 import {ErrorHandingService} from '../error-handling/error-handing.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 const authenticatieTokenMaxLengthValidator = Validators.maxLength(255);
 
@@ -37,7 +37,7 @@ export class MindergasnlComponent implements OnInit {
   }
 
   constructor(private mindergasnlService: MindergasnlService,
-              private loadingIndicatorService: LoadingIndicatorService,
+              private spinnerService: NgxSpinnerService,
               private errorHandlingService: ErrorHandingService) { }
 
   public ngOnInit(): void {
@@ -63,22 +63,22 @@ export class MindergasnlComponent implements OnInit {
   }
 
   private getMinderGasNlSettings(): void {
-    this.loadingIndicatorService.open();
+    this.spinnerService.show();
     this.mindergasnlService.get().subscribe(
       minderGasNlSettings => this.form.setValue(minderGasNlSettings),
       error => this.errorHandlingService.handleError('De instellingen voor MinderGas.nl konden nu niet opgehaald worden', error),
-      () => this.loadingIndicatorService.close()
+      () => this.spinnerService.hide()
     );
   }
 
   public save(): void {
     if (this.form.valid) {
-      this.loadingIndicatorService.open();
+      this.spinnerService.show();
       this.mindergasnlService.update(this.form.getRawValue()).subscribe(
         () => this.flashSavedMessage(),
         error => this.errorHandlingService.handleError('De instellingen konden niet opgeslagen worden', error),
         () => {
-          this.loadingIndicatorService.close();
+          this.spinnerService.hide();
           this.editMode = false;
         }
       );

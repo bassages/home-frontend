@@ -1,7 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {KlimaatSensor} from '../klimaatSensor';
 import {KlimaatService} from '../klimaat.service';
-import {LoadingIndicatorService} from '../../loading-indicator/loading-indicator.service';
 import {ErrorHandingService} from '../../error-handling/error-handing.service';
 import sortBy from 'lodash/sortBy';
 import map from 'lodash/map';
@@ -22,6 +21,7 @@ import {Statistics} from '../../statistics';
 import {ChartStatisticsService} from '../../chart/statistics/chart-statistics.service';
 import * as chroma from 'chroma-js';
 import {KlimaatSensorService} from '../klimaatsensor.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'home-klimaat-historie',
@@ -48,7 +48,7 @@ export class KlimaatHistorieComponent implements OnInit {
               private klimaatSensorService: KlimaatSensorService,
               private chartService: ChartService,
               private chartStatisticsService: ChartStatisticsService,
-              private loadingIndicatorService: LoadingIndicatorService,
+              private spinnerService: NgxSpinnerService,
               private errorHandlingService: ErrorHandingService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
@@ -87,7 +87,7 @@ export class KlimaatHistorieComponent implements OnInit {
   }
 
   private getKlimaatSensors(): void {
-    this.loadingIndicatorService.open();
+    this.spinnerService.show();
 
     this.klimaatSensorService.list().subscribe(
       response => {
@@ -101,7 +101,7 @@ export class KlimaatHistorieComponent implements OnInit {
             this.getAndLoadData();
           } else {
             this.loadData([]);
-            this.loadingIndicatorService.close();
+            this.spinnerService.hide();
           }
       },
       error => this.errorHandlingService.handleError('De klimaat sensors konden nu niet worden opgehaald', error),
@@ -171,11 +171,11 @@ export class KlimaatHistorieComponent implements OnInit {
   }
 
   private getAndLoadData(): void {
-    this.loadingIndicatorService.open();
+    this.spinnerService.show();
     this.klimaatService.getKlimaat(this.sensorCode, this.date, this.date.clone().add(1, 'days')).subscribe(
       klimaat => this.loadData(klimaat),
       error => this.errorHandlingService.handleError('Klimaat historie kon niet worden opgehaald', error),
-      () => this.loadingIndicatorService.close()
+      () => this.spinnerService.hide()
     );
   }
 

@@ -10,12 +10,12 @@ import min from 'lodash/min';
 import max from 'lodash/max';
 import map from 'lodash/map';
 import filter from 'lodash/filter';
-import {LoadingIndicatorService} from '../loading-indicator/loading-indicator.service';
 import {ErrorHandingService} from '../error-handling/error-handing.service';
 import {OpgenomenVermogen} from './opgenomen-vermogen';
 import {ChartService} from '../chart/chart.service';
 import {Statistics} from '../statistics';
 import {ChartStatisticsService} from '../chart/statistics/chart-statistics.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'home-opgenomen-vermogen',
@@ -41,7 +41,7 @@ export class OpgenomenVermogenComponent implements OnInit {
   constructor(private opgenomenVermogenService: OpgenomenVermogenService,
               private chartService: ChartService,
               private chartStatisticsService: ChartStatisticsService,
-              private loadingIndicatorService: LoadingIndicatorService,
+              private spinnerService: NgxSpinnerService,
               private errorHandlingService: ErrorHandingService,
               private router: Router,
               private activatedRoute: ActivatedRoute) { }
@@ -68,7 +68,7 @@ export class OpgenomenVermogenComponent implements OnInit {
   }
 
   private getAndLoadData() {
-    this.loadingIndicatorService.open();
+    this.spinnerService.show();
 
     const from = this.selectedDate;
     const to = from.clone().add(1, 'days');
@@ -76,7 +76,7 @@ export class OpgenomenVermogenComponent implements OnInit {
     this.opgenomenVermogenService.getHistory(from, to, this.periodLengthInSeconds).subscribe(
       opgenomenVermogens => this.loadDataIntoChart(opgenomenVermogens),
       error => this.errorHandlingService.handleError('Opgenomen vermogen kon niet worden opgehaald', error),
-      () => this.loadingIndicatorService.close()
+      () => this.spinnerService.hide()
     );
   }
 

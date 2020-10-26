@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AppComponent} from './app.component';
 import {MeterstandComponent} from './meterstand/meterstand.component';
@@ -10,11 +10,9 @@ import {DpDatePickerModule} from 'ng2-date-picker';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {NavbarComponent} from './navbar/navbar.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
-import {LoadingIndicatorComponent} from './loading-indicator/loading-indicator.component';
-import {LoadingIndicatorService} from './loading-indicator/loading-indicator.service';
 import {ErrorHandlingComponent} from './error-handling/error-handling.component';
 import {ErrorHandingService} from './error-handling/error-handing.service';
-import { environment } from '../environments/environment';
+import {environment} from '../environments/environment';
 import * as SockJS from 'sockjs-client';
 import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
 import {OpgenomenVermogenService} from './opgenomen-vermogen/opgenomen-vermogen.service';
@@ -50,6 +48,8 @@ import {AuthorizationInterceptor} from './auth/authorization-interceptor';
 import {AuthService} from './auth.service';
 import {LoginComponent} from './login/login.component';
 import {KlimaatSensorService} from './klimaat/klimaatsensor.service';
+import {NgxSpinnerModule} from 'ngx-spinner';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 export function socketProvider() {
   return new SockJS('/ws');
@@ -100,7 +100,6 @@ const appRoutes: Routes = [
     DashboardComponent,
     StroomVerbruikComponent,
     GasVerbruikComponent,
-    LoadingIndicatorComponent,
     ErrorHandlingComponent,
     EnergieVerbruikComponent,
     DateNavigatorComponent,
@@ -124,6 +123,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     NgbModule,
     DpDatePickerModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes, {enableTracing: false, useHash: true})
   ],
   providers: [
@@ -143,7 +144,6 @@ const appRoutes: Routes = [
     MindergasnlService,
     KlimaatService,
     KlimaatSensorService,
-    LoadingIndicatorService,
     StandbyPowerService,
     ErrorHandingService,
     {
@@ -161,7 +161,8 @@ const appRoutes: Routes = [
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 
 export class AppModule {

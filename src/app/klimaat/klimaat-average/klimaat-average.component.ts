@@ -3,11 +3,11 @@ import * as moment from 'moment';
 import {Moment} from 'moment';
 import {ErrorHandingService} from '../../error-handling/error-handing.service';
 import {KlimaatService} from '../klimaat.service';
-import {LoadingIndicatorService} from '../../loading-indicator/loading-indicator.service';
 import {KlimaatSensor} from '../klimaatSensor';
 import {GemiddeldeKlimaatPerMaand} from '../gemiddeldeKlimaatPerMaand';
 import sortBy from 'lodash/sortBy';
 import {KlimaatSensorService} from '../klimaatsensor.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'home-klimaat-average',
@@ -24,7 +24,7 @@ export class KlimaatAverageComponent implements OnInit {
 
   constructor(private klimaatService: KlimaatService,
               private klimaatSensorService: KlimaatSensorService,
-              private loadingIndicatorService: LoadingIndicatorService,
+              private spinnerService: NgxSpinnerService,
               private errorHandlingService: ErrorHandingService) {
   }
 
@@ -33,7 +33,7 @@ export class KlimaatAverageComponent implements OnInit {
   }
 
   private getKlimaatSensors(): void {
-    this.loadingIndicatorService.open();
+    this.spinnerService.show();
 
     this.klimaatSensorService.list().subscribe(
       response => {
@@ -49,13 +49,13 @@ export class KlimaatAverageComponent implements OnInit {
   }
 
   private getAndLoadData() {
-    this.loadingIndicatorService.open();
+    this.spinnerService.show();
     this.gemiddeldeKlimaatPerMaand = [];
 
     this.klimaatService.getGemiddeldeKlimaatPerMaand(this.sensorCode, this.sensorType, this.year.year()).subscribe(
       gemiddeldeKlimaatPerMaand => { this.gemiddeldeKlimaatPerMaand = gemiddeldeKlimaatPerMaand; },
       error => this.errorHandlingService.handleError('Gemiddelde klimaat kon niet worden opgehaald', error),
-      () => this.loadingIndicatorService.close()
+      () => this.spinnerService.hide()
     );
   }
 

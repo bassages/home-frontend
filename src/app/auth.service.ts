@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
-import {LoadingIndicatorService} from './loading-indicator/loading-indicator.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 const API_PATH_USER = '/api/user';
 
@@ -14,7 +14,7 @@ export class AuthService {
 
   constructor(private http: HttpClient,
               private router: Router,
-              private loadingIndicatorService: LoadingIndicatorService) {
+              private spinnerService: NgxSpinnerService,) {
   }
 
   public determineCurrentLoginStatus() {
@@ -57,7 +57,7 @@ export class AuthService {
 
   public loggedOut() {
     this.authenticatedSubject.next(false);
-    this.loadingIndicatorService.close();
+    this.spinnerService.hide();
     this.router.navigate(['/login']);
   }
 }

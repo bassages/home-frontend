@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
-import {LoadingIndicatorService} from '../loading-indicator/loading-indicator.service';
 import {Error} from './error';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Injectable()
 export class ErrorHandingService {
   private errorSubject = new Subject<Error>();
 
-  constructor(private loadingIndicatorService: LoadingIndicatorService) { }
+  constructor(private spinnerService: NgxSpinnerService,) { }
 
   public onError(): Observable<Error> {
     return this.errorSubject.asObservable();
@@ -15,7 +15,7 @@ export class ErrorHandingService {
 
   public handleError(message: String, causedBy: any) {
     console.error(message, causedBy);
-    this.loadingIndicatorService.close();
+    this.spinnerService.hide();
     this.errorSubject.next(new Error(message, causedBy));
   }
 }

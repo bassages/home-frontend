@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {KlimaatService} from '../klimaat.service';
-import {LoadingIndicatorService} from '../../loading-indicator/loading-indicator.service';
 import {ErrorHandingService} from '../../error-handling/error-handing.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
@@ -10,6 +9,7 @@ import sortBy from 'lodash/sortBy';
 import {zip} from 'rxjs';
 import {Router} from '@angular/router';
 import {KlimaatSensorService} from '../klimaatsensor.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'home-klimaat-highest-lowest',
@@ -27,7 +27,7 @@ export class KlimaatHighestLowestComponent implements OnInit {
 
   constructor(private klimaatService: KlimaatService,
               private klimaatSensorService: KlimaatSensorService,
-              private loadingIndicatorService: LoadingIndicatorService,
+              private spinnerService: NgxSpinnerService,
               private errorHandlingService: ErrorHandingService,
               private router: Router) {
   }
@@ -37,7 +37,7 @@ export class KlimaatHighestLowestComponent implements OnInit {
   }
 
   private getKlimaatSensors(): void {
-    this.loadingIndicatorService.open();
+    this.spinnerService.show();
 
     this.klimaatSensorService.list().subscribe(
       response => {
@@ -53,7 +53,7 @@ export class KlimaatHighestLowestComponent implements OnInit {
   }
 
   private getAndLoadData(): void {
-    this.loadingIndicatorService.open();
+    this.spinnerService.show();
 
     const from: Moment = this.getFrom();
     const to: Moment = this.getTo();
@@ -66,7 +66,7 @@ export class KlimaatHighestLowestComponent implements OnInit {
         this.highestKlimaats = klimaats[1];
       },
       error => this.errorHandlingService.handleError('Hoogste/laagste klimaat kon niet worden opgehaald', error),
-      () => this.loadingIndicatorService.close()
+      () => this.spinnerService.hide()
     );
   }
 

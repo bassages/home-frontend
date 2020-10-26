@@ -4,8 +4,8 @@ import {MeterstandOpDag} from './meterstandOpDag';
 import sortBy from 'lodash/sortBy';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {LoadingIndicatorService} from '../loading-indicator/loading-indicator.service';
 import {ErrorHandingService} from '../error-handling/error-handing.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'home-meterstand',
@@ -18,7 +18,7 @@ export class MeterstandComponent implements OnInit {
   public sortedMeterstandenPerDag: MeterstandOpDag[] = [];
 
   constructor(private meterstandService: MeterstandService,
-              private loadingIndicatorService: LoadingIndicatorService,
+              private spinnerService: NgxSpinnerService,
               private errorHandlingService: ErrorHandingService) {
   }
 
@@ -36,12 +36,12 @@ export class MeterstandComponent implements OnInit {
     const from = this.selectedYearMonth.clone().startOf('month');
     const to = from.clone().add(1, 'month');
 
-    this.loadingIndicatorService.open();
+    this.spinnerService.show();
 
     this.meterstandService.getMeterstanden(from, to).subscribe(
       response => this.sortedMeterstandenPerDag = sortBy<MeterstandOpDag>(response, ['dag']),
       error => this.errorHandlingService.handleError('De meterstanden konden nu niet worden opgehaald', error),
-      () => this.loadingIndicatorService.close()
+      () => this.spinnerService.hide()
     );
   }
 
