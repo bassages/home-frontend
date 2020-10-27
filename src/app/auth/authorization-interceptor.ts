@@ -1,19 +1,16 @@
-import {Inject, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {EMPTY, Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {EMPTY, throwError} from 'rxjs';
-import {DOCUMENT} from '@angular/common';
 import {AuthService} from '../auth.service';
 
 @Injectable()
 export class AuthorizationInterceptor implements HttpInterceptor {
 
-  constructor(@Inject(DOCUMENT) private document: any,
-              private authService: AuthService) {
+  public constructor(private readonly authService: AuthService) {
   }
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const xhr = request.clone({
       // Prevent Basic-auth popup from browser
       headers: request.headers.set('X-Requested-With', 'XMLHttpRequest')
