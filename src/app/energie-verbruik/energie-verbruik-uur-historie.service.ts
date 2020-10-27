@@ -12,7 +12,7 @@ import {DecimalPipe} from '@angular/common';
 export class EnergieVerbruikUurHistorieService extends AbstractEnergieVerbruikHistorieService
                                                implements EnergieVerbruikHistorieService<VerbruikInUur> {
 
-  constructor(private energieVerbruikService: EnergieVerbruikService,
+  constructor(private readonly energieVerbruikService: EnergieVerbruikService,
               protected decimalPipe: DecimalPipe) {
     super(decimalPipe);
   }

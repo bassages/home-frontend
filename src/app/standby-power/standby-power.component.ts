@@ -16,9 +16,9 @@ export class StandbyPowerComponent implements OnInit {
 
   public selectedYear: Moment;
 
-  constructor(private standbyPowerService: StandbyPowerService,
-              private spinnerService: NgxSpinnerService,
-              private errorHandlingService: ErrorHandingService) { }
+  constructor(private readonly standbyPowerService: StandbyPowerService,
+              private readonly spinnerService: NgxSpinnerService,
+              private readonly errorHandlingService: ErrorHandingService) { }
 
   public ngOnInit(): void {
     this.selectedYear = moment();

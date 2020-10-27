@@ -12,7 +12,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   private authenticated: Subscription;
 
-  constructor(private authenticationService: AuthService) {
+  constructor(private readonly authenticationService: AuthService) {
   }
 
   public ngOnInit(): void {

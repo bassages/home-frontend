@@ -44,15 +44,15 @@ export class KlimaatHistorieComponent implements OnInit {
   public statistics: Statistics;
   private chart: ChartAPI;
 
-  constructor(private klimaatService: KlimaatService,
-              private klimaatSensorService: KlimaatSensorService,
-              private chartService: ChartService,
-              private chartStatisticsService: ChartStatisticsService,
-              private spinnerService: NgxSpinnerService,
-              private errorHandlingService: ErrorHandingService,
-              private activatedRoute: ActivatedRoute,
-              private router: Router,
-              private decimalPipe: DecimalPipe) {
+  constructor(private readonly klimaatService: KlimaatService,
+              private readonly klimaatSensorService: KlimaatSensorService,
+              private readonly chartService: ChartService,
+              private readonly chartStatisticsService: ChartStatisticsService,
+              private readonly spinnerService: NgxSpinnerService,
+              private readonly errorHandlingService: ErrorHandingService,
+              private readonly activatedRoute: ActivatedRoute,
+              private readonly router: Router,
+              private readonly decimalPipe: DecimalPipe) {
   }
 
   @HostListener('window:resize') onResize() {

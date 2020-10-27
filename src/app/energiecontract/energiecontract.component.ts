@@ -28,11 +28,11 @@ export class EnergiecontractComponent implements OnInit {
   public editMode = false;
   public selectedEnergiecontract: Energiecontract;
 
-  constructor(private energiecontractService: EnergiecontractService,
-              private spinnerService: NgxSpinnerService,
-              private errorHandlingService: ErrorHandingService,
-              private decimalPipe: DecimalPipe,
-              private modalService: NgbModal) {
+  constructor(private readonly energiecontractService: EnergiecontractService,
+              private readonly spinnerService: NgxSpinnerService,
+              private readonly errorHandlingService: ErrorHandingService,
+              private readonly decimalPipe: DecimalPipe,
+              private readonly modalService: NgbModal) {
   }
 
   @ViewChild('datePicker', {static: true})

@@ -12,9 +12,9 @@ export class AuthService {
 
   public authenticatedSubject = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient,
-              private router: Router,
-              private spinnerService: NgxSpinnerService) {
+  constructor(private readonly http: HttpClient,
+              private readonly router: Router,
+              private readonly spinnerService: NgxSpinnerService) {
   }
 
   public determineCurrentLoginStatus() {

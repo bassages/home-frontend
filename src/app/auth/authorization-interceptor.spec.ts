@@ -23,8 +23,8 @@ describe('AuthorizationInterceptor', () => {
           useFactory: () => authServiceMockInstance
         }
       ]
-    })
-  })
+    });
+  });
 
   afterEach(inject([HttpTestingController], (httpMock: HttpTestingController) => {
     httpMock.verify();
@@ -44,7 +44,7 @@ describe('AuthorizationInterceptor', () => {
       httpGetObservable.subscribe(
         value => expect(value).toEqual(httpResponseBody),
         error => fail('expected request to succeed')
-      )
+      );
 
       const expectedHeaderName = 'X-Requested-With';
       const expectedHeaderValue = 'XMLHttpRequest';

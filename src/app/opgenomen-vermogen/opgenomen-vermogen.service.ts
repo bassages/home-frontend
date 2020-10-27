@@ -7,7 +7,7 @@ import {Moment} from 'moment';
 @Injectable()
 export class OpgenomenVermogenService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
   public getMostRecent(): Observable<OpgenomenVermogen> {
     const url = '/api/opgenomen-vermogen/meest-recente';

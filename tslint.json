@@ -3,6 +3,7 @@
     "node_modules/codelyzer"
   ],
   "rules": {
+    "prefer-readonly": true,
     "arrow-return-shorthand": true,
     "callable-types": true,
     "class-name": true,

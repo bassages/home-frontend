@@ -5,9 +5,9 @@ import {NgxSpinnerService} from 'ngx-spinner';
 
 @Injectable()
 export class ErrorHandingService {
-  private errorSubject = new Subject<Error>();
+  private readonly errorSubject = new Subject<Error>();
 
-  constructor(private spinnerService: NgxSpinnerService) { }
+  constructor(private readonly spinnerService: NgxSpinnerService) { }
 
   public onError(): Observable<Error> {
     return this.errorSubject.asObservable();

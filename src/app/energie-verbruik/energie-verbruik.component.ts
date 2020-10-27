@@ -41,12 +41,12 @@ export class EnergieVerbruikComponent implements OnInit {
 
   private energieVerbruikHistorieService: EnergieVerbruikHistorieService<any>;
 
-  constructor(private energieVerbruikChartServiceProvider: EnergieVerbruikHistorieServiceProvider,
-              private spinnerService: NgxSpinnerService,
-              private errorHandlingService: ErrorHandingService,
-              private decimalPipe: DecimalPipe,
-              private activatedRoute: ActivatedRoute,
-              private router: Router) { }
+  constructor(private readonly energieVerbruikChartServiceProvider: EnergieVerbruikHistorieServiceProvider,
+              private readonly spinnerService: NgxSpinnerService,
+              private readonly errorHandlingService: ErrorHandingService,
+              private readonly decimalPipe: DecimalPipe,
+              private readonly activatedRoute: ActivatedRoute,
+              private readonly router: Router) { }
 
   ngOnInit() {
       combineLatest([ this.activatedRoute.paramMap, this.activatedRoute.queryParamMap ]).subscribe(combined => {

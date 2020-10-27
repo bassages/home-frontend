@@ -19,7 +19,7 @@ class BackendEnergiecontract {
 @Injectable()
 export class EnergiecontractService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
   private readonly energycontractApiUrl = '/api/energycontract';
 

@@ -8,7 +8,7 @@ import {Meterstand} from './meterstand';
 @Injectable()
 export class MeterstandService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
   public getMeterstanden(from: Moment, to: Moment): Observable<MeterstandOpDag[]> {
     const url = `/api/meterstanden/per-dag/${from.format('YYYY-MM-DD')}/${to.format('YYYY-MM-DD')}`;

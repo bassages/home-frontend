@@ -24,7 +24,7 @@ const sensorTypeToDecimalFormatMapping: Map<string, string> =
 @Injectable()
 export class KlimaatService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
   private static mapAllToKlimaat(backendKlimaats: BackendKlimaat[]): Klimaat[] {
     return backendKlimaats.map(KlimaatService.mapToKlimaat);

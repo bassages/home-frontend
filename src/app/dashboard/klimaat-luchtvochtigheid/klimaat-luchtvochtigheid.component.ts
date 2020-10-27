@@ -27,9 +27,9 @@ export class KlimaatLuchtvochtigheidComponent implements  OnInit, OnDestroy {
   private klimaatObserver: Observable<Message>;
   private klimaatSubscription: Subscription;
 
-  constructor(private klimaatService: KlimaatService,
-              private stompService: RxStompService,
-              private router: Router) { }
+  constructor(private readonly klimaatService: KlimaatService,
+              private readonly stompService: RxStompService,
+              private readonly router: Router) { }
 
   public ngOnInit(): void {
     this.subscribeToKlimaatUpdates();

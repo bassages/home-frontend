@@ -8,12 +8,12 @@ import {EnergieVerbruikHistorieService} from './energie-verbruik-historie.servic
 @Injectable()
 export class EnergieVerbruikHistorieServiceProvider {
 
-  private periodeToChartServiceMapping: Map<string, EnergieVerbruikHistorieService<any>>;
+  private readonly periodeToChartServiceMapping: Map<string, EnergieVerbruikHistorieService<any>>;
 
-  constructor(private energieVerbruikUurHistorieService: EnergieVerbruikUurHistorieService,
-              private energieVerbruikDagHistorieService: EnergieVerbruikDagHistorieService,
-              private energieVerbruikMaandHistorieService: EnergieVerbruikMaandHistorieService,
-              private energieVerbruikJaarHistorieService: EnergieVerbruikJaarHistorieService) {
+  constructor(private readonly energieVerbruikUurHistorieService: EnergieVerbruikUurHistorieService,
+              private readonly energieVerbruikDagHistorieService: EnergieVerbruikDagHistorieService,
+              private readonly energieVerbruikMaandHistorieService: EnergieVerbruikMaandHistorieService,
+              private readonly energieVerbruikJaarHistorieService: EnergieVerbruikJaarHistorieService) {
 
     this.periodeToChartServiceMapping = new Map<string, EnergieVerbruikHistorieService<any>>([
       ['uur', energieVerbruikUurHistorieService],

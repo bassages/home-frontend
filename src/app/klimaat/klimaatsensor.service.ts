@@ -8,7 +8,7 @@ import { of } from 'rxjs';
 @Injectable()
 export class KlimaatSensorService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
   // Cache klimaatsensors, they don't update frequently
   private klimaatSensors: KlimaatSensor[];

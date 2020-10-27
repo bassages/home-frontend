@@ -13,7 +13,7 @@ import {VerbruikInJaar} from './verbruikInJaar';
 export class EnergieVerbruikJaarHistorieService extends AbstractEnergieVerbruikHistorieService
                                                 implements EnergieVerbruikHistorieService<VerbruikInJaar> {
 
-  constructor(private energieVerbruikService: EnergieVerbruikService,
+  constructor(private readonly energieVerbruikService: EnergieVerbruikService,
               protected decimalPipe: DecimalPipe) {
     super(decimalPipe);
   }

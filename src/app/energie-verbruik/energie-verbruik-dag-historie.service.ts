@@ -14,7 +14,7 @@ import capitalize from 'lodash/capitalize';
 export class EnergieVerbruikDagHistorieService extends AbstractEnergieVerbruikHistorieService
                                                implements EnergieVerbruikHistorieService<VerbruikOpDag> {
 
-  constructor(private energieVerbruikService: EnergieVerbruikService,
+  constructor(private readonly energieVerbruikService: EnergieVerbruikService,
               protected decimalPipe: DecimalPipe) {
     super(decimalPipe);
   }

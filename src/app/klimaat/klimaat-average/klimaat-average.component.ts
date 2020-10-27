@@ -22,10 +22,10 @@ export class KlimaatAverageComponent implements OnInit {
 
   public gemiddeldeKlimaatPerMaand: GemiddeldeKlimaatPerMaand[];
 
-  constructor(private klimaatService: KlimaatService,
-              private klimaatSensorService: KlimaatSensorService,
-              private spinnerService: NgxSpinnerService,
-              private errorHandlingService: ErrorHandingService) {
+  constructor(private readonly klimaatService: KlimaatService,
+              private readonly klimaatSensorService: KlimaatSensorService,
+              private readonly spinnerService: NgxSpinnerService,
+              private readonly errorHandlingService: ErrorHandingService) {
   }
 
   public ngOnInit(): void {

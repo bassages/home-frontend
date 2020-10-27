@@ -30,10 +30,10 @@ export class GasVerbruikComponent implements OnInit, OnDestroy {
   private meterstandObserver: Observable<Message>;
   private meterstandSubscription: Subscription;
 
-  constructor(private stompService: RxStompService,
-              private router: Router,
-              private meterstandService: MeterstandService,
-              private energieVerbruikService: EnergieVerbruikService) { }
+  constructor(private readonly stompService: RxStompService,
+              private readonly router: Router,
+              private readonly meterstandService: MeterstandService,
+              private readonly energieVerbruikService: EnergieVerbruikService) { }
 
   public ngOnInit(): void {
     this.subscribeToMeterstandUpdates();

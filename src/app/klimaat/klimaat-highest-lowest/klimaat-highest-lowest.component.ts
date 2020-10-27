@@ -25,11 +25,11 @@ export class KlimaatHighestLowestComponent implements OnInit {
   public highestKlimaats: Klimaat[];
   public lowestKlimaats: Klimaat[];
 
-  constructor(private klimaatService: KlimaatService,
-              private klimaatSensorService: KlimaatSensorService,
-              private spinnerService: NgxSpinnerService,
-              private errorHandlingService: ErrorHandingService,
-              private router: Router) {
+  constructor(private readonly klimaatService: KlimaatService,
+              private readonly klimaatSensorService: KlimaatSensorService,
+              private readonly spinnerService: NgxSpinnerService,
+              private readonly errorHandlingService: ErrorHandingService,
+              private readonly router: Router) {
   }
 
   public ngOnInit(): void {

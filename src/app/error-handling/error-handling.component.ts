@@ -10,13 +10,13 @@ import {Error} from './error';
 export class ErrorHandlingComponent implements OnInit {
 
   @ViewChild('errorDialogTemplate', { static: true })
-  private errorDialogTemplate: TemplateRef<any>;
+  private readonly errorDialogTemplate: TemplateRef<any>;
 
   public message: String;
   private modal: NgbModalRef;
 
-  constructor(private modalService: NgbModal,
-              private errorHandlingService: ErrorHandingService) {
+  constructor(private readonly modalService: NgbModal,
+              private readonly errorHandlingService: ErrorHandingService) {
   }
 
   public ngOnInit(): void {

@@ -11,7 +11,7 @@ import {VerbruikInJaar} from './verbruikInJaar';
 @Injectable()
 export class EnergieVerbruikService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
   public getGemiddeldVerbruikPerDag(from: Moment, to: Moment): Observable<GemiddeldVerbruikInPeriod> {
     const url = '/api/energie/gemiddelde-per-dag/' + from.format('YYYY-MM-DD') + '/' + to.format('YYYY-MM-DD');

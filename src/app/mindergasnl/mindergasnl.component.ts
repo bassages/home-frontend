@@ -36,9 +36,9 @@ export class MindergasnlComponent implements OnInit {
     return this._editmode;
   }
 
-  constructor(private mindergasnlService: MindergasnlService,
-              private spinnerService: NgxSpinnerService,
-              private errorHandlingService: ErrorHandingService) { }
+  constructor(private readonly mindergasnlService: MindergasnlService,
+              private readonly spinnerService: NgxSpinnerService,
+              private readonly errorHandlingService: ErrorHandingService) { }
 
   public ngOnInit(): void {
     this.createForm();

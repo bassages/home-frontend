@@ -6,7 +6,7 @@ import {MindergasnlSettings} from './mindergasnlSettings';
 @Injectable()
 export class MindergasnlService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
   public get(): Observable<MindergasnlSettings> {
     const url = '/api/mindergasnl';

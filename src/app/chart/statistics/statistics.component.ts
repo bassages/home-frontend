@@ -23,7 +23,7 @@ export class StatisticsComponent {
   @Input()
   public additionalClasses = '';
 
-  constructor(private decimalPipe: DecimalPipe) { }
+  constructor(private readonly decimalPipe: DecimalPipe) { }
 
   public format(value: number): string {
     if (value === undefined || value === null || isNaN(value)) {

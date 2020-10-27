@@ -21,11 +21,11 @@ export class KlimaatSensorsComponent implements OnInit {
   public editMode = false;
   public selectedSensor: KlimaatSensor;
 
-  constructor(private klimaatService: KlimaatService,
-              private klimaatSensorService: KlimaatSensorService,
-              private spinnerService: NgxSpinnerService,
-              private errorHandlingService: ErrorHandingService,
-              private modalService: NgbModal) {
+  constructor(private readonly klimaatService: KlimaatService,
+              private readonly klimaatSensorService: KlimaatSensorService,
+              private readonly spinnerService: NgxSpinnerService,
+              private readonly errorHandlingService: ErrorHandingService,
+              private readonly modalService: NgbModal) {
   }
 
   public ngOnInit(): void {

@@ -6,7 +6,7 @@ import {StandbyPowerInPeriod} from './standby-power-in-period';
 @Injectable()
 export class StandbyPowerService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
   public get(year: number): Observable<StandbyPowerInPeriod[]> {
     const url = '/api/standby-power/' + year;

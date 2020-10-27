@@ -38,13 +38,13 @@ export class OpgenomenVermogenComponent implements OnInit {
     { periodLength: 600, title: 'Detailniveau --'  }
   ];
 
-  constructor(private opgenomenVermogenService: OpgenomenVermogenService,
-              private chartService: ChartService,
-              private chartStatisticsService: ChartStatisticsService,
-              private spinnerService: NgxSpinnerService,
-              private errorHandlingService: ErrorHandingService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute) { }
+  constructor(private readonly opgenomenVermogenService: OpgenomenVermogenService,
+              private readonly chartService: ChartService,
+              private readonly chartStatisticsService: ChartStatisticsService,
+              private readonly spinnerService: NgxSpinnerService,
+              private readonly errorHandlingService: ErrorHandingService,
+              private readonly router: Router,
+              private readonly activatedRoute: ActivatedRoute) { }
 
   @HostListener('window:resize') onResize() {
     this.chartService.adjustChartHeightToAvailableWindowHeight(this.chart);

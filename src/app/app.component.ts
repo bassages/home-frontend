@@ -10,7 +10,7 @@ import {AuthService} from './auth.service';
 export class AppComponent implements OnInit {
 
 
-  constructor(private authService: AuthService) {
+  constructor(private readonly authService: AuthService) {
   }
 
   public ngOnInit(): void {

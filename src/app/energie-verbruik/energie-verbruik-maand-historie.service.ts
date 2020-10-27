@@ -17,7 +17,7 @@ const capitalizedFullMonthNames = ['Januari', 'Februari', 'Maart', 'April', 'Mei
 export class EnergieVerbruikMaandHistorieService extends AbstractEnergieVerbruikHistorieService
                                                  implements EnergieVerbruikHistorieService<VerbruikInMaand> {
 
-  constructor(private energieVerbruikService: EnergieVerbruikService,
+  constructor(private readonly energieVerbruikService: EnergieVerbruikService,
               protected decimalPipe: DecimalPipe) {
     super(decimalPipe);
   }

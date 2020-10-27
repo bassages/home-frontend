@@ -17,9 +17,9 @@ export class MeterstandComponent implements OnInit {
 
   public sortedMeterstandenPerDag: MeterstandOpDag[] = [];
 
-  constructor(private meterstandService: MeterstandService,
-              private spinnerService: NgxSpinnerService,
-              private errorHandlingService: ErrorHandingService) {
+  constructor(private readonly meterstandService: MeterstandService,
+              private readonly spinnerService: NgxSpinnerService,
+              private readonly errorHandlingService: ErrorHandingService) {
   }
 
   public ngOnInit(): void {
