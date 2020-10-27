@@ -105,17 +105,17 @@ export class KlimaatService {
 }
 
 class BackendKlimaat {
-  datumtijd: string;
-  temperatuur: number;
-  luchtvochtigheid: number;
+  public datumtijd: string;
+  public temperatuur: number;
+  public luchtvochtigheid: number;
 }
 
 class BackendRealtimeKlimaat extends BackendKlimaat {
-  temperatuurTrend: string;
-  luchtvochtigheidTrend: string;
+  public temperatuurTrend: string;
+  public luchtvochtigheidTrend: string;
 }
 
 class BackendGemiddeldeKlimaatPerMaand {
-  maand: string;
-  gemiddelde: number;
+  public maand: string;
+  public gemiddelde: number;
 }

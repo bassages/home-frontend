@@ -48,7 +48,7 @@ export class EnergieVerbruikComponent implements OnInit {
               private readonly activatedRoute: ActivatedRoute,
               private readonly router: Router) { }
 
-  ngOnInit() {
+  public ngOnInit() {
       combineLatest([ this.activatedRoute.paramMap, this.activatedRoute.queryParamMap ]).subscribe(combined => {
         const params: ParamMap = <ParamMap>combined[0];
         const queryParams: ParamMap = <ParamMap>combined[1];
@@ -84,7 +84,7 @@ export class EnergieVerbruikComponent implements OnInit {
       });
   }
 
-  @HostListener('window:resize') onResize() {
+  @HostListener('window:resize') public onResize() {
     this.determineChartOrTable();
     if (this.showChart) {
       this.energieVerbruikHistorieService.adjustChartHeightToAvailableWindowHeight(this.chart);

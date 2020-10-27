@@ -46,7 +46,7 @@ export class OpgenomenVermogenComponent implements OnInit {
               private readonly router: Router,
               private readonly activatedRoute: ActivatedRoute) { }
 
-  @HostListener('window:resize') onResize() {
+  @HostListener('window:resize') public onResize() {
     this.chartService.adjustChartHeightToAvailableWindowHeight(this.chart);
   }
 

@@ -1,4 +1,4 @@
 export class KlimaatSensor {
-  code: string;
-  omschrijving: string;
+  public code: string;
+  public omschrijving: string;
 }

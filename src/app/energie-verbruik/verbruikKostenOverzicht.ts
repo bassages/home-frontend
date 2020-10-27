@@ -1,8 +1,8 @@
 export abstract class VerbruikKostenOverzicht {
-  stroomVerbruikDal: number;
-  stroomKostenDal: number;
-  stroomVerbruikNormaal: number;
-  stroomKostenNormaal: number;
-  gasVerbruik: number;
-  gasKosten: number;
+  public stroomVerbruikDal: number;
+  public stroomKostenDal: number;
+  public stroomVerbruikNormaal: number;
+  public stroomKostenNormaal: number;
+  public gasVerbruik: number;
+  public gasKosten: number;
 }

@@ -1,6 +1,6 @@
 import {Meterstand} from './meterstand';
 
 export class MeterstandOpDag {
-  dag: Date;
-  meterstand: Meterstand;
+  public dag: Date;
+  public meterstand: Meterstand;
 }

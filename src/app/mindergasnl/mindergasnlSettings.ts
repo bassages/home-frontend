@@ -1,4 +1,4 @@
 export class MindergasnlSettings {
-  automatischUploaden: boolean;
-  authenticatietoken: string;
+  public automatischUploaden: boolean;
+  public authenticatietoken: string;
 }

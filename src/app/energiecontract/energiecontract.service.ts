@@ -6,14 +6,14 @@ import * as moment from 'moment';
 import {map} from 'rxjs/operators';
 
 class BackendEnergiecontract {
-  id: number;
-  validFrom: string;
-  validTo: string;
-  stroomPerKwhNormaalTarief: number;
-  stroomPerKwhDalTarief: number;
-  gasPerKuub: number;
-  leverancier: string;
-  remark: string;
+  public id: number;
+  public validFrom: string;
+  public validTo: string;
+  public stroomPerKwhNormaalTarief: number;
+  public stroomPerKwhDalTarief: number;
+  public gasPerKuub: number;
+  public leverancier: string;
+  public remark: string;
 }
 
 @Injectable()
@@ -23,7 +23,7 @@ export class EnergiecontractService {
 
   private readonly energycontractApiUrl = '/api/energycontract';
 
-  static toEnergieContract(backendEnergieContract: BackendEnergiecontract): Energiecontract {
+  public static toEnergieContract(backendEnergieContract: BackendEnergiecontract): Energiecontract {
     const energiecontract: Energiecontract = new Energiecontract();
     energiecontract.id = backendEnergieContract.id;
     energiecontract.leverancier = backendEnergieContract.leverancier;

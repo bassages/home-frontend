@@ -1,11 +1,11 @@
 export class StandbyPowerInPeriod {
-  fromDate: Date;
-  toDate: Date;
-  standbyPower: number;
+  public fromDate: Date;
+  public toDate: Date;
+  public standbyPower: number;
 
-  costsOfStandByPower: number;
-  totalCostsOfPower: number;
+  public costsOfStandByPower: number;
+  public totalCostsOfPower: number;
 
-  percentageOfTotalPeriod: number;
-  percentageOfTotalCost: number;
+  public percentageOfTotalPeriod: number;
+  public percentageOfTotalCost: number;
 }

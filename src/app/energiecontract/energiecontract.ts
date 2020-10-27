@@ -1,12 +1,12 @@
 import {Moment} from 'moment';
 
 export class Energiecontract {
-  id: number;
-  validFrom: Moment;
-  validTo: Moment;
-  stroomPerKwhNormaalTarief: number;
-  stroomPerKwhDalTarief: number;
-  gasPerKuub: number;
-  leverancier: string;
-  remark: string;
+  public id: number;
+  public validFrom: Moment;
+  public validTo: Moment;
+  public stroomPerKwhNormaalTarief: number;
+  public stroomPerKwhDalTarief: number;
+  public gasPerKuub: number;
+  public leverancier: string;
+  public remark: string;
 }

@@ -1,6 +1,6 @@
 import {Moment} from 'moment';
 
 export class GemiddeldeKlimaatPerMaand {
-  maand: Moment;
-  gemiddelde: number;
+  public maand: Moment;
+  public gemiddelde: number;
 }

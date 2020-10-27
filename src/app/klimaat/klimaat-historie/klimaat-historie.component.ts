@@ -55,7 +55,7 @@ export class KlimaatHistorieComponent implements OnInit {
               private readonly decimalPipe: DecimalPipe) {
   }
 
-  @HostListener('window:resize') onResize() {
+  @HostListener('window:resize') public onResize() {
     this.determineChartOrTable();
     if (this.showChart) {
       this.chartService.adjustChartHeightToAvailableWindowHeight(this.chart);

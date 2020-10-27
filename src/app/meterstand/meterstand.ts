@@ -1,9 +1,9 @@
 export class Meterstand {
-  dateTime: Date;
-  stroomTariefIndicator: string;
-  stroomTarief1: number;
-  stroomTarief2: number;
-  gas: number;
+  public dateTime: Date;
+  public stroomTariefIndicator: string;
+  public stroomTarief1: number;
+  public stroomTarief2: number;
+  public gas: number;
 
   constructor(json: string) {
     const jsonObject: any = JSON.parse(json);
