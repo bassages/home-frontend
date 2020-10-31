@@ -1,17 +1,22 @@
 {
   "/login": {
-    "target": "http://localhost:8080"
+    "target": "http://localhost:8080",
+    "logLevel": "debug"
   },
   "/logout": {
-    "target": "http://localhost:8080"
+    "target": "http://localhost:8080",
+    "logLevel": "debug"
   },
   "/api": {
-    "target": "http://localhost:8080"
+    "target": "http://localhost:8080",
+    "logLevel": "debug"
   },
   "/actuator": {
-    "target": "http://localhost:8080"
+    "target": "http://localhost:8080",
+    "logLevel": "debug"
   },
   "/ws": {
-    "target": "http://localhost:8080"
+    "target": "http://localhost:8080",
+    "logLevel": "debug"
   }
 }
