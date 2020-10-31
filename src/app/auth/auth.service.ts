@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {NgxSpinnerService} from 'ngx-spinner';
@@ -13,13 +13,17 @@ export class AuthService {
 
   public authenticatedSubject = new BehaviorSubject<boolean>(false);
 
-  constructor(private readonly http: HttpClient,
-              private readonly router: Router,
-              private readonly spinnerService: NgxSpinnerService) {
+  public constructor(private readonly http: HttpClient,
+                     private readonly router: Router,
+                     private readonly spinnerService: NgxSpinnerService) {
   }
 
-  public determineCurrentLoginStatus() {
+  public determineCurrentLoginStatus(): Observable<User> {
     return this.http.get(API_PATH_USER).pipe(this.tapAuthResponseToUpdateSubject());
+  }
+
+  public updateAuthenticatedSubject(): void {
+    this.determineCurrentLoginStatus().subscribe();
   }
 
   public authenticate(credentials) {

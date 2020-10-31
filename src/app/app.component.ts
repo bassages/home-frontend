@@ -9,11 +9,11 @@ import {AuthService} from './auth/auth.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private readonly authService: AuthService) {
+  public constructor(private readonly authService: AuthService) {
   }
 
   public ngOnInit(): void {
     moment.locale('nl');
-    this.authService.determineCurrentLoginStatus().subscribe();
+    this.authService.updateAuthenticatedSubject();
   }
 }

@@ -15,13 +15,14 @@ export class LoginComponent implements OnInit {
 
   public initialized = false;
 
-  constructor(private readonly authenticationService: AuthService,
-              private readonly http: HttpClient,
-              private readonly router: Router) {
+  public constructor(private readonly authenticationService: AuthService,
+                     private readonly http: HttpClient,
+                     private readonly router: Router) {
   }
 
   public ngOnInit(): void {
-    this.authenticationService.determineCurrentLoginStatus().subscribe(() => {}, () => {}, () => this.navigateToRootWhenAlreadyLoggedIn());
+    this.authenticationService.determineCurrentLoginStatus()
+      .subscribe(() => {}, () => {}, () => this.navigateToRootWhenAlreadyLoggedIn());
   }
 
   private navigateToRootWhenAlreadyLoggedIn() {
