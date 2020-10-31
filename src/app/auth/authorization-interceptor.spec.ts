@@ -3,7 +3,7 @@ import {HttpClientTestingModule, HttpTestingController, TestRequest} from '@angu
 import {HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
 import {AuthorizationInterceptor} from './authorization-interceptor';
 import {instance, mock} from 'ts-mockito';
-import {AuthService} from '../auth.service';
+import {AuthService} from './auth.service';
 
 describe('AuthorizationInterceptor', () => {
   const authServiceMock = mock(AuthService);

@@ -13,8 +13,8 @@ describe('OpgenomenVermogenService', () => {
     });
   });
 
-  afterEach(inject([HttpTestingController], (httpMock: HttpTestingController) => {
-    httpMock.verify();
+  afterEach(inject([HttpTestingController], (httpTestingController: HttpTestingController) => {
+    httpTestingController.verify();
   }));
 
   it('should get most recent by getting it from the backend api',

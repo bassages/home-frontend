@@ -4,6 +4,7 @@ import {BehaviorSubject} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {User} from './user';
 
 const API_PATH_USER = '/api/user';
 
@@ -29,22 +30,14 @@ export class AuthService {
   // noinspection JSMethodCanBeStatic
   private createBasicAuthHeader(credentials): HttpHeaders {
     return new HttpHeaders({
-      authorization: 'Basic ' + btoa(credentials.username + ':' + credentials.password)
+      authorization: 'Basic ' + btoa(`${credentials.username}:${credentials.password}`)
     });
   }
 
   private tapAuthResponseToUpdateSubject() {
-    return tap(response => {
-      this.updateAuthenticatedSubject(response);
-    }, () => this.authenticatedSubject.next(false));
-  }
-
-  private updateAuthenticatedSubject(response) {
-    if (response['name']) {
+    return tap((user: User) => {
       this.authenticatedSubject.next(true);
-    } else {
-      this.authenticatedSubject.next(false);
-    }
+    });
   }
 
   public logout() {

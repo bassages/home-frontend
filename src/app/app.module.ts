@@ -45,7 +45,7 @@ import {KlimaatSensorsComponent} from './klimaat/klimaat-sensors/klimaat-sensors
 import {StandbyPowerComponent} from './standby-power/standby-power.component';
 import {StandbyPowerService} from './standby-power/standby-power.service';
 import {AuthorizationInterceptor} from './auth/authorization-interceptor';
-import {AuthService} from './auth.service';
+import {AuthService} from './auth/auth.service';
 import {LoginComponent} from './login/login.component';
 import {KlimaatSensorService} from './klimaat/klimaatsensor.service';
 import {NgxSpinnerModule} from 'ngx-spinner';
