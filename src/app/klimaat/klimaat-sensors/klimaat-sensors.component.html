@@ -4,13 +4,7 @@
   </div>
 </div>
 
-<div *ngIf="sensors && sensors.length === 0" class="table-responsive">
-  <div class="alert alert-info">
-    <i class="fas fa-info-circle" aria-hidden="true"></i> Er zijn nog geen klimaatsensors. <strong>Tip</strong>: Klimaatsensors worden automatisch toegevoegd zodra ze aangesloten worden en gegevens registreren.
-  </div>
-</div>
-
-<div *ngIf="sensors && sensors.length > 0" class="table-responsive">
+<div class="table-responsive" *ngIf="sensors && sensors.length > 0; else no_klimaatsensors">
   <table class="table table-bordered table-striped table-hover table-sm">
     <thead>
     <tr>
@@ -24,6 +18,14 @@
     </tr>
   </table>
 </div>
+
+<ng-template #no_klimaatsensors>
+  <div class="table-responsive" *ngIf="sensors">
+    <div class="alert alert-info">
+      <i class="fas fa-info-circle" aria-hidden="true"></i> Er zijn nog geen klimaatsensors. <strong>Tip</strong>: Klimaatsensors worden automatisch toegevoegd zodra ze aangesloten worden en gegevens registreren.
+    </div>
+  </div>
+</ng-template>
 
 <form [formGroup]="form" [hidden]="!editMode" class="form-horizontal" autocomplete="off" novalidate (submit)="save()">
   <hr/>
