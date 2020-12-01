@@ -1,10 +1,11 @@
-# Trigger analysis when pushing in main or pull requests, and when creating
-# a pull request.
-push:
-  branches:
-    - main
-pull_request:
-  types: [opened, synchronize, reopened]
+on:
+  # Trigger analysis when pushing in main or pull requests, and when creating
+  # a pull request.
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
 name: Build Angular
 jobs:
   build:
