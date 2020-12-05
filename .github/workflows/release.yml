@@ -1,7 +1,9 @@
 on:
   release:
     types: [published]
+
 name: Add artifacts to release
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,27 +17,20 @@ jobs:
 
       - name: Echo release data
         run: |
-          echo tag_name is: ${{ github.event.release.tag_name }}
-          echo release name is: ${{ github.event.release.name }}
-          echo release tag is: ${GITHUB_REF}
+          echo release name: ${{ github.event.release.name }}
+          echo release tag_name: ${{ github.event.release.tag_name }}
 
       - name: Checkout the given ref
         uses: actions/checkout@v1
         with:
           ref: ${{ github.event.release.tag_name }}
 
-#      - name: Cache node modules
-#        uses: actions/cache@v1
-#        with:
-#          path: ~/.npm
-#          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-#          restore-keys: |
-#            ${{ runner.os }}-node-
-#      - name: Node ${{ matrix.node-version }}
-#        uses: actions/setup-node@v1
-#        with:
-#          node-version: ${{ matrix.node-version }}
-#      - name: npm install and npm run build
-#        run: |
-#          npm i
-#          npm run build
+      - name: Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: npm install and npm run build
+        run: |
+          npm i
+          npm run build
