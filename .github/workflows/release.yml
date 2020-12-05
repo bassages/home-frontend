@@ -15,13 +15,8 @@ jobs:
       - name: Echo (debug) action details
         uses: hmarr/debug-action@v1.0.0
 
-      - name: Echo release data
-        run: |
-          echo release name: ${{ github.event.release.name }}
-          echo release tag_name: ${{ github.event.release.tag_name }}
-
       - name: Checkout the tag of the release
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           ref: ${{ github.event.release.tag_name }}
 
