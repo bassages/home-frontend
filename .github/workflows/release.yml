@@ -16,4 +16,4 @@ jobs:
         run: echo "Release event GITHUB_REF = ${GITHUB_REF}"
 
       - name: Release name
-        run: echo "Release name = ${github.event.release.name}"
+        run: echo "Release name = ${github.event.release.name} tag_name = ${github.event.release.tag_name}"
