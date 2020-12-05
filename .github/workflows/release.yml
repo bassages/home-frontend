@@ -1,0 +1,16 @@
+on:
+  release:
+    types: [published]
+name: Add artifacts to release
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14]
+
+    steps:
+      - uses: hmarr/debug-action
+
+      - name: Branch name
+        run: echo "Release event GITHUB_REF = ${GITHUB_REF}"
