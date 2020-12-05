@@ -15,5 +15,9 @@ jobs:
       - name: Branch name
         run: echo "Release event GITHUB_REF = ${GITHUB_REF}"
 
-      - name: Release name
-        run: echo "Release name = ${github.event.release.name} tag_name = ${github.event.release.tag_name}"
+      name: echo var
+        run: |
+          echo version name is: ${{ github.event.release.tag_name }}
+          echo release title is: ${{ github.event.release.name }}
+          echo release body is: ${{ github.event.release.body }}
+          echo repository is: ${{ github.repository }}
