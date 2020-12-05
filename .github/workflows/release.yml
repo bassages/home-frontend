@@ -17,12 +17,12 @@ jobs:
         run: |
           echo tag_name is: ${{ github.event.release.tag_name }}
           echo release name is: ${{ github.event.release.name }}
-          echo release tag is: ${{ GITHUB_REF }}
+          echo release tag is: ${GITHUB_REF}
 
       - name: Checkout the given ref
         uses: actions/checkout@v1
         with:
-          - ref: ${{ GITHUB_REF }}
+          - ref: ${GITHUB_REF}
 
 #      - name: Cache node modules
 #        uses: actions/cache@v1
