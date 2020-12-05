@@ -10,14 +10,32 @@ jobs:
         node-version: [14]
 
     steps:
-      - uses: hmarr/debug-action@v1.0.0
+      - name: Echo (debug) action details
+        uses: hmarr/debug-action@v1.0.0
 
-      - name: Branch name
-        run: echo "Release event GITHUB_REF = ${GITHUB_REF}"
-
-      - name: echo var
+      - name: Echo release data
         run: |
-          echo version name is: ${{ github.event.release.tag_name }}
-          echo release title is: ${{ github.event.release.name }}
-          echo release body is: ${{ github.event.release.body }}
-          echo repository is: ${{ github.repository }}
+          echo tag_name is: ${{ github.event.release.tag_name }}
+          echo release name is: ${{ github.event.release.name }}
+          echo release tag is: ${{ GITHUB_REF }}
+
+      - name: Checkout the given ref
+        uses: actions/checkout@v1
+        with:
+          - ref: ${{ GITHUB_REF }}
+
+#      - name: Cache node modules
+#        uses: actions/cache@v1
+#        with:
+#          path: ~/.npm
+#          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+#          restore-keys: |
+#            ${{ runner.os }}-node-
+#      - name: Node ${{ matrix.node-version }}
+#        uses: actions/setup-node@v1
+#        with:
+#          node-version: ${{ matrix.node-version }}
+#      - name: npm install and npm run build
+#        run: |
+#          npm i
+#          npm run build
