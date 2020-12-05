@@ -14,3 +14,6 @@ jobs:
 
       - name: Branch name
         run: echo "Release event GITHUB_REF = ${GITHUB_REF}"
+
+      - name: Release name
+        run: echo "Release name = ${github.event.release.name}"
