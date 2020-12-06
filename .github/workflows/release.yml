@@ -7,9 +7,6 @@ name: Add artifacts to release
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14]
 
     steps:
       - name: Echo (debug) action details
@@ -20,10 +17,10 @@ jobs:
         with:
           ref: ${{ github.event.release.tag_name }}
 
-      - name: Setup Node ${{ matrix.node-version }}
+      - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 14
 
       - name: Run npm install and npm run build
         run: |
