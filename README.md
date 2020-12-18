@@ -1,6 +1,6 @@
 # home-frontend
 
-<a href="https://travis-ci.com/bassages/home-frontend" taget="_blank"><img src="https://travis-ci.org/bassages/home-server.svg?branch=master" alt="Travis CI badge"></a>
+![Build home-frontend](https://github.com/bassages/home-frontend/workflows/Build%20home-frontend/badge.svg)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=bassages_home-frontend&metric=coverage)](https://sonarcloud.io/dashboard?id=bassages_home-frontend)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=bassages_home-frontend&metric=code_smells)](https://sonarcloud.io/dashboard?id=bassages_home-frontend)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=bassages_home-frontend&metric=bugs)](https://sonarcloud.io/dashboard?id=bassages_home-frontend)
