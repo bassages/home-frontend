@@ -1,0 +1,22 @@
+[
+  {
+    "dag": "2000-01-01",
+    "meterstand": {
+      "dateTime": "2000-01-01T23:59:50",
+      "stroomTarief1": 1.0,
+      "stroomTarief2": 1.1,
+      "gas": 10.101,
+      "stroomTariefIndicator": "DAL"
+    }
+  },
+  {
+    "dag": "2000-01-02",
+    "meterstand": {
+      "dateTime": "2000-01-02:59:50",
+      "stroomTarief1": 2.0,
+      "stroomTarief2": 2.2,
+      "gas": 20.202,
+      "stroomTariefIndicator": "DAL"
+    }
+  }
+]
