@@ -44,4 +44,8 @@ testem.log
 .DS_Store
 Thumbs.db
 
-build
+# Gradle
+.gradle
+
+cypress/videos
+cypress/screenshots
