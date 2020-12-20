@@ -16,17 +16,23 @@ jobs:
       - name: Checkout frontend
         uses: actions/checkout@v2
 
-      - uses: suisei-cn/actions-download-file@v1
-        id: downloadfile  # Remember to give an ID if you need the output
-        name: Download the backend artifact
-        with:
-          url: "https://github.com/bassages/home-server/releases/download/1.37.0/home-server-1.37.0.zip"
-          target: backend
+#      - uses: suisei-cn/actions-download-file@v1
+#        id: downloadfile  # Remember to give an ID if you need the output
+#        name: Download the backend artifact
+#        with:
+#          url: "https://github.com/bassages/home-server/releases/download/1.37.0/home-server-1.37.0.zip"
+#          target: backend
+#
+#      - name: Decompress backend artifact
+#        uses: TonyBogdanov/zip@1.0
+#        with:
+#          args: unzip -qq ./${{steps.downloadfile.filename}} -d ./backend
 
-      - name: Decompress backend artifact
-        uses: TonyBogdanov/zip@1.0
+      - name: Checkout backend
+        uses: actions/checkout@v2
         with:
-          args: unzip -qq ./${{steps.downloadfile.filename}} -d ./backend
+          repository: 'bassages/home-server'
+
 
 #      - name: Cache node modules
 #        uses: actions/cache@v1
