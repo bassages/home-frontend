@@ -3,27 +3,20 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "local:serve-interactive": "run-s lint && ng serve --open --proxy-config proxy.conf.json",
+    "ci:build": "run-s lint test-with-coverage build",
+    "ci:release": "run-s test-without-coverage build create-zip",
+    "ci:test-e2e": "start-server-and-test serve http://localhost:4200 cypress:run",
     "ng": "ng",
     "clean": "rm -rf node_modules && rm -rf dist && rm -rf coverage",
-
-    "serve-local": "run-s lint && ng serve --open --proxy-config proxy.conf.json",
-    "build-local": "run-s lint test-without-coverage build create-zip",
-
-    "build-ci": "run-s lint test-with-coverage build",
-    "release-ci": "run-s test-without-coverage build create-zip",
-
+    "serve": "ng serve --proxy-config proxy.conf.json",
     "lint": "ng lint",
     "test-without-coverage": "ng test --watch=false --browsers=ChromeHeadless",
     "test-with-coverage": "ng test --code-coverage  --watch=false --browsers=ChromeHeadless",
     "build": "ng build --prod",
     "create-zip": "cd dist && zip -r home-frontend.zip . && cd ..",
-
-    "build-cypress": "ng build --prod && cypress run",
     "reinstall": "npm run clean && npm install",
     "rebuild": "npm run clean && npm install && npm run build",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
-    "e2e": "ng e2e",
     "bundle-report": "webpack-bundle-analyzer dist/stats.json"
   },
   "private": true,
@@ -88,6 +81,7 @@
     "node-sass": "^4.14.1",
     "npm-run-all": "^4.1.5",
     "protractor": "~7.0.0",
+    "start-server-and-test": "^1.11.6",
     "ts-mockito": "^2.6.1",
     "ts-node": "~9.0.0",
     "tslint": "~6.1.3",
