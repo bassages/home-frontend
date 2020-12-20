@@ -40,11 +40,16 @@ jobs:
         with:
           java-version: 15
 
-      - name: Start backend
-        uses: eskatos/gradle-command-action@v1
-        with:
-          arguments: bootrun
-          build-root-directory: home-backend
+#      - name: Start backend
+#        uses: eskatos/gradle-command-action@v1
+#        with:
+#          arguments: bootrun
+#          build-root-directory: home-backend
+
+      - name: Run backend background
+        working-directory: home-backend
+        run: |
+          ./gradlew bootrun &
 
 #      - name: Cache node modules
 #        uses: actions/cache@v1
