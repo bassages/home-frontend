@@ -16,6 +16,7 @@
     "build": "ng build --prod",
     "create-zip": "cd dist && zip -r home-frontend.zip . && cd ..",
     "reinstall": "npm run clean && npm install",
+    "cypress:run": "cypress run",
     "rebuild": "npm run clean && npm install && npm run build",
     "bundle-report": "webpack-bundle-analyzer dist/stats.json"
   },
