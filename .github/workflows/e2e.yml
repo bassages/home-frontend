@@ -23,6 +23,11 @@ jobs:
           url: "https://github.com/bassages/home-server/releases/download/1.37.0/home-server-1.37.0.zip"
           target: backend
 
+      - name: Decompress backend
+        uses: TonyBogdanov/zip@1.0
+        with:
+          args: unzip -qq ./${{steps.downloadfile.filename}} -d ./backend
+
 #      - name: Cache node modules
 #        uses: actions/cache@v1
 #        with:
