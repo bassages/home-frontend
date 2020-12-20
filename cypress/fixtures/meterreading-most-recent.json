@@ -1,0 +1,7 @@
+{
+  "dateTime": "2000-01-01T02:03:04",
+  "stroomTarief1": 1.222,
+  "stroomTarief2": 3.444,
+  "gas": 5.666,
+  "stroomTariefIndicator": "DAL"
+}
