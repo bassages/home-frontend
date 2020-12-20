@@ -25,7 +25,7 @@ jobs:
       - name: Run npm install and npm run build
         run: |
           npm i
-          npm run build
+          npm run release-ci
 
       - name: Upload Release Asset
         id: upload-release-asset
