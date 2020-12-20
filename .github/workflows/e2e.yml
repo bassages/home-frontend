@@ -13,23 +13,30 @@ jobs:
       - name: Echo (debug) action details
         uses: hmarr/debug-action@v1.0.0
 
-      - name: Checkout
+      - name: Checkout frontend
         uses: actions/checkout@v2
 
-      - name: Cache node modules
-        uses: actions/cache@v1
+      - uses: suisei-cn/actions-download-file@v1
+        id: downloadfile  # Remember to give an ID if you need the output
+        name: Download the file
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          url: "https://github.com/bassages/home-server/releases/download/1.37.0/home-server-1.37.0.zip"
+          target: backend
 
-      - name: Setup Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14
-
-      - name: Run e2e tests
-        run: |
-          npm i
-          npm run ci:test-e2e
+#      - name: Cache node modules
+#        uses: actions/cache@v1
+#        with:
+#          path: ~/.npm
+#          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+#          restore-keys: |
+#            ${{ runner.os }}-node-
+#
+#      - name: Setup Node
+#        uses: actions/setup-node@v1
+#        with:
+#          node-version: 14
+#
+#      - name: Run e2e tests
+#        run: |
+#          npm i
+#          npm run ci:test-e2e
