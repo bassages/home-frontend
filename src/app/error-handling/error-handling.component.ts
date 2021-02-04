@@ -12,7 +12,7 @@ export class ErrorHandlingComponent implements OnInit {
   @ViewChild('errorDialogTemplate', { static: true })
   private readonly errorDialogTemplate: TemplateRef<any>;
 
-  public message: String;
+  public message: string;
   private modal: NgbModalRef;
 
   constructor(private readonly modalService: NgbModal,
@@ -25,7 +25,7 @@ export class ErrorHandlingComponent implements OnInit {
   }
 
   public handleError(error: Error): void {
-    this.message = error.message;
+    this.message = error.message.valueOf();
     this.openDialog();
   }
 

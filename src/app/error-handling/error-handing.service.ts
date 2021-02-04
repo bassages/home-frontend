@@ -13,7 +13,7 @@ export class ErrorHandingService {
     return this.errorSubject.asObservable();
   }
 
-  public handleError(message: String, causedBy: any) {
+  public handleError(message: string, causedBy: any) {
     console.error(message, causedBy);
     this.spinnerService.hide();
     this.errorSubject.next(new Error(message, causedBy));

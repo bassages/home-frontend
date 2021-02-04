@@ -50,8 +50,8 @@ export class EnergieVerbruikComponent implements OnInit {
 
   public ngOnInit() {
       combineLatest([ this.activatedRoute.paramMap, this.activatedRoute.queryParamMap ]).subscribe(combined => {
-        const params: ParamMap = <ParamMap>combined[0];
-        const queryParams: ParamMap = <ParamMap>combined[1];
+        const params: ParamMap = combined[0];
+        const queryParams: ParamMap = combined[1];
 
         const verbruiksoortParam = params.get('verbruiksoort');
         const periodeParam = params.get('periode');
