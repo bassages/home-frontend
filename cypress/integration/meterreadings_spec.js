@@ -16,7 +16,7 @@ describe('Meterreadings', () => {
 
     const from = dayjs().date(1).format('YYYY-MM-DD');
     const to = dayjs().date(1).add(1, 'month').format('YYYY-MM-DD');
-    cy.intercept('GET', `/meterstanden/per-dag/${from}/${to}`, { fixture: 'meterreadings-today.json' })
+    cy.intercept('GET', `/api/meterstanden/per-dag/${from}/${to}`, { fixture: 'meterreadings-today.json' })
 
     cy.visit('http://localhost:4200/#/meterstand');
 
