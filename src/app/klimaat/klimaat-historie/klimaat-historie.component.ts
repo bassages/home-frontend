@@ -193,10 +193,7 @@ export class KlimaatHistorieComponent implements OnInit {
     const tickValues = this.getTicksForEveryHourInDay();
 
     const values: any = [];
-    // for (var i = 0; i < vm.selection.length; i++) {
-      values.push(this.date.format('DD-MM-YYYY'));
-      // values.push(d3.time.format('%d-%m-%Y')(vm.selection[i]));
-    // }
+    values.push(this.date.format('DD-MM-YYYY'));
 
     return {
       bindto: '#chart',
@@ -264,7 +261,6 @@ export class KlimaatHistorieComponent implements OnInit {
 
   private getFixedDate(): Date {
     return this.date.toDate();
-    // return new Date('01-01-2016');
   }
 
   public formatWithoutUnitLabel(sensorType: string, value: number): string {
