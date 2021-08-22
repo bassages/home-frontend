@@ -22,7 +22,12 @@ export class LoginComponent implements OnInit {
 
   public ngOnInit(): void {
     this.authenticationService.determineCurrentLoginStatus()
-      .subscribe(() => {}, () => {}, () => this.navigateToRootWhenAlreadyLoggedIn());
+      .subscribe(
+        () => {
+        // Intentionally left empty
+      }, () => {
+        // Intentionally left empty
+      }, () => this.navigateToRootWhenAlreadyLoggedIn());
   }
 
   private navigateToRootWhenAlreadyLoggedIn() {
@@ -35,7 +40,14 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
-    this.authenticationService.authenticate(this.credentials).subscribe(() => {}, () => {}, () =>  this.processAuthenticationStatus());
+    this.authenticationService.authenticate(this.credentials).subscribe(
+      () => {
+        // Intentionally left empty
+      },
+      () => {
+        // Intentionally left empty
+      },
+      () =>  this.processAuthenticationStatus());
   }
 
   private processAuthenticationStatus() {

@@ -46,8 +46,12 @@ export class AuthService {
 
   public logout() {
     this.http.post('/logout', null).subscribe(
-      () => {},
-        () => {},
+      () => {
+        // Intentionally left empty
+      },
+        () => {
+          // Intentionally left empty
+        },
         () => this.loggedOut()
     );
   }
