@@ -2,7 +2,7 @@ import {inject, TestBed} from '@angular/core/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {KlimaatService} from './klimaat.service';
 import {Klimaat} from './klimaat';
-import * as moment from 'moment';
+import * as dayjs from 'dayjs';
 
 describe('OpgenomenVermogenService', () => {
 
@@ -22,8 +22,8 @@ describe('OpgenomenVermogenService', () => {
       (httpMock: HttpTestingController, service: KlimaatService) => {
 
         // Call the service
-        const from = moment('2020-10-04T16:11:11');
-        const to = moment('2021-11-02T12:21:36');
+        const from = dayjs('2020-10-04T16:11:11');
+        const to = dayjs('2021-11-02T12:21:36');
         service.getKlimaat('someSensorCode', from, to).subscribe(data => {
           expect(data.length).toBe(2);
         });
@@ -45,8 +45,8 @@ describe('OpgenomenVermogenService', () => {
       (httpMock: HttpTestingController, service: KlimaatService) => {
 
         // Call the service
-        const from = moment('2020-10-04T16:11:11');
-        const to = moment('2021-11-02T12:21:36');
+        const from = dayjs('2020-10-04T16:11:11');
+        const to = dayjs('2021-11-02T12:21:36');
         const limit = 10;
         service.getTop('someSensorCode', 'someSensorType', 'someTopType', from, to, limit).subscribe(data => {
           expect(data.length).toBe(2);

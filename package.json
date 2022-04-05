@@ -51,7 +51,6 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.0",
     "lodash": "^4.17.21",
-    "moment": "2.29.2",
     "ng2-date-picker": "^13.1.1",
     "ngx-spinner": "^13.1.1",
     "popper.js": "^1.16.1",
@@ -60,9 +59,6 @@
     "stompjs": "^2.3.3",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
-  },
-  "resolutions": {
-    "moment": "2.29.1"
   },
   "devDependencies": {
     "@angular-eslint/builder": "13.2.0",

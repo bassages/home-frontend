@@ -2,10 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {MeterstandService} from './meterstand.service';
 import {MeterstandOpDag} from './meterstandOpDag';
 import sortBy from 'lodash/sortBy';
-import * as moment from 'moment';
-import {Moment} from 'moment';
 import {ErrorHandingService} from '../error-handling/error-handing.service';
 import {NgxSpinnerService} from 'ngx-spinner';
+import dayjs, {Dayjs} from 'dayjs';
 
 @Component({
   selector: 'home-meterstand',
@@ -13,7 +12,7 @@ import {NgxSpinnerService} from 'ngx-spinner';
 })
 export class MeterstandComponent implements OnInit {
 
-  public selectedYearMonth: Moment;
+  public selectedYearMonth: Dayjs;
 
   public sortedMeterstandenPerDag: MeterstandOpDag[] = [];
 
@@ -28,8 +27,8 @@ export class MeterstandComponent implements OnInit {
   }
 
   // noinspection JSMethodCanBeStatic
-  private getStartOfCurrentMonth(): Moment {
-    return moment().startOf('month');
+  private getStartOfCurrentMonth(): Dayjs {
+    return dayjs().startOf('month');
   }
 
   private getMeterstanden(): void {
@@ -45,7 +44,7 @@ export class MeterstandComponent implements OnInit {
     );
   }
 
-  public yearMonthChanged(selectedYearMonth: Moment): void {
+  public yearMonthChanged(selectedYearMonth: Dayjs): void {
     this.selectedYearMonth = selectedYearMonth;
     this.getMeterstanden();
   }

@@ -1,6 +1,6 @@
-import {Moment} from 'moment';
+import {Dayjs} from 'dayjs';
 
 export class GemiddeldeKlimaatPerMaand {
-  public maand: Moment;
+  public maand: Dayjs;
   public gemiddelde: number;
 }

@@ -2,8 +2,6 @@ import {Component, HostListener, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import * as c3 from 'c3';
 import {ChartAPI, ChartConfiguration} from 'c3';
-import * as moment from 'moment';
-import {Moment} from 'moment';
 import capitalize from 'lodash/capitalize';
 import isEqual from 'lodash/isEqual';
 import {ErrorHandingService} from '../error-handling/error-handing.service';
@@ -13,6 +11,7 @@ import {EnergieVerbruikHistorieService} from './energie-verbruik-historie.servic
 import {EnergieVerbruikHistorieServiceProvider} from './energie-verbruik-historie-service-provider';
 import {VerbruikKostenOverzicht} from './verbruikKostenOverzicht';
 import {NgxSpinnerService} from 'ngx-spinner';
+import dayjs, {Dayjs} from 'dayjs';
 
 const periodeToDateNavigatorModeMapping: Map<string, string> =
   new Map<string, string>([
@@ -31,7 +30,7 @@ export class EnergieVerbruikComponent implements OnInit {
   public showTable = false;
 
   public dateNavigatorMode: string;
-  public selectedDate: Moment = moment();
+  public selectedDate: Dayjs = dayjs();
   public verbruiksoort = '';
   public energiesoorten: string[] = [];
   public periode = '';
@@ -58,9 +57,9 @@ export class EnergieVerbruikComponent implements OnInit {
         const energiesoortenParam = queryParams.getAll('energiesoort');
 
         if (!queryParams.has('datum')) {
-          return this.navigateTo(verbruiksoortParam, energiesoortenParam, periodeParam, moment());
+          return this.navigateTo(verbruiksoortParam, energiesoortenParam, periodeParam, dayjs());
         }
-        const selectedDayParam = moment(queryParams.get('datum'), 'DD-MM-YYYY');
+        const selectedDayParam = dayjs(queryParams.get('datum'), 'DD-MM-YYYY');
 
         if (isEqual(this.energiesoorten, energiesoortenParam) && this.verbruiksoort === verbruiksoortParam
                    && this.selectedDate.isSame(selectedDayParam) && this.periode === periodeParam) {
@@ -121,7 +120,7 @@ export class EnergieVerbruikComponent implements OnInit {
                                                                                                       this.verbruiksoort,
                                                                                                       this.energiesoorten,
                                                                                                       this.verbruiken,
-                                                                                           (date: Moment) => this.navigateToDetails(date));
+                                                                                           (date: Dayjs) => this.navigateToDetails(date));
     this.loadChartConfiguration(chartConfiguration);
   }
 
@@ -137,7 +136,7 @@ export class EnergieVerbruikComponent implements OnInit {
     this.navigateTo(this.verbruiksoort, energiesoorten, this.periode, this.selectedDate);
   }
 
-  private navigateTo(verbruiksoort: string, energiesoorten: string[], periode: string, datum: Moment) {
+  private navigateTo(verbruiksoort: string, energiesoorten: string[], periode: string, datum: Dayjs) {
     const commands = ['/energie', verbruiksoort, periode];
     const extras = { queryParams: { 'energiesoort': energiesoorten, 'datum': datum.format('DD-MM-YYYY') }, replaceUrl: true };
     this.router.navigate(commands, extras);
@@ -151,15 +150,15 @@ export class EnergieVerbruikComponent implements OnInit {
     this.navigateTo(verbruiksoort, this.energiesoorten, this.periode, this.selectedDate);
   }
 
-  public onDateNavigate(selectedDate: Moment) {
+  public onDateNavigate(selectedDate: Dayjs) {
     this.navigateTo(this.verbruiksoort, this.energiesoorten, this.periode, selectedDate);
   }
 
   private navigateToDetailsOfVerbruik(verbruik: any) {
-    this.navigateToDetails(this.energieVerbruikHistorieService.getMoment(this.selectedDate, verbruik));
+    this.navigateToDetails(this.energieVerbruikHistorieService.getDayjs(this.selectedDate, verbruik));
   }
 
-  private navigateToDetails(date: Moment) {
+  private navigateToDetails(date: Dayjs) {
     if (this.periode === 'uur') {
       this.router.navigate(['/energie/opgenomen-vermogen'], { queryParams: {datum: date.format('DD-MM-YYYY')}, replaceUrl: false });
     } else if (this.periode === 'dag') {

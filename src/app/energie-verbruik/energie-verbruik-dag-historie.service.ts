@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
 import {EnergieVerbruikHistorieService} from './energie-verbruik-historie.service';
-import * as moment from 'moment';
-import {Moment} from 'moment';
 import {EnergieVerbruikService} from './energie-verbruik.service';
 import {Observable} from 'rxjs';
 import {VerbruikOpDag} from './verbruikOpDag';
@@ -9,6 +7,7 @@ import {AbstractEnergieVerbruikHistorieService} from './energie-verbruik-base-ch
 import {ChartConfiguration} from 'c3';
 import {DecimalPipe} from '@angular/common';
 import capitalize from 'lodash/capitalize';
+import dayjs, {Dayjs} from 'dayjs';
 
 @Injectable()
 export class EnergieVerbruikDagHistorieService extends AbstractEnergieVerbruikHistorieService
@@ -19,17 +18,17 @@ export class EnergieVerbruikDagHistorieService extends AbstractEnergieVerbruikHi
     super(decimalPipe);
   }
 
-  public getVerbruiken(selectedDate: Moment): Observable<VerbruikOpDag[]> {
+  public getVerbruiken(selectedDate: Dayjs): Observable<VerbruikOpDag[]> {
     const from = selectedDate.clone().date(1);
     const to = from.clone().add(1, 'months');
     return this.energieVerbruikService.getVerbruikPerDag(from, to);
   }
 
-  public getChartConfig(selectedDate: Moment,
+  public getChartConfig(selectedDate: Dayjs,
                         verbruiksoort: string,
                         energiesoorten: string[],
                         verbruiken: any[],
-                        onDataClick: ((date: Moment) => void)): ChartConfiguration {
+                        onDataClick: ((date: Dayjs) => void)): ChartConfiguration {
     const that = this;
 
     const chartConfiguration = super.getDefaultBarChartConfig();
@@ -38,12 +37,12 @@ export class EnergieVerbruikDagHistorieService extends AbstractEnergieVerbruikHi
     chartConfiguration.data.groups = [keysGroups];
     chartConfiguration.data.keys = { x: 'dag', value: keysGroups };
     chartConfiguration.data.json = verbruiken;
-    chartConfiguration.data.onclick = (data => onDataClick(moment(data.x)));
+    chartConfiguration.data.onclick = (data => onDataClick(dayjs(data.x)));
     chartConfiguration.axis = {
       x: {
         type: 'timeseries',
         tick: {
-          format: (date: Date) => capitalize(moment(date).format('ddd DD')),
+          format: (date: Date) => capitalize(dayjs(date).format('ddd DD')),
           values: this.getTicksForEveryDayInMonth(selectedDate),
           centered: true,
           multiline: true,
@@ -69,21 +68,21 @@ export class EnergieVerbruikDagHistorieService extends AbstractEnergieVerbruikHi
   }
 
   // noinspection JSMethodCanBeStatic
-  private getPeriodStart(selectedDate: Moment): Moment {
+  private getPeriodStart(selectedDate: Dayjs): Dayjs {
     return selectedDate.clone()
                        .date(1);
   }
 
   // noinspection JSMethodCanBeStatic
-  private getPeriodEnd(selectedDate: Moment): Moment {
+  private getPeriodEnd(selectedDate: Dayjs): Dayjs {
     return selectedDate.clone()
                        .date(1)
                        .add(1, 'months')
                        .subtract(1, 'milliseconds');
   }
 
-  private getTicksForEveryDayInMonth(selectedMoment: Moment): number[] {
-    const date: Moment = this.getPeriodStart(selectedMoment);
+  private getTicksForEveryDayInMonth(selectedMoment: Dayjs): number[] {
+    const date: Dayjs = this.getPeriodStart(selectedMoment);
     const numberOfDaysInMonth: number = selectedMoment.daysInMonth();
     const tickValues: number[] = [];
 
@@ -100,10 +99,10 @@ export class EnergieVerbruikDagHistorieService extends AbstractEnergieVerbruikHi
 
   // noinspection JSMethodCanBeStatic
   private formatDate(date: any): string {
-    return capitalize(moment(date).format('ddd DD-MM'));
+    return capitalize(dayjs(date).format('ddd DD-MM'));
   }
 
-  public getMoment(selectedDate: Moment, verbruikOpDag: VerbruikOpDag): Moment {
-    return moment(verbruikOpDag.dag);
+  public getDayjs(selectedDate: Dayjs, verbruikOpDag: VerbruikOpDag): Dayjs {
+    return dayjs(verbruikOpDag.dag);
   }
 }

@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {OpgenomenVermogen} from './opgenomen-vermogen';
 import {Moment} from 'moment';
+import {Dayjs} from 'dayjs';
 
 @Injectable()
 export class OpgenomenVermogenService {
@@ -14,7 +15,7 @@ export class OpgenomenVermogenService {
     return this.http.get<OpgenomenVermogen>(url);
   }
 
-  public getHistory(from: Moment, to: Moment, periodLengthInMilliseconds: number): Observable<OpgenomenVermogen[]> {
+  public getHistory(from: Dayjs, to: Dayjs, periodLengthInMilliseconds: number): Observable<OpgenomenVermogen[]> {
     const formattedFrom = from.format('YYYY-MM-DD');
     const formattedTo = to.format('YYYY-MM-DD');
     const url = `/api/opgenomen-vermogen/historie/${formattedFrom}/${formattedTo}?subPeriodLength=${periodLengthInMilliseconds}`;

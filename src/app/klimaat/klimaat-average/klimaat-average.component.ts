@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import * as moment from 'moment';
-import {Moment} from 'moment';
 import {ErrorHandingService} from '../../error-handling/error-handing.service';
 import {KlimaatService} from '../klimaat.service';
 import {KlimaatSensor} from '../klimaatSensor';
@@ -8,6 +6,7 @@ import {GemiddeldeKlimaatPerMaand} from '../gemiddeldeKlimaatPerMaand';
 import sortBy from 'lodash/sortBy';
 import {KlimaatSensorService} from '../klimaatsensor.service';
 import {NgxSpinnerService} from 'ngx-spinner';
+import dayjs, {Dayjs} from 'dayjs';
 
 @Component({
   selector: 'home-klimaat-average',
@@ -18,7 +17,7 @@ export class KlimaatAverageComponent implements OnInit {
   public sensors: KlimaatSensor[];
   public sensorType = 'temperatuur';
   public sensorCode: string;
-  public year: Moment = moment();
+  public year: Dayjs = dayjs();
 
   public gemiddeldeKlimaatPerMaand: GemiddeldeKlimaatPerMaand[];
 
@@ -71,7 +70,7 @@ export class KlimaatAverageComponent implements OnInit {
     this.getAndLoadData();
   }
 
-  public yearPickerChanged(selectedYear: Moment): void {
+  public yearPickerChanged(selectedYear: Dayjs): void {
     this.year = selectedYear;
     this.getAndLoadData();
   }

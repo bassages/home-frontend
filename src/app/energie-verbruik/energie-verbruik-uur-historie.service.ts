@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {EnergieVerbruikHistorieService} from './energie-verbruik-historie.service';
-import {Moment} from 'moment';
 import {EnergieVerbruikService} from './energie-verbruik.service';
 import {VerbruikInUur} from './verbruikInUur';
 import {Observable} from 'rxjs';
 import {AbstractEnergieVerbruikHistorieService} from './energie-verbruik-base-chart.service';
 import {ChartConfiguration} from 'c3';
 import {DecimalPipe} from '@angular/common';
+import {Dayjs} from 'dayjs';
 
 @Injectable()
 export class EnergieVerbruikUurHistorieService extends AbstractEnergieVerbruikHistorieService
@@ -17,15 +17,15 @@ export class EnergieVerbruikUurHistorieService extends AbstractEnergieVerbruikHi
     super(decimalPipe);
   }
 
-  public getVerbruiken(selectedDate: Moment): Observable<VerbruikInUur[]> {
+  public getVerbruiken(selectedDate: Dayjs): Observable<VerbruikInUur[]> {
     return this.energieVerbruikService.getVerbruikPerUurOpDag(selectedDate);
   }
 
-  public getChartConfig(selectedDate: Moment,
+  public getChartConfig(selectedDate: Dayjs,
                         verbruiksoort: string,
                         energiesoorten: string[],
                         verbruiken: any[],
-                        onDataClick: ((date: Moment) => void)): ChartConfiguration {
+                        onDataClick: ((date: Dayjs) => void)): ChartConfiguration {
     const that = this;
 
     const chartConfiguration: ChartConfiguration = super.getDefaultBarChartConfig();
@@ -64,7 +64,7 @@ export class EnergieVerbruikUurHistorieService extends AbstractEnergieVerbruikHi
     return `${this.decimalPipe.transform(uur, '2.0-0')}:00 - ${this.decimalPipe.transform(uur + 1, '2.0-0')}:00`;
   }
 
-  public getMoment(selectedDate: Moment, verbruikInUur: VerbruikInUur): Moment {
+  public getDayjs(selectedDate: Dayjs, verbruikInUur: VerbruikInUur): Dayjs {
     return selectedDate.clone();
   }
 }

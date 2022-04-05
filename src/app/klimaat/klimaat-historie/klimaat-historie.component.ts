@@ -10,8 +10,6 @@ import min from 'lodash/min';
 import max from 'lodash/max';
 import filter from 'lodash/filter';
 import {ActivatedRoute, Router} from '@angular/router';
-import * as moment from 'moment';
-import {Moment} from 'moment';
 import * as c3 from 'c3';
 import {ChartAPI, ChartConfiguration} from 'c3';
 import {ChartService} from '../../chart/chart.service';
@@ -22,6 +20,7 @@ import {ChartStatisticsService} from '../../chart/statistics/chart-statistics.se
 import * as chroma from 'chroma-js';
 import {KlimaatSensorService} from '../klimaatsensor.service';
 import {NgxSpinnerService} from 'ngx-spinner';
+import dayjs, {Dayjs} from 'dayjs';
 
 @Component({
   selector: 'home-klimaat-historie',
@@ -31,7 +30,7 @@ export class KlimaatHistorieComponent implements OnInit {
 
   public sensorCode: string;
   public sensorType: string;
-  public date: Moment;
+  public date: Dayjs;
 
   public sensors: KlimaatSensor[];
 
@@ -68,9 +67,9 @@ export class KlimaatHistorieComponent implements OnInit {
       const sensorTypeParam = queryParams.get('sensorType');
 
       if (queryParams.has('datum')) {
-        this.date = moment(queryParams.get('datum'), 'DD-MM-YYYY');
+        this.date = dayjs(queryParams.get('datum'), 'DD-MM-YYYY');
       } else {
-        return this.navigateTo(sensorCodeParam, sensorTypeParam, moment());
+        return this.navigateTo(sensorCodeParam, sensorTypeParam, dayjs());
       }
 
       if (!queryParams.has('sensorType')) {
@@ -118,7 +117,7 @@ export class KlimaatHistorieComponent implements OnInit {
     }
   }
 
-  public onDateNavigate(selectedDate: Moment): void {
+  public onDateNavigate(selectedDate: Dayjs): void {
     this.navigateTo(this.sensorCode, this.sensorType, selectedDate);
   }
 
@@ -151,7 +150,7 @@ export class KlimaatHistorieComponent implements OnInit {
     }
   }
 
-  private navigateTo(sensorCode: string, sensorType: string, datum: Moment): void {
+  private navigateTo(sensorCode: string, sensorType: string, datum: Dayjs): void {
     const commands = ['/klimaat/historie'];
     const extras = { queryParams: { sensorCode: sensorCode, sensorType: sensorType, datum: datum.format('DD-MM-YYYY') }, replaceUrl: true };
     this.router.navigate(commands, extras);
@@ -233,7 +232,7 @@ export class KlimaatHistorieComponent implements OnInit {
       },
       tooltip: {
         format: {
-          name: (name: string, ratio: number, id: string, index: number) => moment(name, 'DD-MM-YYYY').format('DD-MM-YYYY'),
+          name: (name: string, ratio: number, id: string, index: number) => dayjs(name, 'DD-MM-YYYY').format('DD-MM-YYYY'),
           value: (value: number) => this.formatWithUnitLabel(that.sensorType, value)
         }
       }
@@ -242,7 +241,7 @@ export class KlimaatHistorieComponent implements OnInit {
 
   // noinspection JSMethodCanBeStatic
   private getTo(from: Date): Date {
-    return moment(from).add(1, 'days').toDate();
+    return dayjs(from).add(1, 'days').toDate();
   }
 
   private getTicksForEveryHourInDay() {

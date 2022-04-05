@@ -2,9 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {StandbyPowerService} from './standby-power.service';
 import {ErrorHandingService} from '../error-handling/error-handing.service';
 import {StandbyPowerInPeriod} from './standby-power-in-period';
-import * as moment from 'moment';
-import {Moment} from 'moment';
 import {NgxSpinnerService} from 'ngx-spinner';
+import dayjs, {Dayjs} from 'dayjs';
 
 @Component({
   selector: 'home-standby-power',
@@ -14,14 +13,14 @@ export class StandbyPowerComponent implements OnInit {
 
   public standbyPowerInPeriods: StandbyPowerInPeriod[];
 
-  public selectedYear: Moment;
+  public selectedYear: Dayjs;
 
   constructor(private readonly standbyPowerService: StandbyPowerService,
               private readonly spinnerService: NgxSpinnerService,
               private readonly errorHandlingService: ErrorHandingService) { }
 
   public ngOnInit(): void {
-    this.selectedYear = moment();
+    this.selectedYear = dayjs();
     setTimeout(() => this.getAndLoadData());
   }
 
@@ -39,7 +38,7 @@ export class StandbyPowerComponent implements OnInit {
     this.standbyPowerInPeriods = standbyPowerInLastQuarters;
   }
 
-  public onYearNavigate(selectedYear: Moment): void {
+  public onYearNavigate(selectedYear: Dayjs): void {
     this.selectedYear = selectedYear;
     this.getAndLoadData();
   }

@@ -1,6 +1,4 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import * as moment from 'moment';
-import {Moment} from 'moment';
 import {OpgenomenVermogenService} from './opgenomen-vermogen.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as c3 from 'c3';
@@ -16,6 +14,10 @@ import {ChartService} from '../chart/chart.service';
 import {Statistics} from '../statistics';
 import {ChartStatisticsService} from '../chart/statistics/chart-statistics.service';
 import {NgxSpinnerService} from 'ngx-spinner';
+import * as dayjs from 'dayjs';
+import {Dayjs} from 'dayjs';
+import * as duration from 'dayjs/plugin/duration';
+dayjs.extend(duration);
 
 @Component({
   selector: 'home-opgenomen-vermogen',
@@ -23,10 +25,10 @@ import {NgxSpinnerService} from 'ngx-spinner';
 })
 export class OpgenomenVermogenComponent implements OnInit {
 
-  public selectedDate: Moment;
+  public selectedDate: Dayjs;
   public statistics: Statistics;
 
-  public periodLengthInSeconds = moment.duration(3, 'minutes').asSeconds();
+  public periodLengthInSeconds = dayjs.duration(3, 'minutes').asSeconds();
 
   private chart: ChartAPI;
 
@@ -53,15 +55,15 @@ export class OpgenomenVermogenComponent implements OnInit {
   public ngOnInit(): void {
     this.activatedRoute.queryParamMap.subscribe((queryParams) => {
       if (!queryParams.has('datum')) {
-        return this.navigateTo(moment());
+        return this.navigateTo(dayjs());
       }
-      this.selectedDate = moment(queryParams.get('datum'), 'DD-MM-YYYY');
+      this.selectedDate = dayjs(queryParams.get('datum'), 'DD-MM-YYYY');
 
       setTimeout(() => this.getAndLoadData());
     });
   }
 
-  private navigateTo(date: Moment) {
+  private navigateTo(date: Dayjs) {
     const commands = ['/energie/opgenomen-vermogen'];
     const extras = {queryParams: { datum: date.format('DD-MM-YYYY')}, replaceUrl: true};
     this.router.navigate(commands, extras);
@@ -80,7 +82,7 @@ export class OpgenomenVermogenComponent implements OnInit {
     );
   }
 
-  public onDateNavigate(selectedDate: Moment) {
+  public onDateNavigate(selectedDate: Dayjs) {
     this.navigateTo(selectedDate);
   }
 
@@ -159,8 +161,8 @@ export class OpgenomenVermogenComponent implements OnInit {
   }
 
   // noinspection JSMethodCanBeStatic
-  private getTicksForEveryHourInPeriod(from: Moment, to: Moment) {
-    const numberOfHoursInPeriod: number = moment.duration(to.diff(from)).asHours();
+  private getTicksForEveryHourInPeriod(from: Dayjs, to: Dayjs) {
+    const numberOfHoursInPeriod: number = dayjs.duration(to.diff(from)).asHours();
 
     const tickValues: number[] = [];
     for (let i = 0; i <= numberOfHoursInPeriod; i++) {

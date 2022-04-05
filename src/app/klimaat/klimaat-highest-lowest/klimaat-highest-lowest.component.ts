@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {KlimaatService} from '../klimaat.service';
 import {ErrorHandingService} from '../../error-handling/error-handing.service';
-import * as moment from 'moment';
-import {Moment} from 'moment';
 import {Klimaat} from '../klimaat';
 import {KlimaatSensor} from '../klimaatSensor';
 import sortBy from 'lodash/sortBy';
@@ -10,6 +8,7 @@ import {zip} from 'rxjs';
 import {Router} from '@angular/router';
 import {KlimaatSensorService} from '../klimaatsensor.service';
 import {NgxSpinnerService} from 'ngx-spinner';
+import dayjs, {Dayjs} from 'dayjs';
 
 @Component({
   selector: 'home-klimaat-highest-lowest',
@@ -20,7 +19,7 @@ export class KlimaatHighestLowestComponent implements OnInit {
   public sensorCode;
   public sensorType = 'temperatuur';
   public limit = 10;
-  public year: Moment = moment();
+  public year: Dayjs = dayjs();
 
   public highestKlimaats: Klimaat[];
   public lowestKlimaats: Klimaat[];
@@ -55,8 +54,8 @@ export class KlimaatHighestLowestComponent implements OnInit {
   private getAndLoadData(): void {
     this.spinnerService.show();
 
-    const from: Moment = this.getFrom();
-    const to: Moment = this.getTo();
+    const from: Dayjs = this.getFrom();
+    const to: Dayjs = this.getTo();
 
     const getLowest = this.klimaatService.getTop(this.sensorCode, this.sensorType, 'laagste', from, to, this.limit);
     const getHighest = this.klimaatService.getTop(this.sensorCode, this.sensorType, 'hoogste', from, to, this.limit);
@@ -70,11 +69,11 @@ export class KlimaatHighestLowestComponent implements OnInit {
     );
   }
 
-  private getFrom(): Moment {
+  private getFrom(): Dayjs {
     return this.year.clone().month(0).date(1);
   }
 
-  private getTo(): Moment {
+  private getTo(): Dayjs {
     return this.year.clone().month(11).date(31);
   }
 
@@ -94,7 +93,7 @@ export class KlimaatHighestLowestComponent implements OnInit {
     this.getAndLoadData();
   }
 
-  public yearPickerChanged(selectedYear: Moment): void {
+  public yearPickerChanged(selectedYear: Dayjs): void {
       this.year = selectedYear;
       this.getAndLoadData();
   }
@@ -104,7 +103,7 @@ export class KlimaatHighestLowestComponent implements OnInit {
     this.getAndLoadData();
   }
 
-  public navigateToDetailsOfDate(dateTime: Moment): void {
+  public navigateToDetailsOfDate(dateTime: Dayjs): void {
     const commands = ['/klimaat/historie'];
     const extras = { queryParams: { sensorCode: this.sensorCode, sensorType: this.sensorType, datum: dateTime.format('DD-MM-YYYY') } };
     this.router.navigate(commands, extras);

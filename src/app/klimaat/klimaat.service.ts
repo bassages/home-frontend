@@ -2,12 +2,11 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {filter, map} from 'rxjs/operators';
-import * as moment from 'moment';
-import {Moment} from 'moment';
 import {Klimaat} from './klimaat';
 import {RealtimeKlimaat} from './realtimeKlimaat';
 import {Trend} from './trend';
 import {GemiddeldeKlimaatPerMaand} from './gemiddeldeKlimaatPerMaand';
+import dayjs, {Dayjs} from 'dayjs';
 
 const sensorTypeToPostfixMapping: Map<string, string> =
   new Map<string, string>([
@@ -32,7 +31,7 @@ export class KlimaatService {
 
   private static mapToKlimaat(backendKlimaat: BackendKlimaat): Klimaat {
     const klimaat: Klimaat = new Klimaat();
-    klimaat.dateTime = moment(backendKlimaat.datumtijd);
+    klimaat.dateTime = dayjs(backendKlimaat.datumtijd);
     klimaat.temperatuur = backendKlimaat.temperatuur;
     klimaat.luchtvochtigheid = backendKlimaat.luchtvochtigheid;
     return klimaat;
@@ -40,7 +39,7 @@ export class KlimaatService {
 
   public static mapToRealtimeKlimaat(source: any): RealtimeKlimaat {
     const realtimeKlimaat: RealtimeKlimaat = new RealtimeKlimaat();
-    realtimeKlimaat.dateTime = moment(source.datumtijd);
+    realtimeKlimaat.dateTime = dayjs(source.datumtijd);
     realtimeKlimaat.temperatuur = source.temperatuur;
     realtimeKlimaat.luchtvochtigheid = source.luchtvochtigheid;
     realtimeKlimaat.temperatuurTrend = Trend[source.temperatuurTrend as string];
@@ -57,12 +56,12 @@ export class KlimaatService {
   public static mapToGemiddeldeKlimaatPerMaand(backendGemiddeldeKlimaatPerMaand: BackendGemiddeldeKlimaatPerMaand)
                 : GemiddeldeKlimaatPerMaand {
     const gemiddeldeKlimaatPerMaand: GemiddeldeKlimaatPerMaand = new GemiddeldeKlimaatPerMaand();
-    gemiddeldeKlimaatPerMaand.maand = moment(backendGemiddeldeKlimaatPerMaand.maand);
+    gemiddeldeKlimaatPerMaand.maand = dayjs(backendGemiddeldeKlimaatPerMaand.maand);
     gemiddeldeKlimaatPerMaand.gemiddelde = backendGemiddeldeKlimaatPerMaand.gemiddelde;
     return gemiddeldeKlimaatPerMaand;
   }
 
-  public getKlimaat(sensorCode: string, from: Moment, to: Moment): Observable<Klimaat[]> {
+  public getKlimaat(sensorCode: string, from: Dayjs, to: Dayjs): Observable<Klimaat[]> {
     const url = `/api/klimaat/${sensorCode}`;
     const params = new HttpParams().set('from', from.format('YYYY-MM-DD'))
                                    .set('to', to.format('YYYY-MM-DD'));
@@ -75,7 +74,7 @@ export class KlimaatService {
                     .pipe(map(KlimaatService.mapToRealtimeKlimaat));
   }
 
-  public getTop(sensorCode: string, sensorType: string, topType: string, from: Moment, to: Moment, limit: number): Observable<Klimaat[]> {
+  public getTop(sensorCode: string, sensorType: string, topType: string, from: Dayjs, to: Dayjs, limit: number): Observable<Klimaat[]> {
     const params = new HttpParams().set('from', from.format('YYYY-MM-DD'))
                                    .set('to', to.format('YYYY-MM-DD'))
                                    .set('sensorType', sensorType)

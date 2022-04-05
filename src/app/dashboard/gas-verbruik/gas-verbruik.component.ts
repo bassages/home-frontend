@@ -10,7 +10,7 @@ import isNumber from 'lodash/isNumber';
 import {VerbruikOpDag} from '../../energie-verbruik/verbruikOpDag';
 import {GemiddeldVerbruikInPeriod} from '../../energie-verbruik/gemiddeldVerbruikInPeriod';
 import {Router} from '@angular/router';
-import * as moment from 'moment';
+import dayjs from 'dayjs';
 
 @Component({
   selector: 'home-gas-verbruik',
@@ -57,7 +57,7 @@ export class GasVerbruikComponent implements OnInit, OnDestroy {
   }
 
   private getVerbruikVandaag() {
-    const from = moment().startOf('day');
+    const from = dayjs().startOf('day');
     const to = from.clone().add(1, 'day');
 
     this.energieVerbruikService.getVerbruikPerDag(from, to).subscribe((verbruikPerDag: VerbruikOpDag[]) => {
@@ -70,7 +70,7 @@ export class GasVerbruikComponent implements OnInit, OnDestroy {
   }
 
   private getGemiddeldVerbruikAfgelopenWeek() {
-    const to = moment().startOf('day');
+    const to = dayjs().startOf('day');
     const from = to.clone().subtract(6, 'day');
 
     this.energieVerbruikService.getGemiddeldVerbruikPerDag(from, to).subscribe(

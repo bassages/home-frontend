@@ -4,11 +4,11 @@ import {ErrorHandingService} from '../error-handling/error-handing.service';
 import {EnergiecontractService} from './energiecontract.service';
 import sortBy from 'lodash/sortBy';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import * as moment from 'moment';
 import {DatePickerDirective, IDatePickerDirectiveConfig} from 'ng2-date-picker';
 import {DecimalPipe} from '@angular/common';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NgxSpinnerService} from 'ngx-spinner';
+import dayjs from 'dayjs';
 
 const datePickerFormat = 'DD-MM-YYYY';
 const pricePattern = /^\d(,\d{1,6})*$/;
@@ -105,7 +105,7 @@ export class EnergiecontractComponent implements OnInit {
     this.gas.setValue('');
     this.stroomNormaalTarief.setValue('');
     this.stroomDalTarief.setValue('');
-    this.selectedDate.setValue(moment());
+    this.selectedDate.setValue(dayjs());
   }
 
   public startEdit(energiecontract: Energiecontract): void {
@@ -133,7 +133,7 @@ export class EnergiecontractComponent implements OnInit {
     this.spinnerService.show();
 
     const energiecontract: Energiecontract = this.selectedEnergiecontract ? this.selectedEnergiecontract : new Energiecontract();
-    energiecontract.validFrom = moment(this.selectedDate.value, this.datePickerConfiguration.format);
+    energiecontract.validFrom = dayjs(this.selectedDate.value, this.datePickerConfiguration.format);
     energiecontract.leverancier = this.leverancier.value;
 
     if (this.remark.value) {
