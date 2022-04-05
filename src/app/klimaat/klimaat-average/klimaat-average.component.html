@@ -25,14 +25,14 @@
       <table class="table table-bordered table-striped table-hover table-sm">
         <thead>
         <tr>
-          <th class="text-right">Maand</th>
-          <th class="text-right text-capitalize">{{sensorType}}</th>
+          <th class="text-end">Maand</th>
+          <th class="text-end text-capitalize">{{sensorType}}</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let gemiddeldeKlimaatInMaand of gemiddeldeKlimaatPerMaand">
-          <td class="text-right text-capitalize">{{ gemiddeldeKlimaatInMaand.maand.toDate() | date: 'MMMM'}}</td>
-          <td class="text-right">{{ gemiddeldeKlimaatInMaand.gemiddelde | number: getDecimalFormat(sensorType) }}{{ (gemiddeldeKlimaatInMaand.gemiddelde !== null && gemiddeldeKlimaatInMaand.gemiddelde !== undefined) ? getValuePostFix(sensorType) : '' }}</td>
+          <td class="text-end text-capitalize">{{ gemiddeldeKlimaatInMaand.maand.toDate() | date: 'MMMM'}}</td>
+          <td class="text-end">{{ gemiddeldeKlimaatInMaand.gemiddelde | number: getDecimalFormat(sensorType) }}{{ (gemiddeldeKlimaatInMaand.gemiddelde !== null && gemiddeldeKlimaatInMaand.gemiddelde !== undefined) ? getValuePostFix(sensorType) : '' }}</td>
         </tr>
         </tbody>
       </table>

@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import {Moment} from 'moment';
 import {DatePickerDirective, IDatePickerDirectiveConfig} from 'ng2-date-picker';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import dayjs from 'dayjs';
 
 const selectedDayFormat = 'dd. DD-MM-YYYY';
 const selectedMonthFormat = 'MMMM YYYY';
@@ -63,11 +64,11 @@ export class DateNavigatorComponent {
   private initDatePickerConfigurations() {
     this.dayPickerConfiguration = {
       format: selectedDayFormat,
-      max: moment()
+      max: dayjs()
     };
     this.monthPickerConfiguration = {
       format: selectedMonthFormat,
-      max: moment()
+      max: dayjs()
     };
   }
 

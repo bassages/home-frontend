@@ -35,16 +35,16 @@
           <table class="table table-bordered table-striped table-hover table-sm">
             <thead>
             <tr>
-              <th class="text-right"></th>
-              <th class="text-right">Datum/tijd</th>
-              <th class="text-right text-capitalize">{{sensorType}}</th>
+              <th class="text-end"></th>
+              <th class="text-end">Datum/tijd</th>
+              <th class="text-end text-capitalize">{{sensorType}}</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let klimaat of lowestKlimaats; let index = index" (click)="navigateToDetailsOfDate(klimaat.dateTime)" class="clickable">
-              <td class="text-right">{{ index + 1 }}.</td>
-              <td class="text-right">{{ klimaat.dateTime.toDate() | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
-              <td class="text-right">{{ klimaat[sensorType] | number: getDecimalFormat(sensorType) }}{{ getValuePostFix(sensorType) }}</td>
+              <td class="text-end">{{ index + 1 }}.</td>
+              <td class="text-end">{{ klimaat.dateTime.toDate() | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+              <td class="text-end">{{ klimaat[sensorType] | number: getDecimalFormat(sensorType) }}{{ getValuePostFix(sensorType) }}</td>
             </tr>
             </tbody>
           </table>
@@ -63,16 +63,16 @@
           <table class="table table-bordered table-striped table-hover table-sm">
             <thead>
             <tr>
-              <th class="text-right"></th>
-              <th class="text-right">Datum/tijd</th>
-              <th class="text-right text-capitalize">{{sensorType}}</th>
+              <th class="text-end"></th>
+              <th class="text-end">Datum/tijd</th>
+              <th class="text-end text-capitalize">{{sensorType}}</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let klimaat of highestKlimaats; let index = index" (click)="navigateToDetailsOfDate(klimaat.dateTime)" class="clickable">
-              <td class="text-right">{{ index + 1 }}.</td>
-              <td class="text-right">{{ klimaat.dateTime.toDate() | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
-              <td class="text-right">{{ klimaat[sensorType] | number: '1.2-2' }}{{ getValuePostFix(sensorType) }}</td>
+              <td class="text-end">{{ index + 1 }}.</td>
+              <td class="text-end">{{ klimaat.dateTime.toDate() | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+              <td class="text-end">{{ klimaat[sensorType] | number: '1.2-2' }}{{ getValuePostFix(sensorType) }}</td>
             </tr>
             </tbody>
           </table>
