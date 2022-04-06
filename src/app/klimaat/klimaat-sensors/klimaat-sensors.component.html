@@ -27,24 +27,24 @@
   </div>
 </ng-template>
 
-<form [formGroup]="form" [hidden]="!editMode" class="form-horizontal" autocomplete="off" novalidate (submit)="save()">
+<form [formGroup]="form" [hidden]="!editMode" autocomplete="off" novalidate (submit)="save()">
   <hr/>
 
-  <div class="form-group row">
-    <label for="code" class="col-md-4 col-lg-3 control-label">Code</label>
+  <div class="row mb-3">
+    <label for="code" class="col-md-4 col-lg-3 col-form-label ">Code</label>
     <div class="col-sm-9 col-md-7 col-lg-5">
       <input type="text" class="form-control" id="code" name="code" formControlName="code" readonly="readonly">
     </div>
   </div>
 
-  <div class="form-group row">
-    <label for="omschrijving" class="col-md-4 col-lg-3 control-label">Omschrijving</label>
+  <div class="row mb-3">
+    <label for="omschrijving" class="col-md-4 col-lg-3 col-form-label">Omschrijving</label>
     <div class="col-sm-9 col-md-7 col-lg-5">
       <input type="text" class="form-control" [ngClass]="{'is-invalid': omschrijving.invalid}" id="omschrijving" name="omschrijving" formControlName="omschrijving">
     </div>
   </div>
 
-  <div class="form-group row">
+  <div class="row">
     <div class="col-md-4 col-lg-3">&nbsp;</div>
     <div class="col-sm-9 col-md-7 col-lg-5">
       <button type="button" class="btn btn-primary float-start" [hidden]="!selectedSensor" (click)="openDeletionConformationDialog(deletionConformationDialog)"><i class="fa fa-trash" aria-hidden="true"></i> Verwijderen</button>

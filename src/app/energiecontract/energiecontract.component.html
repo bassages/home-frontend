@@ -43,8 +43,8 @@
 <form [formGroup]="form" [hidden]="!editMode" class="form-horizontal" autocomplete="off" novalidate (submit)="save()">
   <hr/>
 
-  <div class="mb3 row">
-    <label for="fromDate" class="col-md-4 col-lg-3 control-label">Vanaf *</label>
+  <div class="row mb-3">
+    <label for="fromDate" class="col-md-4 col-lg-3 col-form-label">Vanaf *</label>
     <div class="col-sm-9 col-md-7 col-lg-5">
       <div class="input-group">
         <input #datePicker="dpDayPicker" type="text" class="form-control" id="fromDate" name="fromDate"
@@ -58,15 +58,15 @@
     </div>
   </div>
 
-  <div class="form-group row">
-    <label for="leverancier" class="col-md-4 col-lg-3 control-label">Leverancier *</label>
+  <div class="row mb-3">
+    <label for="leverancier" class="col-md-4 col-lg-3 col-form-label">Leverancier *</label>
     <div class="col-sm-9 col-md-7 col-lg-5">
       <input id="leverancier" name="leverancier" type="text" class="form-control" [ngClass]="{'is-invalid': leverancier.invalid}" formControlName="leverancier" />
     </div>
   </div>
 
-  <div class="form-group row">
-    <label for="gas" class="col-md-4 col-lg-3 control-label">Gas (m<sup>3</sup>) *</label>
+  <div class="row mb-3">
+    <label for="gas" class="col-md-4 col-lg-3 col-form-label">Gas (m<sup>3</sup>) *</label>
     <div class="col-sm-9 col-md-7 col-lg-5">
       <div class="input-group">
         <span class="input-group-text">&euro;</span>
@@ -75,8 +75,8 @@
     </div>
   </div>
 
-  <div class="form-group row">
-    <label for="stroomNormaaltarief" class="col-md-4 col-lg-3 control-label">Stroom normaaltarief (kWh) *</label>
+  <div class="row mb-3">
+    <label for="stroomNormaaltarief" class="col-md-4 col-lg-3 col-form-label">Stroom normaaltarief (kWh) *</label>
     <div class="col-sm-9 col-md-7 col-lg-5">
       <div class="input-group">
         <span class="input-group-text">&euro;</span>
@@ -85,8 +85,8 @@
     </div>
   </div>
 
-  <div class="form-group row">
-    <label for="stroomDaltarief" class="col-md-4 col-lg-3 control-label">Stroom daltarief (kWh)</label>
+  <div class="row mb-3">
+    <label for="stroomDaltarief" class="col-md-4 col-lg-3 col-form-label">Stroom daltarief (kWh)</label>
     <div class="col-sm-9 col-md-7 col-lg-5">
       <div class="input-group">
         <span class="input-group-text">&euro;</span>
@@ -95,14 +95,14 @@
     </div>
   </div>
 
-  <div class="form-group row">
-    <label for="remark" class="col-md-4 col-lg-3 control-label">Notitie</label>
+  <div class="row mb-3">
+    <label for="remark" class="col-md-4 col-lg-3 col-form-label">Notitie</label>
     <div class="col-sm-9 col-md-7 col-lg-5">
       <textarea id="remark" name="remark" class="form-control" rows="3" [ngClass]="{'is-invalid': remark.invalid}" formControlName="remark"></textarea>
     </div>
   </div>
 
-  <div class="form-group row">
+  <div class="row">
     <div class="col-md-4 col-lg-3">&nbsp;</div>
     <div class="col-sm-9 col-md-7 col-lg-5">
       <button type="button" class="btn btn-primary float-start" [hidden]="!selectedEnergiecontract" (click)="openDeletionConformationDialog(deletionConformationDialog)"><i class="fa fa-trash" aria-hidden="true"></i> Verwijderen</button>
