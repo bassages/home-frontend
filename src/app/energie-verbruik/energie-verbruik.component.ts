@@ -23,7 +23,8 @@ const periodeToDateNavigatorModeMapping: Map<string, string> =
 
 @Component({
   selector: 'home-energie-verbruik',
-  templateUrl: './energie-verbruik.component.html'
+  templateUrl: './energie-verbruik.component.html',
+  styleUrls: ['./energie-verbuik-component.scss']
 })
 export class EnergieVerbruikComponent implements OnInit {
   public showChart = false;
@@ -130,6 +131,7 @@ export class EnergieVerbruikComponent implements OnInit {
   }
 
   public toggleEnergiesoort(energiesoortToToggle) {
+    console.log('toggleEnergiesoort', energiesoortToToggle);
     const energiesoorten = this.energieVerbruikHistorieService.toggleEnergiesoort(this.verbruiksoort,
                                                                                   this.energiesoorten,
                                                                                   energiesoortToToggle);

@@ -13,12 +13,12 @@
       <span *ngIf="!klimaat">-&#8451;</span>
 
       <span *ngIf="klimaat?.temperatuurTrend === Trend.UP">
-        <i data-fa-transform="rotate-45" class="fas fa-arrow-up text-danger ml-1" aria-hidden="true"></i>
+        <i data-fa-transform="rotate-45" class="fas fa-arrow-up text-danger ms-1" aria-hidden="true"></i>
       </span>
       <span *ngIf="klimaat?.temperatuurTrend === Trend.DOWN">
-        <i data-fa-transform="rotate--45" class="fas fa-arrow-down text-primary ml-1" aria-hidden="true"></i>
+        <i data-fa-transform="rotate--45" class="fas fa-arrow-down text-primary ms-1" aria-hidden="true"></i>
       </span>
-      <span *ngIf="klimaat?.temperatuurTrend === Trend.STABLE" class="text-success ml-1">
+      <span *ngIf="klimaat?.temperatuurTrend === Trend.STABLE" class="text-success ms-1">
         <strong>&asymp;</strong>
       </span>
     </div>

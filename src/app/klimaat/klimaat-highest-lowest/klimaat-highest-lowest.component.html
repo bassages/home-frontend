@@ -1,26 +1,33 @@
-<div class="form-row mb-3">
-  <div class="col-md-3 mb-2">
-    <div class="btn-group btn-group-toggle d-flex">
-      <label class="btn btn-outline-secondary w-100" [ngClass]="{'active': sensorType === 'temperatuur'}">
-        <input type="checkbox" [checked]="sensorType === 'temperatuur'" (click)="setSensorType('temperatuur')"><i class="fas fa-thermometer-half" aria-hidden="true"></i> &#8451;
-      </label>
-      <label class="btn btn-outline-secondary w-100" [ngClass]="{'active': sensorType === 'luchtvochtigheid'}">
-        <input type="checkbox" [checked]="sensorType === 'luchtvochtigheid'" (change)="setSensorType('luchtvochtigheid')"><i class="fas fa-tint" aria-hidden="true"></i> %
-      </label>
+<div class="container mb-3">
+  <div class="row">
+    <div class="col-md-3 mb-2">
+      <div class="btn-group btn-group-toggle d-flex">
+        <input type="checkbox" class="btn-check" [checked]="sensorType === 'temperatuur'">
+        <label class="btn btn-outline-secondary w-100" [ngClass]="{'active': sensorType === 'temperatuur'}"
+               (click)="setSensorType('temperatuur')">
+          <i class="fas fa-thermometer-half" aria-hidden="true"></i> &#8451;
+        </label>
+
+        <input type="checkbox" class="btn-check" [checked]="sensorType === 'luchtvochtigheid'">
+        <label class="btn btn-outline-secondary w-100" [ngClass]="{'active': sensorType === 'luchtvochtigheid'}"
+               (click)="setSensorType('luchtvochtigheid')">
+          <i class="fas fa-tint" aria-hidden="true"></i> %
+        </label>
+      </div>
     </div>
-  </div>
-  <div class="col-md-3 mb-2">
-    <select class="form-control" name="sensor" (change)="sensorChanged()" [(ngModel)]="sensorCode">
-      <option *ngFor="let _sensor of sensors" [value]="_sensor.code">{{_sensor.omschrijving}}</option>
-    </select>
-  </div>
-  <div class="col-md-3 mb-2">
-    <home-date-navigator mode="year" [selectedDate]="year" (navigation)="yearPickerChanged($event)" class="input-group"></home-date-navigator>
-  </div>
-  <div class="col-md-2">
-    <select class="form-control form-control" id="limit" name="limit" (change)="limitChanged()" [(ngModel)]="limit">
-      <option *ngFor="let _limit of [5, 10, 25, 50, 100]" [value]="_limit">{{ _limit }}</option>
-    </select>
+    <div class="col-md-3 mb-2">
+      <select class="form-select" name="sensor" (change)="sensorChanged()" [(ngModel)]="sensorCode">
+        <option *ngFor="let _sensor of sensors" [value]="_sensor.code">{{_sensor.omschrijving}}</option>
+      </select>
+    </div>
+    <div class="col-md-3 mb-2">
+      <home-date-navigator mode="year" [selectedDate]="year" (navigation)="yearPickerChanged($event)" class="input-group"></home-date-navigator>
+    </div>
+    <div class="col-md-3">
+      <select class="form-select form-control" id="limit" name="limit" (change)="limitChanged()" [(ngModel)]="limit">
+        <option *ngFor="let _limit of [5, 10, 25, 50, 100]" [value]="_limit">{{ _limit }}</option>
+      </select>
+    </div>
   </div>
 </div>
 

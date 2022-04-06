@@ -29,7 +29,7 @@
       <div class="float-end">
         <button *ngIf="!editMode" type="button" class='btn btn-primary' (click)="editMode = true"><i class="fas fa-edit" aria-hidden="true"></i> Wijzig</button>
         <button *ngIf="editMode" type="button" class='btn btn-primary' (click)="cancel()"><i class="fas fa-ban" aria-hidden="true"></i> Annuleren</button>
-        <button *ngIf="editMode" type="submit" class='btn btn-primary ml-1' [disabled]="form.invalid"><i class="fas fa-check" aria-hidden="true"></i> Opslaan</button>
+        <button *ngIf="editMode" type="submit" class='btn btn-primary ms-1' [disabled]="form.invalid"><i class="fas fa-check" aria-hidden="true"></i> Opslaan</button>
       </div>
     </div>
   </div>

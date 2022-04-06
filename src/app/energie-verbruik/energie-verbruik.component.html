@@ -1,28 +1,33 @@
 <div class="row">
-  <div class="col-lg-1 pr-0 d-none d-lg-block">&nbsp;</div>
+  <div class="col-lg-1 pe-0 d-none d-lg-block">&nbsp;</div>
 
   <div class="col-md-12 col-lg-11 px-0 d-none d-lg-block">
     <ul class="nav nav-tabs">
-      <li class="nav-item mr-1">
+      <li class="nav-item me-1">
         <a class="nav-link clickable" [ngClass]="{'active': periode == 'uur'}" (click)="setPeriode('uur')">Uur</a>
       </li>
-      <li class="nav-item mr-1">
+      <li class="nav-item me-1">
         <a class="nav-link clickable" [ngClass]="{'active': periode == 'dag'}" (click)="setPeriode('dag')">Dag</a>
       </li>
-      <li class="nav-item mr-1">
+      <li class="nav-item me-1">
         <a class="nav-link clickable" [ngClass]="{'active': periode == 'maand'}" (click)="setPeriode('maand')">Maand</a>
       </li>
-      <li class="nav-item mr-0">
+      <li class="nav-item me-0">
         <a class="nav-link clickable" [ngClass]="{'active': periode == 'jaar'}" (click)="setPeriode('jaar')">Jaar</a>
       </li>
 
-      <li class="ml-auto mr-auto">
+      <li class="ms-auto me-auto">
         <div class="btn-group btn-group-toggle">
-          <label class="btn btn-outline-secondary" [ngClass]="{'active': isEnergieSoortSelected('stroom')}">
-            <input type="checkbox" [checked]="isEnergieSoortSelected('stroom')" (click)="toggleEnergiesoort('stroom')"><i class="fas fa-bolt" aria-hidden="true"></i> Stroom
+          <input type="checkbox" class="btn-check" [checked]="isEnergieSoortSelected('stroom')">
+          <label class="btn btn-outline-secondary electricity-gas-toggle-button" [ngClass]="{'active': isEnergieSoortSelected('stroom')}"
+                 (click)="toggleEnergiesoort('stroom')">
+            <i class="fas fa-bolt" aria-hidden="true"></i> Stroom
           </label>
-          <label class="btn btn-outline-secondary" [ngClass]="{'active': isEnergieSoortSelected('gas')}">
-            <input type="checkbox" [checked]="isEnergieSoortSelected('gas')" (change)="toggleEnergiesoort('gas')">&nbsp;&nbsp; <i class="fas fa-fire" aria-hidden="true"></i> Gas&nbsp;&nbsp;&nbsp;
+
+          <input type="checkbox" class="btn-check" [checked]="isEnergieSoortSelected('gas')">
+          <label class="btn btn-outline-secondary electricity-gas-toggle-button" [ngClass]="{'active': isEnergieSoortSelected('gas')}"
+                 (click)="toggleEnergiesoort('gas')">
+            <i class="fas fa-fire" aria-hidden="true"></i> Gas
           </label>
         </div>
       </li>
@@ -39,27 +44,31 @@
 
   <!-- Kostensoort selection -->
   <div class="row mb-2">
-    <div class="col-6 pl-2 pr-1 pl-sm-0">
-      <button class="btn btn-outline-secondary btn-sm btn-block" [ngClass]="{'active': verbruiksoort == 'verbruik'}" (click)="setVerbruikSoort('verbruik')">Verbruik</button>
+    <div class="col-6 ps-2 pe-1 ps-sm-0">
+      <button class="btn btn-outline-secondary btn-sm btn-block" [ngClass]="{'active': verbruiksoort == 'verbruik'}"
+              (click)="setVerbruikSoort('verbruik')">Verbruik</button>
     </div>
-    <div class="col-6 pl-1 pr-2 pr-sm-0">
-      <button class="btn btn-outline-secondary btn-sm btn-block" [ngClass]="{'active': verbruiksoort == 'kosten'}" (click)="setVerbruikSoort('kosten')"> Kosten</button>
+    <div class="col-6 ps-1 pe-2 pe-sm-0">
+      <button class="btn btn-outline-secondary btn-sm btn-block" [ngClass]="{'active': verbruiksoort == 'kosten'}"
+              (click)="setVerbruikSoort('kosten')"> Kosten</button>
     </div>
   </div>
 
   <!-- Energiesoort selection  -->
   <div class="row mb-2">
-    <div class="col-6 pl-2 pr-1 pl-sm-0">
-      <button class="btn btn-outline-secondary btn-sm btn-block" [ngClass]="{'active': isEnergieSoortSelected('stroom')}" (click)="toggleEnergiesoort('stroom')"><i class="fas fa-bolt" aria-hidden="true"></i> Stroom</button>
+    <div class="col-6 ps-2 pe-1 ps-sm-0">
+      <button class="btn btn-outline-secondary btn-sm btn-block" [ngClass]="{'active': isEnergieSoortSelected('stroom')}"
+              (click)="toggleEnergiesoort('stroom')"><i class="fas fa-bolt" aria-hidden="true"></i> Stroom</button>
     </div>
-    <div class="col-6 pl-1 pr-2 pr-sm-0">
-      <button class="btn btn-outline-secondary btn-sm btn-block" [ngClass]="{'active': isEnergieSoortSelected('gas')}" (click)="toggleEnergiesoort('gas')"><i class="fas fa-fire" aria-hidden="true"></i> Gas</button>
+    <div class="col-6 ps-1 pe-2 pe-sm-0">
+      <button class="btn btn-outline-secondary btn-sm btn-block" [ngClass]="{'active': isEnergieSoortSelected('gas')}"
+              (click)="toggleEnergiesoort('gas')"><i class="fas fa-fire" aria-hidden="true"></i> Gas</button>
     </div>
   </div>
 
   <!-- Period selection  -->
   <div class="row mb-2">
-    <div class="col-3 pl-2 pr-1 pl-sm-0">
+    <div class="col-3 ps-2 pe-1 ps-sm-0">
       <button class="btn btn-outline-secondary btn-sm btn-block" [ngClass]="{'active': periode === 'uur'}" (click)="setPeriode('uur')">Uur</button>
     </div>
     <div class="col-3 px-1">
@@ -68,7 +77,7 @@
     <div class="col-3 px-1">
       <button class="btn btn-outline-secondary btn-sm btn-block" [ngClass]="{'active': periode === 'maand'}" (click)="setPeriode('maand')">Maand</button>
     </div>
-    <div class="col-3 pl-1 pr-2 pr-sm-0">
+    <div class="col-3 ps-1 pe-2 pe-sm-0">
       <button class="btn btn-outline-secondary btn-sm btn-block" [ngClass]="{'active': periode === 'jaar'}" (click)="setPeriode('jaar')">Jaar</button>
     </div>
   </div>
