@@ -73,7 +73,7 @@ export class OpgenomenVermogenComponent implements OnInit {
     this.spinnerService.show();
 
     const from = this.selectedDate;
-    const to = from.clone().add(1, 'days');
+    const to = from.add(1, 'days');
 
     this.opgenomenVermogenService.getHistory(from, to, this.periodLengthInSeconds).subscribe(
       opgenomenVermogens => this.loadDataIntoChart(opgenomenVermogens),
@@ -173,7 +173,7 @@ export class OpgenomenVermogenComponent implements OnInit {
   }
 
   private getTo() {
-    return this.selectedDate.clone().add(1, 'days');
+    return this.selectedDate.add(1, 'days');
   }
 
   // noinspection JSMethodCanBeStatic

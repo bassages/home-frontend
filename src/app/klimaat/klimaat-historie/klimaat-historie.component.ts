@@ -171,7 +171,7 @@ export class KlimaatHistorieComponent implements OnInit {
 
   private getAndLoadData(): void {
     this.spinnerService.show();
-    this.klimaatService.getKlimaat(this.sensorCode, this.date, this.date.clone().add(1, 'days')).subscribe(
+    this.klimaatService.getKlimaat(this.sensorCode, this.date, this.date.add(1, 'days')).subscribe(
       klimaat => this.loadData(klimaat),
       error => this.errorHandlingService.handleError('Klimaat historie kon niet worden opgehaald', error),
       () => this.spinnerService.hide()
@@ -290,7 +290,7 @@ export class KlimaatHistorieComponent implements OnInit {
         const datumtijdKey = datumtijd.format('DD-MM-YYYY');
         const datumtijdValue = serverresponse.data[j][this.sensorType];
 
-        const date: Date = datumtijd.clone().toDate();
+        const date: Date = datumtijd.toDate();
         date.setDate(this.getFixedDate().getDate());
         date.setMonth(this.getFixedDate().getMonth());
         date.setFullYear(this.getFixedDate().getFullYear());

@@ -58,7 +58,7 @@ export class GasVerbruikComponent implements OnInit, OnDestroy {
 
   private getVerbruikVandaag() {
     const from = dayjs().startOf('day');
-    const to = from.clone().add(1, 'day');
+    const to = from.add(1, 'day');
 
     this.energieVerbruikService.getVerbruikPerDag(from, to).subscribe((verbruikPerDag: VerbruikOpDag[]) => {
         if (verbruikPerDag) {
@@ -71,7 +71,7 @@ export class GasVerbruikComponent implements OnInit, OnDestroy {
 
   private getGemiddeldVerbruikAfgelopenWeek() {
     const to = dayjs().startOf('day');
-    const from = to.clone().subtract(6, 'day');
+    const from = to.subtract(6, 'day');
 
     this.energieVerbruikService.getGemiddeldVerbruikPerDag(from, to).subscribe(
       (gemiddeldVerbruikPerDagInAfgelopenWeek: GemiddeldVerbruikInPeriod) => {

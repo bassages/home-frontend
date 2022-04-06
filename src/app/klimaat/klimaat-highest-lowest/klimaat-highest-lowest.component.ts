@@ -70,11 +70,11 @@ export class KlimaatHighestLowestComponent implements OnInit {
   }
 
   private getFrom(): Dayjs {
-    return this.year.clone().month(0).date(1);
+    return this.year.month(0).date(1);
   }
 
   private getTo(): Dayjs {
-    return this.year.clone().month(11).date(31);
+    return this.year.month(11).date(31);
   }
 
   public getValuePostFix(sensorType: string): string {

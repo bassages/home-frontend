@@ -131,7 +131,6 @@ export class EnergieVerbruikComponent implements OnInit {
   }
 
   public toggleEnergiesoort(energiesoortToToggle) {
-    console.log('toggleEnergiesoort', energiesoortToToggle);
     const energiesoorten = this.energieVerbruikHistorieService.toggleEnergiesoort(this.verbruiksoort,
                                                                                   this.energiesoorten,
                                                                                   energiesoortToToggle);

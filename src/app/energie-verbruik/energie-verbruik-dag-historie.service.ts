@@ -19,8 +19,8 @@ export class EnergieVerbruikDagHistorieService extends AbstractEnergieVerbruikHi
   }
 
   public getVerbruiken(selectedDate: Dayjs): Observable<VerbruikOpDag[]> {
-    const from = selectedDate.clone().date(1);
-    const to = from.clone().add(1, 'months');
+    const from = selectedDate.date(1);
+    const to = from.add(1, 'months');
     return this.energieVerbruikService.getVerbruikPerDag(from, to);
   }
 
@@ -69,26 +69,24 @@ export class EnergieVerbruikDagHistorieService extends AbstractEnergieVerbruikHi
 
   // noinspection JSMethodCanBeStatic
   private getPeriodStart(selectedDate: Dayjs): Dayjs {
-    return selectedDate.clone()
-                       .date(1);
+    return selectedDate.date(1);
   }
 
   // noinspection JSMethodCanBeStatic
   private getPeriodEnd(selectedDate: Dayjs): Dayjs {
-    return selectedDate.clone()
-                       .date(1)
+    return selectedDate.date(1)
                        .add(1, 'months')
                        .subtract(1, 'milliseconds');
   }
 
   private getTicksForEveryDayInMonth(selectedMoment: Dayjs): number[] {
-    const date: Dayjs = this.getPeriodStart(selectedMoment);
+    let date: Dayjs = this.getPeriodStart(selectedMoment);
     const numberOfDaysInMonth: number = selectedMoment.daysInMonth();
     const tickValues: number[] = [];
 
     for (let i = 0; i < numberOfDaysInMonth; i++) {
       tickValues.push(date.toDate().getTime());
-      date.add(1, 'days');
+      date = date.add(1, 'days');
     }
     return tickValues;
   }

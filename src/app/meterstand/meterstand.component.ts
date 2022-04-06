@@ -32,8 +32,8 @@ export class MeterstandComponent implements OnInit {
   }
 
   private getMeterstanden(): void {
-    const from = this.selectedYearMonth.clone().startOf('month');
-    const to = from.clone().add(1, 'month');
+    const from = this.selectedYearMonth.startOf('month');
+    const to = from.add(1, 'month');
 
     this.spinnerService.show();
 

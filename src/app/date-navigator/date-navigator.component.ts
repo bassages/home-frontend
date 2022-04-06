@@ -111,10 +111,10 @@ export class DateNavigatorComponent {
 
   public navigate(amount: number): void {
     if (this.mode === 'day') {
-      this.selectedDate = this._selectedDate.clone().add(amount, 'days');
+      this.selectedDate = this._selectedDate.add(amount, 'days');
 
     } else if (this.mode === 'month') {
-      this.selectedDate = this._selectedDate.clone().add(amount, 'months');
+      this.selectedDate = this._selectedDate.add(amount, 'months');
 
     } else if (this.mode === 'year') {
       this.selectedDate = dayjs(
