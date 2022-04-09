@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Energiecontract} from './energiecontract';
-import * as moment from 'moment';
 import {map} from 'rxjs/operators';
+import dayjs from 'dayjs';
 
 class BackendEnergiecontract {
   public id: number;
@@ -31,8 +31,8 @@ export class EnergiecontractService {
     energiecontract.stroomPerKwhDalTarief = backendEnergieContract.stroomPerKwhDalTarief;
     energiecontract.stroomPerKwhNormaalTarief = backendEnergieContract.stroomPerKwhNormaalTarief;
     energiecontract.gasPerKuub = backendEnergieContract.gasPerKuub;
-    energiecontract.validFrom = moment(backendEnergieContract.validFrom, 'YYYY-MM-DD');
-    energiecontract.validTo = moment(backendEnergieContract.validTo, 'YYYY-MM-DD');
+    energiecontract.validFrom = dayjs(backendEnergieContract.validFrom, 'YYYY-MM-DD');
+    energiecontract.validTo = dayjs(backendEnergieContract.validTo, 'YYYY-MM-DD');
     return energiecontract;
   }
 

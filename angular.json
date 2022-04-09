@@ -7,6 +7,9 @@
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
+      "i18n": {
+        "sourceLocale": "nl"
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -16,14 +19,13 @@
             "main": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
-            "aot": true,
-            "i18nLocale": "nl",
             "assets": [
               "src/assets"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/c3/c3.min.css",
+              "node_modules/ngx-spinner/animations/timer.css",
               "src/styles.scss"
             ],
             "scripts": [
@@ -31,8 +33,15 @@
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "node_modules/@fortawesome/fontawesome/index.js",
               "node_modules/@fortawesome/fontawesome-free-solid/index.js",
-              "node_modules/@fortawesome/fontawesome-free-regular/index.js"
-            ]
+              "node_modules/@fortawesome/fontawesome-free-regular/index.js",
+              "node_modules/d3/d3.js"
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -56,12 +65,14 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "home-server-frontend:build"
+            "browserTarget": "home-server-frontend:build",
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -92,22 +103,11 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/c3/c3.min.css",
+              "node_modules/ngx-spinner/animations/timer.css",
               "src/styles.scss"
             ],
             "assets": [
               "src/assets"
-            ]
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
             ]
           }
         }
@@ -123,17 +123,6 @@
           "options": {
             "protractorConfig": "./protractor.conf.js",
             "devServerTarget": "home-server-frontend:serve"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
           }
         }
       }

@@ -2,8 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {KlimaatSensor} from './klimaatSensor';
 import {tap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
-import { of } from 'rxjs';
+import {of, Observable} from 'rxjs';
 
 @Injectable()
 export class KlimaatSensorService {

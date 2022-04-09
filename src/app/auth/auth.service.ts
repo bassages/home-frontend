@@ -39,21 +39,15 @@ export class AuthService {
   }
 
   private tapAuthResponseToUpdateSubject() {
-    return tap((user: User) => {
+    return tap((_user: User) => {
       this.authenticatedSubject.next(true);
     });
   }
 
   public logout() {
-    this.http.post('/logout', null).subscribe(
-      () => {
-        // Intentionally left empty
-      },
-        () => {
-          // Intentionally left empty
-        },
-        () => this.loggedOut()
-    );
+    this.http.post('/logout', null).subscribe({
+      complete: () => this.loggedOut()
+    });
   }
 
   public loggedOut() {

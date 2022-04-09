@@ -2,7 +2,7 @@ import {inject, TestBed} from '@angular/core/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {OpgenomenVermogenService} from './opgenomen-vermogen.service';
 import {OpgenomenVermogen} from './opgenomen-vermogen';
-import * as moment from 'moment';
+import * as dayjs from 'dayjs';
 
 describe('OpgenomenVermogenService', () => {
 
@@ -24,7 +24,7 @@ describe('OpgenomenVermogenService', () => {
         // Call the service
         service.getMostRecent().subscribe(data => {
           expect(data.watt).toBe(136);
-          expect(data.datumtijd).toEqual(moment('2020-10-04T16:11:11').toDate());
+          expect(data.datumtijd).toEqual(dayjs('2020-10-04T16:11:11').toDate());
           expect(data.tariefIndicator).toBe('DAL');
         });
 
@@ -36,7 +36,7 @@ describe('OpgenomenVermogenService', () => {
         const mostRecentOpgenomenVermogen: OpgenomenVermogen = new OpgenomenVermogen();
         mostRecentOpgenomenVermogen.tariefIndicator = 'DAL';
         mostRecentOpgenomenVermogen.watt = 136;
-        mostRecentOpgenomenVermogen.datumtijd = moment('2020-10-04T16:11:11').toDate();
+        mostRecentOpgenomenVermogen.datumtijd = dayjs('2020-10-04T16:11:11').toDate();
         req.flush(mostRecentOpgenomenVermogen);
       })
   );

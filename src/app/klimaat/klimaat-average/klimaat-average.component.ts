@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import * as moment from 'moment';
-import {Moment} from 'moment';
 import {ErrorHandingService} from '../../error-handling/error-handing.service';
 import {KlimaatService} from '../klimaat.service';
 import {KlimaatSensor} from '../klimaatSensor';
@@ -8,6 +6,7 @@ import {GemiddeldeKlimaatPerMaand} from '../gemiddeldeKlimaatPerMaand';
 import sortBy from 'lodash/sortBy';
 import {KlimaatSensorService} from '../klimaatsensor.service';
 import {NgxSpinnerService} from 'ngx-spinner';
+import dayjs, {Dayjs} from 'dayjs';
 
 @Component({
   selector: 'home-klimaat-average',
@@ -18,7 +17,7 @@ export class KlimaatAverageComponent implements OnInit {
   public sensors: KlimaatSensor[];
   public sensorType = 'temperatuur';
   public sensorCode: string;
-  public year: Moment = moment();
+  public year: Dayjs = dayjs();
 
   public gemiddeldeKlimaatPerMaand: GemiddeldeKlimaatPerMaand[];
 
@@ -35,8 +34,8 @@ export class KlimaatAverageComponent implements OnInit {
   private getKlimaatSensors(): void {
     this.spinnerService.show();
 
-    this.klimaatSensorService.list().subscribe(
-      response => {
+    this.klimaatSensorService.list().subscribe({
+      next: response => {
         this.sensors = sortBy<KlimaatSensor>(response, ['omschrijving']);
 
         if (this.sensors.length > 0) {
@@ -44,19 +43,19 @@ export class KlimaatAverageComponent implements OnInit {
         }
         this.getAndLoadData();
       },
-      error => this.errorHandlingService.handleError('De klimaat sensors konden niet worden opgehaald', error),
-    );
+      error: error => this.errorHandlingService.handleError('De klimaat sensors konden niet worden opgehaald', error),
+    });
   }
 
   private getAndLoadData() {
     this.spinnerService.show();
     this.gemiddeldeKlimaatPerMaand = [];
 
-    this.klimaatService.getGemiddeldeKlimaatPerMaand(this.sensorCode, this.sensorType, this.year.year()).subscribe(
-      gemiddeldeKlimaatPerMaand => { this.gemiddeldeKlimaatPerMaand = gemiddeldeKlimaatPerMaand; },
-      error => this.errorHandlingService.handleError('Gemiddelde klimaat kon niet worden opgehaald', error),
-      () => this.spinnerService.hide()
-    );
+    this.klimaatService.getGemiddeldeKlimaatPerMaand(this.sensorCode, this.sensorType, this.year.year()).subscribe({
+      next: gemiddeldeKlimaatPerMaand => { this.gemiddeldeKlimaatPerMaand = gemiddeldeKlimaatPerMaand; },
+      error: error => this.errorHandlingService.handleError('Gemiddelde klimaat kon niet worden opgehaald', error),
+      complete: () => this.spinnerService.hide()
+    });
   }
 
   public getValuePostFix(sensorType: string): string {
@@ -71,7 +70,7 @@ export class KlimaatAverageComponent implements OnInit {
     this.getAndLoadData();
   }
 
-  public yearPickerChanged(selectedYear: Moment): void {
+  public yearPickerChanged(selectedYear: Dayjs): void {
     this.year = selectedYear;
     this.getAndLoadData();
   }

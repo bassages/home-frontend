@@ -1,9 +1,9 @@
-import {Moment} from 'moment';
+import {Dayjs} from 'dayjs';
 
 export class Energiecontract {
   public id: number;
-  public validFrom: Moment;
-  public validTo: Moment;
+  public validFrom: Dayjs;
+  public validTo: Dayjs;
   public stroomPerKwhNormaalTarief: number;
   public stroomPerKwhDalTarief: number;
   public gasPerKuub: number;

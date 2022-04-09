@@ -10,7 +10,7 @@ import isNumber from 'lodash/isNumber';
 import {VerbruikOpDag} from '../../energie-verbruik/verbruikOpDag';
 import {GemiddeldVerbruikInPeriod} from '../../energie-verbruik/gemiddeldVerbruikInPeriod';
 import {Router} from '@angular/router';
-import * as moment from 'moment';
+import dayjs from 'dayjs';
 
 @Component({
   selector: 'home-gas-verbruik',
@@ -57,8 +57,8 @@ export class GasVerbruikComponent implements OnInit, OnDestroy {
   }
 
   private getVerbruikVandaag() {
-    const from = moment().startOf('day');
-    const to = from.clone().add(1, 'day');
+    const from = dayjs().startOf('day');
+    const to = from.add(1, 'day');
 
     this.energieVerbruikService.getVerbruikPerDag(from, to).subscribe((verbruikPerDag: VerbruikOpDag[]) => {
         if (verbruikPerDag) {
@@ -70,8 +70,8 @@ export class GasVerbruikComponent implements OnInit, OnDestroy {
   }
 
   private getGemiddeldVerbruikAfgelopenWeek() {
-    const to = moment().startOf('day');
-    const from = to.clone().subtract(6, 'day');
+    const to = dayjs().startOf('day');
+    const from = to.subtract(6, 'day');
 
     this.energieVerbruikService.getGemiddeldVerbruikPerDag(from, to).subscribe(
       (gemiddeldVerbruikPerDagInAfgelopenWeek: GemiddeldVerbruikInPeriod) => {
@@ -89,19 +89,24 @@ export class GasVerbruikComponent implements OnInit, OnDestroy {
 
       const gasLeds: Led[] = new Array<Led>(10);
 
-      gasLeds[9] = new Led(procentueleVeranderingTovAfgelopenWeek >= 50 ? LedState.ON : LedState.OFF);
-      gasLeds[8] = new Led(procentueleVeranderingTovAfgelopenWeek >= 40 ? LedState.ON : LedState.OFF);
-      gasLeds[7] = new Led(procentueleVeranderingTovAfgelopenWeek >= 30 ? LedState.ON : LedState.OFF);
-      gasLeds[6] = new Led(procentueleVeranderingTovAfgelopenWeek >= 20 ? LedState.ON : LedState.OFF);
-      gasLeds[5] = new Led(procentueleVeranderingTovAfgelopenWeek >= 10 ? LedState.ON : LedState.OFF);
-      gasLeds[4] = new Led(procentueleVeranderingTovAfgelopenWeek >= 0 ? LedState.ON : LedState.OFF);
-      gasLeds[3] = new Led(procentueleVeranderingTovAfgelopenWeek >= -10 ? LedState.ON : LedState.OFF);
-      gasLeds[2] = new Led(procentueleVeranderingTovAfgelopenWeek >= -20 ? LedState.ON : LedState.OFF);
-      gasLeds[1] = new Led(procentueleVeranderingTovAfgelopenWeek >= -30 ? LedState.ON : LedState.OFF);
+      gasLeds[9] = this.createLed(procentueleVeranderingTovAfgelopenWeek, 50);
+      gasLeds[8] = this.createLed(procentueleVeranderingTovAfgelopenWeek, 40);
+      gasLeds[7] = this.createLed(procentueleVeranderingTovAfgelopenWeek, 30);
+      gasLeds[6] = this.createLed(procentueleVeranderingTovAfgelopenWeek, 20);
+      gasLeds[5] = this.createLed(procentueleVeranderingTovAfgelopenWeek, 10);
+      gasLeds[4] = this.createLed(procentueleVeranderingTovAfgelopenWeek, 0);
+      gasLeds[3] = this.createLed(procentueleVeranderingTovAfgelopenWeek, -10);
+      gasLeds[2] = this.createLed(procentueleVeranderingTovAfgelopenWeek, -20);
+      gasLeds[1] = this.createLed(procentueleVeranderingTovAfgelopenWeek, -30);
       gasLeds[0] = new Led(LedState.ON);
 
       this.gasLeds = gasLeds;
     }
+  }
+
+  // noinspection JSMethodCanBeStatic
+  private createLed(procentueleVeranderingTovAfgelopenWeek: number, onFromValue: number) {
+    return new Led(procentueleVeranderingTovAfgelopenWeek >= onFromValue ? LedState.ON : LedState.OFF);
   }
 
   private getProcentueleVeranderingTovAfgelopenWeek() {

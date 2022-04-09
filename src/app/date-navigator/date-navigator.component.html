@@ -2,12 +2,10 @@
 
   <div class="input-group">
 
-    <span class="input-group-prepend">
-      <button (click)="navigate(-1)"
-              class="btn btn-outline-secondary"
-              [ngClass]="{'responsive-size': responsiveSize}"
-              type="button"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
-    </span>
+    <button (click)="navigate(-1)"
+            class="btn btn-outline-secondary"
+            [ngClass]="{'responsive-size': responsiveSize}"
+            type="button"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
 
     <!--suppress HtmlFormInputWithoutLabel -->
     <input #picker="dpDayPicker" type="text" *ngIf="mode == 'day'" class="form-control text-center text-capitalize" name="dayPicker"
@@ -42,12 +40,10 @@
            }"
            readonly="readonly" />
 
-    <span class="input-group-append">
       <button type="button"
               class="btn btn-outline-secondary responsive-size"
               [ngClass]="{'responsive-size': responsiveSize}"
               (click)="navigate(+1)" [disabled]="isUpNavigationDisabled()"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
-    </span>
 
   </div>
 </form>

@@ -43,13 +43,13 @@ export class KlimaatSensorsComponent implements OnInit {
   private getKlimaatSensors(): void {
     this.spinnerService.show();
 
-    this.klimaatSensorService.list().subscribe(
-      response => {
+    this.klimaatSensorService.list().subscribe({
+      next: response => {
         this.sensors = sortBy<KlimaatSensor>(response, ['code']);
       },
-      error => this.errorHandlingService.handleError('De klimaat sensors konden nu niet worden opgehaald', error),
-      () => this.spinnerService.hide()
-    );
+      error: error => this.errorHandlingService.handleError('De klimaat sensors konden nu niet worden opgehaald', error),
+      complete: () => this.spinnerService.hide()
+    });
   }
 
   get code(): FormControl {
@@ -75,31 +75,31 @@ export class KlimaatSensorsComponent implements OnInit {
     sensorToSave.code = this.code.value;
     sensorToSave.omschrijving = this.omschrijving.value;
 
-    this.klimaatSensorService.update(sensorToSave).subscribe(
-      savedKlimaatSensor => {
+    this.klimaatSensorService.update(sensorToSave).subscribe({
+      next: savedKlimaatSensor => {
         this.selectedSensor.omschrijving = savedKlimaatSensor.omschrijving;
         this.editMode = false;
         this.selectedSensor = null;
       },
-      error => {
+      error: error => {
         this.errorHandlingService.handleError('De wijzingen konden nu niet worden opgeslagen', error);
       },
-      () => this.spinnerService.hide()
-    );
+      complete: () => this.spinnerService.hide()
+    });
   }
 
   public delete() {
     this.spinnerService.show();
 
-    this.klimaatSensorService.delete(this.selectedSensor).subscribe(
-      () => {
+    this.klimaatSensorService.delete(this.selectedSensor).subscribe({
+      next: () => {
         const index = this.sensors.indexOf(this.selectedSensor);
         this.sensors.splice(index, 1);
         this.editMode = false;
       },
-      error => this.errorHandlingService.handleError('De klimaatsensor kon niet worden verwijderd', error),
-      () => this.spinnerService.hide()
-    );
+      error: error => this.errorHandlingService.handleError('De klimaatsensor kon niet worden verwijderd', error),
+      complete: () => this.spinnerService.hide()
+    });
   }
 
   public cancelEdit() {
@@ -109,7 +109,7 @@ export class KlimaatSensorsComponent implements OnInit {
 
   public openDeletionConformationDialog(deletionConformationDialogTemplate) {
     this.modalService.open(deletionConformationDialogTemplate).result.then(
-    (result) => this.delete(),
-    (reason) => console.info('Cancel deletion'));
+    _result => this.delete(),
+    _reason => console.info('Cancel deletion'));
   }
 }

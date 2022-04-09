@@ -1,6 +1,4 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import * as moment from 'moment';
-import {Moment} from 'moment';
 import {OpgenomenVermogenService} from './opgenomen-vermogen.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as c3 from 'c3';
@@ -16,6 +14,10 @@ import {ChartService} from '../chart/chart.service';
 import {Statistics} from '../statistics';
 import {ChartStatisticsService} from '../chart/statistics/chart-statistics.service';
 import {NgxSpinnerService} from 'ngx-spinner';
+import * as dayjs from 'dayjs';
+import {Dayjs} from 'dayjs';
+import * as duration from 'dayjs/plugin/duration';
+dayjs.extend(duration);
 
 @Component({
   selector: 'home-opgenomen-vermogen',
@@ -23,10 +25,10 @@ import {NgxSpinnerService} from 'ngx-spinner';
 })
 export class OpgenomenVermogenComponent implements OnInit {
 
-  public selectedDate: Moment;
+  public selectedDate: Dayjs;
   public statistics: Statistics;
 
-  public periodLengthInSeconds = moment.duration(3, 'minutes').asSeconds();
+  public periodLengthInSeconds = dayjs.duration(3, 'minutes').asSeconds();
 
   private chart: ChartAPI;
 
@@ -53,15 +55,15 @@ export class OpgenomenVermogenComponent implements OnInit {
   public ngOnInit(): void {
     this.activatedRoute.queryParamMap.subscribe((queryParams) => {
       if (!queryParams.has('datum')) {
-        return this.navigateTo(moment());
+        return this.navigateTo(dayjs());
       }
-      this.selectedDate = moment(queryParams.get('datum'), 'DD-MM-YYYY');
+      this.selectedDate = dayjs(queryParams.get('datum'), 'DD-MM-YYYY');
 
       setTimeout(() => this.getAndLoadData());
     });
   }
 
-  private navigateTo(date: Moment) {
+  private navigateTo(date: Dayjs) {
     const commands = ['/energie/opgenomen-vermogen'];
     const extras = {queryParams: { datum: date.format('DD-MM-YYYY')}, replaceUrl: true};
     this.router.navigate(commands, extras);
@@ -71,16 +73,16 @@ export class OpgenomenVermogenComponent implements OnInit {
     this.spinnerService.show();
 
     const from = this.selectedDate;
-    const to = from.clone().add(1, 'days');
+    const to = from.add(1, 'days');
 
-    this.opgenomenVermogenService.getHistory(from, to, this.periodLengthInSeconds).subscribe(
-      opgenomenVermogens => this.loadDataIntoChart(opgenomenVermogens),
-      error => this.errorHandlingService.handleError('Opgenomen vermogen kon niet worden opgehaald', error),
-      () => this.spinnerService.hide()
-    );
+    this.opgenomenVermogenService.getHistory(from, to, this.periodLengthInSeconds).subscribe({
+      next: opgenomenVermogens => this.loadDataIntoChart(opgenomenVermogens),
+      error: error => this.errorHandlingService.handleError('Opgenomen vermogen kon niet worden opgehaald', error),
+      complete: () => this.spinnerService.hide()
+    });
   }
 
-  public onDateNavigate(selectedDate: Moment) {
+  public onDateNavigate(selectedDate: Dayjs) {
     this.navigateTo(selectedDate);
   }
 
@@ -96,25 +98,25 @@ export class OpgenomenVermogenComponent implements OnInit {
     const transformedData = [];
 
     let previousTarief = null;
-    for (let i = 0; i < opgenomenVermogens.length; i++) {
+    opgenomenVermogens.forEach(opgenomenVermogen => {
       const transformedDataItem: any = {};
 
-      const tarief = opgenomenVermogens[i].tariefIndicator.toLowerCase();
-      transformedDataItem.datumtijd = new Date(opgenomenVermogens[i].datumtijd).getTime();
-      transformedDataItem['watt-' + tarief] = opgenomenVermogens[i].watt;
+      const tarief = opgenomenVermogen.tariefIndicator.toLowerCase();
+      transformedDataItem.datumtijd = new Date(opgenomenVermogen.datumtijd).getTime();
+      transformedDataItem['watt-' + tarief] = opgenomenVermogen.watt;
 
       // Fill the "gap" between this row and the previous one
       if (previousTarief && tarief && tarief !== previousTarief) {
         const obj: any = {};
-        obj.datumtijd = new Date(opgenomenVermogens[i].datumtijd).getTime() - 1;
+        obj.datumtijd = new Date(opgenomenVermogen.datumtijd).getTime() - 1;
         const attribute = 'watt-' + previousTarief;
-        obj[attribute] = opgenomenVermogens[i].watt;
+        obj[attribute] = opgenomenVermogen.watt;
         transformedData.push(obj);
       }
 
       previousTarief = tarief;
       transformedData.push(transformedDataItem);
-    }
+    });
     return transformedData;
   }
 
@@ -159,8 +161,8 @@ export class OpgenomenVermogenComponent implements OnInit {
   }
 
   // noinspection JSMethodCanBeStatic
-  private getTicksForEveryHourInPeriod(from: Moment, to: Moment) {
-    const numberOfHoursInPeriod: number = moment.duration(to.diff(from)).asHours();
+  private getTicksForEveryHourInPeriod(from: Dayjs, to: Dayjs) {
+    const numberOfHoursInPeriod: number = dayjs.duration(to.diff(from)).asHours();
 
     const tickValues: number[] = [];
     for (let i = 0; i <= numberOfHoursInPeriod; i++) {
@@ -171,7 +173,7 @@ export class OpgenomenVermogenComponent implements OnInit {
   }
 
   private getTo() {
-    return this.selectedDate.clone().add(1, 'days');
+    return this.selectedDate.add(1, 'days');
   }
 
   // noinspection JSMethodCanBeStatic

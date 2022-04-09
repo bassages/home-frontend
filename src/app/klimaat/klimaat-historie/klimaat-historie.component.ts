@@ -10,8 +10,6 @@ import min from 'lodash/min';
 import max from 'lodash/max';
 import filter from 'lodash/filter';
 import {ActivatedRoute, Router} from '@angular/router';
-import * as moment from 'moment';
-import {Moment} from 'moment';
 import * as c3 from 'c3';
 import {ChartAPI, ChartConfiguration} from 'c3';
 import {ChartService} from '../../chart/chart.service';
@@ -22,6 +20,7 @@ import {ChartStatisticsService} from '../../chart/statistics/chart-statistics.se
 import * as chroma from 'chroma-js';
 import {KlimaatSensorService} from '../klimaatsensor.service';
 import {NgxSpinnerService} from 'ngx-spinner';
+import dayjs, {Dayjs} from 'dayjs';
 
 @Component({
   selector: 'home-klimaat-historie',
@@ -31,7 +30,7 @@ export class KlimaatHistorieComponent implements OnInit {
 
   public sensorCode: string;
   public sensorType: string;
-  public date: Moment;
+  public date: Dayjs;
 
   public sensors: KlimaatSensor[];
 
@@ -68,9 +67,9 @@ export class KlimaatHistorieComponent implements OnInit {
       const sensorTypeParam = queryParams.get('sensorType');
 
       if (queryParams.has('datum')) {
-        this.date = moment(queryParams.get('datum'), 'DD-MM-YYYY');
+        this.date = dayjs(queryParams.get('datum'), 'DD-MM-YYYY');
       } else {
-        return this.navigateTo(sensorCodeParam, sensorTypeParam, moment());
+        return this.navigateTo(sensorCodeParam, sensorTypeParam, dayjs());
       }
 
       if (!queryParams.has('sensorType')) {
@@ -89,8 +88,8 @@ export class KlimaatHistorieComponent implements OnInit {
   private getKlimaatSensors(): void {
     this.spinnerService.show();
 
-    this.klimaatSensorService.list().subscribe(
-      response => {
+    this.klimaatSensorService.list().subscribe({
+      next: response => {
           this.sensors = sortBy<KlimaatSensor>(response, ['omschrijving']);
 
           if (!this.sensorCode && this.sensors.length > 0) {
@@ -104,21 +103,21 @@ export class KlimaatHistorieComponent implements OnInit {
             this.spinnerService.hide();
           }
       },
-      error => this.errorHandlingService.handleError('De klimaat sensors konden nu niet worden opgehaald', error),
-    );
+      error: error => this.errorHandlingService.handleError('De klimaat sensors konden nu niet worden opgehaald', error),
+    });
   }
 
   private loadData(klimaats: Klimaat[]) {
     this.klimaats = klimaats;
     this.statistics = this.getStatistics(klimaats);
     if (this.showChart) {
-      this.loadDataIntoChart(this.klimaats);
+      this.loadDataIntoChart();
     } else if (this.showTable) {
-      this.loadDataIntoTable(this.klimaats);
+      this.loadDataIntoTable();
     }
   }
 
-  public onDateNavigate(selectedDate: Moment): void {
+  public onDateNavigate(selectedDate: Dayjs): void {
     this.navigateTo(this.sensorCode, this.sensorType, selectedDate);
   }
 
@@ -139,7 +138,7 @@ export class KlimaatHistorieComponent implements OnInit {
     if (!this.showChart) {
       this.showTable = false;
       this.showChart = true;
-      this.loadDataIntoChart(this.klimaats);
+      this.loadDataIntoChart();
     }
   }
 
@@ -147,23 +146,23 @@ export class KlimaatHistorieComponent implements OnInit {
     if (!this.showTable) {
       this.showChart = false;
       this.showTable = true;
-      this.loadDataIntoTable(this.klimaats);
+      this.loadDataIntoTable();
     }
   }
 
-  private navigateTo(sensorCode: string, sensorType: string, datum: Moment): void {
+  private navigateTo(sensorCode: string, sensorType: string, datum: Dayjs): void {
     const commands = ['/klimaat/historie'];
     const extras = { queryParams: { sensorCode: sensorCode, sensorType: sensorType, datum: datum.format('DD-MM-YYYY') }, replaceUrl: true };
     this.router.navigate(commands, extras);
   }
 
-  private loadDataIntoChart(klimaat: Klimaat[]): void {
-    const chartConfiguration: ChartConfiguration = this.getChartConfig(klimaat);
+  private loadDataIntoChart(): void {
+    const chartConfiguration: ChartConfiguration = this.getChartConfig(this.klimaats);
     this.chart = c3.generate(chartConfiguration);
     this.chartService.adjustChartHeightToAvailableWindowHeight(this.chart);
   }
 
-  private loadDataIntoTable(klimaat: Klimaat[]) {
+  private loadDataIntoTable() {
     this.sortedUniqueValues = sortBy(uniq(map(this.klimaats, this.sensorType)));
     this.colorScale = chroma.scale(['#3e7fcd', 'white', '#e83b26'])
                             .mode('lch')
@@ -172,11 +171,11 @@ export class KlimaatHistorieComponent implements OnInit {
 
   private getAndLoadData(): void {
     this.spinnerService.show();
-    this.klimaatService.getKlimaat(this.sensorCode, this.date, this.date.clone().add(1, 'days')).subscribe(
-      klimaat => this.loadData(klimaat),
-      error => this.errorHandlingService.handleError('Klimaat historie kon niet worden opgehaald', error),
-      () => this.spinnerService.hide()
-    );
+    this.klimaatService.getKlimaat(this.sensorCode, this.date, this.date.add(1, 'days')).subscribe({
+      next: klimaat => this.loadData(klimaat),
+      error: error => this.errorHandlingService.handleError('Klimaat historie kon niet worden opgehaald', error),
+      complete: () => this.spinnerService.hide()
+    });
   }
 
   public sensorChanged(): void {
@@ -233,7 +232,7 @@ export class KlimaatHistorieComponent implements OnInit {
       },
       tooltip: {
         format: {
-          name: (name: string, ratio: number, id: string, index: number) => moment(name, 'DD-MM-YYYY').format('DD-MM-YYYY'),
+          name: (name: string, _ratio: number, _id: string, _index: number) => dayjs(name, 'DD-MM-YYYY').format('DD-MM-YYYY'),
           value: (value: number) => this.formatWithUnitLabel(that.sensorType, value)
         }
       }
@@ -242,7 +241,7 @@ export class KlimaatHistorieComponent implements OnInit {
 
   // noinspection JSMethodCanBeStatic
   private getTo(from: Date): Date {
-    return moment(from).add(1, 'days').toDate();
+    return dayjs(from).add(1, 'days').toDate();
   }
 
   private getTicksForEveryHourInDay() {
@@ -263,7 +262,7 @@ export class KlimaatHistorieComponent implements OnInit {
     return this.date.toDate();
   }
 
-  public formatWithoutUnitLabel(sensorType: string, value: number): string {
+  public formatWithoutUnitLabel(_sensorType: string, value: number): string {
     return this.decimalPipe.transform(value, this.getDecimalFormat(this.sensorType));
   }
 
@@ -275,23 +274,22 @@ export class KlimaatHistorieComponent implements OnInit {
     return this.klimaatService.getDecimalFormat(sensorType);
   }
 
-  public getValuePostFix(sensorType: string) {
+  public getValuePostFix(_sensorType: string) {
     return this.klimaatService.getValuePostFix(this.sensorType);
   }
 
   private transformServerdata(serverresponses) {
     const result = [];
 
-    for (let i = 0; i < serverresponses.length; i++) {
-      const serverresponse = serverresponses[i]; // Values on a specific date
+    for (const serverresponse of serverresponses) {
 
-      for (let j = 0; j < serverresponse.data.length; j++) {
-        const datumtijd = serverresponse.data[j].dateTime;
+      for (const element of serverresponse.data) {
+        const datumtijd = element.dateTime;
 
         const datumtijdKey = datumtijd.format('DD-MM-YYYY');
-        const datumtijdValue = serverresponse.data[j][this.sensorType];
+        const datumtijdValue = element[this.sensorType];
 
-        const date: Date = datumtijd.clone().toDate();
+        const date: Date = datumtijd.toDate();
         date.setDate(this.getFixedDate().getDate());
         date.setMonth(this.getFixedDate().getMonth());
         date.setFullYear(this.getFixedDate().getFullYear());
@@ -307,9 +305,9 @@ export class KlimaatHistorieComponent implements OnInit {
   private getOrCreateCombinedRow(currentRows, datumtijd) {
     let row = null;
 
-    for (let i = 0; i < currentRows.length; i++) {
-      if (currentRows[i].datumtijd.getTime() === datumtijd.getTime()) {
-        row = currentRows[i];
+    for (const currentRow of currentRows) {
+      if (currentRow.datumtijd.getTime() === datumtijd.getTime()) {
+        row = currentRow;
         break;
       }
     }

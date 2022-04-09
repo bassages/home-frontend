@@ -1,18 +1,18 @@
-import {Moment} from 'moment';
 import {ChartConfiguration} from 'c3';
 import {Observable} from 'rxjs';
+import {Dayjs} from 'dayjs';
 
 export interface EnergieVerbruikHistorieService<T> {
 
-  getVerbruiken(selectedDate: Moment): Observable<T[]>;
+  getVerbruiken(selectedDate: Dayjs): Observable<T[]>;
 
   getEmptyChartConfig(): ChartConfiguration;
 
-  getChartConfig(selectedDate: Moment,
+  getChartConfig(selectedDate: Dayjs,
                  verbruiksoort: string,
                  energiesoorten: string[],
                  verbruiken: T[],
-                 onDataClick: ((date: Moment) => void)): ChartConfiguration;
+                 onDataClick: ((date: Dayjs) => void)): ChartConfiguration;
 
   toggleEnergiesoort(verbruiksoort: string, energiesoorten: string[], energiesoortToToggle: string): string[];
 
@@ -22,5 +22,5 @@ export interface EnergieVerbruikHistorieService<T> {
 
   adjustChartHeightToAvailableWindowHeight(chart: any): void;
 
-  getMoment(selectedDate: Moment, T): Moment;
+  getDayjs(selectedDate: Dayjs, T): Dayjs;
 }

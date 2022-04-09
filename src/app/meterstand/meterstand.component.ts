@@ -2,10 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {MeterstandService} from './meterstand.service';
 import {MeterstandOpDag} from './meterstandOpDag';
 import sortBy from 'lodash/sortBy';
-import * as moment from 'moment';
-import {Moment} from 'moment';
 import {ErrorHandingService} from '../error-handling/error-handing.service';
 import {NgxSpinnerService} from 'ngx-spinner';
+import dayjs, {Dayjs} from 'dayjs';
 
 @Component({
   selector: 'home-meterstand',
@@ -13,7 +12,7 @@ import {NgxSpinnerService} from 'ngx-spinner';
 })
 export class MeterstandComponent implements OnInit {
 
-  public selectedYearMonth: Moment;
+  public selectedYearMonth: Dayjs;
 
   public sortedMeterstandenPerDag: MeterstandOpDag[] = [];
 
@@ -28,24 +27,24 @@ export class MeterstandComponent implements OnInit {
   }
 
   // noinspection JSMethodCanBeStatic
-  private getStartOfCurrentMonth(): Moment {
-    return moment().startOf('month');
+  private getStartOfCurrentMonth(): Dayjs {
+    return dayjs().startOf('month');
   }
 
   private getMeterstanden(): void {
-    const from = this.selectedYearMonth.clone().startOf('month');
-    const to = from.clone().add(1, 'month');
+    const from = this.selectedYearMonth.startOf('month');
+    const to = from.add(1, 'month');
 
     this.spinnerService.show();
 
-    this.meterstandService.getMeterstanden(from, to).subscribe(
-      response => this.sortedMeterstandenPerDag = sortBy<MeterstandOpDag>(response, ['dag']),
-      error => this.errorHandlingService.handleError('De meterstanden konden nu niet worden opgehaald', error),
-      () => this.spinnerService.hide()
-    );
+    this.meterstandService.getMeterstanden(from, to).subscribe({
+      next: response => this.sortedMeterstandenPerDag = sortBy<MeterstandOpDag>(response, ['dag']),
+      error: error => this.errorHandlingService.handleError('De meterstanden konden nu niet worden opgehaald', error),
+      complete: () => this.spinnerService.hide()
+    });
   }
 
-  public yearMonthChanged(selectedYearMonth: Moment): void {
+  public yearMonthChanged(selectedYearMonth: Dayjs): void {
     this.selectedYearMonth = selectedYearMonth;
     this.getMeterstanden();
   }

@@ -4,11 +4,11 @@ import {ErrorHandingService} from '../error-handling/error-handing.service';
 import {EnergiecontractService} from './energiecontract.service';
 import sortBy from 'lodash/sortBy';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import * as moment from 'moment';
 import {DatePickerDirective, IDatePickerDirectiveConfig} from 'ng2-date-picker';
 import {DecimalPipe} from '@angular/common';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NgxSpinnerService} from 'ngx-spinner';
+import dayjs from 'dayjs';
 
 const datePickerFormat = 'DD-MM-YYYY';
 const pricePattern = /^\d(,\d{1,6})*$/;
@@ -60,11 +60,11 @@ export class EnergiecontractComponent implements OnInit {
   private getEnergieContracten(): void {
     this.spinnerService.show();
 
-    this.energiecontractService.getAll().subscribe(
-      response => this.energiecontracten = this.sort(response),
-      error => this.errorHandlingService.handleError('De energiecontracten konden nu niet worden opgehaald', error),
-      () => this.spinnerService.hide()
-    );
+    this.energiecontractService.getAll().subscribe({
+      next: response => this.energiecontracten = this.sort(response),
+      error: error => this.errorHandlingService.handleError('De energiecontracten konden nu niet worden opgehaald', error),
+      complete: () => this.spinnerService.hide()
+    });
   }
 
   // noinspection JSMethodCanBeStatic
@@ -105,7 +105,7 @@ export class EnergiecontractComponent implements OnInit {
     this.gas.setValue('');
     this.stroomNormaalTarief.setValue('');
     this.stroomDalTarief.setValue('');
-    this.selectedDate.setValue(moment());
+    this.selectedDate.setValue(dayjs());
   }
 
   public startEdit(energiecontract: Energiecontract): void {
@@ -133,7 +133,7 @@ export class EnergiecontractComponent implements OnInit {
     this.spinnerService.show();
 
     const energiecontract: Energiecontract = this.selectedEnergiecontract ? this.selectedEnergiecontract : new Energiecontract();
-    energiecontract.validFrom = moment(this.selectedDate.value, this.datePickerConfiguration.format);
+    energiecontract.validFrom = dayjs(this.selectedDate.value, this.datePickerConfiguration.format);
     energiecontract.leverancier = this.leverancier.value;
 
     if (this.remark.value) {
@@ -144,8 +144,8 @@ export class EnergiecontractComponent implements OnInit {
     energiecontract.stroomPerKwhNormaalTarief = this.toFloat(this.stroomNormaalTarief.value);
     energiecontract.stroomPerKwhDalTarief = this.toFloat(this.stroomDalTarief.value);
 
-    this.energiecontractService.save(energiecontract).subscribe(
-      savedEnergiecontract => {
+    this.energiecontractService.save(energiecontract).subscribe({
+      next: savedEnergiecontract => {
         if (this.selectedEnergiecontract) {
           this.selectedEnergiecontract.id = savedEnergiecontract.id;
         } else {
@@ -155,24 +155,24 @@ export class EnergiecontractComponent implements OnInit {
         this.editMode = false;
         this.selectedEnergiecontract = null;
       },
-      error => {
+      error: error => {
         this.errorHandlingService.handleError('Het energiecontract kon nu niet worden opgeslagen', error);
       },
-      () => this.spinnerService.hide()
-    );
+      complete: () => this.spinnerService.hide()
+    });
   }
 
   public delete(): void {
     this.spinnerService.show();
-    this.energiecontractService.delete(this.selectedEnergiecontract.id).subscribe(
-      () => {
+    this.energiecontractService.delete(this.selectedEnergiecontract.id).subscribe({
+      next: () => {
         const index = this.energiecontracten.indexOf(this.selectedEnergiecontract);
         this.energiecontracten.splice(index, 1);
         this.editMode = false;
       },
-      error => this.errorHandlingService.handleError('Het energiecontract kon niet worden verwijderd', error),
-      () => this.spinnerService.hide()
-    );
+      error: error => this.errorHandlingService.handleError('Het energiecontract kon niet worden verwijderd', error),
+      complete: () => this.spinnerService.hide()
+    });
   }
 
   public openDatePicker(): void {
@@ -193,7 +193,7 @@ export class EnergiecontractComponent implements OnInit {
 
   public openDeletionConformationDialog(deletionConformationDialogTemplate) {
     this.modalService.open(deletionConformationDialogTemplate).result.then(
-      (result) => this.delete(),
-      (reason) => console.info('Cancel deletion'));
+      _result => this.delete(),
+      _reason => console.info('Cancel deletion'));
   }
 }

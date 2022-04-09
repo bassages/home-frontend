@@ -1,8 +1,7 @@
 import {Component, EventEmitter, Input, Output, QueryList, ViewChildren} from '@angular/core';
-import * as moment from 'moment';
-import {Moment} from 'moment';
 import {DatePickerDirective, IDatePickerDirectiveConfig} from 'ng2-date-picker';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import dayjs, {Dayjs} from 'dayjs';
 
 const selectedDayFormat = 'dd. DD-MM-YYYY';
 const selectedMonthFormat = 'MMMM YYYY';
@@ -21,7 +20,7 @@ export class DateNavigatorComponent {
   public responsiveSize = false;
 
   @Input()
-  set selectedDate(selectedDate: Moment) {
+  set selectedDate(selectedDate: Dayjs) {
     if (selectedDate !== undefined) {
       this._selectedDate = selectedDate;
       this.selectedDay.setValue(selectedDate);
@@ -31,21 +30,19 @@ export class DateNavigatorComponent {
   }
 
   @Output()
-  public navigation = new EventEmitter<Moment>();
+  public navigation = new EventEmitter<Dayjs>();
 
   @ViewChildren('picker')
   public pickers: QueryList<DatePickerDirective>;
 
   public form: FormGroup;
 
-  private _selectedDate: Moment;
+  private _selectedDate: Dayjs;
 
-  public previouslySelectedDate: Moment;
+  public previouslySelectedDate: Dayjs;
 
   public monthPickerConfiguration: IDatePickerDirectiveConfig;
   public dayPickerConfiguration: IDatePickerDirectiveConfig;
-
-  public yearPickerFormattedValue: number;
 
   constructor() {
     this.initDatePickerConfigurations();
@@ -63,18 +60,18 @@ export class DateNavigatorComponent {
   private initDatePickerConfigurations() {
     this.dayPickerConfiguration = {
       format: selectedDayFormat,
-      max: moment()
+      max: dayjs()
     };
     this.monthPickerConfiguration = {
       format: selectedMonthFormat,
-      max: moment()
+      max: dayjs()
     };
   }
 
-  public datePickerChanged(selectedDate: Moment): void {
+  public datePickerChanged(selectedDate: Dayjs): void {
     if (selectedDate !== undefined && this.previouslySelectedDate !== undefined
       && !selectedDate.isSame(this.previouslySelectedDate)) {
-      this.pickers.forEach((item, index, array) => {
+      this.pickers.forEach((item, _index, _array) => {
         item.elemRef.nativeElement.blur();
         item.api.close();
       });
@@ -100,7 +97,7 @@ export class DateNavigatorComponent {
       return true;
     }
 
-    const now: Moment = moment();
+    const now: Dayjs = dayjs();
     if (this.mode === 'day') {
       return now.date() === this._selectedDate.date()
         && now.month() === this._selectedDate.month()
@@ -114,13 +111,13 @@ export class DateNavigatorComponent {
 
   public navigate(amount: number): void {
     if (this.mode === 'day') {
-      this.selectedDate = this._selectedDate.clone().add(amount, 'days');
+      this.selectedDate = this._selectedDate.add(amount, 'days');
 
     } else if (this.mode === 'month') {
-      this.selectedDate = this._selectedDate.clone().add(amount, 'months');
+      this.selectedDate = this._selectedDate.add(amount, 'months');
 
     } else if (this.mode === 'year') {
-      this.selectedDate = moment(
+      this.selectedDate = dayjs(
         `${this.selectedYear.value + amount}-${this._selectedDate.format('MM')}-${this._selectedDate.format('DD')}`);
 
       // Since year mode is not backed by a datepicker, we'll have to trigger the navigation event

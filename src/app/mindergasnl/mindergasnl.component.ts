@@ -64,24 +64,24 @@ export class MindergasnlComponent implements OnInit {
 
   private getMinderGasNlSettings(): void {
     this.spinnerService.show();
-    this.mindergasnlService.get().subscribe(
-      minderGasNlSettings => this.form.setValue(minderGasNlSettings),
-      error => this.errorHandlingService.handleError('De instellingen voor MinderGas.nl konden nu niet opgehaald worden', error),
-      () => this.spinnerService.hide()
-    );
+    this.mindergasnlService.get().subscribe({
+      next: minderGasNlSettings => this.form.setValue(minderGasNlSettings),
+      error: error => this.errorHandlingService.handleError('De instellingen voor MinderGas.nl konden nu niet opgehaald worden', error),
+      complete: () => this.spinnerService.hide()
+    });
   }
 
   public save(): void {
     if (this.form.valid) {
       this.spinnerService.show();
-      this.mindergasnlService.update(this.form.getRawValue()).subscribe(
-        () => this.flashSavedMessage(),
-        error => this.errorHandlingService.handleError('De instellingen konden niet opgeslagen worden', error),
-        () => {
+      this.mindergasnlService.update(this.form.getRawValue()).subscribe({
+        next: () => this.flashSavedMessage(),
+        error: error => this.errorHandlingService.handleError('De instellingen konden niet opgeslagen worden', error),
+        complete: () => {
           this.spinnerService.hide();
           this.editMode = false;
         }
-      );
+      });
     }
   }
 

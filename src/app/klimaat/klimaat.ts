@@ -1,7 +1,7 @@
-import {Moment} from 'moment';
+import {Dayjs} from 'dayjs';
 
 export class Klimaat {
-  public dateTime: Moment;
+  public dateTime: Dayjs;
   public temperatuur: number;
   public luchtvochtigheid: number;
 }

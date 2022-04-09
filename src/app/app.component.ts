@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import * as moment from 'moment';
-import 'moment/locale/nl';
+import 'dayjs/locale/nl';
 import {AuthService} from './auth/auth.service';
+import dayjs from 'dayjs';
 
 @Component({
   selector: 'home-root',
@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    moment.locale('nl');
+    dayjs.locale('nl');
     this.authService.updateAuthenticatedSubject();
   }
 }
