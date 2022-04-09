@@ -34,7 +34,7 @@ export class EnergieVerbruikUurHistorieService extends AbstractEnergieVerbruikHi
     chartConfiguration.data.groups = [keysGroups];
     chartConfiguration.data.keys = { x: 'uur', value: keysGroups };
     chartConfiguration.data.json = verbruiken;
-    chartConfiguration.data.onclick = (data => onDataClick(selectedDate));
+    chartConfiguration.data.onclick = (_data => onDataClick(selectedDate));
     chartConfiguration.axis = {
       x: {
         type: 'category',
@@ -64,7 +64,7 @@ export class EnergieVerbruikUurHistorieService extends AbstractEnergieVerbruikHi
     return `${this.decimalPipe.transform(uur, '2.0-0')}:00 - ${this.decimalPipe.transform(uur + 1, '2.0-0')}:00`;
   }
 
-  public getDayjs(selectedDate: Dayjs, verbruikInUur: VerbruikInUur): Dayjs {
+  public getDayjs(selectedDate: Dayjs, _verbruikInUur: VerbruikInUur): Dayjs {
     return selectedDate.clone();
   }
 }

@@ -59,7 +59,7 @@ export class EnergieVerbruikDagHistorieService extends AbstractEnergieVerbruikHi
       }
     };
     chartConfiguration.tooltip = {
-      contents: function (data, defaultTitleFormat, defaultValueFormat, color) {
+      contents: function (data, _defaultTitleFormat, defaultValueFormat, color) {
         const titleFormat = (date: any) => that.formatDate(date);
         return that.getTooltipContent(this, data, titleFormat, defaultValueFormat, color, verbruiksoort, energiesoorten);
       }
@@ -100,7 +100,7 @@ export class EnergieVerbruikDagHistorieService extends AbstractEnergieVerbruikHi
     return capitalize(dayjs(date).format('ddd DD-MM'));
   }
 
-  public getDayjs(selectedDate: Dayjs, verbruikOpDag: VerbruikOpDag): Dayjs {
+  public getDayjs(_selectedDate: Dayjs, verbruikOpDag: VerbruikOpDag): Dayjs {
     return dayjs(verbruikOpDag.dag);
   }
 }

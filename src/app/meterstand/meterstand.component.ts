@@ -37,11 +37,11 @@ export class MeterstandComponent implements OnInit {
 
     this.spinnerService.show();
 
-    this.meterstandService.getMeterstanden(from, to).subscribe(
-      response => this.sortedMeterstandenPerDag = sortBy<MeterstandOpDag>(response, ['dag']),
-      error => this.errorHandlingService.handleError('De meterstanden konden nu niet worden opgehaald', error),
-      () => this.spinnerService.hide()
-    );
+    this.meterstandService.getMeterstanden(from, to).subscribe({
+      next: response => this.sortedMeterstandenPerDag = sortBy<MeterstandOpDag>(response, ['dag']),
+      error: error => this.errorHandlingService.handleError('De meterstanden konden nu niet worden opgehaald', error),
+      complete: () => this.spinnerService.hide()
+    });
   }
 
   public yearMonthChanged(selectedYearMonth: Dayjs): void {

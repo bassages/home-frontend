@@ -54,7 +54,7 @@ export class EnergieVerbruikMaandHistorieService extends AbstractEnergieVerbruik
       }
     };
     chartConfiguration.tooltip = {
-      contents: function (data, defaultTitleFormat, valueFormatter, color) {
+      contents: function (data, _defaultTitleFormat, valueFormatter, color) {
         const titleFormatter = (month: number) => capitalizedFullMonthNames[month - 1];
         return that.getTooltipContent(this, data, titleFormatter, valueFormatter, color, verbruiksoort, energiesoorten);
       }

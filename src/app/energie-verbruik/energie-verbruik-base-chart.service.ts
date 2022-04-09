@@ -52,7 +52,7 @@ export abstract class AbstractEnergieVerbruikHistorieService extends ChartServic
     };
   }
 
-  protected formatWithoutUnitLabel(verbruiksoort: string, value: any) {
+  protected formatWithoutUnitLabel(_verbruiksoort: string, value: any) {
     return this.decimalPipe.transform(value, '1.3-3');
   }
 
@@ -65,7 +65,7 @@ export abstract class AbstractEnergieVerbruikHistorieService extends ChartServic
     }
   }
 
-  protected getTooltipContent(c3, data, titleFormatter, valueFormatter, color, verbruiksoort: string, energiesoorten: string[]) {
+  protected getTooltipContent(c3, data, titleFormatter, _valueFormatter, color, verbruiksoort: string, energiesoorten: string[]) {
     let tooltipContents = '';
 
     data = sortBy(data, 'id');
@@ -74,16 +74,16 @@ export abstract class AbstractEnergieVerbruikHistorieService extends ChartServic
       tooltipContents += `<table class='${c3.CLASS.tooltip}'><tr><th colspan='2'>${titleFormatter(data[0].x)}</th></tr>`;
     }
 
-    for (let i = 0; i < data.length; i++) {
-      if (!(data[i] && (data[i].value || data[i].value === 0))) {
+    for (const element of data) {
+      if (!(element && (element.value || element.value === 0))) {
         continue;
       }
 
-      const bgcolor = c3.levelColor ? c3.levelColor(data[i].value) : color(data[i].id);
+      const bgcolor = c3.levelColor ? c3.levelColor(element.value) : color(element.id);
 
       tooltipContents += '<tr>';
-      tooltipContents += `<td class='name'><span style='background-color:${bgcolor}'></span>${this.getTooltipLabel(data[i].id)}</td>`;
-      tooltipContents += `<td class='value'>${this.formatWithUnitLabel(verbruiksoort, energiesoorten, data[i].value)}</td>`;
+      tooltipContents += `<td class='name'><span style='background-color:${bgcolor}'></span>${this.getTooltipLabel(element.id)}</td>`;
+      tooltipContents += `<td class='value'>${this.formatWithUnitLabel(verbruiksoort, energiesoorten, element.value)}</td>`;
       tooltipContents += '</tr>';
     }
 

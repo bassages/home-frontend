@@ -21,13 +21,9 @@ export class LoginComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.authenticationService.determineCurrentLoginStatus()
-      .subscribe(
-        () => {
-        // Intentionally left empty
-      }, () => {
-        // Intentionally left empty
-      }, () => this.navigateToRootWhenAlreadyLoggedIn());
+    this.authenticationService.determineCurrentLoginStatus().subscribe({
+        complete: () => this.navigateToRootWhenAlreadyLoggedIn()
+      });
   }
 
   private navigateToRootWhenAlreadyLoggedIn() {
@@ -40,14 +36,9 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
-    this.authenticationService.authenticate(this.credentials).subscribe(
-      () => {
-        // Intentionally left empty
-      },
-      () => {
-        // Intentionally left empty
-      },
-      () =>  this.processAuthenticationStatus());
+    this.authenticationService.authenticate(this.credentials).subscribe({
+      complete: () => this.processAuthenticationStatus()
+    });
   }
 
   private processAuthenticationStatus() {

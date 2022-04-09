@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {OpgenomenVermogen} from './opgenomen-vermogen';
-import {Moment} from 'moment';
 import {Dayjs} from 'dayjs';
 
 @Injectable()

@@ -38,8 +38,8 @@ export class KlimaatHighestLowestComponent implements OnInit {
   private getKlimaatSensors(): void {
     this.spinnerService.show();
 
-    this.klimaatSensorService.list().subscribe(
-      response => {
+    this.klimaatSensorService.list().subscribe({
+      next: response => {
         this.sensors = sortBy<KlimaatSensor>(response, ['omschrijving']);
 
         if (this.sensors.length > 0) {
@@ -47,8 +47,8 @@ export class KlimaatHighestLowestComponent implements OnInit {
         }
         this.getAndLoadData();
       },
-      error => this.errorHandlingService.handleError('De klimaat sensors konden nu niet worden opgehaald', error),
-    );
+      error: error => this.errorHandlingService.handleError('De klimaat sensors konden nu niet worden opgehaald', error),
+    });
   }
 
   private getAndLoadData(): void {
@@ -60,13 +60,14 @@ export class KlimaatHighestLowestComponent implements OnInit {
     const getLowest = this.klimaatService.getTop(this.sensorCode, this.sensorType, 'laagste', from, to, this.limit);
     const getHighest = this.klimaatService.getTop(this.sensorCode, this.sensorType, 'hoogste', from, to, this.limit);
 
-    zip(getLowest, getHighest).subscribe(klimaats => {
+    zip(getLowest, getHighest).subscribe({
+      next: klimaats => {
         this.lowestKlimaats = klimaats[0];
         this.highestKlimaats = klimaats[1];
       },
-      error => this.errorHandlingService.handleError('Hoogste/laagste klimaat kon niet worden opgehaald', error),
-      () => this.spinnerService.hide()
-    );
+      error: error => this.errorHandlingService.handleError('Hoogste/laagste klimaat kon niet worden opgehaald', error),
+      complete: () => this.spinnerService.hide()
+    });
   }
 
   private getFrom(): Dayjs {

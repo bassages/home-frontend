@@ -17,7 +17,7 @@ export class EnergieVerbruikJaarHistorieService extends AbstractEnergieVerbruikH
     super(decimalPipe);
   }
 
-  public getVerbruiken(selectedDate: Dayjs): Observable<VerbruikInJaar[]> {
+  public getVerbruiken(_selectedDate: Dayjs): Observable<VerbruikInJaar[]> {
     return this.energieVerbruikService.getVerbruikPerJaar();
   }
 
@@ -43,7 +43,7 @@ export class EnergieVerbruikJaarHistorieService extends AbstractEnergieVerbruikH
       }
     };
     chartConfiguration.tooltip = {
-      contents: function (data, defaultTitleFormat, valueFormatter, color) {
+      contents: function (data, _defaultTitleFormat, valueFormatter, color) {
         const titleFormatter = (year: number) => year;
         return that.getTooltipContent(this, data, titleFormatter, valueFormatter, color, verbruiksoort, energiesoorten);
       }

@@ -75,11 +75,11 @@ export class OpgenomenVermogenComponent implements OnInit {
     const from = this.selectedDate;
     const to = from.add(1, 'days');
 
-    this.opgenomenVermogenService.getHistory(from, to, this.periodLengthInSeconds).subscribe(
-      opgenomenVermogens => this.loadDataIntoChart(opgenomenVermogens),
-      error => this.errorHandlingService.handleError('Opgenomen vermogen kon niet worden opgehaald', error),
-      () => this.spinnerService.hide()
-    );
+    this.opgenomenVermogenService.getHistory(from, to, this.periodLengthInSeconds).subscribe({
+      next: opgenomenVermogens => this.loadDataIntoChart(opgenomenVermogens),
+      error: error => this.errorHandlingService.handleError('Opgenomen vermogen kon niet worden opgehaald', error),
+      complete: () => this.spinnerService.hide()
+    });
   }
 
   public onDateNavigate(selectedDate: Dayjs) {
@@ -98,25 +98,25 @@ export class OpgenomenVermogenComponent implements OnInit {
     const transformedData = [];
 
     let previousTarief = null;
-    for (let i = 0; i < opgenomenVermogens.length; i++) {
+    opgenomenVermogens.forEach(opgenomenVermogen => {
       const transformedDataItem: any = {};
 
-      const tarief = opgenomenVermogens[i].tariefIndicator.toLowerCase();
-      transformedDataItem.datumtijd = new Date(opgenomenVermogens[i].datumtijd).getTime();
-      transformedDataItem['watt-' + tarief] = opgenomenVermogens[i].watt;
+      const tarief = opgenomenVermogen.tariefIndicator.toLowerCase();
+      transformedDataItem.datumtijd = new Date(opgenomenVermogen.datumtijd).getTime();
+      transformedDataItem['watt-' + tarief] = opgenomenVermogen.watt;
 
       // Fill the "gap" between this row and the previous one
       if (previousTarief && tarief && tarief !== previousTarief) {
         const obj: any = {};
-        obj.datumtijd = new Date(opgenomenVermogens[i].datumtijd).getTime() - 1;
+        obj.datumtijd = new Date(opgenomenVermogen.datumtijd).getTime() - 1;
         const attribute = 'watt-' + previousTarief;
-        obj[attribute] = opgenomenVermogens[i].watt;
+        obj[attribute] = opgenomenVermogen.watt;
         transformedData.push(obj);
       }
 
       previousTarief = tarief;
       transformedData.push(transformedDataItem);
-    }
+    });
     return transformedData;
   }
 

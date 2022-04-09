@@ -71,7 +71,7 @@ export class DateNavigatorComponent {
   public datePickerChanged(selectedDate: Dayjs): void {
     if (selectedDate !== undefined && this.previouslySelectedDate !== undefined
       && !selectedDate.isSame(this.previouslySelectedDate)) {
-      this.pickers.forEach((item, index, array) => {
+      this.pickers.forEach((item, _index, _array) => {
         item.elemRef.nativeElement.blur();
         item.api.close();
       });
