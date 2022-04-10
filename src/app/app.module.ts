@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AppComponent} from './app.component';
 import {MeterstandComponent} from './meterstand/meterstand.component';
@@ -18,7 +18,7 @@ import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@s
 import {OpgenomenVermogenService} from './opgenomen-vermogen/opgenomen-vermogen.service';
 import {EnergieVerbruikService} from './energie-verbruik/energie-verbruik.service';
 import {EnergieVerbruikComponent} from './energie-verbruik/energie-verbruik.component';
-import {DecimalPipe} from '@angular/common';
+import {DecimalPipe, registerLocaleData} from '@angular/common';
 import {StroomVerbruikComponent} from './dashboard/stroom-verbruik/stroom-verbruik.component';
 import {GasVerbruikComponent} from './dashboard/gas-verbruik/gas-verbruik.component';
 import {DateNavigatorComponent} from './date-navigator/date-navigator.component';
@@ -51,6 +51,7 @@ import {KlimaatSensorService} from './klimaat/klimaatsensor.service';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import localeNl from '@angular/common/locales/nl';
 
 export function socketProvider() {
   return new SockJS('/ws');
@@ -126,7 +127,7 @@ const appRoutes: Routes = [
     DpDatePickerModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(appRoutes, { enableTracing: false, useHash: true, relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot(appRoutes, {enableTracing: false, useHash: true, relativeLinkResolution: 'legacy'}),
     FontAwesomeModule
   ],
   providers: [
@@ -161,6 +162,10 @@ const appRoutes: Routes = [
       provide: HTTP_INTERCEPTORS,
       useClass: AuthorizationInterceptor,
       multi: true
+    },
+    {
+      provide: LOCALE_ID,
+      useValue: 'nl'
     }
   ],
   bootstrap: [AppComponent],
@@ -168,4 +173,8 @@ const appRoutes: Routes = [
 })
 
 export class AppModule {
+
+  constructor() {
+    registerLocaleData(localeNl);
+  }
 }
