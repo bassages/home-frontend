@@ -73,9 +73,9 @@ describe('OpgenomenVermogenService', () => {
           .subscribe(data => {
             expect(data.length).toBe(2);
             expect(data[0].gemiddelde).toEqual(10.32);
-            expect(data[0].maand.format('Y-MM-DD')).toEqual('2017-01-01');
+            expect(data[0].maand.format('YYYY-MM-DD')).toEqual('2017-01-01');
             expect(data[1].gemiddelde).toEqual(12.32);
-            expect(data[1].maand.format('Y-MM-DD')).toEqual('2017-02-01');
+            expect(data[1].maand.format('YYYY-MM-DD')).toEqual('2017-02-01');
           });
 
         // Set the expectations for the HttpClient mock
