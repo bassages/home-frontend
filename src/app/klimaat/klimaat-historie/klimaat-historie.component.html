@@ -57,12 +57,14 @@
   <div class="col-md-12 col-lg-11 px-2 px-sm-0">
     <div [hidden]="!showChart" id="chart" class="c3 graph-chart"></div>
     <div *ngIf="showTable" class="table-responsive">
-      <table class="table table-bordered table-striped table-hover table-sm">
-        <tr *ngFor="let klimaat of klimaats" class="clickable'">
-          <td class="text-end">{{ getFormattedTime(klimaat) }}</td>
-          <td class="text-end">{{ formatWithUnitLabel(sensorType, klimaat[sensorType]) }}</td>
-          <td [style.background-color]="getColor(klimaat[sensorType])" style="width:12px;"></td>
-        </tr>
+      <table class="table table-bordered table-striped table-sm">
+        <tbody>
+          <tr *ngFor="let klimaat of klimaats" class="clickable'">
+            <td class="text-end">{{ getFormattedTime(klimaat) }}</td>
+            <td class="text-end">{{ formatWithUnitLabel(sensorType, klimaat[sensorType]) }}</td>
+            <td [style.background-color]="getColor(klimaat[sensorType])" style="width:12px;"></td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>

@@ -11,21 +11,21 @@
 <div class="table-responsive">
   <table class="table table-bordered table-striped table-sm">
     <thead>
-    <tr>
-      <th colspan="2" style="width: 25%">Datum</th>
-      <th class="text-end" style="width: 25%">Stroom daltarief</th>
-      <th class="text-end" style="width: 25%">Stroom normaaltarief</th>
-      <th class="text-end" style="width: 25%">Gas</th>
-    </tr>
+      <tr>
+        <th colspan="2" style="width: 25%">Datum</th>
+        <th class="text-end" style="width: 25%">Stroom daltarief</th>
+        <th class="text-end" style="width: 25%">Stroom normaaltarief</th>
+        <th class="text-end" style="width: 25%">Gas</th>
+      </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let meterstandOpDag of sortedMeterstandenPerDag">
-      <td class="text-end">{{meterstandOpDag.dag | date : 'EEE.'}}</td>
-      <td class="text-nowrap">{{meterstandOpDag.dag | date : 'dd-MM-yyyy'}}</td>
-      <td class="text-end">{{meterstandOpDag.meterstand?.stroomTarief1 | number: '1.3-3'}}</td>
-      <td class="text-end">{{meterstandOpDag.meterstand?.stroomTarief2 | number: '1.3-3'}}</td>
-      <td class="text-end">{{meterstandOpDag.meterstand?.gas | number: '1.3-3'}}</td>
-    </tr>
+      <tr *ngFor="let meterstandOpDag of sortedMeterstandenPerDag">
+        <td class="text-end">{{meterstandOpDag.dag | date : 'EEE.'}}</td>
+        <td class="text-nowrap">{{meterstandOpDag.dag | date : 'dd-MM-yyyy'}}</td>
+        <td class="text-end">{{meterstandOpDag.meterstand?.stroomTarief1 | number: '1.3-3'}}</td>
+        <td class="text-end">{{meterstandOpDag.meterstand?.stroomTarief2 | number: '1.3-3'}}</td>
+        <td class="text-end">{{meterstandOpDag.meterstand?.gas | number: '1.3-3'}}</td>
+      </tr>
     </tbody>
   </table>
 </div>

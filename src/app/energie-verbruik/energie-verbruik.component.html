@@ -114,12 +114,14 @@
             <th class="text-end" *ngIf="isEnergieSoortSelected('stroom') && isEnergieSoortSelected('gas') && verbruiksoort === 'kosten'">Totaal</th>
           </tr>
         </thead>
-        <tr *ngFor="let verbruik of verbruiken" class="clickable" (click)="navigateToDetailsOfVerbruik(verbruik)">
-          <td class="text-end">{{ getFormattedDate(verbruik) }}</td>
-          <td class="text-end" *ngIf="isEnergieSoortSelected('gas')">{{ getFormattedValue(verbruik, 'gas') }}</td>
-          <td class="text-end" *ngIf="isEnergieSoortSelected('stroom')">{{ getFormattedValue(verbruik, 'stroom') }}</td>
-          <td class="text-end" *ngIf="isEnergieSoortSelected('stroom') && isEnergieSoortSelected('gas') && verbruiksoort === 'kosten'">{{ getFormattedTotalCosts(verbruik) }}</td>
-        </tr>
+        <tbody>
+          <tr *ngFor="let verbruik of verbruiken" class="clickable" (click)="navigateToDetailsOfVerbruik(verbruik)">
+            <td class="text-end">{{ getFormattedDate(verbruik) }}</td>
+            <td class="text-end" *ngIf="isEnergieSoortSelected('gas')">{{ getFormattedValue(verbruik, 'gas') }}</td>
+            <td class="text-end" *ngIf="isEnergieSoortSelected('stroom')">{{ getFormattedValue(verbruik, 'stroom') }}</td>
+            <td class="text-end" *ngIf="isEnergieSoortSelected('stroom') && isEnergieSoortSelected('gas') && verbruiksoort === 'kosten'">{{ getFormattedTotalCosts(verbruik) }}</td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>
