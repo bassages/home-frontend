@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header h3 clickable" (click)="navigateToKlimaatHistory()">
-    <i class="fas fa-tint" aria-hidden="true"></i> Luchtvochtigheid
+    <fa-icon [icon]="faDroplet"></fa-icon> Luchtvochtigheid
   </div>
   <div class="card-body">
     <div class="ledbar float-start">
@@ -11,13 +11,13 @@
     <div class="h3">
       <span *ngIf="klimaat">{{ klimaat.luchtvochtigheid | number: '1.2-2' }}%</span>
       <span *ngIf="!klimaat">-%</span>
-      <span *ngIf="klimaat?.luchtvochtigheidTrend === Trend.UP">
-        <i data-fa-transform="rotate-45" class="fas fa-arrow-up text-danger ms-1" aria-hidden="true"></i>
+      <span *ngIf="klimaat?.luchtvochtigheidTrend === Trend.UP" class="text-danger ms-2">
+        <fa-icon [icon]="faArrowTrendUp"></fa-icon>
       </span>
-      <span *ngIf="klimaat?.luchtvochtigheidTrend === Trend.DOWN">
-        <i data-fa-transform="rotate--45" class="fas fa-arrow-down text-primary ms-1" aria-hidden="true"></i>
+      <span *ngIf="klimaat?.luchtvochtigheidTrend === Trend.DOWN" class="text-primary ms-2">
+        <fa-icon [icon]="faArrowTrendDown"></fa-icon>
       </span>
-      <span *ngIf="klimaat?.luchtvochtigheidTrend === Trend.STABLE" class="text-success ms-1">
+      <span *ngIf="klimaat?.luchtvochtigheidTrend === Trend.STABLE" class="text-success ms-2">
         <strong>&asymp;</strong>
       </span>
     </div>

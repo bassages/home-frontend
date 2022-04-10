@@ -9,6 +9,15 @@ import {DecimalPipe} from '@angular/common';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NgxSpinnerService} from 'ngx-spinner';
 import dayjs from 'dayjs';
+import {
+  faBan,
+  faCalendarDays,
+  faCheck,
+  faCircleInfo,
+  faCirclePlus,
+  faTrash,
+  faTriangleExclamation
+} from '@fortawesome/free-solid-svg-icons';
 
 const datePickerFormat = 'DD-MM-YYYY';
 const pricePattern = /^\d(,\d{1,6})*$/;
@@ -18,6 +27,13 @@ const pricePattern = /^\d(,\d{1,6})*$/;
   templateUrl: './energiecontract.component.html'
 })
 export class EnergiecontractComponent implements OnInit {
+  faCirclePlus = faCirclePlus;
+  faCircleInfo = faCircleInfo;
+  faCalendarDays = faCalendarDays;
+  faTriangleExclamation = faTriangleExclamation;
+  faBan = faBan;
+  faCheck = faCheck;
+  faTrash = faTrash;
 
   public energiecontracten: Energiecontract[];
 

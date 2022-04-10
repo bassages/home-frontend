@@ -4,14 +4,16 @@
       <div *ngIf="loginFailed" class="alert alert-danger">
         Ongeldige gebruiksnaam en/of wachtwoord
       </div>
-      <i class="fas fa-home fa-4x mb-4" aria-hidden="true"></i>
+      <div class="mb-4">
+        <fa-icon [icon]="faHouseChimney" size="4x"></fa-icon>
+      </div>
       <div class="ms-3 me-3">
         <div class="input-group mb-2">
-          <div class="input-group-text"><i class="fas fa-user" aria-hidden="true"></i></div>
+          <span class="input-group-text"><fa-icon [icon]="faUser"></fa-icon></span>
           <input class="form-control" type="text" id="username" name="username" [(ngModel)]="credentials.username" placeholder="Gebruikersnaam" required autofocus />
         </div>
         <div class="input-group mb-2">
-          <div class="input-group-text"><i class="fas fa-key" aria-hidden="true"></i></div>
+          <span class="input-group-text"><fa-icon [icon]="faKey"></fa-icon></span>
           <input class="form-control" type="password" id="password" name="password" [(ngModel)]="credentials.password" placeholder="Wachtwoord" required />
         </div>
         <input class="form-control btn btn-secondary" type="submit" value="Aanmelden"/>

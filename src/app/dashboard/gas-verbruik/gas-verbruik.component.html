@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header h3 clickable" (click)="navigateToVerbruikDetails()">
-    <i class="fas fa-fire" aria-hidden="true"></i> Gas
+    <fa-icon [icon]="faFireFlameCurved"></fa-icon> Gas
   </div>
   <div class="card-body">
     <div class="ledbar float-start">
@@ -16,7 +16,9 @@
     <p class="h3">Meterstand</p>
 
     <p class="h6" *ngIf="meterstand">
-      <span ngbTooltip="Normaaltarief"><i class="fas fa-moon" aria-hidden="true" ngbTooltip="Dal- en normaaltarief"></i> <i class="fas fa-sun" aria-hidden="true"></i> {{meterstand.gas | number: '1.3-3'}}</span>
+      <span ngbTooltip="Dal- en normaaltarief">
+        <fa-icon [icon]="faMoon"></fa-icon> <fa-icon [icon]="faSun"></fa-icon><span class="ms-1">{{meterstand.gas | number: '1.3-3'}}</span>
+      </span>
     </p>
     <p class="h6" *ngIf="!meterstand">
       -

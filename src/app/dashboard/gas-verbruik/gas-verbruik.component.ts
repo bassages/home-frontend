@@ -11,6 +11,7 @@ import {VerbruikOpDag} from '../../energie-verbruik/verbruikOpDag';
 import {GemiddeldVerbruikInPeriod} from '../../energie-verbruik/gemiddeldVerbruikInPeriod';
 import {Router} from '@angular/router';
 import dayjs from 'dayjs';
+import {faFireFlameCurved, faMoon, faSun} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'home-gas-verbruik',
@@ -18,6 +19,9 @@ import dayjs from 'dayjs';
   styleUrls: ['../ledbar.scss', './gas-verbruik.component.scss']
 })
 export class GasVerbruikComponent implements OnInit, OnDestroy {
+  faFireFlameCurved = faFireFlameCurved;
+  faMoon = faMoon;
+  faSun = faSun;
 
   public LedState = LedState;
 

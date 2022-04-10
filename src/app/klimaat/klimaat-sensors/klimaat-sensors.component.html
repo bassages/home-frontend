@@ -22,7 +22,7 @@
 <ng-template #no_klimaatsensors>
   <div class="table-responsive" *ngIf="sensors">
     <div class="alert alert-info">
-      <i class="fas fa-info-circle" aria-hidden="true"></i> Er zijn nog geen klimaatsensors. <strong>Tip</strong>: Klimaatsensors worden automatisch toegevoegd zodra ze aangesloten worden en gegevens registreren.
+      <fa-icon [icon]="faCircleInfo"></fa-icon> Er zijn nog geen klimaatsensors. <strong>Tip</strong>: Klimaatsensors worden automatisch toegevoegd zodra ze aangesloten worden en gegevens registreren.
     </div>
   </div>
 </ng-template>
@@ -47,10 +47,10 @@
   <div class="row">
     <div class="col-md-4 col-lg-3">&nbsp;</div>
     <div class="col-sm-9 col-md-7 col-lg-5">
-      <button type="button" class="btn btn-primary float-start" [hidden]="!selectedSensor" (click)="openDeletionConformationDialog(deletionConformationDialog)"><i class="fa fa-trash" aria-hidden="true"></i> Verwijderen</button>
+      <button type="button" class="btn btn-primary float-start" [hidden]="!selectedSensor" (click)="openDeletionConformationDialog(deletionConformationDialog)"><fa-icon [icon]="faTrash"></fa-icon> Verwijderen</button>
       <div class="float-end">
-        <button type="button" class="btn btn-primary" (click)="cancelEdit()"><i class="fa fa-ban" aria-hidden="true"></i> Annuleren</button>
-        <button type="submit" class="btn btn-primary ms-1" [disabled]="form.invalid"><i class="fa fa-check" aria-hidden="true"></i> Opslaan</button>
+        <button type="button" class="btn btn-primary" (click)="cancelEdit()"><fa-icon [icon]="faBan"></fa-icon> Annuleren</button>
+        <button type="submit" class="btn btn-primary ms-1" [disabled]="form.invalid"><fa-icon [icon]="faCheck"></fa-icon> Opslaan</button>
       </div>
     </div>
   </div>
@@ -58,10 +58,11 @@
 
 <ng-template #deletionConformationDialog let-close="close" let-dismiss="dismiss">
   <div class="modal-header bg-warning text-light">
-    <h4 class="modal-title"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Bevestig</h4>
+    <h4 class="modal-title"><fa-icon [icon]="faTriangleExclamation"></fa-icon> Bevestig</h4>
   </div>
   <div class="modal-body">
-    <p>Weet je het zeker?</p><p>Alle historie van de klimaatsensor <strong>{{selectedSensor.code}}</strong> zal worden verwijderd.</p>
+    <p>Weet je het zeker?</p>
+    <p>Alle historie van de klimaatsensor <strong>{{selectedSensor.code}}</strong> zal worden verwijderd.</p>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" (click)="dismiss('CANCEL')">Nee, niet verwijderen</button>

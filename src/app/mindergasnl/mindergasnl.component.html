@@ -1,5 +1,5 @@
 <div>
-  <h1>MinderGas.nl <sup><a href="http://mindergas.nl/" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt fa-xs" aria-hidden="true"></i></a></sup></h1>
+  <h1>MinderGas.nl <sup><a href="http://mindergas.nl/" target="_blank" rel="noopener noreferrer"><fa-icon [icon]="faArrowUpRightFromSquare"></fa-icon></a></sup></h1>
 </div>
 
 <form [formGroup]="form" class="form-horizontal" autocomplete="off" novalidate (submit)="save()">
@@ -29,9 +29,9 @@
     <div class="col-sm-4 col-md-3">&nbsp;</div>
     <div class="col-sm-6">
       <div class="float-end">
-        <button *ngIf="!editMode" type="button" class='btn btn-primary' (click)="editMode = true"><i class="fas fa-edit" aria-hidden="true"></i> Wijzig</button>
-        <button *ngIf="editMode" type="button" class='btn btn-primary' (click)="cancel()"><i class="fas fa-ban" aria-hidden="true"></i> Annuleren</button>
-        <button *ngIf="editMode" type="submit" class='btn btn-primary ms-1' [disabled]="form.invalid"><i class="fas fa-check" aria-hidden="true"></i> Opslaan</button>
+        <button *ngIf="!editMode" type="button" class='btn btn-primary' (click)="editMode = true"><fa-icon [icon]="faEdit"></fa-icon> Wijzig</button>
+        <button *ngIf="editMode" type="button" class='btn btn-primary' (click)="cancel()"><fa-icon [icon]="faBan"></fa-icon> Annuleren</button>
+        <button *ngIf="editMode" type="submit" class='btn btn-primary ms-1' [disabled]="form.invalid"><fa-icon [icon]="faCheck"></fa-icon> Opslaan</button>
       </div>
     </div>
   </div>

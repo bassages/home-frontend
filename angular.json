@@ -31,9 +31,6 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "node_modules/@fortawesome/fontawesome/index.js",
-              "node_modules/@fortawesome/fontawesome-free-solid/index.js",
-              "node_modules/@fortawesome/fontawesome-free-regular/index.js",
               "node_modules/d3/d3.js"
             ],
             "vendorChunk": true,
@@ -95,10 +92,7 @@
             "tsConfig": "tsconfig.spec.json",
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "node_modules/@fortawesome/fontawesome/index.js",
-              "node_modules/@fortawesome/fontawesome-free-solid/index.js",
-              "node_modules/@fortawesome/fontawesome-free-regular/index.js"
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",

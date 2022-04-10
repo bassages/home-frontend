@@ -3,6 +3,7 @@ import {MindergasnlService} from './mindergasnl.service';
 import {ErrorHandingService} from '../error-handling/error-handing.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {faArrowUpRightFromSquare, faBan, faCheck, faEdit} from '@fortawesome/free-solid-svg-icons';
 
 const authenticatieTokenMaxLengthValidator = Validators.maxLength(255);
 
@@ -11,6 +12,10 @@ const authenticatieTokenMaxLengthValidator = Validators.maxLength(255);
   templateUrl: './mindergasnl.component.html'
 })
 export class MindergasnlComponent implements OnInit {
+  faArrowUpRightFromSquare = faArrowUpRightFromSquare
+  faEdit = faEdit
+  faBan = faBan
+  faCheck = faCheck
 
   public form: FormGroup;
   public showSavedMessage = false;

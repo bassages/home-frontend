@@ -21,12 +21,15 @@ import * as chroma from 'chroma-js';
 import {KlimaatSensorService} from '../klimaatsensor.service';
 import {NgxSpinnerService} from 'ngx-spinner';
 import dayjs, {Dayjs} from 'dayjs';
+import {faDroplet, faThermometerHalf} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'home-klimaat-historie',
   templateUrl: './klimaat-historie.component.html'
 })
 export class KlimaatHistorieComponent implements OnInit {
+  faDroplet = faDroplet;
+  faThermometerHalf = faThermometerHalf;
 
   public sensorCode: string;
   public sensorType: string;

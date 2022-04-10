@@ -5,15 +5,15 @@
 
   <div class="col-7 text-end right-to-h1">
     <button class='btn btn-primary' (click)="startAdd()">
-      <span class="d-none d-sm-block"><i class="fas fa-plus-circle" aria-hidden="true"></i> Toevoegen</span>
-      <span class="d-block d-sm-none"><i class="fas fa-plus-circle" aria-hidden="true"></i></span>
+      <span class="d-none d-sm-block"><fa-icon [icon]="faCirclePlus"></fa-icon> Toevoegen</span>
+      <span class="d-block d-sm-none"><fa-icon [icon]="faCirclePlus"></fa-icon></span>
     </button>
   </div>
 </div>
 
 <div *ngIf="energiecontracten && energiecontracten.length === 0" class="table-responsive">
   <div class="alert alert-info">
-    <i class="fas fa-info-circle" aria-hidden="true"></i> Er zijn nog geen energiecontracten. <strong>Tip</strong>: Je kunt er één toevoegen door rechtsboven op de knop "Toevoegen" te klikken.
+    <fa-icon [icon]="faCircleInfo"></fa-icon> Er zijn nog geen energiecontracten. <strong>Tip</strong>: Je kunt er één toevoegen door rechtsboven op de knop "Toevoegen" te klikken.
   </div>
 </div>
 
@@ -53,7 +53,7 @@
                [ngClass]="{'is-invalid': selectedDate.invalid}"
                theme="dp-material"
                mode="day" />
-        <button type="button" class="btn btn-outline-secondary" (click)="openDatePicker()"><i class="fas fa-calendar" aria-hidden="true"></i></button>
+        <button type="button" class="btn btn-outline-secondary" (click)="openDatePicker()"><fa-icon [icon]="faCalendarDays"></fa-icon></button>
       </div>
     </div>
   </div>
@@ -105,10 +105,10 @@
   <div class="row">
     <div class="col-md-4 col-lg-3">&nbsp;</div>
     <div class="col-sm-9 col-md-7 col-lg-5">
-      <button type="button" class="btn btn-primary float-start" [hidden]="!selectedEnergiecontract" (click)="openDeletionConformationDialog(deletionConformationDialog)"><i class="fa fa-trash" aria-hidden="true"></i> Verwijderen</button>
+      <button type="button" class="btn btn-primary float-start" [hidden]="!selectedEnergiecontract" (click)="openDeletionConformationDialog(deletionConformationDialog)"><fa-icon [icon]="faTrash"></fa-icon> Verwijderen</button>
       <div class="float-end">
-        <button type="button" class="btn btn-primary" (click)="cancelEdit()"><i class="fa fa-ban" aria-hidden="true"></i> Annuleren</button>
-        <button type="submit" class="btn btn-primary ms-1" [disabled]="form.invalid"><i class="fa fa-check" aria-hidden="true"></i> Opslaan</button>
+        <button type="button" class="btn btn-primary" (click)="cancelEdit()"><fa-icon [icon]="faBan"></fa-icon> Annuleren</button>
+        <button type="submit" class="btn btn-primary ms-1" [disabled]="form.invalid"><fa-icon [icon]="faCheck"></fa-icon> Opslaan</button>
       </div>
     </div>
   </div>
@@ -117,7 +117,7 @@
 
 <ng-template #deletionConformationDialog let-close="close" let-dismiss="dismiss">
   <div class="modal-header bg-warning text-light">
-    <h4 class="modal-title"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Bevestig</h4>
+    <h4 class="modal-title"><fa-icon [icon]="faTriangleExclamation"></fa-icon> Bevestig</h4>
   </div>
   <div class="modal-body">
     <p>Weet je zeker dat je energiecontract met <strong>{{selectedEnergiecontract.leverancier}}</strong> (vanaf {{selectedEnergiecontract.validFrom | date:'dd-MM-yyyy'}}) wilt verwijderen?</p>

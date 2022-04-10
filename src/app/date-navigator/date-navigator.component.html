@@ -5,7 +5,7 @@
     <button (click)="navigate(-1)"
             class="btn btn-outline-secondary"
             [ngClass]="{'responsive-size': responsiveSize}"
-            type="button"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+            type="button"><fa-icon [icon]="faChevronLeft"></fa-icon></button>
 
     <!--suppress HtmlFormInputWithoutLabel -->
     <input #picker="dpDayPicker" type="text" *ngIf="mode === 'day'" class="form-control text-center text-capitalize" name="dayPicker"
@@ -43,7 +43,7 @@
       <button type="button"
               class="btn btn-outline-secondary responsive-size"
               [ngClass]="{'responsive-size': responsiveSize}"
-              (click)="navigate(+1)" [disabled]="isUpNavigationDisabled()"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+              (click)="navigate(+1)" [disabled]="isUpNavigationDisabled()"><fa-icon [icon]="faChevronRight"></fa-icon></button>
 
   </div>
 </form>

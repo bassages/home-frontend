@@ -7,12 +7,15 @@ import sortBy from 'lodash-es/sortBy';
 import {KlimaatSensorService} from '../klimaatsensor.service';
 import {NgxSpinnerService} from 'ngx-spinner';
 import dayjs, {Dayjs} from 'dayjs';
+import {faDroplet, faThermometerHalf} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'home-klimaat-average',
   templateUrl: './klimaat-average.component.html'
 })
 export class KlimaatAverageComponent implements OnInit {
+  faDroplet = faDroplet;
+  faThermometerHalf = faThermometerHalf;
 
   public sensors: KlimaatSensor[];
   public sensorType = 'temperatuur';

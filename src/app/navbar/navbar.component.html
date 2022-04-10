@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" *ngIf="isVisible">
   <div class="container">
-    <a class="navbar-brand" routerLink="/dashboard"><i class="fas fa-home" aria-hidden="true"></i></a>
+    <a class="navbar-brand" routerLink="/dashboard"><fa-icon [icon]="faHouseChimney"></fa-icon></a>
 
     <button class="navbar-toggler" type="button" (click)="isCollapsed=!isCollapsed" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Open/sluit menu">
       <span class="navbar-toggler-icon"></span>
@@ -16,12 +16,12 @@
             Energieverbruik <span class="caret"></span>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuVerbruik">
-            <a class="dropdown-item" routerLink="/energie/basisverbruik"  (click)="collapse()"><i class="fas fa-exclamation-circle" aria-hidden="true"></i> Stroom - Basisverbruik</a>
-            <a class="dropdown-item" routerLink="/energie/opgenomen-vermogen"  (click)="collapse()"><i class="fas fa-chart-area" aria-hidden="true"></i> Stroom - opgenomen vermogen</a>
-            <a class="dropdown-item" [routerLink]="['/energie', 'verbruik', 'uur']" [queryParams]="{ energiesoort: ['stroom'] }" (click)="collapse()"><i class="fas fa-chart-bar" aria-hidden="true"></i> Verbruik per uur</a>
-            <a class="dropdown-item" [routerLink]="['/energie', 'verbruik', 'dag']" [queryParams]="{ energiesoort: ['stroom'] }" (click)="collapse()"><i class="fas fa-chart-bar" aria-hidden="true"></i> Verbruik per dag</a>
-            <a class="dropdown-item" [routerLink]="['/energie', 'verbruik', 'maand']" [queryParams]="{ energiesoort: ['stroom'] }" (click)="collapse()"><i class="fas fa-chart-bar" aria-hidden="true"></i> Verbruik per maand</a>
-            <a class="dropdown-item" [routerLink]="['/energie', 'verbruik', 'jaar']" [queryParams]="{ energiesoort: ['stroom'] }" (click)="collapse()"><i class="fas fa-chart-bar" aria-hidden="true"></i> Verbruik per jaar</a>
+            <a class="dropdown-item" routerLink="/energie/basisverbruik"  (click)="collapse()"><fa-icon [icon]="faHouseChimney"></fa-icon> Stroom - Basisverbruik</a>
+            <a class="dropdown-item" routerLink="/energie/opgenomen-vermogen"  (click)="collapse()"><fa-icon [icon]="faChartArea"></fa-icon> Stroom - opgenomen vermogen</a>
+            <a class="dropdown-item" [routerLink]="['/energie', 'verbruik', 'uur']" [queryParams]="{ energiesoort: ['stroom'] }" (click)="collapse()"><fa-icon [icon]="faChartColumn"></fa-icon> Verbruik per uur</a>
+            <a class="dropdown-item" [routerLink]="['/energie', 'verbruik', 'dag']" [queryParams]="{ energiesoort: ['stroom'] }" (click)="collapse()"><fa-icon [icon]="faChartColumn"></fa-icon> Verbruik per dag</a>
+            <a class="dropdown-item" [routerLink]="['/energie', 'verbruik', 'maand']" [queryParams]="{ energiesoort: ['stroom'] }" (click)="collapse()"><fa-icon [icon]="faChartColumn"></fa-icon> Verbruik per maand</a>
+            <a class="dropdown-item" [routerLink]="['/energie', 'verbruik', 'jaar']" [queryParams]="{ energiesoort: ['stroom'] }" (click)="collapse()"><fa-icon [icon]="faChartColumn"></fa-icon> Verbruik per jaar</a>
           </div>
         </li>
         <li class="nav-item dropdown">
@@ -29,10 +29,10 @@
             Energiekosten <span class="caret"></span>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuKosten">
-            <a class="dropdown-item" [routerLink]="['/energie', 'kosten', 'uur']" [queryParams]="{ energiesoort: ['stroom', 'gas'] }" (click)="collapse()"><i class="fas fa-chart-bar" aria-hidden="true"></i> Kosten per uur</a>
-            <a class="dropdown-item" [routerLink]="['/energie', 'kosten', 'dag']" [queryParams]="{ energiesoort: ['stroom', 'gas'] }" (click)="collapse()"><i class="fas fa-chart-bar" aria-hidden="true"></i> Kosten per dag</a>
-            <a class="dropdown-item" [routerLink]="['/energie', 'kosten', 'maand']" [queryParams]="{ energiesoort: ['stroom', 'gas'] }" (click)="collapse()"><i class="fas fa-chart-bar" aria-hidden="true"></i> Kosten per maand</a>
-            <a class="dropdown-item" [routerLink]="['/energie', 'kosten', 'jaar']" [queryParams]="{ energiesoort: ['stroom', 'gas'] }" (click)="collapse()"><i class="fas fa-chart-bar" aria-hidden="true"></i> Kosten per jaar</a>
+            <a class="dropdown-item" [routerLink]="['/energie', 'kosten', 'uur']" [queryParams]="{ energiesoort: ['stroom', 'gas'] }" (click)="collapse()"><fa-icon [icon]="faChartColumn"></fa-icon> Kosten per uur</a>
+            <a class="dropdown-item" [routerLink]="['/energie', 'kosten', 'dag']" [queryParams]="{ energiesoort: ['stroom', 'gas'] }" (click)="collapse()"><fa-icon [icon]="faChartColumn"></fa-icon> Kosten per dag</a>
+            <a class="dropdown-item" [routerLink]="['/energie', 'kosten', 'maand']" [queryParams]="{ energiesoort: ['stroom', 'gas'] }" (click)="collapse()"><fa-icon [icon]="faChartColumn"></fa-icon> Kosten per maand</a>
+            <a class="dropdown-item" [routerLink]="['/energie', 'kosten', 'jaar']" [queryParams]="{ energiesoort: ['stroom', 'gas'] }" (click)="collapse()"><fa-icon [icon]="faChartColumn"></fa-icon> Kosten per jaar</a>
           </div>
         </li>
         <li class="nav-item dropdown">
@@ -40,9 +40,9 @@
             Klimaat <span class="caret"></span>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu">
-            <a class="dropdown-item" routerLink="/klimaat/sensors" (click)="collapse()"><i class="fas fa-microchip" aria-hidden="true"></i> Sensors</a>
-            <a class="dropdown-item" routerLink="/klimaat/historie" (click)="collapse()"><i class="fas fa-chart-line" aria-hidden="true"></i> Per dag</a>
-            <a class="dropdown-item" routerLink="/klimaat/hoogste-laagste" (click)="collapse()"><i class="fas fa-table" aria-hidden="true"></i> Hoogste / Laagste</a>
+            <a class="dropdown-item" routerLink="/klimaat/sensors" (click)="collapse()"><fa-icon [icon]="faMicrochip"></fa-icon> Sensors</a>
+            <a class="dropdown-item" routerLink="/klimaat/historie" (click)="collapse()"><fa-icon [icon]="faChartLine"></fa-icon> Per dag</a>
+            <a class="dropdown-item" routerLink="/klimaat/hoogste-laagste" (click)="collapse()"><fa-icon [icon]="faTable"></fa-icon> Hoogste / Laagste</a>
             <a class="dropdown-item" routerLink="/klimaat/gemiddelde" (click)="collapse()">x&#772; Gemiddelde</a>
           </div>
         </li>
@@ -54,15 +54,15 @@
       <ul class="navbar-nav ms-auto">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuBeheer" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-cogs" aria-hidden="true"></i> Beheer <span class="caret"></span>
+            <fa-icon [icon]="faGears"></fa-icon> Beheer <span class="caret"></span>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuBeheer">
-            <a class="dropdown-item" routerLink="/mindergasnl" (click)="collapse()"><i class="fas fa-fire" aria-hidden="true"></i> MinderGas.nl</a>
-            <a class="dropdown-item" routerLink="/energiecontract" (click)="collapse()"><i class="far fa-file-alt" aria-hidden="true"></i> Energiecontracten</a>
-            <a class="dropdown-item" href="/actuator" target="_blank"><i class="fas fa-server" aria-hidden="true"></i> Server</a>
+            <a class="dropdown-item" routerLink="/mindergasnl" (click)="collapse()"><fa-icon [icon]="faFireFlameCurved"></fa-icon> MinderGas.nl</a>
+            <a class="dropdown-item" routerLink="/energiecontract" (click)="collapse()"><fa-icon [icon]="faFileLines"></fa-icon> Energiecontracten</a>
+            <a class="dropdown-item" href="/actuator" target="_blank"><fa-icon [icon]="faServer"></fa-icon> Server</a>
           </div>
         </li>
-        <li><a class="nav-link clickable" (click)="logout()"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Afmelden</a></li>
+        <li><a class="nav-link clickable" (click)="logout()"><fa-icon [icon]="faRightFromBracket"></fa-icon>Afmelden</a></li>
       </ul>
     </div>
   </div>

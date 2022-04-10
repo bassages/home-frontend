@@ -9,12 +9,18 @@ import {Router} from '@angular/router';
 import {KlimaatSensorService} from '../klimaatsensor.service';
 import {NgxSpinnerService} from 'ngx-spinner';
 import dayjs, {Dayjs} from 'dayjs';
+import {faArrowDown, faArrowUp, faDroplet, faThermometerHalf} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'home-klimaat-highest-lowest',
   templateUrl: './klimaat-highest-lowest.component.html'
 })
 export class KlimaatHighestLowestComponent implements OnInit {
+  faDroplet = faDroplet;
+  faThermometerHalf = faThermometerHalf
+  faArrowDown = faArrowDown
+  faArrowUp = faArrowUp
+
   public sensors: KlimaatSensor[];
   public sensorCode;
   public sensorType = 'temperatuur';

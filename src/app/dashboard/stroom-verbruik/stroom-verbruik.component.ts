@@ -8,6 +8,7 @@ import {OpgenomenVermogenService} from '../../opgenomen-vermogen/opgenomen-vermo
 import {Led, LedState} from '../led';
 import {MeterstandService} from '../../meterstand/meterstand.service';
 import {Router} from '@angular/router';
+import {faMoon, faPlugCircleBolt, faSun} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'home-stroom-verbruik',
@@ -15,6 +16,9 @@ import {Router} from '@angular/router';
   styleUrls: ['../ledbar.scss', './stroom-verbruik.component.scss']
 })
 export class StroomVerbruikComponent implements OnInit, OnDestroy {
+  faPlugCircleBolt = faPlugCircleBolt;
+  faMoon = faMoon;
+  faSun = faSun;
 
   public LedState = LedState;
 

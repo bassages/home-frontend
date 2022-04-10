@@ -5,13 +5,13 @@
         <input type="checkbox" class="btn-check" [checked]="sensorType === 'temperatuur'">
         <label class="btn btn-outline-secondary w-100" [ngClass]="{'active': sensorType === 'temperatuur'}"
                (click)="setSensorType('temperatuur')">
-          <i class="fas fa-thermometer-half" aria-hidden="true"></i> &#8451;
+          <fa-icon [icon]="faThermometerHalf"></fa-icon> &#8451;
         </label>
 
         <input type="checkbox" class="btn-check" [checked]="sensorType === 'luchtvochtigheid'">
         <label class="btn btn-outline-secondary w-100" [ngClass]="{'active': sensorType === 'luchtvochtigheid'}"
                (click)="setSensorType('luchtvochtigheid')">
-          <i class="fas fa-tint" aria-hidden="true"></i> %
+          <fa-icon [icon]="faDroplet"></fa-icon> %
         </label>
       </div>
     </div>
@@ -35,7 +35,7 @@
   <div class="col-md-12 col-lg-6 mb-2">
     <div class="card">
       <div class="card-header">
-        <h3><i class="fas fa-arrow-down text-info" aria-hidden="true"></i> Laagst gemeten</h3>
+        <h3><span class="text-info"><fa-icon [icon]="faArrowDown"></fa-icon></span> Laagst gemeten</h3>
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -63,7 +63,7 @@
   <div class="col-md-12 col-lg-6">
     <div class="card">
       <div class="card-header">
-        <h3><i class="fas fa-arrow-up text-danger" aria-hidden="true"></i> Hoogst gemeten</h3>
+        <h3><span class="text-danger"><fa-icon [icon]="faArrowUp"></fa-icon></span> Hoogst gemeten</h3>
       </div>
       <div class="card-body">
         <div class="table-responsive">

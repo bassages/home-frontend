@@ -2,12 +2,16 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {AuthService} from '../auth/auth.service';
+import {faHouseChimney, faKey, faUser} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'home-login',
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
+  faHouseChimney = faHouseChimney;
+  faUser = faUser;
+  faKey = faKey;
 
   public credentials = {username: '', password: ''};
 

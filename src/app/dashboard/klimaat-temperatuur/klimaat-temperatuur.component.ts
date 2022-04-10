@@ -7,6 +7,7 @@ import {RxStompService} from '@stomp/ng2-stompjs';
 import {KlimaatService} from '../../klimaat/klimaat.service';
 import {RealtimeKlimaat} from '../../klimaat/realtimeKlimaat';
 import {Trend} from '../../klimaat/trend';
+import {faArrowTrendDown, faArrowTrendUp, faThermometerHalf} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'home-klimaat-temperatuur',
@@ -14,6 +15,9 @@ import {Trend} from '../../klimaat/trend';
   styleUrls: ['../ledbar.scss', './klimaat-temperatuur.component.scss']
 })
 export class KlimaatTemperatuurComponent implements OnInit, OnDestroy {
+  faThermometerHalf = faThermometerHalf
+  faArrowTrendUp = faArrowTrendUp
+  faArrowTrendDown = faArrowTrendDown
 
   public LedState = LedState;
   public Trend = Trend;

@@ -7,12 +7,18 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {KlimaatSensorService} from '../klimaatsensor.service';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {faBan, faCheck, faCircleInfo, faTrash, faTriangleExclamation} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'home-klimaat-sensors',
   templateUrl: './klimaat-sensors.component.html'
 })
 export class KlimaatSensorsComponent implements OnInit {
+  faCircleInfo = faCircleInfo;
+  faTriangleExclamation = faTriangleExclamation;
+  faBan = faBan;
+  faCheck = faCheck;
+  faTrash = faTrash;
 
   public sensors: KlimaatSensor[];
 

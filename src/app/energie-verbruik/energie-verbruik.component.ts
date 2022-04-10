@@ -12,6 +12,7 @@ import {EnergieVerbruikHistorieServiceProvider} from './energie-verbruik-histori
 import {VerbruikKostenOverzicht} from './verbruikKostenOverzicht';
 import {NgxSpinnerService} from 'ngx-spinner';
 import dayjs, {Dayjs} from 'dayjs';
+import {faFireFlameCurved, faPlugCircleBolt} from '@fortawesome/free-solid-svg-icons';
 
 const periodeToDateNavigatorModeMapping: Map<string, string> =
   new Map<string, string>([
@@ -27,6 +28,9 @@ const periodeToDateNavigatorModeMapping: Map<string, string> =
   styleUrls: ['./energie-verbuik-component.scss']
 })
 export class EnergieVerbruikComponent implements OnInit {
+  faPlugCircleBolt = faPlugCircleBolt
+  faFireFlameCurved = faFireFlameCurved
+
   public showChart = false;
   public showTable = false;
 

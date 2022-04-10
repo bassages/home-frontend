@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header h3 clickable" (click)="navigateToKlimaatHistory()">
-    <i class="fas fa-thermometer-half" aria-hidden="true"></i> Temperatuur
+    <fa-icon [icon]="faThermometerHalf"></fa-icon> Temperatuur
   </div>
   <div class="card-body">
     <div class="ledbar float-start">
@@ -12,13 +12,13 @@
       <span *ngIf="klimaat">{{ klimaat.temperatuur | number: '1.2-2' }}&#8451;</span>
       <span *ngIf="!klimaat">-&#8451;</span>
 
-      <span *ngIf="klimaat?.temperatuurTrend === Trend.UP">
-        <i data-fa-transform="rotate-45" class="fas fa-arrow-up text-danger ms-1" aria-hidden="true"></i>
+      <span *ngIf="klimaat?.temperatuurTrend === Trend.UP" class="ms-2 text-danger">
+        <fa-icon [icon]="faArrowTrendUp"></fa-icon>
       </span>
-      <span *ngIf="klimaat?.temperatuurTrend === Trend.DOWN">
-        <i data-fa-transform="rotate--45" class="fas fa-arrow-down text-primary ms-1" aria-hidden="true"></i>
+      <span *ngIf="klimaat?.temperatuurTrend === Trend.DOWN" class="ms-2 text-primary">
+        <fa-icon [icon]="faArrowTrendDown"></fa-icon>
       </span>
-      <span *ngIf="klimaat?.temperatuurTrend === Trend.STABLE" class="text-success ms-1">
+      <span *ngIf="klimaat?.temperatuurTrend === Trend.STABLE" class="text-success ms-2">
         <strong>&asymp;</strong>
       </span>
     </div>

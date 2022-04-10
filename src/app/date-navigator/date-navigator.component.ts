@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, Output, QueryList, ViewChildren} from '@
 import {DatePickerDirective, IDatePickerDirectiveConfig} from 'ng2-date-picker';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import dayjs, {Dayjs} from 'dayjs';
+import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 
 const selectedDayFormat = 'dd. DD-MM-YYYY';
 const selectedMonthFormat = 'MMMM YYYY';
@@ -12,6 +13,8 @@ const selectedMonthFormat = 'MMMM YYYY';
   styleUrls: ['./date-navigator.component.scss']
 })
 export class DateNavigatorComponent {
+  faChevronLeft = faChevronLeft
+  faChevronRight = faChevronRight
 
   @Input()
   public mode: string;

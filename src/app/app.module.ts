@@ -50,6 +50,7 @@ import {LoginComponent} from './login/login.component';
 import {KlimaatSensorService} from './klimaat/klimaatsensor.service';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 export function socketProvider() {
   return new SockJS('/ws');
@@ -125,7 +126,8 @@ const appRoutes: Routes = [
     DpDatePickerModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(appRoutes, { enableTracing: false, useHash: true, relativeLinkResolution: 'legacy' })
+    RouterModule.forRoot(appRoutes, { enableTracing: false, useHash: true, relativeLinkResolution: 'legacy' }),
+    FontAwesomeModule
   ],
   providers: [
     AuthService,

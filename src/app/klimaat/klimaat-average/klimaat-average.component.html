@@ -5,12 +5,12 @@
         <input type="checkbox" class="btn-check" [checked]="sensorType === 'temperatuur'">
         <label class="btn btn-outline-secondary w-100" [ngClass]="{'active': sensorType === 'temperatuur'}"
                (click)="setSensorType('temperatuur')">
-          <i class="fas fa-thermometer-half" aria-hidden="true"></i> &#8451;
+          <fa-icon [icon]="faThermometerHalf"></fa-icon> &#8451;
         </label>
         <input type="checkbox" class="btn-check" [checked]="sensorType === 'luchtvochtigheid'">
         <label class="btn btn-outline-secondary w-100" [ngClass]="{'active': sensorType === 'luchtvochtigheid'}"
                (click)="setSensorType('luchtvochtigheid')">
-          <i class="fas fa-tint" aria-hidden="true"></i> %
+          <fa-icon [icon]="faDroplet"></fa-icon> %
         </label>
       </div>
     </div>

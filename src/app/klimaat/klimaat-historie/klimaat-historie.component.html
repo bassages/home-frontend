@@ -28,10 +28,10 @@
   <!-- Sensortype selection  -->
   <div class="row mb-2">
     <div class="col-6 ps-2 pe-1 ps-sm-0 d-grid">
-      <button class="btn btn-outline-secondary btn-sm" [ngClass]="{'active': sensorType === 'temperatuur'}" (click)="setSensorType('temperatuur')"><i class="fas fa-thermometer-half" aria-hidden="true"></i> Temperatuur (&#8451;)</button>
+      <button class="btn btn-outline-secondary btn-sm" [ngClass]="{'active': sensorType === 'temperatuur'}" (click)="setSensorType('temperatuur')"><fa-icon [icon]="faThermometerHalf"></fa-icon> Temperatuur (&#8451;)</button>
     </div>
     <div class="col-6 ps-1 pe-2 pe-sm-0 d-grid">
-      <button class="btn btn-outline-secondary btn-sm" [ngClass]="{'active': sensorType === 'luchtvochtigheid'}" (click)="setSensorType('luchtvochtigheid')"><i class="fas fa-tint" aria-hidden="true"></i> Luchtvochtigheid (%)</button>
+      <button class="btn btn-outline-secondary btn-sm" [ngClass]="{'active': sensorType === 'luchtvochtigheid'}" (click)="setSensorType('luchtvochtigheid')"><fa-icon [icon]="faDroplet"></fa-icon> Luchtvochtigheid (%)</button>
     </div>
   </div>
 
@@ -47,10 +47,10 @@
   <div class="col-md-1 px-0 d-none d-lg-block">
     <ul class="nav nav-tabs-left flex-column">
       <li class="nav-item">
-        <a class="nav-link mb-1 clickable text-center" [ngClass]="{'active': sensorType === 'temperatuur'}" (click)="setSensorType('temperatuur')"><i class="fas fa-thermometer-half" aria-hidden="true"></i> &#8451;</a>
+        <a class="nav-link mb-1 clickable text-center" [ngClass]="{'active': sensorType === 'temperatuur'}" (click)="setSensorType('temperatuur')"><fa-icon [icon]="faThermometerHalf"></fa-icon> &#8451;</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link mb-0 clickable text-center" [ngClass]="{'active': sensorType === 'luchtvochtigheid'}" (click)="setSensorType('luchtvochtigheid')"><i class="fas fa-tint" aria-hidden="true"></i> %</a>
+        <a class="nav-link mb-0 clickable text-center" [ngClass]="{'active': sensorType === 'luchtvochtigheid'}" (click)="setSensorType('luchtvochtigheid')"><fa-icon [icon]="faDroplet"></fa-icon> %</a>
       </li>
     </ul>
   </div>
