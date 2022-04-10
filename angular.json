@@ -110,11 +110,20 @@
               "src/assets"
             ]
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     },
     "home-server-frontend-e2e": {
-      "root": "",
+      "root": "e2e",
       "sourceRoot": "",
       "projectType": "application",
       "architect": {
@@ -139,6 +148,7 @@
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "defaultCollection": "@angular-eslint/schematics"
   }
 }

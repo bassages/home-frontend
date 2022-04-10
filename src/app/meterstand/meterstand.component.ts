@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MeterstandService} from './meterstand.service';
 import {MeterstandOpDag} from './meterstandOpDag';
-import sortBy from 'lodash/sortBy';
+import sortBy from 'lodash-es/sortBy';
 import {ErrorHandingService} from '../error-handling/error-handing.service';
 import {NgxSpinnerService} from 'ngx-spinner';
 import dayjs, {Dayjs} from 'dayjs';

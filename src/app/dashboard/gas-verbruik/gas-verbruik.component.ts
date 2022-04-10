@@ -6,7 +6,7 @@ import {Meterstand} from '../../meterstand/meterstand';
 import {Led, LedState} from '../led';
 import {MeterstandService} from '../../meterstand/meterstand.service';
 import {EnergieVerbruikService} from '../../energie-verbruik/energie-verbruik.service';
-import isNumber from 'lodash/isNumber';
+import isNumber from 'lodash-es/isNumber';
 import {VerbruikOpDag} from '../../energie-verbruik/verbruikOpDag';
 import {GemiddeldVerbruikInPeriod} from '../../energie-verbruik/gemiddeldVerbruikInPeriod';
 import {Router} from '@angular/router';

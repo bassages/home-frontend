@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Energiecontract} from './energiecontract';
 import {ErrorHandingService} from '../error-handling/error-handing.service';
 import {EnergiecontractService} from './energiecontract.service';
-import sortBy from 'lodash/sortBy';
+import sortBy from 'lodash-es/sortBy';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePickerDirective, IDatePickerDirectiveConfig} from 'ng2-date-picker';
 import {DecimalPipe} from '@angular/common';

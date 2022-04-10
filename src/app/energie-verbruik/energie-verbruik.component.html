@@ -4,16 +4,16 @@
   <div class="col-md-12 col-lg-11 px-0 d-none d-lg-block">
     <ul class="nav nav-tabs">
       <li class="nav-item me-1">
-        <a class="nav-link clickable" [ngClass]="{'active': periode == 'uur'}" (click)="setPeriode('uur')">Uur</a>
+        <a class="nav-link clickable" [ngClass]="{'active': periode === 'uur'}" (click)="setPeriode('uur')">Uur</a>
       </li>
       <li class="nav-item me-1">
-        <a class="nav-link clickable" [ngClass]="{'active': periode == 'dag'}" (click)="setPeriode('dag')">Dag</a>
+        <a class="nav-link clickable" [ngClass]="{'active': periode === 'dag'}" (click)="setPeriode('dag')">Dag</a>
       </li>
       <li class="nav-item me-1">
-        <a class="nav-link clickable" [ngClass]="{'active': periode == 'maand'}" (click)="setPeriode('maand')">Maand</a>
+        <a class="nav-link clickable" [ngClass]="{'active': periode === 'maand'}" (click)="setPeriode('maand')">Maand</a>
       </li>
       <li class="nav-item me-0">
-        <a class="nav-link clickable" [ngClass]="{'active': periode == 'jaar'}" (click)="setPeriode('jaar')">Jaar</a>
+        <a class="nav-link clickable" [ngClass]="{'active': periode === 'jaar'}" (click)="setPeriode('jaar')">Jaar</a>
       </li>
 
       <li class="ms-auto me-auto">
@@ -32,7 +32,7 @@
         </div>
       </li>
       <li>
-        <home-date-navigator *ngIf="dateNavigatorMode != 'off'" [mode]="dateNavigatorMode" [selectedDate]="selectedDate"
+        <home-date-navigator *ngIf="dateNavigatorMode !== 'off'" [mode]="dateNavigatorMode" [selectedDate]="selectedDate"
                              (navigation)="onDateNavigate($event)" class="input-group"></home-date-navigator>
       </li>
     </ul>
@@ -45,11 +45,11 @@
   <!-- Kostensoort selection -->
   <div class="row mb-2">
     <div class="col-6 ps-2 pe-1 ps-sm-0 d-grid">
-      <button class="btn btn-outline-secondary btn-sm" [ngClass]="{'active': verbruiksoort == 'verbruik'}"
+      <button class="btn btn-outline-secondary btn-sm" [ngClass]="{'active': verbruiksoort === 'verbruik'}"
               (click)="setVerbruikSoort('verbruik')">Verbruik</button>
     </div>
     <div class="col-6 ps-1 pe-2 pe-sm-0 d-grid">
-      <button class="btn btn-outline-secondary btn-sm" [ngClass]="{'active': verbruiksoort == 'kosten'}"
+      <button class="btn btn-outline-secondary btn-sm" [ngClass]="{'active': verbruiksoort === 'kosten'}"
               (click)="setVerbruikSoort('kosten')"> Kosten</button>
     </div>
   </div>
@@ -84,7 +84,7 @@
 
   <!-- Date selection  -->
   <div class="row mb-2 px-2 px-sm-0">
-    <home-date-navigator *ngIf="dateNavigatorMode != 'off'" [mode]="dateNavigatorMode" [selectedDate]="selectedDate"
+    <home-date-navigator *ngIf="dateNavigatorMode !== 'off'" [mode]="dateNavigatorMode" [selectedDate]="selectedDate"
                          [responsiveSize]="true" (navigation)="onDateNavigate($event)"
                          class="input-group input-group-sm ps-0 pe-0"></home-date-navigator>
   </div>
@@ -111,14 +111,14 @@
             <th></th>
             <th class="text-end" *ngIf="isEnergieSoortSelected('gas')">Gas</th>
             <th class="text-end" *ngIf="isEnergieSoortSelected('stroom')">Stroom</th>
-            <th class="text-end" *ngIf="isEnergieSoortSelected('stroom') && isEnergieSoortSelected('gas') && verbruiksoort == 'kosten'">Totaal</th>
+            <th class="text-end" *ngIf="isEnergieSoortSelected('stroom') && isEnergieSoortSelected('gas') && verbruiksoort === 'kosten'">Totaal</th>
           </tr>
         </thead>
         <tr *ngFor="let verbruik of verbruiken" class="clickable" (click)="navigateToDetailsOfVerbruik(verbruik)">
           <td class="text-end">{{ getFormattedDate(verbruik) }}</td>
           <td class="text-end" *ngIf="isEnergieSoortSelected('gas')">{{ getFormattedValue(verbruik, 'gas') }}</td>
           <td class="text-end" *ngIf="isEnergieSoortSelected('stroom')">{{ getFormattedValue(verbruik, 'stroom') }}</td>
-          <td class="text-end" *ngIf="isEnergieSoortSelected('stroom') && isEnergieSoortSelected('gas') && verbruiksoort == 'kosten'">{{ getFormattedTotalCosts(verbruik) }}</td>
+          <td class="text-end" *ngIf="isEnergieSoortSelected('stroom') && isEnergieSoortSelected('gas') && verbruiksoort === 'kosten'">{{ getFormattedTotalCosts(verbruik) }}</td>
         </tr>
       </table>
     </div>

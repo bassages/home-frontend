@@ -8,7 +8,7 @@
             type="button"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
 
     <!--suppress HtmlFormInputWithoutLabel -->
-    <input #picker="dpDayPicker" type="text" *ngIf="mode == 'day'" class="form-control text-center text-capitalize" name="dayPicker"
+    <input #picker="dpDayPicker" type="text" *ngIf="mode === 'day'" class="form-control text-center text-capitalize" name="dayPicker"
            [formControl]="selectedDay"
            [dpDayPicker]="dayPickerConfiguration"
            (onChange)="datePickerChanged($event)"
@@ -20,7 +20,7 @@
            mode="day" />
 
     <!--suppress HtmlFormInputWithoutLabel -->
-    <input #picker="dpDayPicker" type="text" *ngIf="mode == 'month'" class="form-control text-center text-capitalize" name="monthPicker"
+    <input #picker="dpDayPicker" type="text" *ngIf="mode === 'month'" class="form-control text-center text-capitalize" name="monthPicker"
            [formControl]="selectedMonth"
            [dpDayPicker]="monthPickerConfiguration"
            (onChange)="datePickerChanged($event)"
@@ -32,7 +32,7 @@
            mode="month" />
 
     <!--suppress HtmlFormInputWithoutLabel -->
-    <input #yearPicker type="text" *ngIf="mode == 'year'" class="form-control text-center responsive-size" name="yearPicker"
+    <input #yearPicker type="text" *ngIf="mode === 'year'" class="form-control text-center responsive-size" name="yearPicker"
            [formControl]="selectedYear"
            [ngClass]="{
                   'is-invalid': selectedYear.invalid,

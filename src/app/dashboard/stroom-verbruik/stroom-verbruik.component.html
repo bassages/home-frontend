@@ -4,17 +4,17 @@
   </div>
   <div class="card-body">
     <div class="ledbar float-start">
-      <div *ngFor="let i of [9,8,7,6,5,4,3,2,1,0]" class="led" [ngClass]="opgenomenVermogenLeds[i]?.state == LedState.ON ? 'opgenomen-vermogen-led-' + i : 'led-off'"></div>
+      <div *ngFor="let i of [9,8,7,6,5,4,3,2,1,0]" class="led" [ngClass]="opgenomenVermogenLeds[i]?.state === LedState.ON ? 'opgenomen-vermogen-led-' + i : 'led-off'"></div>
     </div>
 
     <p class="h3">Op dit moment</p>
     <div class="h3 current-power-usage">
       {{opgenomenVermogen ? opgenomenVermogen.watt : '-'}} Watt
       <span ngbTooltip="Daltarief">
-        <i *ngIf="opgenomenVermogen?.tariefIndicator == 'DAL'" class="fas fa-moon" aria-hidden="true"></i>
+        <i *ngIf="opgenomenVermogen?.tariefIndicator === 'DAL'" class="fas fa-moon" aria-hidden="true"></i>
       </span>
       <span ngbTooltip="Normaaltarief">
-        <i *ngIf="opgenomenVermogen?.tariefIndicator == 'NORMAAL'" class="fas fa-sun" aria-hidden="true"></i>
+        <i *ngIf="opgenomenVermogen?.tariefIndicator === 'NORMAAL'" class="fas fa-sun" aria-hidden="true"></i>
       </span>
     </div>
 

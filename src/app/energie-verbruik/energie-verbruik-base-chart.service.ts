@@ -1,9 +1,9 @@
 import {ChartConfiguration} from 'c3';
-import sortBy from 'lodash/sortBy';
-import sumBy from 'lodash/sumBy';
-import endsWith from 'lodash/endsWith';
-import startsWith from 'lodash/startsWith';
-import capitalize from 'lodash/capitalize';
+import sortBy from 'lodash-es/sortBy';
+import sumBy from 'lodash-es/sumBy';
+import endsWith from 'lodash-es/endsWith';
+import startsWith from 'lodash-es/startsWith';
+import capitalize from 'lodash-es/capitalize';
 import {DecimalPipe} from '@angular/common';
 import {ChartService} from '../chart/chart.service';
 

@@ -2,8 +2,8 @@ import {Component, HostListener, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import * as c3 from 'c3';
 import {ChartAPI, ChartConfiguration} from 'c3';
-import capitalize from 'lodash/capitalize';
-import isEqual from 'lodash/isEqual';
+import capitalize from 'lodash-es/capitalize';
+import isEqual from 'lodash-es/isEqual';
 import {ErrorHandingService} from '../error-handling/error-handing.service';
 import {DecimalPipe} from '@angular/common';
 import {combineLatest} from 'rxjs';
@@ -155,7 +155,7 @@ export class EnergieVerbruikComponent implements OnInit {
     this.navigateTo(this.verbruiksoort, this.energiesoorten, this.periode, selectedDate);
   }
 
-  private navigateToDetailsOfVerbruik(verbruik: any) {
+  public navigateToDetailsOfVerbruik(verbruik: any) {
     this.navigateToDetails(this.energieVerbruikHistorieService.getDayjs(this.selectedDate, verbruik));
   }
 

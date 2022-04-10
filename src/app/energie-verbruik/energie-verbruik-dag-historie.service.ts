@@ -6,7 +6,7 @@ import {VerbruikOpDag} from './verbruikOpDag';
 import {AbstractEnergieVerbruikHistorieService} from './energie-verbruik-base-chart.service';
 import {ChartConfiguration} from 'c3';
 import {DecimalPipe} from '@angular/common';
-import capitalize from 'lodash/capitalize';
+import capitalize from 'lodash-es/capitalize';
 import dayjs, {Dayjs} from 'dayjs';
 
 @Injectable()

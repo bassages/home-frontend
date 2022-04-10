@@ -3,7 +3,7 @@ import {KlimaatService} from '../klimaat.service';
 import {ErrorHandingService} from '../../error-handling/error-handing.service';
 import {Klimaat} from '../klimaat';
 import {KlimaatSensor} from '../klimaatSensor';
-import sortBy from 'lodash/sortBy';
+import sortBy from 'lodash-es/sortBy';
 import {zip} from 'rxjs';
 import {Router} from '@angular/router';
 import {KlimaatSensorService} from '../klimaatsensor.service';

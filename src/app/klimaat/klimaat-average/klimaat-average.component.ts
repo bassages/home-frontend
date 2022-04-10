@@ -3,7 +3,7 @@ import {ErrorHandingService} from '../../error-handling/error-handing.service';
 import {KlimaatService} from '../klimaat.service';
 import {KlimaatSensor} from '../klimaatSensor';
 import {GemiddeldeKlimaatPerMaand} from '../gemiddeldeKlimaatPerMaand';
-import sortBy from 'lodash/sortBy';
+import sortBy from 'lodash-es/sortBy';
 import {KlimaatSensorService} from '../klimaatsensor.service';
 import {NgxSpinnerService} from 'ngx-spinner';
 import dayjs, {Dayjs} from 'dayjs';

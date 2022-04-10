@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {KlimaatService} from '../klimaat.service';
 import {ErrorHandingService} from '../../error-handling/error-handing.service';
 import {KlimaatSensor} from '../klimaatSensor';
-import sortBy from 'lodash/sortBy';
+import sortBy from 'lodash-es/sortBy';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {KlimaatSensorService} from '../klimaatsensor.service';
