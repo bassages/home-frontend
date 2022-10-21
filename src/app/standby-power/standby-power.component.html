@@ -22,11 +22,11 @@
         </thead>
         <tbody>
         <tr *ngFor="let standbyPowerInPeriod of standbyPowerInPeriods">
-          <td class="text-capitalize">{{ standbyPowerInPeriod.fromDate | date : 'MMMM'}}</td>
-          <td class="text-end">{{standbyPowerInPeriod.standbyPower}} Watt</td>
-          <td class="text-end text-capitalize">{{standbyPowerInPeriod.costsOfStandByPower | currency: 'EUR'}}</td>
-          <td class="text-end text-capitalize">{{standbyPowerInPeriod.percentageOfTotalCost}}%</td>
-          <td class="text-end text-capitalize">{{standbyPowerInPeriod.percentageOfTotalPeriod}}%</td>
+          <td class="font-monospace text-capitalize">{{ standbyPowerInPeriod.fromDate | date : 'MMMM'}}</td>
+          <td class="font-monospace text-end">{{standbyPowerInPeriod.standbyPower}} Watt</td>
+          <td class="font-monospace text-end text-capitalize">{{standbyPowerInPeriod.costsOfStandByPower | currency: 'EUR'}}</td>
+          <td class="font-monospace text-end text-capitalize">{{standbyPowerInPeriod.percentageOfTotalCost}} %</td>
+          <td class="font-monospace text-end text-capitalize">{{standbyPowerInPeriod.percentageOfTotalPeriod}} %</td>
         </tr>
         </tbody>
       </table>
