@@ -179,6 +179,9 @@ export abstract class AbstractEnergieVerbruikHistorieService extends ChartServic
   }
 
   protected getAvg(verbruiksoort: string, energiesoorten: string[], verbruiken: VerbruikKostenOverzicht[]): number {
+    if (energiesoorten.length === 0) {
+      return null;
+    }
     const numberOfNonEmptyVerbruiken = this.getNonEmptyValues(verbruiken, verbruiksoort, energiesoorten).length;
     if (numberOfNonEmptyVerbruiken === 0) {
       return null;
@@ -187,6 +190,9 @@ export abstract class AbstractEnergieVerbruikHistorieService extends ChartServic
   }
 
   protected getMin(verbruiksoort: string, energiesoorten: string[], verbruiken: VerbruikKostenOverzicht[]): number {
+    if (energiesoorten.length === 0) {
+      return null;
+    }
     let nonEmptyValues = this.getNonEmptyValues(verbruiken, verbruiksoort, energiesoorten);
     if (nonEmptyValues.length === 0) {
       return null;
@@ -220,6 +226,9 @@ export abstract class AbstractEnergieVerbruikHistorieService extends ChartServic
   }
 
   protected getMax(verbruiksoort: string, energiesoorten: string[], verbruiken: VerbruikKostenOverzicht[]): number {
+    if (energiesoorten.length === 0) {
+      return null;
+    }
     let nonEmptyValues = this.getNonEmptyValues(verbruiken, verbruiksoort, energiesoorten);
     if (nonEmptyValues.length === 0) {
       return null;
