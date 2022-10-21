@@ -30,11 +30,11 @@
     </thead>
     <tbody>
       <tr *ngFor="let energiecontract of energiecontracten" (click)="startEdit(energiecontract)" class="clickable" [ngClass]="{'table-primary': energiecontract.id === selectedEnergiecontract?.id}">
-        <td class="text-nowrap">{{ energiecontract.validFrom | date : 'dd-MM-yyyy' }}</td>
-        <td>{{ energiecontract.leverancier }}</td>
-        <td class="text-end">{{ energiecontract.gasPerKuub | currency:'EUR':'symbol':'1.6-6' }}</td>
-        <td class="text-end">{{ energiecontract.stroomPerKwhNormaalTarief | currency:'EUR':'symbol':'1.6-6' }}</td>
-        <td class="text-end">{{ energiecontract.stroomPerKwhDalTarief | currency:'EUR':'symbol':'1.6-6' }}</td>
+        <td class="font-monospace text-nowrap">{{ energiecontract.validFrom | date : 'dd-MM-yyyy' }}</td>
+        <td class="font-monospace">{{ energiecontract.leverancier }}</td>
+        <td class="font-monospace text-end">{{ energiecontract.gasPerKuub | currency:'EUR':'symbol':'1.6-6' }}</td>
+        <td class="font-monospace text-end">{{ energiecontract.stroomPerKwhNormaalTarief | currency:'EUR':'symbol':'1.6-6' }}</td>
+        <td class="font-monospace text-end">{{ energiecontract.stroomPerKwhDalTarief | currency:'EUR':'symbol':'1.6-6' }}</td>
       </tr>
     </tbody>
   </table>

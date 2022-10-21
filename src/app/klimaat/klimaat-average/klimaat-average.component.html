@@ -37,8 +37,8 @@
         </thead>
         <tbody>
         <tr *ngFor="let gemiddeldeKlimaatInMaand of gemiddeldeKlimaatPerMaand">
-          <td class="text-end text-capitalize">{{ gemiddeldeKlimaatInMaand.maand.toDate() | date: 'MMMM'}}</td>
-          <td class="text-end">{{ gemiddeldeKlimaatInMaand.gemiddelde | number: getDecimalFormat(sensorType) }}{{ (gemiddeldeKlimaatInMaand.gemiddelde !== null && gemiddeldeKlimaatInMaand.gemiddelde !== undefined) ? getValuePostFix(sensorType) : '' }}</td>
+          <td class="font-monospace text-end text-capitalize">{{ gemiddeldeKlimaatInMaand.maand.toDate() | date: 'MMMM'}}</td>
+          <td class="font-monospace text-end">{{ gemiddeldeKlimaatInMaand.gemiddelde | number: getDecimalFormat(sensorType) }}{{ (gemiddeldeKlimaatInMaand.gemiddelde !== null && gemiddeldeKlimaatInMaand.gemiddelde !== undefined) ? ' ' + getValuePostFix(sensorType) : '' }}</td>
         </tr>
         </tbody>
       </table>
