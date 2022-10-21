@@ -95,12 +95,12 @@ export class EnergieVerbruikDagHistorieService extends AbstractEnergieVerbruikHi
     return this.formatDate(verbruikOpDag.dag);
   }
 
+  public getDayjs(_selectedDate: Dayjs, verbruikOpDag: VerbruikOpDag): Dayjs {
+    return dayjs(verbruikOpDag.dag);
+  }
+
   // noinspection JSMethodCanBeStatic
   private formatDate(date: any): string {
     return capitalize(dayjs(date).format('ddd DD-MM'));
-  }
-
-  public getDayjs(_selectedDate: Dayjs, verbruikOpDag: VerbruikOpDag): Dayjs {
-    return dayjs(verbruikOpDag.dag);
   }
 }

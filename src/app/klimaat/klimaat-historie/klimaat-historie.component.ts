@@ -25,7 +25,8 @@ import {faDroplet, faThermometerHalf} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'home-klimaat-historie',
-  templateUrl: './klimaat-historie.component.html'
+  templateUrl: './klimaat-historie.component.html',
+  styleUrls: ['./klimaat-historie-component.scss']
 })
 export class KlimaatHistorieComponent implements OnInit {
   faDroplet = faDroplet;
@@ -324,7 +325,12 @@ export class KlimaatHistorieComponent implements OnInit {
 
   private getStatistics(klimaats: Klimaat[]): Statistics {
     const values: number[] = filter(map(klimaats, this.sensorType), (value: number) => value !== null && value > 0);
-    return new Statistics(min(values), max(values), mean(values));
+    return {
+      min: min(values),
+      max: max(values),
+      avg: mean(values),
+      postfix: this.getValuePostFix(this.sensorType)
+    };
   }
 
   // noinspection JSMethodCanBeStatic

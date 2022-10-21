@@ -13,6 +13,7 @@ import {VerbruikKostenOverzicht} from './verbruikKostenOverzicht';
 import {NgxSpinnerService} from 'ngx-spinner';
 import dayjs, {Dayjs} from 'dayjs';
 import {faFireFlameCurved, faPlugCircleBolt} from '@fortawesome/free-solid-svg-icons';
+import {Statistics} from '../statistics';
 
 const periodeToDateNavigatorModeMapping: Map<string, string> =
   new Map<string, string>([
@@ -34,13 +35,15 @@ export class EnergieVerbruikComponent implements OnInit {
   public showChart = false;
   public showTable = false;
 
-  public dateNavigatorMode: string;
   public selectedDate: Dayjs = dayjs();
+  public dateNavigatorMode: string;
   public verbruiksoort = '';
   public energiesoorten: string[] = [];
-  public periode = '';
+  public statistics: Statistics;
 
+  public periode = '';
   private chart: ChartAPI;
+
   public verbruiken: any[] = [];
 
   private energieVerbruikHistorieService: EnergieVerbruikHistorieService<any>;
@@ -109,6 +112,8 @@ export class EnergieVerbruikComponent implements OnInit {
 
   private loadData(verbruiken: any[]) {
     this.verbruiken = verbruiken;
+    this.statistics = this.energieVerbruikHistorieService.getStatistics(this.verbruiksoort, this.energiesoorten, this.verbruiken);
+
     if (this.showChart) {
       this.loadDataIntoChart();
     } else if (this.showTable) {
@@ -121,11 +126,9 @@ export class EnergieVerbruikComponent implements OnInit {
   }
 
   private loadDataIntoChart(): void {
-    const chartConfiguration: ChartConfiguration = this.energieVerbruikHistorieService.getChartConfig(this.selectedDate,
-                                                                                                      this.verbruiksoort,
-                                                                                                      this.energiesoorten,
-                                                                                                      this.verbruiken,
-                                                                                           (date: Dayjs) => this.navigateToDetails(date));
+    const chartConfiguration: ChartConfiguration = this.energieVerbruikHistorieService.getChartConfig(
+      this.selectedDate, this.verbruiksoort, this.energiesoorten, this.verbruiken,
+      (date: Dayjs) => this.navigateToDetails(date));
     this.loadChartConfiguration(chartConfiguration);
   }
 
@@ -176,7 +179,7 @@ export class EnergieVerbruikComponent implements OnInit {
   }
 
   public determineChartOrTable() {
-    const autoChartOrTableThreshold = 500;
+    const autoChartOrTableThreshold = 576; // Corresponds with Bootstrap SM
     if (window.innerWidth >= autoChartOrTableThreshold) {
       this.doShowChart();
     } else {
@@ -240,5 +243,9 @@ export class EnergieVerbruikComponent implements OnInit {
       throw new Error('Unexpected energiesoort: ' + energiesoort);
     }
     return '';
+  }
+
+  public getDecimalFormat(): string {
+      return '1.3-3';
   }
 }

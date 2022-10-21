@@ -77,3 +77,4 @@ export class EnergieVerbruikMaandHistorieService extends AbstractEnergieVerbruik
     return dayjs(year + '-' + month + '-' + day);
   }
 }
+

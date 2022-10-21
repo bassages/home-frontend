@@ -6,6 +6,8 @@ import startsWith from 'lodash-es/startsWith';
 import capitalize from 'lodash-es/capitalize';
 import {DecimalPipe} from '@angular/common';
 import {ChartService} from '../chart/chart.service';
+import {VerbruikKostenOverzicht} from './verbruikKostenOverzicht';
+import {Statistics} from '../statistics';
 
 const dataColors: {[key: string]: string} = {
   'stroomVerbruikDal': '#4575b3',
@@ -58,11 +60,14 @@ export abstract class AbstractEnergieVerbruikHistorieService extends ChartServic
 
   public formatWithUnitLabel(verbruiksoort: string, energieSoorten: string[], value: number) {
     const withoutUnitLabel = this.formatWithoutUnitLabel(verbruiksoort, value);
-    if (verbruiksoort === 'verbruik') {
-      return withoutUnitLabel + ' ' + this.getVerbruikLabel(energieSoorten[0]);
-    } else if (verbruiksoort === 'kosten') {
-      return '\u20AC ' + withoutUnitLabel;
-    }
+
+    const prefix = verbruiksoort === 'kosten' ? this.getVerbruikSoortPrefix(verbruiksoort) : '';
+    const postfix = verbruiksoort === 'verbruik' ? this.getEnergiesoortPostfix(energieSoorten[0]) : '';
+
+    let formatted = prefix ? prefix + ' ' : '';
+    formatted = formatted + withoutUnitLabel;
+    formatted = postfix ? formatted + ' ' + postfix : formatted;
+    return formatted;
   }
 
   protected getTooltipContent(c3, data, titleFormatter, _valueFormatter, color, verbruiksoort: string, energiesoorten: string[]) {
@@ -111,13 +116,21 @@ export abstract class AbstractEnergieVerbruikHistorieService extends ChartServic
   }
 
   // noinspection JSMethodCanBeStatic
-  private getVerbruikLabel(energiesoort: string) {
+  public getEnergiesoortPostfix(energiesoort: string) {
     if (energiesoort === 'stroom') {
       return 'kWh';
     } else if (energiesoort === 'gas') {
       return 'm\u00B3';
     } else {
-      return '?';
+      return null;
+    }
+  }
+
+  public getVerbruikSoortPrefix(verbruiksoort: string) {
+    if (verbruiksoort === 'kosten') {
+      return '\u20AC';
+    } else {
+      return null;
     }
   }
 
@@ -153,5 +166,138 @@ export abstract class AbstractEnergieVerbruikHistorieService extends ChartServic
       }
     }
     return newEnergiesoorten;
+  }
+
+  public getStatistics(verbruiksoort: string, energiesoorten: string[], verbruiken: VerbruikKostenOverzicht[]): Statistics {
+    return {
+      avg: this.getAvg(verbruiksoort, energiesoorten, verbruiken),
+      min: this.getMin(verbruiksoort, energiesoorten, verbruiken),
+      max: this.getMax(verbruiksoort, energiesoorten, verbruiken),
+      prefix: verbruiksoort === 'kosten' ? this.getVerbruikSoortPrefix(verbruiksoort) + ' ' : '',
+      postfix: verbruiksoort === 'verbruik' ? ' ' + this.getEnergiesoortPostfix(energiesoorten[0]) : ''
+    };
+  }
+
+  protected getAvg(verbruiksoort: string, energiesoorten: string[], verbruiken: VerbruikKostenOverzicht[]): number {
+    const numberOfNonEmptyVerbruiken = this.getNonEmptyValues(verbruiken, verbruiksoort, energiesoorten).length;
+    if (numberOfNonEmptyVerbruiken === 0) {
+      return null;
+    }
+    return this.getSum(verbruiksoort, energiesoorten, verbruiken) / numberOfNonEmptyVerbruiken;
+  }
+
+  protected getMin(verbruiksoort: string, energiesoorten: string[], verbruiken: VerbruikKostenOverzicht[]): number {
+    let nonEmptyValues = this.getNonEmptyValues(verbruiken, verbruiksoort, energiesoorten);
+    if (nonEmptyValues.length === 0) {
+      return null;
+    }
+    if (verbruiksoort === 'verbruik') {
+      return this.getMinVerbruik(energiesoorten, verbruiken);
+    } else if (verbruiksoort === 'kosten') {
+      return this.getMinKosten(energiesoorten, verbruiken);
+    }
+    return null;
+  }
+
+  private getMinVerbruik(energiesoorten: string[], verbruiken: VerbruikKostenOverzicht[]) {
+    if (energiesoorten[0] === 'gas') {
+      return Math.min(...verbruiken.filter(value => value.gasVerbruik > 0)
+        .map(value => value.gasVerbruik));
+    } else {
+      return Math.min(...verbruiken.filter(value => (value.stroomVerbruikDal + value.stroomVerbruikNormaal) > 0)
+        .map(value => value.stroomVerbruikDal + value.stroomVerbruikNormaal));
+    }
+  }
+
+  private getMinKosten(energiesoorten: string[], verbruiken: VerbruikKostenOverzicht[]) {
+    if (energiesoorten.length === 2) {
+      return Math.min(...verbruiken.map(value => value.gasKosten + value.stroomKostenDal + value.stroomKostenNormaal));
+    } else if (energiesoorten[0] === 'gas') {
+      return Math.min(...verbruiken.map(value => value.gasKosten));
+    } else {
+      return Math.min(...verbruiken.map(value => value.stroomKostenDal + value.stroomKostenNormaal));
+    }
+  }
+
+  protected getMax(verbruiksoort: string, energiesoorten: string[], verbruiken: VerbruikKostenOverzicht[]): number {
+    let nonEmptyValues = this.getNonEmptyValues(verbruiken, verbruiksoort, energiesoorten);
+    if (nonEmptyValues.length === 0) {
+      return null;
+    }
+    if (verbruiksoort === 'verbruik') {
+      return this.getMaxVerbruik(energiesoorten, verbruiken);
+    } else if (verbruiksoort === 'kosten') {
+      return this.getMaxKosten(energiesoorten, verbruiken);
+    }
+    return null;
+  }
+
+  private getMaxVerbruik(energiesoorten: string[], verbruiken: VerbruikKostenOverzicht[]) {
+    if (energiesoorten[0] === 'gas') {
+      return Math.max(...verbruiken.filter(value => value.gasVerbruik > 0)
+        .map(value => value.gasVerbruik));
+    } else {
+      return Math.max(...verbruiken.filter(value => (value.stroomVerbruikDal + value.stroomVerbruikNormaal) > 0)
+        .map(value => value.stroomVerbruikDal + value.stroomVerbruikNormaal));
+    }
+  }
+
+  private getMaxKosten(energiesoorten: string[], verbruiken: VerbruikKostenOverzicht[]) {
+    if (energiesoorten.length === 2) {
+      return Math.max(...verbruiken.map(value => value.gasKosten + value.stroomKostenDal + value.stroomKostenNormaal));
+    } else if (energiesoorten[0] === 'gas') {
+      return Math.max(...verbruiken.map(value => value.gasKosten));
+    } else {
+      return Math.max(...verbruiken.map(value => value.stroomKostenDal + value.stroomKostenNormaal));
+    }
+  }
+
+  private getValue(verbruiksoort: string, energiesoorten: string[], verbruik: VerbruikKostenOverzicht): number {
+    if (verbruiksoort === 'verbruik') {
+      return this.getVerbruikValue(energiesoorten, verbruik);
+    } else if (verbruiksoort === 'kosten') {
+      return this.getKostenValue(energiesoorten, verbruik);
+    }
+  }
+
+  private getVerbruikValue(energiesoorten: string[], verbruik: VerbruikKostenOverzicht) {
+    if (energiesoorten[0] === 'gas') {
+      return verbruik.gasVerbruik;
+    } else {
+      return this.allNull([verbruik.stroomVerbruikDal, verbruik.stroomVerbruikNormaal])
+        ? null : verbruik.stroomVerbruikDal + verbruik.stroomVerbruikNormaal;
+    }
+  }
+
+  private getKostenValue(energiesoorten: string[], verbruik: VerbruikKostenOverzicht) {
+    if (energiesoorten.length === 2) {
+      return this.allNull([verbruik.stroomKostenDal, verbruik.stroomKostenNormaal, verbruik.gasKosten])
+        ? null : verbruik.stroomKostenDal + verbruik.stroomKostenNormaal + verbruik.gasKosten;
+    } else if (energiesoorten[0] === 'gas') {
+      return verbruik.gasKosten;
+    } else {
+      return this.allNull([verbruik.stroomKostenDal, verbruik.stroomKostenNormaal])
+        ? null : verbruik.stroomKostenDal + verbruik.stroomKostenNormaal;
+    }
+  }
+
+  private getSum(verbruiksoort: string, energiesoorten: string[], verbruiken: VerbruikKostenOverzicht[]): number {
+    const values = this.getNonEmptyValues(verbruiken, verbruiksoort, energiesoorten);
+    if (values.length === 0) {
+      return null;
+    }
+    return values.reduce((accumulator, current) => {
+      return accumulator + current;
+    }, 0);
+  }
+
+  private getNonEmptyValues(verbruiken: VerbruikKostenOverzicht[], verbruiksoort: string, energiesoorten: string[]) {
+    return verbruiken
+      .map(verbruik => this.getValue(verbruiksoort, energiesoorten, verbruik))
+      .filter(value => value !== null);
+  }
+
+  private allNull(values: any[]): boolean {
+    return values.filter(value => value === null).length === values.length;
   }
 }

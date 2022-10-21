@@ -6,6 +6,10 @@ export interface EnergieVerbruikHistorieService<T> {
 
   getVerbruiken(selectedDate: Dayjs): Observable<T[]>;
 
+  getStatistics(verbruiksoort: string,
+                energiesoorten: string[],
+                verbruiken: T[]);
+
   getEmptyChartConfig(): ChartConfiguration;
 
   getChartConfig(selectedDate: Dayjs,

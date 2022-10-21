@@ -1,11 +1,29 @@
-<div *ngIf="statistics" class="row no-gutters pt-2 pb-3" [ngClass]="additionalClasses">
-  <div class="col-4 text-end pe-0">
-    <span class="badge badge-statistics-min">Laagste: <span class="text-nowrap">{{ format(statistics.min) }}</span></span>
-  </div>
-  <div class="col-4 text-center">
-    <span class="badge badge-statistics-max">Hoogste: <span class="text-nowrap">{{ format(statistics.max) }}</span></span>
-  </div>
-  <div class="col-4 text-start ps-0">
-    <span class="badge badge-statistics-avg">Gemiddelde: <span class="text-nowrap">{{ format(statistics.avg) }}</span></span>
-  </div>
+<div *ngIf="statistics" class="row no-gutters pt-2 pb-3 text-center" [ngClass]="additionalClasses">
+  <table class="d-xs-table d-sm-none d-md-none d-lg-none d-xl-none d-xxl-none">
+    <tr>
+      <td>
+        <span class="badge w-100 badge-statistics-min">Min: <span class="text-nowrap">{{ format(statistics.min) }}</span></span>
+      </td>
+      <td>
+        <span class="badge w-100 badge-statistics-max">Max: <span class="text-nowrap">{{ format(statistics.max) }}</span></span>
+      </td>
+      <td>
+        <span class="badge w-100 badge-statistics-avg">Gem.: <span class="text-nowrap">{{ format(statistics.avg) }}</span></span>
+      </td>
+    </tr>
+  </table>
+
+  <table class="d-none d-xs-table d-sm-table d-md-table d-lg-table d-xl-table d-xxl-table">
+    <tr>
+      <td>
+        <span class="badge w-75 badge-statistics-min">Min: <span class="text-nowrap">{{ format(statistics.min) }}</span></span>
+      </td>
+      <td>
+        <span class="badge w-75 badge-statistics-max">Max: <span class="text-nowrap">{{ format(statistics.max) }}</span></span>
+      </td>
+      <td>
+        <span class="badge w-75 badge-statistics-avg">Gem.: <span class="text-nowrap">{{ format(statistics.avg) }}</span></span>
+      </td>
+    </tr>
+  </table>
 </div>

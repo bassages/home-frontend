@@ -16,11 +16,6 @@ export class StatisticsComponent {
   public decimalFormat: string;
 
   @Input()
-  public valuePrefix = '';
-  @Input()
-  public valuePostfix = '';
-
-  @Input()
   public additionalClasses = '';
 
   constructor(private readonly decimalPipe: DecimalPipe) { }
@@ -29,6 +24,9 @@ export class StatisticsComponent {
     if (value === undefined || value === null || isNaN(value)) {
       return '-';
     }
-    return this.valuePrefix + this.decimalPipe.transform(value, this.decimalFormat) + this.valuePostfix;
+    let formatted = this.statistics.prefix ? this.statistics.prefix : '';
+    formatted = formatted + this.decimalPipe.transform(value, this.decimalFormat);
+    formatted = this.statistics.postfix ? formatted + this.statistics.postfix : formatted;
+    return formatted
   }
 }

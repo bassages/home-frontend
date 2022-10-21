@@ -179,7 +179,11 @@ export class OpgenomenVermogenComponent implements OnInit {
   // noinspection JSMethodCanBeStatic
   private getStatistics(opgenomenVermogens: OpgenomenVermogen[]): Statistics {
     const watts: number[] = filter(map(opgenomenVermogens, 'watt'), (watt: number) => watt !== null && watt > 0);
-    return new Statistics(min(watts), max(watts), mean(watts));
+    return {
+      min: min(watts),
+      max: max(watts),
+      avg: mean(watts)
+    };
   }
 
   public periodLengthChanged(): void {
