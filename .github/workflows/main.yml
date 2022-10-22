@@ -15,10 +15,10 @@ jobs:
 
     steps:
       - name: Echo (debug) action details
-        uses: hmarr/debug-action@v1.0.0
+        uses: hmarr/debug-action@v2
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Cache node modules
         uses: actions/cache@v1
@@ -29,9 +29,9 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
 
       - name: Run npm install and npm run build
         run: |
