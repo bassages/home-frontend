@@ -69,9 +69,12 @@
     </div>
   </div>
 </div>
-<div class="row statistics-row">
-  <div class="col-md-1 px-0 d-none d-lg-block">&nbsp;</div>
-  <div class="col-md-12 col-lg-11 px-2 px-sm-0">
-    <home-statistics [statistics]="statistics" [decimalFormat]="getDecimalFormat(sensorType)" [additionalClasses]="{'activated': showChart}"></home-statistics>
+
+<footer class="sticky-footer">
+  <div class="row statistics-row">
+    <div class="col-md-1 px-0 d-none d-lg-block">&nbsp;</div>
+    <div class="col-md-12 col-lg-11 px-2 px-sm-0">
+      <home-statistics [statistics]="statistics" [decimalFormat]="getDecimalFormat(sensorType)" [additionalClasses]="{'activated': showChart}"></home-statistics>
+    </div>
   </div>
-</div>
+</footer>
