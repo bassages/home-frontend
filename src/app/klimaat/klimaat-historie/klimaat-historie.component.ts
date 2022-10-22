@@ -271,7 +271,7 @@ export class KlimaatHistorieComponent implements OnInit {
   }
 
   public formatWithUnitLabel(sensorType: string, value: number): string {
-    return this.formatWithoutUnitLabel(sensorType, value) + this.getValuePostFix(sensorType);
+    return this.formatWithoutUnitLabel(sensorType, value) + " " + this.getValuePostFix(sensorType);
   }
 
   public getDecimalFormat(sensorType: string) {
