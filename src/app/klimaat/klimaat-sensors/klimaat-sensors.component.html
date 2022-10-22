@@ -7,15 +7,17 @@
 <div class="table-responsive" *ngIf="sensors && sensors.length > 0; else no_klimaatsensors">
   <table class="table table-bordered table-striped table-hover table-sm">
     <thead>
-    <tr>
-      <th>Code</th>
-      <th>Omschrijving</th>
-    </tr>
+      <tr>
+        <th>Code</th>
+        <th>Omschrijving</th>
+      </tr>
     </thead>
-    <tr *ngFor="let sensor of sensors" (click)="startEdit(sensor)" class="clickable" [ngClass]="{'table-primary': sensor.code === selectedSensor?.code}">
-      <td>{{ sensor.code }}</td>
-      <td>{{ sensor.omschrijving }}</td>
-    </tr>
+    <tbody>
+      <tr *ngFor="let sensor of sensors" (click)="startEdit(sensor)" class="clickable" [ngClass]="{'table-primary': sensor.code === selectedSensor?.code}">
+        <td>{{ sensor.code }}</td>
+        <td>{{ sensor.omschrijving }}</td>
+      </tr>
+    </tbody>
   </table>
 </div>
 
