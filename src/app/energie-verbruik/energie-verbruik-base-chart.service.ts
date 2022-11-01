@@ -182,7 +182,7 @@ export abstract class AbstractEnergieVerbruikHistorieService extends ChartServic
     if (energiesoorten.length === 0) {
       return null;
     }
-    const numberOfNonEmptyVerbruiken = this.getNonEmptyValues(verbruiken, verbruiksoort, energiesoorten).length;
+    const numberOfNonEmptyVerbruiken = this.getNonEmptyValues(verbruiksoort, energiesoorten, verbruiken).length;
     if (numberOfNonEmptyVerbruiken === 0) {
       return null;
     }
@@ -193,72 +193,22 @@ export abstract class AbstractEnergieVerbruikHistorieService extends ChartServic
     if (energiesoorten.length === 0) {
       return null;
     }
-    let nonEmptyValues = this.getNonEmptyValues(verbruiken, verbruiksoort, energiesoorten);
+    const nonEmptyValues: number[] = this.getNonEmptyValues(verbruiksoort, energiesoorten, verbruiken);
     if (nonEmptyValues.length === 0) {
       return null;
     }
-    if (verbruiksoort === 'verbruik') {
-      return this.getMinVerbruik(energiesoorten, verbruiken);
-    } else if (verbruiksoort === 'kosten') {
-      return this.getMinKosten(energiesoorten, verbruiken);
-    }
-    return null;
-  }
-
-  private getMinVerbruik(energiesoorten: string[], verbruiken: VerbruikKostenOverzicht[]) {
-    if (energiesoorten[0] === 'gas') {
-      return Math.min(...verbruiken.filter(value => value.gasVerbruik > 0)
-        .map(value => value.gasVerbruik));
-    } else {
-      return Math.min(...verbruiken.filter(value => (value.stroomVerbruikDal + value.stroomVerbruikNormaal) > 0)
-        .map(value => value.stroomVerbruikDal + value.stroomVerbruikNormaal));
-    }
-  }
-
-  private getMinKosten(energiesoorten: string[], verbruiken: VerbruikKostenOverzicht[]) {
-    if (energiesoorten.length === 2) {
-      return Math.min(...verbruiken.map(value => value.gasKosten + value.stroomKostenDal + value.stroomKostenNormaal));
-    } else if (energiesoorten[0] === 'gas') {
-      return Math.min(...verbruiken.map(value => value.gasKosten));
-    } else {
-      return Math.min(...verbruiken.map(value => value.stroomKostenDal + value.stroomKostenNormaal));
-    }
+    return Math.min(...nonEmptyValues);
   }
 
   protected getMax(verbruiksoort: string, energiesoorten: string[], verbruiken: VerbruikKostenOverzicht[]): number {
     if (energiesoorten.length === 0) {
       return null;
     }
-    let nonEmptyValues = this.getNonEmptyValues(verbruiken, verbruiksoort, energiesoorten);
+    let nonEmptyValues = this.getNonEmptyValues(verbruiksoort, energiesoorten, verbruiken);
     if (nonEmptyValues.length === 0) {
       return null;
     }
-    if (verbruiksoort === 'verbruik') {
-      return this.getMaxVerbruik(energiesoorten, verbruiken);
-    } else if (verbruiksoort === 'kosten') {
-      return this.getMaxKosten(energiesoorten, verbruiken);
-    }
-    return null;
-  }
-
-  private getMaxVerbruik(energiesoorten: string[], verbruiken: VerbruikKostenOverzicht[]) {
-    if (energiesoorten[0] === 'gas') {
-      return Math.max(...verbruiken.filter(value => value.gasVerbruik > 0)
-        .map(value => value.gasVerbruik));
-    } else {
-      return Math.max(...verbruiken.filter(value => (value.stroomVerbruikDal + value.stroomVerbruikNormaal) > 0)
-        .map(value => value.stroomVerbruikDal + value.stroomVerbruikNormaal));
-    }
-  }
-
-  private getMaxKosten(energiesoorten: string[], verbruiken: VerbruikKostenOverzicht[]) {
-    if (energiesoorten.length === 2) {
-      return Math.max(...verbruiken.map(value => value.gasKosten + value.stroomKostenDal + value.stroomKostenNormaal));
-    } else if (energiesoorten[0] === 'gas') {
-      return Math.max(...verbruiken.map(value => value.gasKosten));
-    } else {
-      return Math.max(...verbruiken.map(value => value.stroomKostenDal + value.stroomKostenNormaal));
-    }
+    return Math.max(...nonEmptyValues);
   }
 
   private getValue(verbruiksoort: string, energiesoorten: string[], verbruik: VerbruikKostenOverzicht): number {
@@ -269,7 +219,7 @@ export abstract class AbstractEnergieVerbruikHistorieService extends ChartServic
     }
   }
 
-  private getVerbruikValue(energiesoorten: string[], verbruik: VerbruikKostenOverzicht) {
+  private getVerbruikValue(energiesoorten: string[], verbruik: VerbruikKostenOverzicht): number {
     if (energiesoorten[0] === 'gas') {
       return verbruik.gasVerbruik;
     } else {
@@ -278,7 +228,7 @@ export abstract class AbstractEnergieVerbruikHistorieService extends ChartServic
     }
   }
 
-  private getKostenValue(energiesoorten: string[], verbruik: VerbruikKostenOverzicht) {
+  private getKostenValue(energiesoorten: string[], verbruik: VerbruikKostenOverzicht): number {
     if (energiesoorten.length === 2) {
       return this.allNull([verbruik.stroomKostenDal, verbruik.stroomKostenNormaal, verbruik.gasKosten])
         ? null : verbruik.stroomKostenDal + verbruik.stroomKostenNormaal + verbruik.gasKosten;
@@ -291,7 +241,7 @@ export abstract class AbstractEnergieVerbruikHistorieService extends ChartServic
   }
 
   private getSum(verbruiksoort: string, energiesoorten: string[], verbruiken: VerbruikKostenOverzicht[]): number {
-    const values = this.getNonEmptyValues(verbruiken, verbruiksoort, energiesoorten);
+    const values = this.getNonEmptyValues(verbruiksoort, energiesoorten, verbruiken);
     if (values.length === 0) {
       return null;
     }
@@ -300,7 +250,7 @@ export abstract class AbstractEnergieVerbruikHistorieService extends ChartServic
     }, 0);
   }
 
-  private getNonEmptyValues(verbruiken: VerbruikKostenOverzicht[], verbruiksoort: string, energiesoorten: string[]) {
+  private getNonEmptyValues(verbruiksoort: string, energiesoorten: string[], verbruiken: VerbruikKostenOverzicht[]): number[] {
     return verbruiken
       .map(verbruik => this.getValue(verbruiksoort, energiesoorten, verbruik))
       .filter(value => value !== null);
