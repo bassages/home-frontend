@@ -3,7 +3,7 @@ import {Energiecontract} from './energiecontract';
 import {ErrorHandingService} from '../error-handling/error-handing.service';
 import {EnergiecontractService} from './energiecontract.service';
 import sortBy from 'lodash-es/sortBy';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {DatePickerDirective, IDatePickerDirectiveConfig} from 'ng2-date-picker';
 import {DecimalPipe} from '@angular/common';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -37,7 +37,7 @@ export class EnergiecontractComponent implements OnInit {
 
   public energiecontracten: Energiecontract[];
 
-  public form: FormGroup;
+  public form: UntypedFormGroup;
 
   public datePickerConfiguration: IDatePickerDirectiveConfig;
 
@@ -63,13 +63,13 @@ export class EnergiecontractComponent implements OnInit {
   }
 
   private createForm(): void {
-    this.form = new FormGroup({
-      leverancier: new FormControl('', [Validators.required, Validators.maxLength(255)]),
-      remark: new FormControl('', [Validators.maxLength(2048)]),
-      gas: new FormControl('', [Validators.required, Validators.pattern(pricePattern)]),
-      stroomNormaalTarief: new FormControl('', [Validators.required, Validators.pattern(pricePattern)]),
-      stroomDalTarief: new FormControl('', Validators.pattern(pricePattern)),
-      selectedDate: new FormControl({value: null}, [Validators.required])
+    this.form = new UntypedFormGroup({
+      leverancier: new UntypedFormControl('', [Validators.required, Validators.maxLength(255)]),
+      remark: new UntypedFormControl('', [Validators.maxLength(2048)]),
+      gas: new UntypedFormControl('', [Validators.required, Validators.pattern(pricePattern)]),
+      stroomNormaalTarief: new UntypedFormControl('', [Validators.required, Validators.pattern(pricePattern)]),
+      stroomDalTarief: new UntypedFormControl('', Validators.pattern(pricePattern)),
+      selectedDate: new UntypedFormControl({value: null}, [Validators.required])
     });
   }
 
@@ -88,28 +88,28 @@ export class EnergiecontractComponent implements OnInit {
     return sortBy<Energiecontract>(energiecontracten, ['validFrom']);
   }
 
-  get selectedDate(): FormControl {
-    return this.form.get('selectedDate') as FormControl;
+  get selectedDate(): UntypedFormControl {
+    return this.form.get('selectedDate') as UntypedFormControl;
   }
 
-  get leverancier(): FormControl {
-    return this.form.get('leverancier') as FormControl;
+  get leverancier(): UntypedFormControl {
+    return this.form.get('leverancier') as UntypedFormControl;
   }
 
-  get remark(): FormControl {
-    return this.form.get('remark') as FormControl;
+  get remark(): UntypedFormControl {
+    return this.form.get('remark') as UntypedFormControl;
   }
 
-  get gas(): FormControl {
-    return this.form.get('gas') as FormControl;
+  get gas(): UntypedFormControl {
+    return this.form.get('gas') as UntypedFormControl;
   }
 
-  get stroomNormaalTarief(): FormControl {
-    return this.form.get('stroomNormaalTarief') as FormControl;
+  get stroomNormaalTarief(): UntypedFormControl {
+    return this.form.get('stroomNormaalTarief') as UntypedFormControl;
   }
 
-  get stroomDalTarief(): FormControl {
-    return this.form.get('stroomDalTarief') as FormControl;
+  get stroomDalTarief(): UntypedFormControl {
+    return this.form.get('stroomDalTarief') as UntypedFormControl;
   }
 
   public startAdd(): void {

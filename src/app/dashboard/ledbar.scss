@@ -1,7 +1,7 @@
 // make sure to import the least possible to reduce main.js bundle size
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins/_breakpoints";
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins/_breakpoints";
 
 .ledbar {
   overflow: auto;

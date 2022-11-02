@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output, QueryList, ViewChildren} from '@angular/core';
 import {DatePickerDirective, IDatePickerDirectiveConfig} from 'ng2-date-picker';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import dayjs, {Dayjs} from 'dayjs';
 import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 
@@ -38,7 +38,7 @@ export class DateNavigatorComponent {
   @ViewChildren('picker')
   public pickers: QueryList<DatePickerDirective>;
 
-  public form: FormGroup;
+  public form: UntypedFormGroup;
 
   private _selectedDate: Dayjs;
 
@@ -53,10 +53,10 @@ export class DateNavigatorComponent {
   }
 
   private createForm(): void {
-    this.form = new FormGroup({
-      selectedDay: new FormControl({value: this._selectedDate}, [Validators.required]),
-      selectedMonth: new FormControl({value: this._selectedDate}, [Validators.required]),
-      selectedYear: new FormControl('', [Validators.required])
+    this.form = new UntypedFormGroup({
+      selectedDay: new UntypedFormControl({value: this._selectedDate}, [Validators.required]),
+      selectedMonth: new UntypedFormControl({value: this._selectedDate}, [Validators.required]),
+      selectedYear: new UntypedFormControl('', [Validators.required])
     });
   }
 
@@ -83,16 +83,16 @@ export class DateNavigatorComponent {
     this.previouslySelectedDate = selectedDate;
   }
 
-  get selectedDay(): FormControl {
-    return this.form.get('selectedDay') as FormControl;
+  get selectedDay(): UntypedFormControl {
+    return this.form.get('selectedDay') as UntypedFormControl;
   }
 
-  get selectedMonth(): FormControl {
-    return this.form.get('selectedMonth') as FormControl;
+  get selectedMonth(): UntypedFormControl {
+    return this.form.get('selectedMonth') as UntypedFormControl;
   }
 
-  get selectedYear(): FormControl {
-    return this.form.get('selectedYear') as FormControl;
+  get selectedYear(): UntypedFormControl {
+    return this.form.get('selectedYear') as UntypedFormControl;
   }
 
   public isUpNavigationDisabled(): boolean {

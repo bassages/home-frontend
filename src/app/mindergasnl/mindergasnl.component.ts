@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MindergasnlService} from './mindergasnl.service';
 import {ErrorHandingService} from '../error-handling/error-handing.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {faArrowUpRightFromSquare, faBan, faCheck, faEdit} from '@fortawesome/free-solid-svg-icons';
 
@@ -17,7 +17,7 @@ export class MindergasnlComponent implements OnInit {
   faBan = faBan
   faCheck = faCheck
 
-  public form: FormGroup;
+  public form: UntypedFormGroup;
   public showSavedMessage = false;
 
   private _editmode: boolean;
@@ -51,20 +51,20 @@ export class MindergasnlComponent implements OnInit {
   }
 
   private createForm(): void {
-    this.form = new FormGroup({
-      automatischUploaden: new FormControl(),
-      authenticatietoken: new FormControl('', authenticatieTokenMaxLengthValidator)
+    this.form = new UntypedFormGroup({
+      automatischUploaden: new UntypedFormControl(),
+      authenticatietoken: new UntypedFormControl('', authenticatieTokenMaxLengthValidator)
     });
     this.automatischUploaden.valueChanges.subscribe(value => this.setAuthenticatieTokenValidators(value));
     this.editMode = false;
   }
 
-  get automatischUploaden(): FormControl {
-    return this.form.get('automatischUploaden') as FormControl;
+  get automatischUploaden(): UntypedFormControl {
+    return this.form.get('automatischUploaden') as UntypedFormControl;
   }
 
-  get authenticatietoken(): FormControl {
-    return this.form.get('authenticatietoken') as FormControl;
+  get authenticatietoken(): UntypedFormControl {
+    return this.form.get('authenticatietoken') as UntypedFormControl;
   }
 
   private getMinderGasNlSettings(): void {

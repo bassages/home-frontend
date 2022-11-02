@@ -3,7 +3,7 @@ import {KlimaatService} from '../klimaat.service';
 import {ErrorHandingService} from '../../error-handling/error-handing.service';
 import {KlimaatSensor} from '../klimaatSensor';
 import sortBy from 'lodash-es/sortBy';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {KlimaatSensorService} from '../klimaatsensor.service';
 import {NgxSpinnerService} from 'ngx-spinner';
@@ -22,7 +22,7 @@ export class KlimaatSensorsComponent implements OnInit {
 
   public sensors: KlimaatSensor[];
 
-  public form: FormGroup;
+  public form: UntypedFormGroup;
 
   public editMode = false;
   public selectedSensor: KlimaatSensor;
@@ -40,9 +40,9 @@ export class KlimaatSensorsComponent implements OnInit {
   }
 
   private createForm(): void {
-    this.form = new FormGroup({
-      code: new FormControl(''),
-      omschrijving: new FormControl('', [Validators.maxLength(255)]),
+    this.form = new UntypedFormGroup({
+      code: new UntypedFormControl(''),
+      omschrijving: new UntypedFormControl('', [Validators.maxLength(255)]),
     });
   }
 
@@ -58,12 +58,12 @@ export class KlimaatSensorsComponent implements OnInit {
     });
   }
 
-  get code(): FormControl {
-    return this.form.get('code') as FormControl;
+  get code(): UntypedFormControl {
+    return this.form.get('code') as UntypedFormControl;
   }
 
-  get omschrijving(): FormControl {
-    return this.form.get('omschrijving') as FormControl;
+  get omschrijving(): UntypedFormControl {
+    return this.form.get('omschrijving') as UntypedFormControl;
   }
 
   public startEdit(klimaatSensor: KlimaatSensor) {

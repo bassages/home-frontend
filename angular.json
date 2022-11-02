@@ -28,6 +28,11 @@
               "node_modules/ngx-spinner/animations/timer.css",
               "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "./node_modules"
+              ]
+            },
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
@@ -131,7 +136,6 @@
       }
     }
   },
-  "defaultProject": "home-server-frontend",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
@@ -143,6 +147,8 @@
   },
   "cli": {
     "analytics": false,
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
