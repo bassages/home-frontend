@@ -34,6 +34,6 @@ export class AuthorizationInterceptor implements HttpInterceptor {
         return EMPTY;
       }
     }
-    return throwError(httpErrorResponse.message);
+    return throwError(() => new Error(httpErrorResponse.message));
   }
 }
