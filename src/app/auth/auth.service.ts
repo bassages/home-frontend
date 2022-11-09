@@ -5,6 +5,7 @@ import {tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {User} from './user';
+import { Buffer } from 'buffer';
 
 const API_PATH_USER = '/api/user';
 
@@ -34,7 +35,7 @@ export class AuthService {
   // noinspection JSMethodCanBeStatic
   private createBasicAuthHeader(credentials): HttpHeaders {
     return new HttpHeaders({
-      authorization: 'Basic ' + btoa(`${credentials.username}:${credentials.password}`)
+      authorization: 'Basic ' + Buffer.from(`${credentials.username}:${credentials.password}`).toString('base64')
     });
   }
 
