@@ -6,8 +6,7 @@ import {Klimaat} from './klimaat';
 import {RealtimeKlimaat} from './realtimeKlimaat';
 import {Trend} from './trend';
 import {GemiddeldeKlimaatPerMaand} from './gemiddeldeKlimaatPerMaand';
-import * as dayjs from 'dayjs';
-import {Dayjs} from 'dayjs';
+import dayjs, {Dayjs} from 'dayjs';
 
 const sensorTypeToPostfixMapping: Map<string, string> =
   new Map<string, string>([

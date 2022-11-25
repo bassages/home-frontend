@@ -2,7 +2,7 @@ import {inject, TestBed} from '@angular/core/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {KlimaatService} from './klimaat.service';
 import {Klimaat} from './klimaat';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 
 describe('OpgenomenVermogenService', () => {
 

@@ -13,7 +13,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {ErrorHandlingComponent} from './error-handling/error-handling.component';
 import {ErrorHandingService} from './error-handling/error-handing.service';
 import {environment} from '../environments/environment';
-import * as SockJS from 'sockjs-client';
+import SockJS from 'sockjs-client';
 import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
 import {OpgenomenVermogenService} from './opgenomen-vermogen/opgenomen-vermogen.service';
 import {EnergieVerbruikService} from './energie-verbruik/energie-verbruik.service';

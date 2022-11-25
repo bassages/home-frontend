@@ -14,9 +14,8 @@ import {ChartService} from '../chart/chart.service';
 import {Statistics} from '../statistics';
 import {ChartStatisticsService} from '../chart/statistics/chart-statistics.service';
 import {NgxSpinnerService} from 'ngx-spinner';
-import * as dayjs from 'dayjs';
-import {Dayjs} from 'dayjs';
-import * as duration from 'dayjs/plugin/duration';
+import dayjs, {Dayjs} from 'dayjs';
+import duration from 'dayjs/plugin/duration';
 dayjs.extend(duration);
 
 @Component({
