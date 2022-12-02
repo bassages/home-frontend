@@ -9,10 +9,10 @@ class BackendEnergiecontract {
   public id: number;
   public validFrom: string;
   public validTo: string;
-  public stroomPerKwhNormaalTarief: number;
-  public stroomPerKwhDalTarief: number;
-  public gasPerKuub: number;
-  public leverancier: string;
+  public electricityPerKwhStandardTariff: number;
+  public electricityPerKwhOffPeakTariff: number;
+  public gasPerCubicMeter: number;
+  public supplierName: string;
   public remark: string;
 }
 
@@ -26,11 +26,11 @@ export class EnergiecontractService {
   public static toEnergieContract(backendEnergieContract: BackendEnergiecontract): Energiecontract {
     const energiecontract: Energiecontract = new Energiecontract();
     energiecontract.id = backendEnergieContract.id;
-    energiecontract.leverancier = backendEnergieContract.leverancier;
+    energiecontract.leverancier = backendEnergieContract.supplierName;
     energiecontract.remark = backendEnergieContract.remark;
-    energiecontract.stroomPerKwhDalTarief = backendEnergieContract.stroomPerKwhDalTarief;
-    energiecontract.stroomPerKwhNormaalTarief = backendEnergieContract.stroomPerKwhNormaalTarief;
-    energiecontract.gasPerKuub = backendEnergieContract.gasPerKuub;
+    energiecontract.stroomPerKwhDalTarief = backendEnergieContract.electricityPerKwhOffPeakTariff;
+    energiecontract.stroomPerKwhNormaalTarief = backendEnergieContract.electricityPerKwhStandardTariff;
+    energiecontract.gasPerKuub = backendEnergieContract.gasPerCubicMeter;
     energiecontract.validFrom = dayjs(backendEnergieContract.validFrom, 'YYYY-MM-DD');
     energiecontract.validTo = dayjs(backendEnergieContract.validTo, 'YYYY-MM-DD');
     return energiecontract;
@@ -44,11 +44,11 @@ export class EnergiecontractService {
     const backendEnergiecontract: BackendEnergiecontract = new BackendEnergiecontract();
     backendEnergiecontract.id = energieContract.id;
     backendEnergiecontract.validFrom = energieContract.validFrom.format('YYYY-MM-DD');
-    backendEnergiecontract.leverancier = energieContract.leverancier;
+    backendEnergiecontract.supplierName = energieContract.leverancier;
     backendEnergiecontract.remark = energieContract.remark;
-    backendEnergiecontract.gasPerKuub = energieContract.gasPerKuub;
-    backendEnergiecontract.stroomPerKwhNormaalTarief = energieContract.stroomPerKwhNormaalTarief;
-    backendEnergiecontract.stroomPerKwhDalTarief = energieContract.stroomPerKwhDalTarief;
+    backendEnergiecontract.gasPerCubicMeter = energieContract.gasPerKuub;
+    backendEnergiecontract.electricityPerKwhStandardTariff = energieContract.stroomPerKwhNormaalTarief;
+    backendEnergiecontract.electricityPerKwhOffPeakTariff = energieContract.stroomPerKwhDalTarief;
     return backendEnergiecontract;
   }
 
