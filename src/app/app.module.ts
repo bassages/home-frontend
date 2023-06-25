@@ -127,7 +127,7 @@ const appRoutes: Routes = [
     DpDatePickerModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(appRoutes, {enableTracing: false, useHash: true, relativeLinkResolution: 'legacy'}),
+    RouterModule.forRoot(appRoutes, {enableTracing: false, useHash: true}),
     FontAwesomeModule
   ],
   providers: [
