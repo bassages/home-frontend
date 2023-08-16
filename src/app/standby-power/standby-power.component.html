@@ -16,6 +16,7 @@
           <th>Maand</th>
           <th class="text-end">Verbruik</th>
           <th class="text-end">Kosten</th>
+          <th class="text-end">Verbruik per jaar</th>
           <th class="text-end">% totale kosten<sup>*</sup></th>
           <th class="text-end">% tijd<sup>**</sup></th>
         </tr>
@@ -24,9 +25,10 @@
         <tr *ngFor="let standbyPowerInPeriod of standbyPowerInPeriods">
           <td class="font-monospace text-capitalize">{{ standbyPowerInPeriod.fromDate | date : 'MMMM'}}</td>
           <td class="font-monospace text-end">{{standbyPowerInPeriod.standbyPower}} Watt</td>
-          <td class="font-monospace text-end text-capitalize">{{standbyPowerInPeriod.costsOfStandByPower | currency: 'EUR'}}</td>
-          <td class="font-monospace text-end text-capitalize">{{standbyPowerInPeriod.percentageOfTotalCost}} %</td>
-          <td class="font-monospace text-end text-capitalize">{{standbyPowerInPeriod.percentageOfTotalPeriod}} %</td>
+          <td class="font-monospace text-end">{{standbyPowerInPeriod.costsOfStandByPower | currency: 'EUR'}}</td>
+          <td class="font-monospace text-end">{{standbyPowerInPeriod.approxYearlyUsageKwh}} kWh</td>
+          <td class="font-monospace text-end">{{standbyPowerInPeriod.percentageOfTotalCost}} %</td>
+          <td class="font-monospace text-end">{{standbyPowerInPeriod.percentageOfTotalPeriod}} %</td>
         </tr>
         </tbody>
       </table>

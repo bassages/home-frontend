@@ -2,6 +2,7 @@ export class StandbyPowerInPeriod {
   public fromDate: Date;
   public toDate: Date;
   public standbyPower: number;
+  public approxYearlyUsageKwh: number;
 
   public costsOfStandByPower: number;
   public totalCostsOfPower: number;
