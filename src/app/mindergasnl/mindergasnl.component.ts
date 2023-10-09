@@ -72,7 +72,7 @@ export class MindergasnlComponent implements OnInit {
     this.mindergasnlService.get().subscribe({
       next: minderGasNlSettings => this.form.setValue(minderGasNlSettings),
       error: error => this.errorHandlingService.handleError('De instellingen voor MinderGas.nl konden nu niet opgehaald worden', error),
-      complete: () => this.spinnerService.hide()
+      complete: () => { this.spinnerService.hide() }
     });
   }
 
