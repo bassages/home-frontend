@@ -26,3 +26,11 @@
 
 ### Klimaat
 ![Alt text](documentation/screenshots/temperatuur.jpg?raw=true "Temperatuur")
+
+## Technical
+### Updating versions
+#### Angular
+`npx @angular/cli@latest update --allow-dirty`
+`npx @angular/cli@latest update @angular/cli  --allow-dirty
+`npx @angular/cli@latest update @angular/common  --allow-dirty`
+`npx @angular/cli@latest update @angular/cdk  --allow-dirty`
