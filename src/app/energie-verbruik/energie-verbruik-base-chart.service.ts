@@ -159,11 +159,9 @@ export abstract class AbstractEnergieVerbruikHistorieService extends ChartServic
       } else {
         newEnergiesoorten.splice(indexOfToggledEnergieSoort, 1);
       }
-    } else {
-      if (newEnergiesoorten[0] !== energiesoortToToggle) {
-        newEnergiesoorten.splice(0, newEnergiesoorten.length);
-        newEnergiesoorten.push(energiesoortToToggle);
-      }
+    } else if (newEnergiesoorten[0] !== energiesoortToToggle) {
+      newEnergiesoorten.splice(0, newEnergiesoorten.length);
+      newEnergiesoorten.push(energiesoortToToggle);
     }
     return newEnergiesoorten;
   }

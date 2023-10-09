@@ -23,16 +23,13 @@ export class AuthorizationInterceptor implements HttpInterceptor {
   // noinspection JSMethodCanBeStatic
   private handleError(request: HttpRequest<any>, httpErrorResponse: HttpErrorResponse) {
     if (httpErrorResponse.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
+      // A client-side or network error occurred
       console.error('An error occurred:', httpErrorResponse.error.message);
-    } else {
-
-      if (httpErrorResponse.status === 401) {
-        if (request.url !== '/api/user') {
-          this.authService.loggedOut();
-        }
-        return EMPTY;
+    } else if (httpErrorResponse.status === 401) {
+      if (request.url !== '/api/user') {
+        this.authService.loggedOut();
       }
+      return EMPTY;
     }
     return throwError(() => new Error(httpErrorResponse.message));
   }
