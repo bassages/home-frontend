@@ -57,7 +57,7 @@ export class KlimaatAverageComponent implements OnInit {
     this.klimaatService.getGemiddeldeKlimaatPerMaand(this.sensorCode, this.sensorType, this.year.year()).subscribe({
       next: gemiddeldeKlimaatPerMaand => { this.gemiddeldeKlimaatPerMaand = gemiddeldeKlimaatPerMaand; },
       error: error => this.errorHandlingService.handleError('Gemiddelde klimaat kon niet worden opgehaald', error),
-      complete: () => this.spinnerService.hide()
+        complete: () => { this.spinnerService.hide() }
     });
   }
 

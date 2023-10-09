@@ -79,7 +79,7 @@ export class EnergiecontractComponent implements OnInit {
     this.energiecontractService.getAll().subscribe({
       next: response => this.energiecontracten = this.sort(response),
       error: error => this.errorHandlingService.handleError('De energiecontracten konden nu niet worden opgehaald', error),
-      complete: () => this.spinnerService.hide()
+      complete: () => { this.spinnerService.hide() }
     });
   }
 
@@ -174,7 +174,7 @@ export class EnergiecontractComponent implements OnInit {
       error: error => {
         this.errorHandlingService.handleError('Het energiecontract kon nu niet worden opgeslagen', error);
       },
-      complete: () => this.spinnerService.hide()
+      complete: () => { this.spinnerService.hide() }
     });
   }
 
@@ -187,7 +187,7 @@ export class EnergiecontractComponent implements OnInit {
         this.editMode = false;
       },
       error: error => this.errorHandlingService.handleError('Het energiecontract kon niet worden verwijderd', error),
-      complete: () => this.spinnerService.hide()
+      complete: () => { this.spinnerService.hide() }
     });
   }
 

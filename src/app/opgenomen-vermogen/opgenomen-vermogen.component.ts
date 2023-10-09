@@ -77,7 +77,7 @@ export class OpgenomenVermogenComponent implements OnInit {
     this.opgenomenVermogenService.getHistory(from, to, this.periodLengthInSeconds).subscribe({
       next: opgenomenVermogens => this.loadDataIntoChart(opgenomenVermogens),
       error: error => this.errorHandlingService.handleError('Opgenomen vermogen kon niet worden opgehaald', error),
-      complete: () => this.spinnerService.hide()
+      complete: () => { this.spinnerService.hide() }
     });
   }
 

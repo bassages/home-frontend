@@ -54,7 +54,7 @@ export class KlimaatSensorsComponent implements OnInit {
         this.sensors = sortBy<KlimaatSensor>(response, ['code']);
       },
       error: error => this.errorHandlingService.handleError('De klimaat sensors konden nu niet worden opgehaald', error),
-      complete: () => this.spinnerService.hide()
+      complete: () => { this.spinnerService.hide() }
     });
   }
 
@@ -90,7 +90,7 @@ export class KlimaatSensorsComponent implements OnInit {
       error: error => {
         this.errorHandlingService.handleError('De wijzingen konden nu niet worden opgeslagen', error);
       },
-      complete: () => this.spinnerService.hide()
+      complete: () => { this.spinnerService.hide() }
     });
   }
 
@@ -104,7 +104,7 @@ export class KlimaatSensorsComponent implements OnInit {
         this.editMode = false;
       },
       error: error => this.errorHandlingService.handleError('De klimaatsensor kon niet worden verwijderd', error),
-      complete: () => this.spinnerService.hide()
+      complete: () => { this.spinnerService.hide() }
     });
   }
 

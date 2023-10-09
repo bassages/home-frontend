@@ -106,7 +106,7 @@ export class EnergieVerbruikComponent implements OnInit {
     this.energieVerbruikHistorieService.getVerbruiken(this.selectedDate).subscribe({
       next: verbruiken => this.loadData(verbruiken),
       error: error => this.errorHandlingService.handleError('Het verbruik kon niet worden opgehaald', error),
-      complete: () => this.spinnerService.hide()
+      complete: () => { this.spinnerService.hide() }
     });
   }
 

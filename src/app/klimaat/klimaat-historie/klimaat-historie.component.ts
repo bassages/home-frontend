@@ -178,7 +178,7 @@ export class KlimaatHistorieComponent implements OnInit {
     this.klimaatService.getKlimaat(this.sensorCode, this.date, this.date.add(1, 'days')).subscribe({
       next: klimaat => this.loadData(klimaat),
       error: error => this.errorHandlingService.handleError('Klimaat historie kon niet worden opgehaald', error),
-      complete: () => this.spinnerService.hide()
+      complete: () => { this.spinnerService.hide() }
     });
   }
 

@@ -30,7 +30,7 @@ export class StandbyPowerComponent implements OnInit {
     this.standbyPowerService.get(this.selectedYear.year()).subscribe({
       next: standbyPower => this.loadData(standbyPower),
       error: error => this.errorHandlingService.handleError('Basisverbruik kon niet worden opgehaald', error),
-      complete: () => this.spinnerService.hide()
+      complete: () => { this.spinnerService.hide() }
     });
   }
 

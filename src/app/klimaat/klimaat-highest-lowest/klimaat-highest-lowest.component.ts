@@ -72,7 +72,7 @@ export class KlimaatHighestLowestComponent implements OnInit {
         this.highestKlimaats = klimaats[1];
       },
       error: error => this.errorHandlingService.handleError('Hoogste/laagste klimaat kon niet worden opgehaald', error),
-      complete: () => this.spinnerService.hide()
+      complete: () => { this.spinnerService.hide() }
     });
   }
 

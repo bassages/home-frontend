@@ -40,7 +40,7 @@ export class MeterstandComponent implements OnInit {
     this.meterstandService.getMeterstanden(from, to).subscribe({
       next: response => this.sortedMeterstandenPerDag = sortBy<MeterstandOpDag>(response, ['dag']),
       error: error => this.errorHandlingService.handleError('De meterstanden konden nu niet worden opgehaald', error),
-      complete: () => this.spinnerService.hide()
+      complete: () => { this.spinnerService.hide() }
     });
   }
 
