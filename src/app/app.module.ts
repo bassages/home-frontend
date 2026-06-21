@@ -7,7 +7,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MeterstandService} from './meterstand/meterstand.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DpDatePickerModule} from 'ng2-date-picker';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {NavbarComponent} from './navbar/navbar.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {ErrorHandlingComponent} from './error-handling/error-handling.component';
@@ -94,83 +94,77 @@ const appRoutes: Routes = [
   {path: 'energiecontract', component: EnergiecontractComponent}
 ];
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    MeterstandComponent,
-    NavbarComponent,
-    DashboardComponent,
-    StroomVerbruikComponent,
-    GasVerbruikComponent,
-    ErrorHandlingComponent,
-    EnergieVerbruikComponent,
-    DateNavigatorComponent,
-    OpgenomenVermogenComponent,
-    LoginComponent,
-    MindergasnlComponent,
-    KlimaatHistorieComponent,
-    StatisticsComponent,
-    KlimaatTemperatuurComponent,
-    KlimaatLuchtvochtigheidComponent,
-    EnergiecontractComponent,
-    KlimaatHighestLowestComponent,
-    KlimaatAverageComponent,
-    KlimaatSensorsComponent,
-    StandbyPowerComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgbModule,
-    DpDatePickerModule,
-    NgxSpinnerModule,
-    BrowserAnimationsModule,
-    RouterModule.forRoot(appRoutes, {enableTracing: false, useHash: true}),
-    FontAwesomeModule
-  ],
-  providers: [
-    AuthService,
-    DecimalPipe,
-    ChartService,
-    ChartStatisticsService,
-    MeterstandService,
-    OpgenomenVermogenService,
-    EnergieVerbruikService,
-    EnergieVerbruikUurHistorieService,
-    EnergieVerbruikDagHistorieService,
-    EnergieVerbruikMaandHistorieService,
-    EnergieVerbruikJaarHistorieService,
-    EnergieVerbruikHistorieServiceProvider,
-    EnergiecontractService,
-    MindergasnlService,
-    KlimaatService,
-    KlimaatSensorService,
-    StandbyPowerService,
-    ErrorHandingService,
-    {
-      provide: InjectableRxStompConfig,
-      useValue: myRxStompConfig
-    },
-    {
-      provide: RxStompService,
-      useFactory: rxStompServiceFactory,
-      deps: [InjectableRxStompConfig]
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthorizationInterceptor,
-      multi: true
-    },
-    {
-      provide: LOCALE_ID,
-      useValue: 'nl'
-    }
-  ],
-  bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-})
+@NgModule({ declarations: [
+        AppComponent,
+        MeterstandComponent,
+        NavbarComponent,
+        DashboardComponent,
+        StroomVerbruikComponent,
+        GasVerbruikComponent,
+        ErrorHandlingComponent,
+        EnergieVerbruikComponent,
+        DateNavigatorComponent,
+        OpgenomenVermogenComponent,
+        LoginComponent,
+        MindergasnlComponent,
+        KlimaatHistorieComponent,
+        StatisticsComponent,
+        KlimaatTemperatuurComponent,
+        KlimaatLuchtvochtigheidComponent,
+        EnergiecontractComponent,
+        KlimaatHighestLowestComponent,
+        KlimaatAverageComponent,
+        KlimaatSensorsComponent,
+        StandbyPowerComponent
+    ],
+    bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA], imports: [BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgbModule,
+        DpDatePickerModule,
+        NgxSpinnerModule,
+        BrowserAnimationsModule,
+        RouterModule.forRoot(appRoutes, { enableTracing: false, useHash: true }),
+        FontAwesomeModule], providers: [
+        AuthService,
+        DecimalPipe,
+        ChartService,
+        ChartStatisticsService,
+        MeterstandService,
+        OpgenomenVermogenService,
+        EnergieVerbruikService,
+        EnergieVerbruikUurHistorieService,
+        EnergieVerbruikDagHistorieService,
+        EnergieVerbruikMaandHistorieService,
+        EnergieVerbruikJaarHistorieService,
+        EnergieVerbruikHistorieServiceProvider,
+        EnergiecontractService,
+        MindergasnlService,
+        KlimaatService,
+        KlimaatSensorService,
+        StandbyPowerService,
+        ErrorHandingService,
+        {
+            provide: InjectableRxStompConfig,
+            useValue: myRxStompConfig
+        },
+        {
+            provide: RxStompService,
+            useFactory: rxStompServiceFactory,
+            deps: [InjectableRxStompConfig]
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthorizationInterceptor,
+            multi: true
+        },
+        {
+            provide: LOCALE_ID,
+            useValue: 'nl'
+        },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 
 export class AppModule {
 

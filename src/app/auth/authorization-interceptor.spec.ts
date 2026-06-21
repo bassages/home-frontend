@@ -1,6 +1,6 @@
 import {inject, TestBed} from '@angular/core/testing';
-import {HttpClientTestingModule, HttpTestingController, TestRequest} from '@angular/common/http/testing';
-import {HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
+import { HttpTestingController, TestRequest, provideHttpClientTesting } from '@angular/common/http/testing';
+import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {AuthorizationInterceptor} from './authorization-interceptor';
 import {instance, mock} from 'ts-mockito';
 import {AuthService} from './auth.service';
@@ -11,19 +11,21 @@ describe('AuthorizationInterceptor', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
+    imports: [],
+    providers: [
         {
-          provide: HTTP_INTERCEPTORS,
-          useClass: AuthorizationInterceptor,
-          multi: true
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthorizationInterceptor,
+            multi: true
         },
         {
-          provide: AuthService,
-          useFactory: () => authServiceMockInstance
-        }
-      ]
-    });
+            provide: AuthService,
+            useFactory: () => authServiceMockInstance
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
   });
 
   afterEach(inject([HttpTestingController], (httpMock: HttpTestingController) => {

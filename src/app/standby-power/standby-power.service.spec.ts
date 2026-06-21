@@ -1,15 +1,16 @@
 import {inject, TestBed} from '@angular/core/testing';
 import {StandbyPowerService} from './standby-power.service';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import {StandbyPowerInPeriod} from './standby-power-in-period';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('StandbyPowerService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [StandbyPowerService],
-      imports: [HttpClientTestingModule],
-    });
+    imports: [],
+    providers: [StandbyPowerService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
   });
 
   afterEach(inject([HttpTestingController], (httpMock: HttpTestingController) => {

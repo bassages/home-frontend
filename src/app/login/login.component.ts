@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {Router} from '@angular/router';
 import {AuthService} from '../auth/auth.service';
 import {faHouseChimney, faKey, faUser} from '@fortawesome/free-solid-svg-icons';

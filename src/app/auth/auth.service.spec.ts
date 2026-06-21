@@ -1,5 +1,5 @@
 import {AuthService} from './auth.service';
-import {HttpClient, HttpResponse} from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import {Router} from '@angular/router';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {instance, mock, when} from 'ts-mockito';
