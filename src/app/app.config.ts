@@ -1,6 +1,5 @@
 import {ApplicationConfig, importProvidersFrom, LOCALE_ID} from '@angular/core';
 import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
-import {provideAnimations} from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
@@ -110,7 +109,6 @@ export const appConfig: ApplicationConfig = {
       useClass: DutchMatDatepickerIntl
     },
     provideHttpClient(withInterceptorsFromDi()),
-    provideAnimations(),
     provideRouter(appRoutes, withHashLocation())
   ]
 };
