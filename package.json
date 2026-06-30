@@ -14,7 +14,7 @@
     "test-no-watch-no-coverage": "ng test --watch=false --browsers=ChromeHeadless",
     "test-with-coverage": "ng test --code-coverage --watch=false --browsers=ChromeHeadless",
     "build": "ng build --configuration production",
-    "create-zip": "cd dist && zip -r home-frontend.zip . && cd ..",
+    "create-zip": "cd dist/browser && zip -r ../home-frontend.zip . && cd ../..",
     "reinstall": "npm run clean && npm install",
     "rebuild": "npm run clean && npm install && npm run build"
   },
