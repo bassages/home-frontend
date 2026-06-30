@@ -8,11 +8,15 @@ import {KlimaatSensorService} from '../klimaatsensor.service';
 import {NgxSpinnerService} from 'ngx-spinner';
 import dayjs, {Dayjs} from 'dayjs';
 import {faDroplet, faThermometerHalf} from '@fortawesome/free-solid-svg-icons';
+import { NgClass, DecimalPipe, DatePipe } from '@angular/common';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
+import { DateNavigatorComponent } from '../../date-navigator/date-navigator.component';
 
 @Component({
     selector: 'home-klimaat-average',
     templateUrl: './klimaat-average.component.html',
-    standalone: false
+    imports: [NgClass, FaIconComponent, FormsModule, DateNavigatorComponent, DecimalPipe, DatePipe]
 })
 export class KlimaatAverageComponent implements OnInit {
   faDroplet = faDroplet;

@@ -1,30 +1,33 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import dayjs, {Dayjs} from 'dayjs';
 import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
-import {MatDatepicker} from '@angular/material/datepicker';
+import { MatDatepicker, MatDatepickerInput } from '@angular/material/datepicker';
 import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 import {
   DATE_NAVIGATOR_DATE_FORMATS,
   DateNavigatorDateAdapter,
   DateNavigatorDisplayMode
 } from './date-navigator-date-adapter';
+import { NgClass } from '@angular/common';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { MatInput } from '@angular/material/input';
 
 @Component({
     selector: 'home-date-navigator',
     templateUrl: './date-navigator.component.html',
     styleUrls: ['./date-navigator.component.scss'],
     providers: [
-      {
-        provide: DateAdapter,
-        useClass: DateNavigatorDateAdapter
-      },
-      {
-        provide: MAT_DATE_FORMATS,
-        useValue: DATE_NAVIGATOR_DATE_FORMATS
-      }
+        {
+            provide: DateAdapter,
+            useClass: DateNavigatorDateAdapter
+        },
+        {
+            provide: MAT_DATE_FORMATS,
+            useValue: DATE_NAVIGATOR_DATE_FORMATS
+        }
     ],
-    standalone: false
+    imports: [FormsModule, ReactiveFormsModule, NgClass, FaIconComponent, MatInput, MatDatepickerInput, MatDatepicker]
 })
 export class DateNavigatorComponent implements OnChanges {
   faChevronLeft = faChevronLeft

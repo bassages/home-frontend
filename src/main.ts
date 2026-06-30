@@ -1,13 +1,17 @@
 import {enableProdMode} from '@angular/core';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-
-import {AppModule} from './app/app.module';
+import {registerLocaleData} from '@angular/common';
+import localeNl from '@angular/common/locales/nl';
+import {bootstrapApplication} from '@angular/platform-browser';
 import {environment} from './environments/environment';
 import './dayjs-setup';
+import {AppComponent} from './app/app.component';
+import {appConfig} from './app/app.config';
 
 if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
+registerLocaleData(localeNl);
+
+bootstrapApplication(AppComponent, appConfig)
   .catch(err => console.log(err));

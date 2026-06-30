@@ -14,7 +14,7 @@ import * as c3 from 'c3';
 import {ChartAPI, ChartConfiguration} from 'c3';
 import {ChartService} from '../../chart/chart.service';
 import {Klimaat} from '../klimaat';
-import {DecimalPipe} from '@angular/common';
+import { DecimalPipe, NgClass } from '@angular/common';
 import {Statistics} from '../../statistics';
 import {ChartStatisticsService} from '../../chart/statistics/chart-statistics.service';
 import * as chroma from 'chroma-js';
@@ -22,12 +22,16 @@ import {KlimaatSensorService} from '../klimaatsensor.service';
 import {NgxSpinnerService} from 'ngx-spinner';
 import dayjs, {Dayjs} from 'dayjs';
 import {faDroplet, faThermometerHalf} from '@fortawesome/free-solid-svg-icons';
+import { FormsModule } from '@angular/forms';
+import { DateNavigatorComponent } from '../../date-navigator/date-navigator.component';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { StatisticsComponent } from '../../chart/statistics/statistics.component';
 
 @Component({
     selector: 'home-klimaat-historie',
     templateUrl: './klimaat-historie.component.html',
     styleUrls: ['./klimaat-historie-component.scss'],
-    standalone: false
+    imports: [FormsModule, DateNavigatorComponent, NgClass, FaIconComponent, StatisticsComponent]
 })
 export class KlimaatHistorieComponent implements OnInit {
   faDroplet = faDroplet;

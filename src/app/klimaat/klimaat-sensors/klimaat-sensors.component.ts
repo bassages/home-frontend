@@ -3,16 +3,18 @@ import {KlimaatService} from '../klimaat.service';
 import {ErrorHandingService} from '../../error-handling/error-handing.service';
 import {KlimaatSensor} from '../klimaatSensor';
 import sortBy from 'lodash-es/sortBy';
-import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {KlimaatSensorService} from '../klimaatsensor.service';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {faBan, faCheck, faCircleInfo, faTrash, faTriangleExclamation} from '@fortawesome/free-solid-svg-icons';
+import { NgClass } from '@angular/common';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
     selector: 'home-klimaat-sensors',
     templateUrl: './klimaat-sensors.component.html',
-    standalone: false
+    imports: [NgClass, FaIconComponent, FormsModule, ReactiveFormsModule]
 })
 export class KlimaatSensorsComponent implements OnInit {
   faCircleInfo = faCircleInfo;

@@ -1,16 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import {MindergasnlService} from './mindergasnl.service';
 import {ErrorHandingService} from '../error-handling/error-handing.service';
-import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {faArrowUpRightFromSquare, faBan, faCheck, faEdit} from '@fortawesome/free-solid-svg-icons';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { NgClass } from '@angular/common';
+import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 
 const authenticatieTokenMaxLengthValidator = Validators.maxLength(255);
 
 @Component({
     selector: 'home-mindergasnl',
     templateUrl: './mindergasnl.component.html',
-    standalone: false
+    imports: [FaIconComponent, FormsModule, ReactiveFormsModule, NgClass, NgbAlert]
 })
 export class MindergasnlComponent implements OnInit {
   faArrowUpRightFromSquare = faArrowUpRightFromSquare

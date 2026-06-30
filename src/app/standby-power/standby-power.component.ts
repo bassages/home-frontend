@@ -4,11 +4,13 @@ import {ErrorHandingService} from '../error-handling/error-handing.service';
 import {StandbyPowerInPeriod} from './standby-power-in-period';
 import {NgxSpinnerService} from 'ngx-spinner';
 import dayjs, {Dayjs} from 'dayjs';
+import { DateNavigatorComponent } from '../date-navigator/date-navigator.component';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 
 @Component({
     selector: 'home-standby-power',
     templateUrl: './standby-power.component.html',
-    standalone: false
+    imports: [DateNavigatorComponent, CurrencyPipe, DatePipe]
 })
 export class StandbyPowerComponent implements OnInit {
 

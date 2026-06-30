@@ -1,12 +1,12 @@
 import {Component, Input} from '@angular/core';
 import {Statistics} from '../../statistics';
-import {DecimalPipe} from '@angular/common';
+import { DecimalPipe, NgClass } from '@angular/common';
 
 @Component({
     selector: 'home-statistics',
     templateUrl: './statistics.component.html',
     styleUrls: ['./statistics.component.scss'],
-    standalone: false
+    imports: [NgClass]
 })
 export class StatisticsComponent {
 

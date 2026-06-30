@@ -10,11 +10,15 @@ import {KlimaatSensorService} from '../klimaatsensor.service';
 import {NgxSpinnerService} from 'ngx-spinner';
 import dayjs, {Dayjs} from 'dayjs';
 import {faArrowDown, faArrowUp, faDroplet, faThermometerHalf} from '@fortawesome/free-solid-svg-icons';
+import { NgClass, DecimalPipe, DatePipe } from '@angular/common';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
+import { DateNavigatorComponent } from '../../date-navigator/date-navigator.component';
 
 @Component({
     selector: 'home-klimaat-highest-lowest',
     templateUrl: './klimaat-highest-lowest.component.html',
-    standalone: false
+    imports: [NgClass, FaIconComponent, FormsModule, DateNavigatorComponent, DecimalPipe, DatePipe]
 })
 export class KlimaatHighestLowestComponent implements OnInit {
   faDroplet = faDroplet;

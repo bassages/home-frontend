@@ -5,11 +5,13 @@ import sortBy from 'lodash-es/sortBy';
 import {ErrorHandingService} from '../error-handling/error-handing.service';
 import {NgxSpinnerService} from 'ngx-spinner';
 import dayjs, {Dayjs} from 'dayjs';
+import { DateNavigatorComponent } from '../date-navigator/date-navigator.component';
+import { DecimalPipe, DatePipe } from '@angular/common';
 
 @Component({
     selector: 'home-meterstand',
     templateUrl: './meterstand.component.html',
-    standalone: false
+    imports: [DateNavigatorComponent, DecimalPipe, DatePipe]
 })
 export class MeterstandComponent implements OnInit {
 

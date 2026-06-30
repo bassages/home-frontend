@@ -5,7 +5,7 @@ import {ChartAPI, ChartConfiguration} from 'c3';
 import capitalize from 'lodash-es/capitalize';
 import isEqual from 'lodash-es/isEqual';
 import {ErrorHandingService} from '../error-handling/error-handing.service';
-import {DecimalPipe} from '@angular/common';
+import { DecimalPipe, NgClass } from '@angular/common';
 import {combineLatest} from 'rxjs';
 import {EnergieVerbruikHistorieService} from './energie-verbruik-historie.service';
 import {EnergieVerbruikHistorieServiceProvider} from './energie-verbruik-historie-service-provider';
@@ -14,6 +14,9 @@ import {NgxSpinnerService} from 'ngx-spinner';
 import dayjs, {Dayjs} from 'dayjs';
 import {faFireFlameCurved, faPlugCircleBolt} from '@fortawesome/free-solid-svg-icons';
 import {Statistics} from '../statistics';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { DateNavigatorComponent } from '../date-navigator/date-navigator.component';
+import { StatisticsComponent } from '../chart/statistics/statistics.component';
 
 const periodeToDateNavigatorModeMapping: Map<string, string> =
   new Map<string, string>([
@@ -27,7 +30,7 @@ const periodeToDateNavigatorModeMapping: Map<string, string> =
     selector: 'home-energie-verbruik',
     templateUrl: './energie-verbruik.component.html',
     styleUrls: ['./energie-verbuik-component.scss'],
-    standalone: false
+    imports: [NgClass, FaIconComponent, DateNavigatorComponent, StatisticsComponent]
 })
 export class EnergieVerbruikComponent implements OnInit {
   faPlugCircleBolt = faPlugCircleBolt

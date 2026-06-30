@@ -9,12 +9,15 @@ import {Led, LedState} from '../led';
 import {MeterstandService} from '../../meterstand/meterstand.service';
 import {Router} from '@angular/router';
 import {faMoon, faPlugCircleBolt, faSun} from '@fortawesome/free-solid-svg-icons';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { NgClass, DecimalPipe } from '@angular/common';
+import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'home-stroom-verbruik',
     templateUrl: './stroom-verbruik.component.html',
     styleUrls: ['../ledbar.scss', './stroom-verbruik.component.scss'],
-    standalone: false
+    imports: [FaIconComponent, NgClass, NgbTooltip, DecimalPipe]
 })
 export class StroomVerbruikComponent implements OnInit, OnDestroy {
   faPlugCircleBolt = faPlugCircleBolt;

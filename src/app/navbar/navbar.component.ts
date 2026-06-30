@@ -15,11 +15,14 @@ import {
   faTable,
   faTriangleExclamation
 } from '@fortawesome/free-solid-svg-icons';
+import { RouterLink } from '@angular/router';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'home-navbar',
     templateUrl: './navbar.component.html',
-    standalone: false
+    imports: [RouterLink, FaIconComponent, NgbCollapse]
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   faHouseChimney = faHouseChimney;

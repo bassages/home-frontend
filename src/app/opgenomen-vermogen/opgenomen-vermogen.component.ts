@@ -16,12 +16,15 @@ import {ChartStatisticsService} from '../chart/statistics/chart-statistics.servi
 import {NgxSpinnerService} from 'ngx-spinner';
 import dayjs, {Dayjs} from 'dayjs';
 import duration from 'dayjs/plugin/duration';
+import { DateNavigatorComponent } from '../date-navigator/date-navigator.component';
+import { FormsModule } from '@angular/forms';
+import { StatisticsComponent } from '../chart/statistics/statistics.component';
 dayjs.extend(duration);
 
 @Component({
     selector: 'home-opgenomen-vermogen',
     templateUrl: './opgenomen-vermogen.component.html',
-    standalone: false
+    imports: [DateNavigatorComponent, FormsModule, StatisticsComponent]
 })
 export class OpgenomenVermogenComponent implements OnInit {
 

@@ -3,11 +3,12 @@ import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {ErrorHandingService} from './error-handing.service';
 import {Error} from './error';
 import {faCircleExclamation} from '@fortawesome/free-solid-svg-icons';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
     selector: 'home-error-handler',
     templateUrl: './error-handling.component.html',
-    standalone: false
+    imports: [FaIconComponent]
 })
 export class ErrorHandlingComponent implements OnInit {
   faCircleExclamation = faCircleExclamation;

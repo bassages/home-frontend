@@ -8,12 +8,14 @@ import {RxStompService} from '@stomp/ng2-stompjs';
 import {Message} from '@stomp/stompjs';
 import {Trend} from '../../klimaat/trend';
 import {faArrowTrendDown, faArrowTrendUp, faDroplet} from '@fortawesome/free-solid-svg-icons';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { NgClass, DecimalPipe } from '@angular/common';
 
 @Component({
     selector: 'home-klimaat-luchtvochtigheid',
     templateUrl: './klimaat-luchtvochtigheid.component.html',
     styleUrls: ['../ledbar.scss', './klimaat-luchtvochtigheid.component.scss'],
-    standalone: false
+    imports: [FaIconComponent, NgClass, DecimalPipe]
 })
 export class KlimaatLuchtvochtigheidComponent implements  OnInit, OnDestroy {
   faDroplet = faDroplet

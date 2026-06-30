@@ -8,12 +8,14 @@ import {KlimaatService} from '../../klimaat/klimaat.service';
 import {RealtimeKlimaat} from '../../klimaat/realtimeKlimaat';
 import {Trend} from '../../klimaat/trend';
 import {faArrowTrendDown, faArrowTrendUp, faThermometerHalf} from '@fortawesome/free-solid-svg-icons';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { NgClass, DecimalPipe } from '@angular/common';
 
 @Component({
     selector: 'home-klimaat-temperatuur',
     templateUrl: './klimaat-temperatuur.component.html',
     styleUrls: ['../ledbar.scss', './klimaat-temperatuur.component.scss'],
-    standalone: false
+    imports: [FaIconComponent, NgClass, DecimalPipe]
 })
 export class KlimaatTemperatuurComponent implements OnInit, OnDestroy {
   faThermometerHalf = faThermometerHalf

@@ -3,8 +3,8 @@ import {Energiecontract} from './energiecontract';
 import {ErrorHandingService} from '../error-handling/error-handing.service';
 import {EnergiecontractService} from './energiecontract.service';
 import sortBy from 'lodash-es/sortBy';
-import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
-import {DecimalPipe} from '@angular/common';
+import { UntypedFormControl, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DecimalPipe, NgClass, CurrencyPipe, DatePipe } from '@angular/common';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NgxSpinnerService} from 'ngx-spinner';
 import dayjs from 'dayjs';
@@ -16,13 +16,15 @@ import {
   faTrash,
   faTriangleExclamation
 } from '@fortawesome/free-solid-svg-icons';
-import {MatDatepicker} from '@angular/material/datepicker';
+import { MatDatepicker, MatDatepickerInput } from '@angular/material/datepicker';
 import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 import {
   DayjsMaterialDateAdapter,
   DAYJS_MATERIAL_DATE_FORMATS,
   MaterialDateDisplayMode
 } from '../shared/material/dayjs-material-date-adapter';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { MatInput } from '@angular/material/input';
 
 const pricePattern = /^\d(,\d{1,6})*$/;
 
@@ -30,16 +32,16 @@ const pricePattern = /^\d(,\d{1,6})*$/;
     selector: 'home-energiecontract',
     templateUrl: './energiecontract.component.html',
     providers: [
-      {
-        provide: DateAdapter,
-        useClass: DayjsMaterialDateAdapter
-      },
-      {
-        provide: MAT_DATE_FORMATS,
-        useValue: DAYJS_MATERIAL_DATE_FORMATS
-      }
+        {
+            provide: DateAdapter,
+            useClass: DayjsMaterialDateAdapter
+        },
+        {
+            provide: MAT_DATE_FORMATS,
+            useValue: DAYJS_MATERIAL_DATE_FORMATS
+        }
     ],
-    standalone: false
+    imports: [FaIconComponent, NgClass, FormsModule, ReactiveFormsModule, MatInput, MatDatepickerInput, MatDatepicker, CurrencyPipe, DatePipe]
 })
 export class EnergiecontractComponent implements OnInit {
   faCirclePlus = faCirclePlus;

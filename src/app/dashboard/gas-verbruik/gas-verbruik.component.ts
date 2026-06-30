@@ -12,12 +12,15 @@ import {GemiddeldVerbruikInPeriod} from '../../energie-verbruik/gemiddeldVerbrui
 import {Router} from '@angular/router';
 import dayjs from 'dayjs';
 import {faFireFlameCurved, faMoon, faSun} from '@fortawesome/free-solid-svg-icons';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { NgClass, DecimalPipe } from '@angular/common';
+import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'home-gas-verbruik',
     templateUrl: './gas-verbruik.component.html',
     styleUrls: ['../ledbar.scss', './gas-verbruik.component.scss'],
-    standalone: false
+    imports: [FaIconComponent, NgClass, NgbTooltip, DecimalPipe]
 })
 export class GasVerbruikComponent implements OnInit, OnDestroy {
   faFireFlameCurved = faFireFlameCurved;
