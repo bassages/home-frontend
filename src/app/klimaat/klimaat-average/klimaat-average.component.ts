@@ -10,8 +10,9 @@ import dayjs, {Dayjs} from 'dayjs';
 import {faDroplet, faThermometerHalf} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'home-klimaat-average',
-  templateUrl: './klimaat-average.component.html'
+    selector: 'home-klimaat-average',
+    templateUrl: './klimaat-average.component.html',
+    standalone: false
 })
 export class KlimaatAverageComponent implements OnInit {
   faDroplet = faDroplet;

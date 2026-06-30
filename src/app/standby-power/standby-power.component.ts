@@ -6,8 +6,9 @@ import {NgxSpinnerService} from 'ngx-spinner';
 import dayjs, {Dayjs} from 'dayjs';
 
 @Component({
-  selector: 'home-standby-power',
-  templateUrl: './standby-power.component.html'
+    selector: 'home-standby-power',
+    templateUrl: './standby-power.component.html',
+    standalone: false
 })
 export class StandbyPowerComponent implements OnInit {
 

@@ -24,9 +24,10 @@ const periodeToDateNavigatorModeMapping: Map<string, string> =
   ]);
 
 @Component({
-  selector: 'home-energie-verbruik',
-  templateUrl: './energie-verbruik.component.html',
-  styleUrls: ['./energie-verbuik-component.scss']
+    selector: 'home-energie-verbruik',
+    templateUrl: './energie-verbruik.component.html',
+    styleUrls: ['./energie-verbuik-component.scss'],
+    standalone: false
 })
 export class EnergieVerbruikComponent implements OnInit {
   faPlugCircleBolt = faPlugCircleBolt
@@ -67,7 +68,11 @@ export class EnergieVerbruikComponent implements OnInit {
         if (!queryParams.has('datum')) {
           return this.navigateTo(verbruiksoortParam, energiesoortenParam, periodeParam, dayjs());
         }
-        const selectedDayParam = dayjs(queryParams.get('datum'), 'DD-MM-YYYY');
+        const selectedDayParam = this.parseRouteDate(queryParams.get('datum'));
+
+        if (!selectedDayParam) {
+          return this.navigateTo(verbruiksoortParam, energiesoortenParam, periodeParam, dayjs());
+        }
 
         if (isEqual(this.energiesoorten, energiesoortenParam) && this.verbruiksoort === verbruiksoortParam
                    && this.selectedDate.isSame(selectedDayParam) && this.periode === periodeParam) {
@@ -247,5 +252,10 @@ export class EnergieVerbruikComponent implements OnInit {
 
   public getDecimalFormat(): string {
       return '1.3-3';
+  }
+
+  private parseRouteDate(dateParam: string): Dayjs | null {
+    const parsed = dayjs(dateParam, 'DD-MM-YYYY', true);
+    return parsed.isValid() ? parsed : null;
   }
 }

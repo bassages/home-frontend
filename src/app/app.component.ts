@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import 'dayjs/locale/nl';
 import {AuthService} from './auth/auth.service';
-import dayjs from 'dayjs';
 
 @Component({
-  selector: 'home-root',
-  templateUrl: './app.component.html'
+    selector: 'home-root',
+    templateUrl: './app.component.html',
+    standalone: false
 })
 export class AppComponent implements OnInit {
 
@@ -13,7 +12,6 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    dayjs.locale('nl');
     this.authService.updateAuthenticatedSubject();
   }
 }

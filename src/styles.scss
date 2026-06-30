@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import "bootstrap/scss/bootstrap";
-@import '@angular/cdk/overlay-prebuilt.css';
+@use "bootstrap/scss/bootstrap" as *;
+@use "./styles/bootstrap-tokens" as bootstrap;
 
 .c3-zoom-rect {
   opacity: 1 !important;
@@ -55,19 +55,19 @@ html {
   font-size: 0.85rem;
 }
 
-@include media-breakpoint-up(sm) {
+@include bootstrap.media-breakpoint-up(sm) {
   html {
     font-size: 0.9rem;
   }
 }
 
-@include media-breakpoint-up(md) {
+@include bootstrap.media-breakpoint-up(md) {
   html {
     font-size: 1rem;
   }
 }
 
-@include media-breakpoint-up(lg) {
+@include bootstrap.media-breakpoint-up(lg) {
   html {
     font-size: 1rem;
   }
@@ -147,3 +147,12 @@ $inactive-background-color-hover: #eee;
   color: white;
   font-weight: bold;
 }
+
+.mat-datepicker-content .mat-calendar-body-selected {
+  background-color: var(--bs-primary);
+}
+
+.mat-datepicker-content .mat-calendar-body-cell-content.mat-focus-indicator:hover {
+  background-color: rgb(13 110 253 / 15%);
+}
+

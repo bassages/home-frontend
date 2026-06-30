@@ -4,23 +4,35 @@
   </div>
   <div class="card-body">
     <div class="ledbar float-start">
-      <div *ngFor="let i of [9,8,7,6,5,4,3,2,1,0]" class="led" [ngClass]="leds[i]?.state === LedState.ON ? 'temperatuur-led-' + i : 'led-off'"></div>
+      @for (i of [9,8,7,6,5,4,3,2,1,0]; track i) {
+        <div class="led" [ngClass]="leds[i]?.state === LedState.ON ? 'temperatuur-led-' + i : 'led-off'"></div>
+      }
     </div>
 
     <p class="h3">{{ sensorCode.charAt(0).toUpperCase() + sensorCode.slice(1).toLowerCase() }}</p>
     <div class="h3">
-      <span *ngIf="klimaat">{{ klimaat.temperatuur | number: '1.2-2' }}&#8451;</span>
-      <span *ngIf="!klimaat">-&#8451;</span>
+      @if (klimaat) {
+        <span>{{ klimaat.temperatuur | number: '1.2-2' }}&#8451;</span>
+      }
+      @if (!klimaat) {
+        <span>-&#8451;</span>
+      }
 
-      <span *ngIf="klimaat?.temperatuurTrend === Trend.UP" class="ms-2 text-danger">
-        <fa-icon [icon]="faArrowTrendUp"></fa-icon>
-      </span>
-      <span *ngIf="klimaat?.temperatuurTrend === Trend.DOWN" class="ms-2 text-primary">
-        <fa-icon [icon]="faArrowTrendDown"></fa-icon>
-      </span>
-      <span *ngIf="klimaat?.temperatuurTrend === Trend.STABLE" class="text-success ms-2">
-        <strong>&asymp;</strong>
-      </span>
+      @if (klimaat?.temperatuurTrend === Trend.UP) {
+        <span class="ms-2 text-danger">
+          <fa-icon [icon]="faArrowTrendUp"></fa-icon>
+        </span>
+      }
+      @if (klimaat?.temperatuurTrend === Trend.DOWN) {
+        <span class="ms-2 text-primary">
+          <fa-icon [icon]="faArrowTrendDown"></fa-icon>
+        </span>
+      }
+      @if (klimaat?.temperatuurTrend === Trend.STABLE) {
+        <span class="text-success ms-2">
+          <strong>&asymp;</strong>
+        </span>
+      }
     </div>
   </div>
 </div>

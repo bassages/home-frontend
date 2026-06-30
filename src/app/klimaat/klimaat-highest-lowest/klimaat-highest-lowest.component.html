@@ -4,20 +4,22 @@
       <div class="btn-group btn-group-toggle d-flex">
         <input type="checkbox" class="btn-check" [checked]="sensorType === 'temperatuur'">
         <label class="btn btn-outline-secondary w-100" [ngClass]="{'active': sensorType === 'temperatuur'}"
-               (click)="setSensorType('temperatuur')">
+          (click)="setSensorType('temperatuur')">
           <fa-icon [icon]="faThermometerHalf"></fa-icon> &#8451;
         </label>
 
         <input type="checkbox" class="btn-check" [checked]="sensorType === 'luchtvochtigheid'">
         <label class="btn btn-outline-secondary w-100" [ngClass]="{'active': sensorType === 'luchtvochtigheid'}"
-               (click)="setSensorType('luchtvochtigheid')">
+          (click)="setSensorType('luchtvochtigheid')">
           <fa-icon [icon]="faDroplet"></fa-icon> %
         </label>
       </div>
     </div>
     <div class="col-md-3 mb-2">
       <select class="form-select" name="sensor" (change)="sensorChanged()" [(ngModel)]="sensorCode">
-        <option *ngFor="let _sensor of sensors" [value]="_sensor.code">{{_sensor.omschrijving}}</option>
+        @for (_sensor of sensors; track _sensor) {
+          <option [value]="_sensor.code">{{_sensor.omschrijving}}</option>
+        }
       </select>
     </div>
     <div class="col-md-3 mb-2">
@@ -25,7 +27,9 @@
     </div>
     <div class="col-md-3">
       <select class="form-select form-control" id="limit" name="limit" (change)="limitChanged()" [(ngModel)]="limit">
-        <option *ngFor="let _limit of [5, 10, 25, 50, 100]" [value]="_limit">{{ _limit }}</option>
+        @for (_limit of [5, 10, 25, 50, 100]; track _limit) {
+          <option [value]="_limit">{{ _limit }}</option>
+        }
       </select>
     </div>
   </div>
@@ -41,18 +45,20 @@
         <div class="table-responsive">
           <table class="table table-bordered table-striped table-hover table-sm">
             <thead>
-            <tr>
-              <th class="text-end"></th>
-              <th class="text-end">Datum/tijd</th>
-              <th class="text-end text-capitalize">{{sensorType}}</th>
-            </tr>
+              <tr>
+                <th class="text-end"></th>
+                <th class="text-end">Datum/tijd</th>
+                <th class="text-end text-capitalize">{{sensorType}}</th>
+              </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let klimaat of lowestKlimaats; let index = index" (click)="navigateToDetailsOfDate(klimaat.dateTime)" class="clickable">
-              <td class="font-monospace text-end">{{ index + 1 }}.</td>
-              <td class="font-monospace text-end">{{ klimaat.dateTime.toDate() | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
-              <td class="font-monospace text-end">{{ klimaat[sensorType] | number: getDecimalFormat(sensorType) }}{{ ' ' + getValuePostFix(sensorType) }}</td>
-            </tr>
+              @for (klimaat of lowestKlimaats; track klimaat; let index = $index) {
+                <tr (click)="navigateToDetailsOfDate(klimaat.dateTime)" class="clickable">
+                  <td class="font-monospace text-end">{{ index + 1 }}.</td>
+                  <td class="font-monospace text-end">{{ klimaat.dateTime.toDate() | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+                  <td class="font-monospace text-end">{{ klimaat[sensorType] | number: getDecimalFormat(sensorType) }}{{ ' ' + getValuePostFix(sensorType) }}</td>
+                </tr>
+              }
             </tbody>
           </table>
         </div>
@@ -69,18 +75,20 @@
         <div class="table-responsive">
           <table class="table table-bordered table-striped table-hover table-sm">
             <thead>
-            <tr>
-              <th class="text-end"></th>
-              <th class="text-end">Datum/tijd</th>
-              <th class="text-end text-capitalize">{{sensorType}}</th>
-            </tr>
+              <tr>
+                <th class="text-end"></th>
+                <th class="text-end">Datum/tijd</th>
+                <th class="text-end text-capitalize">{{sensorType}}</th>
+              </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let klimaat of highestKlimaats; let index = index" (click)="navigateToDetailsOfDate(klimaat.dateTime)" class="clickable">
-              <td class="font-monospace text-end">{{ index + 1 }}.</td>
-              <td class="font-monospace text-end">{{ klimaat.dateTime.toDate() | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
-              <td class="font-monospace text-end">{{ klimaat[sensorType] | number: '1.2-2' }}{{ ' ' + getValuePostFix(sensorType) }}</td>
-            </tr>
+              @for (klimaat of highestKlimaats; track klimaat; let index = $index) {
+                <tr (click)="navigateToDetailsOfDate(klimaat.dateTime)" class="clickable">
+                  <td class="font-monospace text-end">{{ index + 1 }}.</td>
+                  <td class="font-monospace text-end">{{ klimaat.dateTime.toDate() | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+                  <td class="font-monospace text-end">{{ klimaat[sensorType] | number: '1.2-2' }}{{ ' ' + getValuePostFix(sensorType) }}</td>
+                </tr>
+              }
             </tbody>
           </table>
         </div>

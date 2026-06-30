@@ -5,7 +5,9 @@
     <h4>Opgenomen vermogen (Watt)</h4>
     <home-date-navigator mode="day" [selectedDate]="selectedDate" (navigation)="onDateNavigate($event)" class="input-group input-group-sm mb-2"></home-date-navigator>
     <select #periodLength class="form-select input-group input-group-sm mb-2" name="periodLength" (change)="periodLengthChanged()" [(ngModel)]="periodLengthInSeconds">
-      <option *ngFor="let _detailLevel of detailLevels" [value]="_detailLevel.periodLength">{{_detailLevel.title}}</option>
+      @for (_detailLevel of detailLevels; track _detailLevel) {
+        <option [value]="_detailLevel.periodLength">{{_detailLevel.title}}</option>
+      }
     </select>
   </div>
 
@@ -17,7 +19,9 @@
       </li>
       <li class="nav-item col-md-3">
         <select #periodLength class="form-select" name="periodLength" (change)="periodLengthChanged()" [(ngModel)]="periodLengthInSeconds">
-          <option *ngFor="let _detailLevel of detailLevels" [value]="_detailLevel.periodLength">{{_detailLevel.title}}</option>
+          @for (_detailLevel of detailLevels; track _detailLevel) {
+            <option [value]="_detailLevel.periodLength">{{_detailLevel.title}}</option>
+          }
         </select>
       </li>
       <li class="nav-item">

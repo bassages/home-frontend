@@ -12,8 +12,9 @@ import dayjs, {Dayjs} from 'dayjs';
 import {faArrowDown, faArrowUp, faDroplet, faThermometerHalf} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'home-klimaat-highest-lowest',
-  templateUrl: './klimaat-highest-lowest.component.html'
+    selector: 'home-klimaat-highest-lowest',
+    templateUrl: './klimaat-highest-lowest.component.html',
+    standalone: false
 })
 export class KlimaatHighestLowestComponent implements OnInit {
   faDroplet = faDroplet;

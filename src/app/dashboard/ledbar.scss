@@ -1,7 +1,5 @@
 // make sure to import the least possible to reduce main.js bundle size
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/mixins/_breakpoints";
+@use "src/styles/bootstrap-tokens" as bootstrap;
 
 .ledbar {
   overflow: auto;
@@ -16,21 +14,21 @@
   overflow: auto;
 }
 
-@include media-breakpoint-up(sm) {
+@include bootstrap.media-breakpoint-up(sm) {
   .led {
     width: 35px;
     height: 5.5px;
   }
 }
 
-@include media-breakpoint-up(md) {
+@include bootstrap.media-breakpoint-up(md) {
   .led {
     width: 35px;
     height: 6px;
   }
 }
 
-@include media-breakpoint-up(lg) {
+@include bootstrap.media-breakpoint-up(lg) {
   .led {
     width: 35px;
     height: 6px;

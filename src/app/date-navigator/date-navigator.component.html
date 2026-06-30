@@ -3,47 +3,65 @@
   <div class="input-group">
 
     <button (click)="navigate(-1)"
-            class="btn btn-outline-secondary"
-            [ngClass]="{'responsive-size': responsiveSize}"
-            type="button"><fa-icon [icon]="faChevronLeft"></fa-icon></button>
+      class="btn btn-outline-secondary"
+      [ngClass]="{'responsive-size': responsiveSize}"
+      type="button"><fa-icon [icon]="faChevronLeft"></fa-icon></button>
 
-    <!--suppress HtmlFormInputWithoutLabel -->
-    <input #picker="dpDayPicker" type="text" *ngIf="mode === 'day'" class="form-control text-center text-capitalize" name="dayPicker"
-           [formControl]="selectedDay"
-           [dpDayPicker]="dayPickerConfiguration"
-           (onChange)="datePickerChanged($event)"
-           [ngClass]="{
-                  'is-invalid': selectedDay.invalid,
-                  'responsive-size': responsiveSize
-           }"
-           theme="dp-material"
-           mode="day" />
+      <!--suppress HtmlFormInputWithoutLabel -->
+      @if (mode === 'day') {
+        <input matInput type="text" class="form-control text-center text-capitalize date-picker-input" name="dayPicker"
+          [formControl]="selectedDay"
+          [max]="maxDate"
+          [matDatepicker]="dayPicker"
+          [ngClass]="{
+                 'is-invalid': selectedDay.invalid,
+                 'responsive-size': responsiveSize
+          }"
+          required
+          readonly
+          (click)="openDayPicker($event)"
+          (dateChange)="datePickerChanged(selectedDay.value, 'day')" />
+        <mat-datepicker #dayPicker></mat-datepicker>
+      }
 
-    <!--suppress HtmlFormInputWithoutLabel -->
-    <input #picker="dpDayPicker" type="text" *ngIf="mode === 'month'" class="form-control text-center text-capitalize" name="monthPicker"
-           [formControl]="selectedMonth"
-           [dpDayPicker]="monthPickerConfiguration"
-           (onChange)="datePickerChanged($event)"
-           [ngClass]="{
-                  'is-invalid': selectedMonth.invalid,
-                  'responsive-size': responsiveSize
-           }"
-           theme="dp-material"
-           mode="month" />
+      <!--suppress HtmlFormInputWithoutLabel -->
+      @if (mode === 'month') {
+        <input matInput type="text" class="form-control text-center text-capitalize date-picker-input" name="monthPicker"
+          [formControl]="selectedMonth"
+          [max]="maxDate"
+          [matDatepicker]="monthPicker"
+          [ngClass]="{
+                 'is-invalid': selectedMonth.invalid,
+                 'responsive-size': responsiveSize
+          }"
+          required
+          readonly
+          (click)="openMonthPicker($event)"
+          (dateChange)="datePickerChanged(selectedMonth.value, 'month')" />
+        <mat-datepicker #monthPicker startView="multi-year" (monthSelected)="monthSelected($event, monthPicker)"></mat-datepicker>
+      }
 
-    <!--suppress HtmlFormInputWithoutLabel -->
-    <input #yearPicker type="text" *ngIf="mode === 'year'" class="form-control text-center responsive-size" name="yearPicker"
-           [formControl]="selectedYear"
-           [ngClass]="{
-                  'is-invalid': selectedYear.invalid,
-                  'responsive-size': responsiveSize
-           }"
-           readonly="readonly" />
+      <!--suppress HtmlFormInputWithoutLabel -->
+      @if (mode === 'year') {
+        <input matInput type="text" class="form-control text-center date-picker-input" name="yearPicker"
+          [formControl]="selectedYear"
+          [max]="maxDate"
+          [matDatepicker]="yearPicker"
+          [ngClass]="{
+                 'is-invalid': selectedYear.invalid,
+                 'responsive-size': responsiveSize
+          }"
+          required
+          readonly
+          (click)="openYearPicker($event)"
+          (dateChange)="datePickerChanged(selectedYear.value, 'year')" />
+        <mat-datepicker #yearPicker startView="multi-year" (yearSelected)="yearSelected($event, yearPicker)"></mat-datepicker>
+      }
 
       <button type="button"
-              class="btn btn-outline-secondary responsive-size"
-              [ngClass]="{'responsive-size': responsiveSize}"
-              (click)="navigate(+1)" [disabled]="isUpNavigationDisabled()"><fa-icon [icon]="faChevronRight"></fa-icon></button>
+        class="btn btn-outline-secondary responsive-size"
+        [ngClass]="{'responsive-size': responsiveSize}"
+        (click)="navigate(+1)" [disabled]="isUpNavigationDisabled()"><fa-icon [icon]="faChevronRight"></fa-icon></button>
 
-  </div>
-</form>
+      </div>
+    </form>

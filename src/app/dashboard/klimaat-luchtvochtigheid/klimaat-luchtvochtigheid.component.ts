@@ -10,9 +10,10 @@ import {Trend} from '../../klimaat/trend';
 import {faArrowTrendDown, faArrowTrendUp, faDroplet} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'home-klimaat-luchtvochtigheid',
-  templateUrl: './klimaat-luchtvochtigheid.component.html',
-  styleUrls: ['../ledbar.scss', './klimaat-luchtvochtigheid.component.scss']
+    selector: 'home-klimaat-luchtvochtigheid',
+    templateUrl: './klimaat-luchtvochtigheid.component.html',
+    styleUrls: ['../ledbar.scss', './klimaat-luchtvochtigheid.component.scss'],
+    standalone: false
 })
 export class KlimaatLuchtvochtigheidComponent implements  OnInit, OnDestroy {
   faDroplet = faDroplet

@@ -14,9 +14,10 @@ import dayjs from 'dayjs';
 import {faFireFlameCurved, faMoon, faSun} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'home-gas-verbruik',
-  templateUrl: './gas-verbruik.component.html',
-  styleUrls: ['../ledbar.scss', './gas-verbruik.component.scss']
+    selector: 'home-gas-verbruik',
+    templateUrl: './gas-verbruik.component.html',
+    styleUrls: ['../ledbar.scss', './gas-verbruik.component.scss'],
+    standalone: false
 })
 export class GasVerbruikComponent implements OnInit, OnDestroy {
   faFireFlameCurved = faFireFlameCurved;

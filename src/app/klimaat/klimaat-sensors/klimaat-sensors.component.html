@@ -4,30 +4,35 @@
   </div>
 </div>
 
-<div class="table-responsive" *ngIf="sensors && sensors.length > 0; else no_klimaatsensors">
-  <table class="table table-bordered table-striped table-hover table-sm">
-    <thead>
-      <tr>
-        <th>Code</th>
-        <th>Omschrijving</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let sensor of sensors" (click)="startEdit(sensor)" class="clickable" [ngClass]="{'table-primary': sensor.code === selectedSensor?.code}">
-        <td>{{ sensor.code }}</td>
-        <td>{{ sensor.omschrijving }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<ng-template #no_klimaatsensors>
-  <div class="table-responsive" *ngIf="sensors">
-    <div class="alert alert-info">
-      <fa-icon [icon]="faCircleInfo"></fa-icon> Er zijn nog geen klimaatsensors. <strong>Tip</strong>: Klimaatsensors worden automatisch toegevoegd zodra ze aangesloten worden en gegevens registreren.
-    </div>
+@if (sensors && sensors.length > 0) {
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover table-sm">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Omschrijving</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (sensor of sensors; track sensor) {
+          <tr (click)="startEdit(sensor)" class="clickable" [ngClass]="{'table-primary': sensor.code === selectedSensor?.code}">
+            <td>{{ sensor.code }}</td>
+            <td>{{ sensor.omschrijving }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
   </div>
-</ng-template>
+} @else {
+  @if (sensors) {
+    <div class="table-responsive">
+      <div class="alert alert-info">
+        <fa-icon [icon]="faCircleInfo"></fa-icon> Er zijn nog geen klimaatsensors. <strong>Tip</strong>: Klimaatsensors worden automatisch toegevoegd zodra ze aangesloten worden en gegevens registreren.
+      </div>
+    </div>
+  }
+}
+
 
 <form [formGroup]="form" [hidden]="!editMode" autocomplete="off" novalidate (submit)="save()">
   <hr/>

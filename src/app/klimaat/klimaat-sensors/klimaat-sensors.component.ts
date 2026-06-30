@@ -10,8 +10,9 @@ import {NgxSpinnerService} from 'ngx-spinner';
 import {faBan, faCheck, faCircleInfo, faTrash, faTriangleExclamation} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'home-klimaat-sensors',
-  templateUrl: './klimaat-sensors.component.html'
+    selector: 'home-klimaat-sensors',
+    templateUrl: './klimaat-sensors.component.html',
+    standalone: false
 })
 export class KlimaatSensorsComponent implements OnInit {
   faCircleInfo = faCircleInfo;

@@ -17,8 +17,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'home-navbar',
-  templateUrl: './navbar.component.html'
+    selector: 'home-navbar',
+    templateUrl: './navbar.component.html',
+    standalone: false
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   faHouseChimney = faHouseChimney;

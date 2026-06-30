@@ -8,8 +8,9 @@ import {faArrowUpRightFromSquare, faBan, faCheck, faEdit} from '@fortawesome/fre
 const authenticatieTokenMaxLengthValidator = Validators.maxLength(255);
 
 @Component({
-  selector: 'home-mindergasnl',
-  templateUrl: './mindergasnl.component.html'
+    selector: 'home-mindergasnl',
+    templateUrl: './mindergasnl.component.html',
+    standalone: false
 })
 export class MindergasnlComponent implements OnInit {
   faArrowUpRightFromSquare = faArrowUpRightFromSquare

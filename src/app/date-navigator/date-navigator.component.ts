@@ -1,42 +1,52 @@
-import {Component, EventEmitter, Input, Output, QueryList, ViewChildren} from '@angular/core';
-import {DatePickerDirective, IDatePickerDirectiveConfig} from 'ng2-date-picker';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import dayjs, {Dayjs} from 'dayjs';
 import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
-
-const selectedDayFormat = 'dd. DD-MM-YYYY';
-const selectedMonthFormat = 'MMMM YYYY';
+import {MatDatepicker} from '@angular/material/datepicker';
+import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
+import {
+  DATE_NAVIGATOR_DATE_FORMATS,
+  DateNavigatorDateAdapter,
+  DateNavigatorDisplayMode
+} from './date-navigator-date-adapter';
 
 @Component({
-  selector: 'home-date-navigator',
-  templateUrl: './date-navigator.component.html',
-  styleUrls: ['./date-navigator.component.scss']
+    selector: 'home-date-navigator',
+    templateUrl: './date-navigator.component.html',
+    styleUrls: ['./date-navigator.component.scss'],
+    providers: [
+      {
+        provide: DateAdapter,
+        useClass: DateNavigatorDateAdapter
+      },
+      {
+        provide: MAT_DATE_FORMATS,
+        useValue: DATE_NAVIGATOR_DATE_FORMATS
+      }
+    ],
+    standalone: false
 })
-export class DateNavigatorComponent {
+export class DateNavigatorComponent implements OnChanges {
   faChevronLeft = faChevronLeft
   faChevronRight = faChevronRight
 
   @Input()
-  public mode: string;
+  public mode: DateNavigatorDisplayMode;
 
   @Input()
   public responsiveSize = false;
 
   @Input()
   set selectedDate(selectedDate: Dayjs) {
-    if (selectedDate !== undefined) {
+    if (selectedDate !== undefined && selectedDate?.isValid()) {
       this._selectedDate = selectedDate;
-      this.selectedDay.setValue(selectedDate);
-      this.selectedMonth.setValue(selectedDate);
-      this.selectedYear.setValue(selectedDate.year());
+      this.updateSelectedDayAndMonthControls(selectedDate);
+      this.previouslySelectedDate = selectedDate;
     }
   }
 
   @Output()
   public navigation = new EventEmitter<Dayjs>();
-
-  @ViewChildren('picker')
-  public pickers: QueryList<DatePickerDirective>;
 
   public form: UntypedFormGroup;
 
@@ -44,43 +54,106 @@ export class DateNavigatorComponent {
 
   public previouslySelectedDate: Dayjs;
 
-  public monthPickerConfiguration: IDatePickerDirectiveConfig;
-  public dayPickerConfiguration: IDatePickerDirectiveConfig;
+  @ViewChild('dayPicker')
+  private dayPicker?: MatDatepicker<Date>;
 
-  constructor() {
-    this.initDatePickerConfigurations();
+  @ViewChild('monthPicker')
+  private monthPicker?: MatDatepicker<Date>;
+
+  @ViewChild('yearPicker')
+  private yearPicker?: MatDatepicker<Date>;
+
+  constructor(private readonly dateAdapter: DateAdapter<Date>) {
     this.createForm();
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['mode']) {
+      this.syncDateAdapterMode();
+    }
   }
 
   private createForm(): void {
     this.form = new UntypedFormGroup({
-      selectedDay: new UntypedFormControl({value: this._selectedDate}, [Validators.required]),
-      selectedMonth: new UntypedFormControl({value: this._selectedDate}, [Validators.required]),
-      selectedYear: new UntypedFormControl('', [Validators.required])
+      selectedDay: new UntypedFormControl(null, [Validators.required]),
+      selectedMonth: new UntypedFormControl(null, [Validators.required]),
+      selectedYear: new UntypedFormControl(null, [Validators.required])
     });
   }
 
-  private initDatePickerConfigurations() {
-    this.dayPickerConfiguration = {
-      format: selectedDayFormat,
-      max: dayjs()
-    };
-    this.monthPickerConfiguration = {
-      format: selectedMonthFormat,
-      max: dayjs()
-    };
-  }
+  public datePickerChanged(value: Date | null, mode: 'day' | 'month' | 'year'): void {
+    const selectedDate = this.toSelectedDate(value, mode);
 
-  public datePickerChanged(selectedDate: Dayjs): void {
-    if (selectedDate !== undefined && this.previouslySelectedDate !== undefined
-      && !selectedDate.isSame(this.previouslySelectedDate)) {
-      this.pickers.forEach((item, _index, _array) => {
-        item.elemRef.nativeElement.blur();
-        item.api.close();
-      });
+    if (!selectedDate && this._selectedDate?.isValid()) {
+      this.updateSelectedDayAndMonthControls(this._selectedDate);
+      this.previouslySelectedDate = this._selectedDate;
+      return;
+    }
+
+    if (selectedDate !== undefined && this._selectedDate !== undefined
+      && !selectedDate.isSame(this._selectedDate)) {
+      this.selectedDate = selectedDate;
       this.navigation.emit(selectedDate);
     }
     this.previouslySelectedDate = selectedDate;
+  }
+
+  public openDayPicker(event: MouseEvent): void {
+    event.preventDefault();
+    this.setDateAdapterMode('day');
+    this.openPicker(this.dayPicker);
+  }
+
+  public openMonthPicker(event: MouseEvent): void {
+    event.preventDefault();
+    this.setDateAdapterMode('month');
+    this.openPicker(this.monthPicker);
+  }
+
+  public openYearPicker(event: MouseEvent): void {
+    event.preventDefault();
+    this.setDateAdapterMode('year');
+    this.openPicker(this.yearPicker);
+  }
+
+  public get maxDate(): Date {
+    return new Date();
+  }
+
+  public monthSelected(value: Date, datepicker: MatDatepicker<Date>): void {
+    this.setDateAdapterMode('month');
+    this.datePickerChanged(value, 'month');
+    datepicker.close();
+  }
+
+  public yearSelected(value: Date, datepicker: MatDatepicker<Date>): void {
+    this.setDateAdapterMode('year');
+    this.datePickerChanged(value, 'year');
+    datepicker.close();
+  }
+
+  private toSelectedDate(value: Date | null, mode: 'day' | 'month' | 'year'): Dayjs | undefined {
+    if (!value) {
+      return undefined;
+    }
+
+    const parsedDate = dayjs(value);
+    if (!parsedDate.isValid()) {
+      return undefined;
+    }
+
+    if (mode === 'month') {
+      return parsedDate.startOf('month');
+    }
+
+    if (mode === 'year') {
+      if (this._selectedDate?.isValid()) {
+        return this._selectedDate.year(parsedDate.year());
+      }
+      return parsedDate.startOf('year');
+    }
+
+    return parsedDate;
   }
 
   get selectedDay(): UntypedFormControl {
@@ -113,18 +186,44 @@ export class DateNavigatorComponent {
   }
 
   public navigate(amount: number): void {
+    let nextDate: Dayjs;
+
     if (this.mode === 'day') {
-      this.selectedDate = this._selectedDate.add(amount, 'days');
+      nextDate = this._selectedDate.add(amount, 'days');
 
     } else if (this.mode === 'month') {
-      this.selectedDate = this._selectedDate.add(amount, 'months');
+      nextDate = this._selectedDate.add(amount, 'months');
 
     } else if (this.mode === 'year') {
-      this.selectedDate = dayjs(
-        `${this.selectedYear.value + amount}-${this._selectedDate.format('MM')}-${this._selectedDate.format('DD')}`);
-
-      // Since year mode is not backed by a datepicker, we'll have to trigger the navigation event
-      this.navigation.emit(this._selectedDate.clone());
+      nextDate = this._selectedDate.add(amount, 'years');
+    } else {
+      return;
     }
+
+    this.selectedDate = nextDate;
+    this.navigation.emit(nextDate.clone());
+  }
+
+  private updateSelectedDayAndMonthControls(selectedDate: Dayjs): void {
+    this.selectedDay.setValue(selectedDate.toDate(), {emitEvent: false});
+    this.selectedMonth.setValue(selectedDate.startOf('month').toDate(), {emitEvent: false});
+    this.selectedYear.setValue(selectedDate.startOf('year').toDate(), {emitEvent: false});
+  }
+
+  private openPicker(datepicker?: MatDatepicker<Date>): void {
+    if (!datepicker) {
+      return;
+    }
+
+    datepicker.open();
+  }
+
+  private syncDateAdapterMode(): void {
+    this.setDateAdapterMode(this.mode ?? 'day');
+  }
+
+  private setDateAdapterMode(mode: DateNavigatorDisplayMode): void {
+    const adapter = this.dateAdapter as DateNavigatorDateAdapter;
+    adapter.setDisplayMode(mode);
   }
 }

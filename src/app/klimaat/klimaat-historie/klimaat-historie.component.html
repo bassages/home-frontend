@@ -5,7 +5,9 @@
     <ul class="nav nav-tabs">
       <li class="nav-item me-1">
         <select class="form-select" name="sensor" (change)="sensorChanged()" [(ngModel)]="sensorCode">
-          <option *ngFor="let _sensor of sensors" [value]="_sensor.code">{{_sensor.omschrijving}}</option>
+          @for (_sensor of sensors; track _sensor) {
+            <option [value]="_sensor.code">{{_sensor.omschrijving}}</option>
+          }
         </select>
       </li>
 
@@ -21,7 +23,9 @@
 
   <div class="row mb-2 px-2 px-sm-0">
     <select class="form-select form-control-sm" name="sensor" (change)="sensorChanged()" [(ngModel)]="sensorCode">
-      <option *ngFor="let _sensor of sensors" [value]="_sensor.code">{{_sensor.omschrijving}}</option>
+      @for (_sensor of sensors; track _sensor) {
+        <option [value]="_sensor.code">{{_sensor.omschrijving}}</option>
+      }
     </select>
   </div>
 
@@ -38,8 +42,8 @@
   <!-- Date selection  -->
   <div class="row mb-2 px-2 px-sm-0">
     <home-date-navigator mode="day" [selectedDate]="date" (navigation)="onDateNavigate($event)"
-                         [responsiveSize]="true"
-                         class="input-group input-group-sm ps-0 pe-0"></home-date-navigator>
+      [responsiveSize]="true"
+    class="input-group input-group-sm ps-0 pe-0"></home-date-navigator>
   </div>
 </div>
 
@@ -56,17 +60,21 @@
   </div>
   <div class="col-md-12 col-lg-11 px-2 px-sm-0">
     <div [hidden]="!showChart" id="chart" class="c3 graph-chart"></div>
-    <div *ngIf="showTable" class="table-responsive">
-      <table class="table table-bordered table-striped table-sm">
-        <tbody>
-          <tr *ngFor="let klimaat of klimaats" class="clickable'">
-            <td class="font-monospace text-end">{{ getFormattedTime(klimaat) }}</td>
-            <td class="font-monospace text-end">{{ formatWithUnitLabel(sensorType, klimaat[sensorType]) }}</td>
-            <td [style.background-color]="getColor(klimaat[sensorType])" style="width:12px;"></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    @if (showTable) {
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-sm">
+          <tbody>
+            @for (klimaat of klimaats; track klimaat) {
+              <tr class="clickable'">
+                <td class="font-monospace text-end">{{ getFormattedTime(klimaat) }}</td>
+                <td class="font-monospace text-end">{{ formatWithUnitLabel(sensorType, klimaat[sensorType]) }}</td>
+                <td [style.background-color]="getColor(klimaat[sensorType])" style="width:12px;"></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
   </div>
 </div>
 

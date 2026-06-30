@@ -17,11 +17,13 @@
     <label class="col-sm-4 col-md-3">Authenticatietoken</label>
     <div class="col-sm-6">
       <input type="text" id="authenticatietoken"
-             class="form-control" [ngClass]="{'is-invalid': authenticatietoken.invalid, 'readonly': !editMode}"
-             formControlName="authenticatietoken" />
-      <div *ngIf="authenticatietoken.invalid && authenticatietoken.errors.required" class="text-danger">
-        <small>Voor het automatisch uploaden naar MinderGas.nl is een authenticatietoken noodzakelijk</small>
-      </div>
+        class="form-control" [ngClass]="{'is-invalid': authenticatietoken.invalid, 'readonly': !editMode}"
+        formControlName="authenticatietoken" />
+      @if (authenticatietoken.invalid && authenticatietoken.errors.required) {
+        <div class="text-danger">
+          <small>Voor het automatisch uploaden naar MinderGas.nl is een authenticatietoken noodzakelijk</small>
+        </div>
+      }
     </div>
   </div>
 
@@ -29,9 +31,15 @@
     <div class="col-sm-4 col-md-3">&nbsp;</div>
     <div class="col-sm-6">
       <div class="float-end">
-        <button *ngIf="!editMode" type="button" class='btn btn-primary' (click)="editMode = true"><fa-icon [icon]="faEdit"></fa-icon> Wijzig</button>
-        <button *ngIf="editMode" type="button" class='btn btn-primary' (click)="cancel()"><fa-icon [icon]="faBan"></fa-icon> Annuleren</button>
-        <button *ngIf="editMode" type="submit" class='btn btn-primary ms-1' [disabled]="form.invalid"><fa-icon [icon]="faCheck"></fa-icon> Opslaan</button>
+        @if (!editMode) {
+          <button type="button" class='btn btn-primary' (click)="editMode = true"><fa-icon [icon]="faEdit"></fa-icon> Wijzig</button>
+        }
+        @if (editMode) {
+          <button type="button" class='btn btn-primary' (click)="cancel()"><fa-icon [icon]="faBan"></fa-icon> Annuleren</button>
+        }
+        @if (editMode) {
+          <button type="submit" class='btn btn-primary ms-1' [disabled]="form.invalid"><fa-icon [icon]="faCheck"></fa-icon> Opslaan</button>
+        }
       </div>
     </div>
   </div>

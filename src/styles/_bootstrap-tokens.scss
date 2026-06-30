@@ -1,0 +1,66 @@
+@use "sass:map";
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+$input-height-sm: calc(1.5em + 0.5rem + 2px);
+$font-size-sm: 0.875rem;
+$input-height: calc(1.5em + 0.75rem + 2px);
+$font-size-base: 1rem;
+
+@function breakpoint-min($name) {
+  @return map.get($grid-breakpoints, $name);
+}
+
+@function breakpoint-max($name) {
+  $min: breakpoint-min($name);
+
+  @if $min == null {
+    @error "Unknown breakpoint '#{$name}'.";
+  }
+
+  @if $min == 0 {
+    @return 0;
+  }
+
+  @return $min - 0.02px;
+}
+
+@mixin media-breakpoint-up($name) {
+  $min: breakpoint-min($name);
+
+  @if $min == null {
+    @error "Unknown breakpoint '#{$name}'.";
+  }
+
+  @if $min == 0 {
+    @content;
+  } @else {
+    @media (min-width: $min) {
+      @content;
+    }
+  }
+}
+
+@mixin media-breakpoint-down($name) {
+  $max: breakpoint-max($name);
+
+  @if $max == null {
+    @error "Unknown breakpoint '#{$name}'.";
+  }
+
+  @if $max == 0 {
+    @content;
+  } @else {
+    @media (max-width: $max) {
+      @content;
+    }
+  }
+}
+

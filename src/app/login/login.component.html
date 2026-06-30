@@ -1,23 +1,27 @@
-<form *ngIf="initialized" role="form" class="form-horizontal pt-5 pb-5" autocomplete="off" novalidate (submit)="login()">
-  <div class="row">
-    <div class="text-center col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
-      <div *ngIf="loginFailed" class="alert alert-danger">
-        Ongeldige gebruiksnaam en/of wachtwoord
-      </div>
-      <div class="mb-4">
-        <fa-icon [icon]="faHouseChimney" size="4x"></fa-icon>
-      </div>
-      <div class="ms-3 me-3">
-        <div class="input-group mb-2">
-          <span class="input-group-text"><fa-icon [icon]="faUser"></fa-icon></span>
-          <input class="form-control" type="text" id="username" name="username" [(ngModel)]="credentials.username" placeholder="Gebruikersnaam" required autofocus />
+@if (initialized) {
+  <form role="form" class="form-horizontal pt-5 pb-5" autocomplete="off" novalidate (submit)="login()">
+    <div class="row">
+      <div class="text-center col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
+        @if (loginFailed) {
+          <div class="alert alert-danger">
+            Ongeldige gebruiksnaam en/of wachtwoord
+          </div>
+        }
+        <div class="mb-4">
+          <fa-icon [icon]="faHouseChimney" size="4x"></fa-icon>
         </div>
-        <div class="input-group mb-2">
-          <span class="input-group-text"><fa-icon [icon]="faKey"></fa-icon></span>
-          <input class="form-control" type="password" id="password" name="password" [(ngModel)]="credentials.password" placeholder="Wachtwoord" required />
+        <div class="ms-3 me-3">
+          <div class="input-group mb-2">
+            <span class="input-group-text"><fa-icon [icon]="faUser"></fa-icon></span>
+            <input class="form-control" type="text" id="username" name="username" [(ngModel)]="credentials.username" placeholder="Gebruikersnaam" required autofocus />
+          </div>
+          <div class="input-group mb-2">
+            <span class="input-group-text"><fa-icon [icon]="faKey"></fa-icon></span>
+            <input class="form-control" type="password" id="password" name="password" [(ngModel)]="credentials.password" placeholder="Wachtwoord" required />
+          </div>
+          <input class="form-control btn btn-secondary" type="submit" value="Aanmelden"/>
         </div>
-        <input class="form-control btn btn-secondary" type="submit" value="Aanmelden"/>
       </div>
     </div>
-  </div>
-</form>
+  </form>
+}

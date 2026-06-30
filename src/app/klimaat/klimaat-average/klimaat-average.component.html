@@ -4,19 +4,21 @@
       <div class="btn-group btn-group-toggle d-flex">
         <input type="checkbox" class="btn-check" [checked]="sensorType === 'temperatuur'">
         <label class="btn btn-outline-secondary w-100" [ngClass]="{'active': sensorType === 'temperatuur'}"
-               (click)="setSensorType('temperatuur')">
+          (click)="setSensorType('temperatuur')">
           <fa-icon [icon]="faThermometerHalf"></fa-icon> &#8451;
         </label>
         <input type="checkbox" class="btn-check" [checked]="sensorType === 'luchtvochtigheid'">
         <label class="btn btn-outline-secondary w-100" [ngClass]="{'active': sensorType === 'luchtvochtigheid'}"
-               (click)="setSensorType('luchtvochtigheid')">
+          (click)="setSensorType('luchtvochtigheid')">
           <fa-icon [icon]="faDroplet"></fa-icon> %
         </label>
       </div>
     </div>
     <div class="col-md-4 col-lg-3 mb-2">
       <select class="form-select" name="sensor" (change)="sensorChanged()" [(ngModel)]="sensorCode">
-        <option *ngFor="let _sensor of sensors" [value]="_sensor.code">{{_sensor.omschrijving}}</option>
+        @for (_sensor of sensors; track _sensor) {
+          <option [value]="_sensor.code">{{_sensor.omschrijving}}</option>
+        }
       </select>
     </div>
     <div class="col-md-4 col-lg-3 mb-2">
@@ -30,16 +32,18 @@
     <div class="table-responsive">
       <table class="table table-bordered table-striped table-hover table-sm">
         <thead>
-        <tr>
-          <th class="text-end">Maand</th>
-          <th class="text-end text-capitalize">{{sensorType}}</th>
-        </tr>
+          <tr>
+            <th class="text-end">Maand</th>
+            <th class="text-end text-capitalize">{{sensorType}}</th>
+          </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let gemiddeldeKlimaatInMaand of gemiddeldeKlimaatPerMaand">
-          <td class="font-monospace text-end text-capitalize">{{ gemiddeldeKlimaatInMaand.maand.toDate() | date: 'MMMM'}}</td>
-          <td class="font-monospace text-end">{{ gemiddeldeKlimaatInMaand.gemiddelde | number: getDecimalFormat(sensorType) }}{{ (gemiddeldeKlimaatInMaand.gemiddelde !== null && gemiddeldeKlimaatInMaand.gemiddelde !== undefined) ? ' ' + getValuePostFix(sensorType) : '' }}</td>
-        </tr>
+          @for (gemiddeldeKlimaatInMaand of gemiddeldeKlimaatPerMaand; track gemiddeldeKlimaatInMaand) {
+            <tr>
+              <td class="font-monospace text-end text-capitalize">{{ gemiddeldeKlimaatInMaand.maand.toDate() | date: 'MMMM'}}</td>
+              <td class="font-monospace text-end">{{ gemiddeldeKlimaatInMaand.gemiddelde | number: getDecimalFormat(sensorType) }}{{ (gemiddeldeKlimaatInMaand.gemiddelde !== null && gemiddeldeKlimaatInMaand.gemiddelde !== undefined) ? ' ' + getValuePostFix(sensorType) : '' }}</td>
+            </tr>
+          }
         </tbody>
       </table>
     </div>

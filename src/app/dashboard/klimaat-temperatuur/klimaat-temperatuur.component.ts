@@ -10,9 +10,10 @@ import {Trend} from '../../klimaat/trend';
 import {faArrowTrendDown, faArrowTrendUp, faThermometerHalf} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'home-klimaat-temperatuur',
-  templateUrl: './klimaat-temperatuur.component.html',
-  styleUrls: ['../ledbar.scss', './klimaat-temperatuur.component.scss']
+    selector: 'home-klimaat-temperatuur',
+    templateUrl: './klimaat-temperatuur.component.html',
+    styleUrls: ['../ledbar.scss', './klimaat-temperatuur.component.scss'],
+    standalone: false
 })
 export class KlimaatTemperatuurComponent implements OnInit, OnDestroy {
   faThermometerHalf = faThermometerHalf

@@ -5,8 +5,9 @@ import {AuthService} from '../auth/auth.service';
 import {faHouseChimney, faKey, faUser} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'home-login',
-  templateUrl: './login.component.html'
+    selector: 'home-login',
+    templateUrl: './login.component.html',
+    standalone: false
 })
 export class LoginComponent implements OnInit {
   faHouseChimney = faHouseChimney;

@@ -5,8 +5,9 @@ import {Error} from './error';
 import {faCircleExclamation} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'home-error-handler',
-  templateUrl: './error-handling.component.html'
+    selector: 'home-error-handler',
+    templateUrl: './error-handling.component.html',
+    standalone: false
 })
 export class ErrorHandlingComponent implements OnInit {
   faCircleExclamation = faCircleExclamation;

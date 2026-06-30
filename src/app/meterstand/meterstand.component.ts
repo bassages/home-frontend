@@ -7,8 +7,9 @@ import {NgxSpinnerService} from 'ngx-spinner';
 import dayjs, {Dayjs} from 'dayjs';
 
 @Component({
-  selector: 'home-meterstand',
-  templateUrl: './meterstand.component.html'
+    selector: 'home-meterstand',
+    templateUrl: './meterstand.component.html',
+    standalone: false
 })
 export class MeterstandComponent implements OnInit {
 

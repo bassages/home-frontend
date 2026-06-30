@@ -3,9 +3,10 @@ import {Statistics} from '../../statistics';
 import {DecimalPipe} from '@angular/common';
 
 @Component({
-  selector: 'home-statistics',
-  templateUrl: './statistics.component.html',
-  styleUrls: ['./statistics.component.scss']
+    selector: 'home-statistics',
+    templateUrl: './statistics.component.html',
+    styleUrls: ['./statistics.component.scss'],
+    standalone: false
 })
 export class StatisticsComponent {
 

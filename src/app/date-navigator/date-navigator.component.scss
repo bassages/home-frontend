@@ -1,18 +1,25 @@
-@import "bootstrap/scss/functions.scss";
-@import "bootstrap/scss/variables.scss";
-@import "bootstrap/scss/mixins/breakpoints.scss";
+@use "src/styles/bootstrap-tokens" as bootstrap;
 
 .date-navigator-form {
   width: inherit;
 }
 
+.date-picker-input {
+  cursor: pointer;
+  caret-color: transparent;
+}
+
+.date-picker-input:focus {
+  box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+}
+
 .responsive-size {
-  @include media-breakpoint-down(md) {
-    height: $input-height-sm;
-    font-size: $font-size-sm;
+  @include bootstrap.media-breakpoint-down(md) {
+    height: bootstrap.$input-height-sm;
+    font-size: bootstrap.$font-size-sm;
   }
-  @include media-breakpoint-down(xl) {
-    height: $input-height;
-    font-size: $font-size-base;
+  @include bootstrap.media-breakpoint-down(xl) {
+    height: bootstrap.$input-height;
+    font-size: bootstrap.$font-size-base;
   }
 }

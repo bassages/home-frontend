@@ -6,7 +6,6 @@ import {MeterstandComponent} from './meterstand/meterstand.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MeterstandService} from './meterstand/meterstand.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {DpDatePickerModule} from 'ng2-date-picker';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {NavbarComponent} from './navbar/navbar.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
@@ -52,6 +51,10 @@ import {NgxSpinnerModule} from 'ngx-spinner';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import localeNl from '@angular/common/locales/nl';
+import {MatDatepickerIntl, MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatNativeDateModule, MAT_DATE_LOCALE} from '@angular/material/core';
+import {DutchMatDatepickerIntl} from './shared/material/dutch-mat-datepicker-intl';
 
 export function socketProvider() {
   return new SockJS('/ws');
@@ -122,9 +125,11 @@ const appRoutes: Routes = [
         FormsModule,
         ReactiveFormsModule,
         NgbModule,
-        DpDatePickerModule,
         NgxSpinnerModule,
         BrowserAnimationsModule,
+        MatDatepickerModule,
+        MatInputModule,
+        MatNativeDateModule,
         RouterModule.forRoot(appRoutes, { enableTracing: false, useHash: true }),
         FontAwesomeModule], providers: [
         AuthService,
@@ -162,6 +167,14 @@ const appRoutes: Routes = [
         {
             provide: LOCALE_ID,
             useValue: 'nl'
+        },
+        {
+            provide: MAT_DATE_LOCALE,
+            useValue: 'nl-NL'
+        },
+        {
+            provide: MatDatepickerIntl,
+            useClass: DutchMatDatepickerIntl
         },
         provideHttpClient(withInterceptorsFromDi())
     ] })

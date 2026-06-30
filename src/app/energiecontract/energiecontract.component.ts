@@ -4,32 +4,46 @@ import {ErrorHandingService} from '../error-handling/error-handing.service';
 import {EnergiecontractService} from './energiecontract.service';
 import sortBy from 'lodash-es/sortBy';
 import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
-import {DatePickerDirective, IDatePickerDirectiveConfig} from 'ng2-date-picker';
 import {DecimalPipe} from '@angular/common';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NgxSpinnerService} from 'ngx-spinner';
 import dayjs from 'dayjs';
 import {
   faBan,
-  faCalendarDays,
   faCheck,
   faCircleInfo,
   faCirclePlus,
   faTrash,
   faTriangleExclamation
 } from '@fortawesome/free-solid-svg-icons';
+import {MatDatepicker} from '@angular/material/datepicker';
+import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
+import {
+  DayjsMaterialDateAdapter,
+  DAYJS_MATERIAL_DATE_FORMATS,
+  MaterialDateDisplayMode
+} from '../shared/material/dayjs-material-date-adapter';
 
-const datePickerFormat = 'DD-MM-YYYY';
 const pricePattern = /^\d(,\d{1,6})*$/;
 
 @Component({
-  selector: 'home-energiecontract',
-  templateUrl: './energiecontract.component.html'
+    selector: 'home-energiecontract',
+    templateUrl: './energiecontract.component.html',
+    providers: [
+      {
+        provide: DateAdapter,
+        useClass: DayjsMaterialDateAdapter
+      },
+      {
+        provide: MAT_DATE_FORMATS,
+        useValue: DAYJS_MATERIAL_DATE_FORMATS
+      }
+    ],
+    standalone: false
 })
 export class EnergiecontractComponent implements OnInit {
   faCirclePlus = faCirclePlus;
   faCircleInfo = faCircleInfo;
-  faCalendarDays = faCalendarDays;
   faTriangleExclamation = faTriangleExclamation;
   faBan = faBan;
   faCheck = faCheck;
@@ -39,25 +53,22 @@ export class EnergiecontractComponent implements OnInit {
 
   public form: UntypedFormGroup;
 
-  public datePickerConfiguration: IDatePickerDirectiveConfig;
-
   public editMode = false;
   public selectedEnergiecontract: Energiecontract;
+
+  @ViewChild('fromDatePicker')
+  private fromDatePicker?: MatDatepicker<Date>;
 
   constructor(private readonly energiecontractService: EnergiecontractService,
               private readonly spinnerService: NgxSpinnerService,
               private readonly errorHandlingService: ErrorHandingService,
               private readonly decimalPipe: DecimalPipe,
-              private readonly modalService: NgbModal) {
+              private readonly modalService: NgbModal,
+              private readonly dateAdapter: DateAdapter<Date>) {
   }
 
-  @ViewChild('datePicker', {static: true})
-  public datePicker: DatePickerDirective;
-
   public ngOnInit(): void {
-    this.datePickerConfiguration = {
-      format: datePickerFormat,
-    };
+    this.setDateAdapterMode('day');
     this.createForm();
     setTimeout(() => this.getEnergieContracten());
   }
@@ -69,7 +80,7 @@ export class EnergiecontractComponent implements OnInit {
       gas: new UntypedFormControl('', [Validators.required, Validators.pattern(pricePattern)]),
       stroomNormaalTarief: new UntypedFormControl('', [Validators.required, Validators.pattern(pricePattern)]),
       stroomDalTarief: new UntypedFormControl('', Validators.pattern(pricePattern)),
-      selectedDate: new UntypedFormControl({value: null}, [Validators.required])
+      selectedDate: new UntypedFormControl(null, [Validators.required])
     });
   }
 
@@ -121,7 +132,7 @@ export class EnergiecontractComponent implements OnInit {
     this.gas.setValue('');
     this.stroomNormaalTarief.setValue('');
     this.stroomDalTarief.setValue('');
-    this.selectedDate.setValue(dayjs());
+    this.selectedDate.setValue(dayjs().toDate());
   }
 
   public startEdit(energiecontract: Energiecontract): void {
@@ -133,7 +144,7 @@ export class EnergiecontractComponent implements OnInit {
     this.gas.setValue(this.formatPrice(energiecontract.gasPerKuub));
     this.stroomNormaalTarief.setValue(this.formatPrice(energiecontract.stroomPerKwhNormaalTarief));
     this.stroomDalTarief.setValue(this.formatPrice(energiecontract.stroomPerKwhDalTarief));
-    this.selectedDate.setValue(energiecontract.validFrom);
+    this.selectedDate.setValue(energiecontract.validFrom?.isValid() ? energiecontract.validFrom.toDate() : null);
   }
 
   private formatPrice(price: number): string {
@@ -149,7 +160,7 @@ export class EnergiecontractComponent implements OnInit {
     this.spinnerService.show();
 
     const energiecontract: Energiecontract = this.selectedEnergiecontract ? this.selectedEnergiecontract : new Energiecontract();
-    energiecontract.validFrom = dayjs(this.selectedDate.value, this.datePickerConfiguration.format);
+    energiecontract.validFrom = dayjs(this.selectedDate.value as Date);
     energiecontract.leverancier = this.leverancier.value;
 
     if (this.remark.value) {
@@ -191,9 +202,20 @@ export class EnergiecontractComponent implements OnInit {
     });
   }
 
-  public openDatePicker(): void {
-    this.datePicker.api.open();
+  public get maxDate(): Date {
+    return new Date();
   }
+
+  public openDatePicker(event: MouseEvent): void {
+    event.preventDefault();
+    this.setDateAdapterMode('day');
+    this.fromDatePicker?.open();
+  }
+
+  public asDate(value: dayjs.Dayjs): Date | null {
+    return value?.isValid() ? value.toDate() : null;
+  }
+
 
   // noinspection JSMethodCanBeStatic
   private toFloat(value: string): number {
@@ -211,5 +233,10 @@ export class EnergiecontractComponent implements OnInit {
     this.modalService.open(deletionConformationDialogTemplate).result.then(
       _result => this.delete(),
       _reason => console.info('Cancel deletion'));
+  }
+
+  private setDateAdapterMode(mode: MaterialDateDisplayMode): void {
+    const adapter = this.dateAdapter as DayjsMaterialDateAdapter;
+    adapter.setDisplayMode(mode);
   }
 }

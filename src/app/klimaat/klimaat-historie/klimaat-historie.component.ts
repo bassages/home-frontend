@@ -24,9 +24,10 @@ import dayjs, {Dayjs} from 'dayjs';
 import {faDroplet, faThermometerHalf} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'home-klimaat-historie',
-  templateUrl: './klimaat-historie.component.html',
-  styleUrls: ['./klimaat-historie-component.scss']
+    selector: 'home-klimaat-historie',
+    templateUrl: './klimaat-historie.component.html',
+    styleUrls: ['./klimaat-historie-component.scss'],
+    standalone: false
 })
 export class KlimaatHistorieComponent implements OnInit {
   faDroplet = faDroplet;
@@ -71,7 +72,11 @@ export class KlimaatHistorieComponent implements OnInit {
       const sensorTypeParam = queryParams.get('sensorType');
 
       if (queryParams.has('datum')) {
-        this.date = dayjs(queryParams.get('datum'), 'DD-MM-YYYY');
+        this.date = this.parseRouteDate(queryParams.get('datum'));
+
+        if (!this.date) {
+          return this.navigateTo(sensorCodeParam, sensorTypeParam, dayjs());
+        }
       } else {
         return this.navigateTo(sensorCodeParam, sensorTypeParam, dayjs());
       }
@@ -342,5 +347,10 @@ export class KlimaatHistorieComponent implements OnInit {
   public getColor(value: number) {
     const indexOfValue = this.sortedUniqueValues.indexOf(value);
     return this.colorScale[indexOfValue];
+  }
+
+  private parseRouteDate(dateParam: string): Dayjs | null {
+    const parsed = dayjs(dateParam, 'DD-MM-YYYY', true);
+    return parsed.isValid() ? parsed : null;
   }
 }

@@ -19,8 +19,9 @@ import duration from 'dayjs/plugin/duration';
 dayjs.extend(duration);
 
 @Component({
-  selector: 'home-opgenomen-vermogen',
-  templateUrl: './opgenomen-vermogen.component.html'
+    selector: 'home-opgenomen-vermogen',
+    templateUrl: './opgenomen-vermogen.component.html',
+    standalone: false
 })
 export class OpgenomenVermogenComponent implements OnInit {
 
@@ -56,7 +57,11 @@ export class OpgenomenVermogenComponent implements OnInit {
       if (!queryParams.has('datum')) {
         return this.navigateTo(dayjs());
       }
-      this.selectedDate = dayjs(queryParams.get('datum'), 'DD-MM-YYYY');
+      this.selectedDate = this.parseRouteDate(queryParams.get('datum'));
+
+      if (!this.selectedDate) {
+        return this.navigateTo(dayjs());
+      }
 
       setTimeout(() => this.getAndLoadData());
     });
@@ -187,5 +192,10 @@ export class OpgenomenVermogenComponent implements OnInit {
 
   public periodLengthChanged(): void {
     this.getAndLoadData();
+  }
+
+  private parseRouteDate(dateParam: string): Dayjs | null {
+    const parsed = dayjs(dateParam, 'DD-MM-YYYY', true);
+    return parsed.isValid() ? parsed : null;
   }
 }

@@ -4,24 +4,34 @@
   </div>
   <div class="card-body">
     <div class="ledbar float-start">
-      <div *ngFor="let i of [9,8,7,6,5,4,3,2,1,0]" class="led" [ngClass]="gasLeds[i]?.state === LedState.ON ? 'gas-led-' + i : 'led-off'"></div>
+      @for (i of [9,8,7,6,5,4,3,2,1,0]; track i) {
+        <div class="led" [ngClass]="gasLeds[i]?.state === LedState.ON ? 'gas-led-' + i : 'led-off'"></div>
+      }
     </div>
 
     <p class="h3">Vandaag</p>
-    <div class="h3" *ngIf="verbruikVandaag">{{verbruikVandaag.gasVerbruik | number: '1.3-3'}} m&#179;</div>
-    <div class="h3" *ngIf="!verbruikVandaag">- m&#179;</div>
+    @if (verbruikVandaag) {
+      <div class="h3">{{verbruikVandaag.gasVerbruik | number: '1.3-3'}} m&#179;</div>
+    }
+    @if (!verbruikVandaag) {
+      <div class="h3">- m&#179;</div>
+    }
 
     <hr />
 
     <p class="h3">Meterstand</p>
 
-    <p class="h6" *ngIf="meterstand">
-      <span ngbTooltip="Dal- en normaaltarief">
-        <fa-icon [icon]="faMoon"></fa-icon> <fa-icon [icon]="faSun"></fa-icon><span class="ms-1">{{meterstand.gas | number: '1.3-3'}}</span>
-      </span>
-    </p>
-    <p class="h6" *ngIf="!meterstand">
-      -
-    </p>
+    @if (meterstand) {
+      <p class="h6">
+        <span ngbTooltip="Dal- en normaaltarief">
+          <fa-icon [icon]="faMoon"></fa-icon> <fa-icon [icon]="faSun"></fa-icon><span class="ms-1">{{meterstand.gas | number: '1.3-3'}}</span>
+        </span>
+      </p>
+    }
+    @if (!meterstand) {
+      <p class="h6">
+        -
+      </p>
+    }
   </div>
 </div>

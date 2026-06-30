@@ -1,6 +1,4 @@
-@import "node_modules/bootstrap/scss/functions";
-@import "node_modules/bootstrap/scss/variables";
-@import "node_modules/bootstrap/scss/mixins/_breakpoints";
+@use "src/styles/bootstrap-tokens" as bootstrap;
 
 .electricity-gas-toggle-button {
   width: 8em;
@@ -12,7 +10,7 @@
   margin-right: 0;
   margin-left: 0;
 }
-@include media-breakpoint-up(lg) {
+@include bootstrap.media-breakpoint-up(lg) {
   .statistics-row {
     margin-left: 2px;
   }

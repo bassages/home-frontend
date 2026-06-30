@@ -11,9 +11,10 @@ import {Router} from '@angular/router';
 import {faMoon, faPlugCircleBolt, faSun} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'home-stroom-verbruik',
-  templateUrl: './stroom-verbruik.component.html',
-  styleUrls: ['../ledbar.scss', './stroom-verbruik.component.scss']
+    selector: 'home-stroom-verbruik',
+    templateUrl: './stroom-verbruik.component.html',
+    styleUrls: ['../ledbar.scss', './stroom-verbruik.component.scss'],
+    standalone: false
 })
 export class StroomVerbruikComponent implements OnInit, OnDestroy {
   faPlugCircleBolt = faPlugCircleBolt;
