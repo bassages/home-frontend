@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from './auth/auth.service';
 import { NavbarComponent } from './navbar/navbar.component';
-import { NgxSpinnerComponent } from 'ngx-spinner';
 import { ErrorHandlingComponent } from './error-handling/error-handling.component';
 import { RouterOutlet } from '@angular/router';
+import { LoadingOverlayComponent } from './loading-overlay/loading-overlay.component';
 
 @Component({
     selector: 'home-root',
     templateUrl: './app.component.html',
-    imports: [NavbarComponent, NgxSpinnerComponent, ErrorHandlingComponent, RouterOutlet]
+    imports: [NavbarComponent, LoadingOverlayComponent, ErrorHandlingComponent, RouterOutlet]
 })
 export class AppComponent implements OnInit {
 

@@ -1,4 +1,4 @@
-import {enableProdMode} from '@angular/core';
+import {enableProdMode, provideZoneChangeDetection} from '@angular/core';
 import {registerLocaleData} from '@angular/common';
 import localeNl from '@angular/common/locales/nl';
 import {bootstrapApplication} from '@angular/platform-browser';
@@ -13,5 +13,5 @@ if (environment.production) {
 
 registerLocaleData(localeNl);
 
-bootstrapApplication(AppComponent, appConfig)
+bootstrapApplication(AppComponent, {...appConfig, providers: [provideZoneChangeDetection(), ...appConfig.providers]})
   .catch(err => console.log(err));

@@ -14,7 +14,7 @@ export class DayjsMaterialDateAdapter extends NativeDateAdapter {
 
   public override format(date: Date, displayFormat: object): string {
     const formatToken = displayFormat as unknown;
-    if (typeof formatToken === 'string' && formatToken === 'dayjsMaterialInput') {
+    if (typeof formatToken === 'string' && (formatToken === 'dayjsMaterialInput' || formatToken === 'dayjsMaterialInputWithWeekday')) {
       const parsedDate = dayjs(date);
       if (!parsedDate.isValid()) {
         return '';
@@ -26,6 +26,12 @@ export class DayjsMaterialDateAdapter extends NativeDateAdapter {
 
       if (this.displayMode === 'year') {
         return parsedDate.format('YYYY');
+      }
+
+      if (formatToken === 'dayjsMaterialInputWithWeekday') {
+        const weekdayAbbreviation = parsedDate.format('dd');
+        const weekday = `${weekdayAbbreviation.charAt(0).toUpperCase()}${weekdayAbbreviation.slice(1)}.`;
+        return `${weekday} ${parsedDate.format('DD-MM-YYYY')}`;
       }
 
       return parsedDate.format('DD-MM-YYYY');
