@@ -17,7 +17,6 @@ import {Klimaat} from '../klimaat';
 import { DecimalPipe, NgClass } from '@angular/common';
 import {Statistics} from '../../statistics';
 import {ChartStatisticsService} from '../../chart/statistics/chart-statistics.service';
-import * as chroma from 'chroma-js';
 import {KlimaatSensorService} from '../klimaatsensor.service';
 import {NgxSpinnerService} from 'ngx-spinner';
 import dayjs, {Dayjs} from 'dayjs';
@@ -26,6 +25,7 @@ import { FormsModule } from '@angular/forms';
 import { DateNavigatorComponent } from '../../date-navigator/date-navigator.component';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { StatisticsComponent } from '../../chart/statistics/statistics.component';
+import chroma from "chroma-js";
 
 @Component({
     selector: 'home-klimaat-historie',
