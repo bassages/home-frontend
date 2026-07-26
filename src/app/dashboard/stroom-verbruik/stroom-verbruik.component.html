@@ -11,7 +11,7 @@
 
     <p class="h3">Op dit moment</p>
     <div class="h3 current-power-usage">
-      {{opgenomenVermogen ? opgenomenVermogen.watt : '-'}} Watt
+      {{opgenomenVermogen ? opgenomenVermogen.activePowerTotalInWatts : '-'}} Watt
       @if (opgenomenVermogen?.tariefIndicator === 'DAL') {
         <span ngbTooltip="Daltarief">
           <fa-icon [icon]="faMoon"></fa-icon>

@@ -110,14 +110,14 @@ export class OpgenomenVermogenComponent implements OnInit {
 
       const tarief = opgenomenVermogen.tariefIndicator.toLowerCase();
       transformedDataItem.datumtijd = new Date(opgenomenVermogen.datumtijd).getTime();
-      transformedDataItem['watt-' + tarief] = opgenomenVermogen.watt;
+      transformedDataItem['active-power-total-in-watts-' + tarief] = opgenomenVermogen.activePowerTotalInWatts;
 
       // Fill the "gap" between this row and the previous one
       if (previousTarief && tarief && tarief !== previousTarief) {
         const obj: any = {};
         obj.datumtijd = new Date(opgenomenVermogen.datumtijd).getTime() - 1;
-        const attribute = 'watt-' + previousTarief;
-        obj[attribute] = opgenomenVermogen.watt;
+        const attribute = 'active-power-total-in-watts-' + previousTarief;
+        obj[attribute] = opgenomenVermogen.activePowerTotalInWatts;
         transformedData.push(obj);
       }
 
@@ -141,9 +141,9 @@ export class OpgenomenVermogenComponent implements OnInit {
         json: chartData,
         keys: {
           x: 'datumtijd',
-          value: ['watt-dal', 'watt-normaal']
+          value: ['active-power-total-in-watts-dal', 'active-power-total-in-watts-normaal']
         },
-        types: {'watt-dal': 'area', 'watt-normaal': 'area'}
+        types: {'active-power-total-in-watts-dal': 'area', 'active-power-total-in-watts-normaal': 'area'}
       },
       axis: {
         x: {
@@ -185,11 +185,12 @@ export class OpgenomenVermogenComponent implements OnInit {
 
   // noinspection JSMethodCanBeStatic
   private getStatistics(opgenomenVermogens: OpgenomenVermogen[]): Statistics {
-    const watts: number[] = filter(map(opgenomenVermogens, 'watt'), (watt: number) => watt !== null && watt > 0);
+    const activePowerTotalsInWatts: number[] = filter(map(opgenomenVermogens, 'activePowerTotalInWatts'),
+      (activePowerTotalInWatts: number) => activePowerTotalInWatts !== null && activePowerTotalInWatts > 0);
     return {
-      min: min(watts),
-      max: max(watts),
-      avg: mean(watts)
+      min: min(activePowerTotalsInWatts),
+      max: max(activePowerTotalsInWatts),
+      avg: mean(activePowerTotalsInWatts)
     };
   }
 

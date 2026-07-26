@@ -24,7 +24,7 @@ describe('OpgenomenVermogenService', () => {
 
         // Call the service
         service.getMostRecent().subscribe(data => {
-          expect(data.watt).toBe(136);
+          expect(data.activePowerTotalInWatts).toBe(136);
           expect(data.datumtijd).toEqual(dayjs('2020-10-04T16:11:11').toDate());
           expect(data.tariefIndicator).toBe('DAL');
         });
@@ -36,7 +36,7 @@ describe('OpgenomenVermogenService', () => {
         // Set the fake data to be returned by the mock
         const mostRecentOpgenomenVermogen: OpgenomenVermogen = new OpgenomenVermogen();
         mostRecentOpgenomenVermogen.tariefIndicator = 'DAL';
-        mostRecentOpgenomenVermogen.watt = 136;
+        mostRecentOpgenomenVermogen.activePowerTotalInWatts = 136;
         mostRecentOpgenomenVermogen.datumtijd = dayjs('2020-10-04T16:11:11').toDate();
         req.flush(mostRecentOpgenomenVermogen);
       })

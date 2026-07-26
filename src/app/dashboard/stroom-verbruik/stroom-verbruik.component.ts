@@ -74,7 +74,7 @@ export class StroomVerbruikComponent implements OnInit, OnDestroy {
       (message) => {
         const json = JSON.parse(message.body);
         const opgenomenVermogen = new OpgenomenVermogen();
-        opgenomenVermogen.watt = json['watt'];
+        opgenomenVermogen.activePowerTotalInWatts = json['activePowerTotalInWatts'];
         opgenomenVermogen.tariefIndicator = json['tariefIndicator'];
         opgenomenVermogen.datumtijd = new Date(json['datumtijd']);
         this.setOpgenomenVermogen(opgenomenVermogen);
@@ -89,9 +89,9 @@ export class StroomVerbruikComponent implements OnInit, OnDestroy {
 
   private setOpgenomenVermogenLeds(opgenomenVermogen: OpgenomenVermogen) {
     const opgenomenVermogenLeds: Led[] = [];
-    opgenomenVermogenLeds.push(new Led(opgenomenVermogen.watt > 0 ? LedState.ON : LedState.OFF));
+    opgenomenVermogenLeds.push(new Led(opgenomenVermogen.activePowerTotalInWatts > 0 ? LedState.ON : LedState.OFF));
     for (let i = 1; i <= 9; i++) {
-      opgenomenVermogenLeds.push(new Led(opgenomenVermogen.watt >= (i * 150) ? LedState.ON : LedState.OFF));
+      opgenomenVermogenLeds.push(new Led(opgenomenVermogen.activePowerTotalInWatts >= (i * 150) ? LedState.ON : LedState.OFF));
     }
     this.opgenomenVermogenLeds = opgenomenVermogenLeds;
   }

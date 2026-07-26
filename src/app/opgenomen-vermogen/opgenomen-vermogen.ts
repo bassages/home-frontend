@@ -1,5 +1,5 @@
 export class OpgenomenVermogen {
   public datumtijd: Date;
-  public watt: number;
+  public activePowerTotalInWatts: number;
   public tariefIndicator: string;
 }
