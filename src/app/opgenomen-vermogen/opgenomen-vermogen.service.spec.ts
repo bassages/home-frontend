@@ -25,6 +25,9 @@ describe('OpgenomenVermogenService', () => {
         // Call the service
         service.getMostRecent().subscribe(data => {
           expect(data.activePowerTotalInWatts).toBe(136);
+          expect(data.activePowerL1InWatts).toBe(40);
+          expect(data.activePowerL2InWatts).toBe(45);
+          expect(data.activePowerL3InWatts).toBe(51);
           expect(data.datumtijd).toEqual(dayjs('2020-10-04T16:11:11').toDate());
           expect(data.tariefIndicator).toBe('DAL');
         });
@@ -37,6 +40,9 @@ describe('OpgenomenVermogenService', () => {
         const mostRecentOpgenomenVermogen: OpgenomenVermogen = new OpgenomenVermogen();
         mostRecentOpgenomenVermogen.tariefIndicator = 'DAL';
         mostRecentOpgenomenVermogen.activePowerTotalInWatts = 136;
+        mostRecentOpgenomenVermogen.activePowerL1InWatts = 40;
+        mostRecentOpgenomenVermogen.activePowerL2InWatts = 45;
+        mostRecentOpgenomenVermogen.activePowerL3InWatts = 51;
         mostRecentOpgenomenVermogen.datumtijd = dayjs('2020-10-04T16:11:11').toDate();
         req.flush(mostRecentOpgenomenVermogen);
       })

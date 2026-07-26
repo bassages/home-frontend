@@ -75,6 +75,9 @@ export class StroomVerbruikComponent implements OnInit, OnDestroy {
         const json = JSON.parse(message.body);
         const opgenomenVermogen = new OpgenomenVermogen();
         opgenomenVermogen.activePowerTotalInWatts = json['activePowerTotalInWatts'];
+        opgenomenVermogen.activePowerL1InWatts = json['activePowerL1InWatts'];
+        opgenomenVermogen.activePowerL2InWatts = json['activePowerL2InWatts'];
+        opgenomenVermogen.activePowerL3InWatts = json['activePowerL3InWatts'];
         opgenomenVermogen.tariefIndicator = json['tariefIndicator'];
         opgenomenVermogen.datumtijd = new Date(json['datumtijd']);
         this.setOpgenomenVermogen(opgenomenVermogen);
@@ -98,5 +101,21 @@ export class StroomVerbruikComponent implements OnInit, OnDestroy {
 
   public navigateToVerbruikDetails() {
     this.router.navigate(['/energie', 'verbruik', 'uur'], {queryParams: { energiesoort: 'stroom' }});
+  }
+
+  public getPhaseShareInPercent(phasePowerInWatts: number): number | null {
+    const totalPowerInWatts = this.opgenomenVermogen?.activePowerTotalInWatts ?? 0;
+    if (totalPowerInWatts <= 0 || phasePowerInWatts == null) {
+      return null;
+    }
+    return (phasePowerInWatts / totalPowerInWatts) * 100;
+  }
+
+  public getPhaseShareLabel(phasePowerInWatts: number): string {
+    const share = this.getPhaseShareInPercent(phasePowerInWatts);
+    if (share == null) {
+      return '-';
+    }
+    return `${share.toFixed(1)}%`;
   }
 }
