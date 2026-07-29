@@ -3,7 +3,7 @@ import {Led, LedState} from '../led';
 import {Observable, Subscription} from 'rxjs';
 import {Message} from '@stomp/stompjs';
 import {Router} from '@angular/router';
-import {RxStompService} from '@stomp/ng2-stompjs';
+import {RxStomp} from '@stomp/rx-stomp';
 import {KlimaatService} from '../../klimaat/klimaat.service';
 import {RealtimeKlimaat} from '../../klimaat/realtimeKlimaat';
 import {Trend} from '../../klimaat/trend';
@@ -35,7 +35,7 @@ export class KlimaatTemperatuurComponent implements OnInit, OnDestroy {
   private klimaatSubscription: Subscription;
 
   constructor(private readonly klimaatService: KlimaatService,
-              private readonly stompService: RxStompService,
+              private readonly stompService: RxStomp,
               private readonly router: Router) { }
 
   public ngOnInit(): void {

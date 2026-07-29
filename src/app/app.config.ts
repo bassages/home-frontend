@@ -6,7 +6,7 @@ import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {MatDatepickerIntl, MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {withHashLocation, provideRouter} from '@angular/router';
-import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
+import {RxStomp, RxStompConfig} from '@stomp/rx-stomp';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import SockJS from 'sockjs-client';
@@ -38,7 +38,7 @@ export function socketProvider() {
   return new SockJS('/ws');
 }
 
-const myRxStompConfig: InjectableRxStompConfig = {
+const myRxStompConfig: RxStompConfig = {
   webSocketFactory: socketProvider,
   connectHeaders: {},
   heartbeatIncoming: 0,
@@ -50,6 +50,13 @@ const myRxStompConfig: InjectableRxStompConfig = {
     }
   }
 };
+
+export function rxStompFactory() {
+  const rxStomp = new RxStomp();
+  rxStomp.configure(myRxStompConfig);
+  rxStomp.activate();
+  return rxStomp;
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -83,13 +90,8 @@ export const appConfig: ApplicationConfig = {
     StandbyPowerService,
     ErrorHandingService,
     {
-      provide: InjectableRxStompConfig,
-      useValue: myRxStompConfig
-    },
-    {
-      provide: RxStompService,
-      useFactory: rxStompServiceFactory,
-      deps: [InjectableRxStompConfig]
+      provide: RxStomp,
+      useFactory: rxStompFactory
     },
     {
       provide: HTTP_INTERCEPTORS,

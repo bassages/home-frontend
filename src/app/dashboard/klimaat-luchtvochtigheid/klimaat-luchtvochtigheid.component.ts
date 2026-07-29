@@ -4,7 +4,7 @@ import {Led, LedState} from '../led';
 import {RealtimeKlimaat} from '../../klimaat/realtimeKlimaat';
 import {Observable, Subscription} from 'rxjs';
 import {Router} from '@angular/router';
-import {RxStompService} from '@stomp/ng2-stompjs';
+import {RxStomp} from '@stomp/rx-stomp';
 import {Message} from '@stomp/stompjs';
 import {Trend} from '../../klimaat/trend';
 import {faArrowTrendDown, faArrowTrendUp, faDroplet} from '@fortawesome/free-solid-svg-icons';
@@ -35,7 +35,7 @@ export class KlimaatLuchtvochtigheidComponent implements  OnInit, OnDestroy {
   private klimaatSubscription: Subscription;
 
   constructor(private readonly klimaatService: KlimaatService,
-              private readonly stompService: RxStompService,
+              private readonly stompService: RxStomp,
               private readonly router: Router) { }
 
   public ngOnInit(): void {

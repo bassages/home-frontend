@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {RxStompService} from '@stomp/ng2-stompjs';
+import {RxStomp} from '@stomp/rx-stomp';
 import {Observable, Subscription} from 'rxjs';
 import {Message} from '@stomp/stompjs';
 import {Meterstand} from '../../meterstand/meterstand';
@@ -38,7 +38,7 @@ export class StroomVerbruikComponent implements OnInit, OnDestroy {
 
   constructor(private readonly opgenomenVermogenService: OpgenomenVermogenService,
               private readonly meterstandService: MeterstandService,
-              private readonly stompService: RxStompService,
+              private readonly stompService: RxStomp,
               private readonly router: Router) { }
 
   public ngOnInit(): void {

@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {RxStompService} from '@stomp/ng2-stompjs';
+import {RxStomp} from '@stomp/rx-stomp';
 import {Observable, Subscription} from 'rxjs';
 import {Message} from '@stomp/stompjs';
 import {Meterstand} from '../../meterstand/meterstand';
@@ -38,7 +38,7 @@ export class GasVerbruikComponent implements OnInit, OnDestroy {
   private meterstandObserver: Observable<Message>;
   private meterstandSubscription: Subscription;
 
-  constructor(private readonly stompService: RxStompService,
+  constructor(private readonly stompService: RxStomp,
               private readonly router: Router,
               private readonly meterstandService: MeterstandService,
               private readonly energieVerbruikService: EnergieVerbruikService) { }
