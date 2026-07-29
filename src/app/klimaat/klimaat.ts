@@ -1,4 +1,4 @@
-import {Dayjs} from 'dayjs';
+import {Dayjs} from 'dayjs/esm';
 
 export class Klimaat {
   public dateTime: Dayjs;

@@ -11,7 +11,7 @@ import {EnergieVerbruikHistorieService} from './energie-verbruik-historie.servic
 import {EnergieVerbruikHistorieServiceProvider} from './energie-verbruik-historie-service-provider';
 import {VerbruikKostenOverzicht} from './verbruikKostenOverzicht';
 import {NgxSpinnerService} from 'ngx-spinner';
-import dayjs, {Dayjs} from 'dayjs';
+import dayjs, {Dayjs} from 'dayjs/esm';
 import {faFireFlameCurved, faPlugCircleBolt} from '@fortawesome/free-solid-svg-icons';
 import {Statistics} from '../statistics';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';

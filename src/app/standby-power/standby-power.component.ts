@@ -3,7 +3,7 @@ import {StandbyPowerService} from './standby-power.service';
 import {ErrorHandingService} from '../error-handling/error-handing.service';
 import {StandbyPowerInPeriod} from './standby-power-in-period';
 import {NgxSpinnerService} from 'ngx-spinner';
-import dayjs, {Dayjs} from 'dayjs';
+import dayjs, {Dayjs} from 'dayjs/esm';
 import { DateNavigatorComponent } from '../date-navigator/date-navigator.component';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 

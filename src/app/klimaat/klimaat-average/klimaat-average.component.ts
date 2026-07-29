@@ -6,7 +6,7 @@ import {GemiddeldeKlimaatPerMaand} from '../gemiddeldeKlimaatPerMaand';
 import sortBy from 'lodash-es/sortBy';
 import {KlimaatSensorService} from '../klimaatsensor.service';
 import {NgxSpinnerService} from 'ngx-spinner';
-import dayjs, {Dayjs} from 'dayjs';
+import dayjs, {Dayjs} from 'dayjs/esm';
 import {faDroplet, faThermometerHalf} from '@fortawesome/free-solid-svg-icons';
 import { NgClass, DecimalPipe, DatePipe } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';

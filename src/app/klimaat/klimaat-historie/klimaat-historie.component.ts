@@ -19,7 +19,7 @@ import {Statistics} from '../../statistics';
 import {ChartStatisticsService} from '../../chart/statistics/chart-statistics.service';
 import {KlimaatSensorService} from '../klimaatsensor.service';
 import {NgxSpinnerService} from 'ngx-spinner';
-import dayjs, {Dayjs} from 'dayjs';
+import dayjs, {Dayjs} from 'dayjs/esm';
 import {faDroplet, faThermometerHalf} from '@fortawesome/free-solid-svg-icons';
 import { FormsModule } from '@angular/forms';
 import { DateNavigatorComponent } from '../../date-navigator/date-navigator.component';

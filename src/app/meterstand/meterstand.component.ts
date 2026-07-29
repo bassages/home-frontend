@@ -4,7 +4,7 @@ import {MeterstandOpDag} from './meterstandOpDag';
 import sortBy from 'lodash-es/sortBy';
 import {ErrorHandingService} from '../error-handling/error-handing.service';
 import {NgxSpinnerService} from 'ngx-spinner';
-import dayjs, {Dayjs} from 'dayjs';
+import dayjs, {Dayjs} from 'dayjs/esm';
 import { DateNavigatorComponent } from '../date-navigator/date-navigator.component';
 import { DecimalPipe, DatePipe } from '@angular/common';
 
@@ -52,4 +52,3 @@ export class MeterstandComponent implements OnInit {
     this.getMeterstanden();
   }
 }
-

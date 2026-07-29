@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import dayjs, {Dayjs} from 'dayjs';
+import dayjs, {Dayjs} from 'dayjs/esm';
 import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import { MatDatepicker, MatDatepickerInput } from '@angular/material/datepicker';
 import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';

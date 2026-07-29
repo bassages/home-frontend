@@ -1,6 +1,6 @@
 import {ChartConfiguration} from 'c3';
 import {Observable} from 'rxjs';
-import {Dayjs} from 'dayjs';
+import {Dayjs} from 'dayjs/esm';
 
 export interface EnergieVerbruikHistorieService<T> {
 

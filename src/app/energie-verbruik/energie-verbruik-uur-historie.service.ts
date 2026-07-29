@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
 import {AbstractEnergieVerbruikHistorieService} from './energie-verbruik-base-chart.service';
 import {ChartConfiguration} from 'c3';
 import {DecimalPipe} from '@angular/common';
-import {Dayjs} from 'dayjs';
+import {Dayjs} from 'dayjs/esm';
 
 @Injectable()
 export class EnergieVerbruikUurHistorieService extends AbstractEnergieVerbruikHistorieService

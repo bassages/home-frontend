@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {MatDateFormats, NativeDateAdapter} from '@angular/material/core';
-import dayjs from 'dayjs';
+import dayjs from 'dayjs/esm';
 
 export type MaterialDateDisplayMode = 'day' | 'month' | 'year';
 
@@ -52,4 +52,3 @@ export const DAYJS_MATERIAL_DATE_FORMATS: MatDateFormats = {
     monthYearA11yLabel: {year: 'numeric', month: 'long'}
   }
 };
-

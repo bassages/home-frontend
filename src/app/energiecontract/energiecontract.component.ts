@@ -7,7 +7,7 @@ import { UntypedFormControl, UntypedFormGroup, Validators, FormsModule, Reactive
 import { DecimalPipe, NgClass, CurrencyPipe, DatePipe } from '@angular/common';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NgxSpinnerService} from 'ngx-spinner';
-import dayjs from 'dayjs';
+import dayjs from 'dayjs/esm';
 import {
   faBan,
   faCheck,

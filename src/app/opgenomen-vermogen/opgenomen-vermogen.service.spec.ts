@@ -2,7 +2,7 @@ import {inject, TestBed} from '@angular/core/testing';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import {OpgenomenVermogenService} from './opgenomen-vermogen.service';
 import {OpgenomenVermogen} from './opgenomen-vermogen';
-import dayjs from 'dayjs';
+import dayjs from 'dayjs/esm';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('OpgenomenVermogenService', () => {

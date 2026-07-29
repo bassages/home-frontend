@@ -6,7 +6,7 @@ import {AbstractEnergieVerbruikHistorieService} from './energie-verbruik-base-ch
 import {ChartConfiguration} from 'c3';
 import {DecimalPipe} from '@angular/common';
 import {VerbruikInMaand} from './verbruikInMaand';
-import dayjs, {Dayjs} from 'dayjs';
+import dayjs, {Dayjs} from 'dayjs/esm';
 
 const capitalizedShortMonthNames = ['Jan.', 'Feb.', 'Maa.', 'Apr.', 'Mei', 'Jun.', 'Jul.', 'Aug.', 'Sep.', 'Okt.', 'Nov.', 'Dec.'];
 const capitalizedFullMonthNames = ['Januari', 'Februari', 'Maart', 'April', 'Mei', 'Juni',
@@ -77,4 +77,3 @@ export class EnergieVerbruikMaandHistorieService extends AbstractEnergieVerbruik
     return dayjs(year + '-' + month + '-' + day);
   }
 }
-

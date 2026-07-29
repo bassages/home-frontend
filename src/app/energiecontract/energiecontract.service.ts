@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Energiecontract} from './energiecontract';
 import {map} from 'rxjs/operators';
-import dayjs from 'dayjs';
+import dayjs from 'dayjs/esm';
 
 class BackendEnergiecontract {
   public id: number;

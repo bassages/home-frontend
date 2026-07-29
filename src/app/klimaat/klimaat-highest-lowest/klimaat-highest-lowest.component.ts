@@ -8,7 +8,7 @@ import {zip} from 'rxjs';
 import {Router} from '@angular/router';
 import {KlimaatSensorService} from '../klimaatsensor.service';
 import {NgxSpinnerService} from 'ngx-spinner';
-import dayjs, {Dayjs} from 'dayjs';
+import dayjs, {Dayjs} from 'dayjs/esm';
 import {faArrowDown, faArrowUp, faDroplet, faThermometerHalf} from '@fortawesome/free-solid-svg-icons';
 import { NgClass, DecimalPipe, DatePipe } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';

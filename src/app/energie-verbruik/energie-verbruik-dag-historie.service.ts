@@ -7,7 +7,7 @@ import {AbstractEnergieVerbruikHistorieService} from './energie-verbruik-base-ch
 import {ChartConfiguration} from 'c3';
 import {DecimalPipe} from '@angular/common';
 import capitalize from 'lodash-es/capitalize';
-import dayjs, {Dayjs} from 'dayjs';
+import dayjs, {Dayjs} from 'dayjs/esm';
 
 @Injectable()
 export class EnergieVerbruikDagHistorieService extends AbstractEnergieVerbruikHistorieService

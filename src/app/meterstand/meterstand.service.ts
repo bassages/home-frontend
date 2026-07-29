@@ -3,7 +3,7 @@ import {MeterstandOpDag} from './meterstandOpDag';
 import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Meterstand} from './meterstand';
-import {Dayjs} from 'dayjs';
+import {Dayjs} from 'dayjs/esm';
 
 @Injectable()
 export class MeterstandService {

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {OpgenomenVermogen} from './opgenomen-vermogen';
-import {Dayjs} from 'dayjs';
+import {Dayjs} from 'dayjs/esm';
 
 @Injectable()
 export class OpgenomenVermogenService {

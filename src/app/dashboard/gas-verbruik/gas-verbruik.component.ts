@@ -10,7 +10,7 @@ import isNumber from 'lodash-es/isNumber';
 import {VerbruikOpDag} from '../../energie-verbruik/verbruikOpDag';
 import {GemiddeldVerbruikInPeriod} from '../../energie-verbruik/gemiddeldVerbruikInPeriod';
 import {Router} from '@angular/router';
-import dayjs from 'dayjs';
+import dayjs from 'dayjs/esm';
 import {faFireFlameCurved, faMoon, faSun} from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { NgClass, DecimalPipe } from '@angular/common';

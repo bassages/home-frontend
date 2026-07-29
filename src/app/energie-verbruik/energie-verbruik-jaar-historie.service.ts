@@ -6,7 +6,7 @@ import {AbstractEnergieVerbruikHistorieService} from './energie-verbruik-base-ch
 import {ChartConfiguration} from 'c3';
 import {DecimalPipe} from '@angular/common';
 import {VerbruikInJaar} from './verbruikInJaar';
-import dayjs, {Dayjs} from 'dayjs';
+import dayjs, {Dayjs} from 'dayjs/esm';
 
 @Injectable()
 export class EnergieVerbruikJaarHistorieService extends AbstractEnergieVerbruikHistorieService

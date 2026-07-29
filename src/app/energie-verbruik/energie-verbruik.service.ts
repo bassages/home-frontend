@@ -6,7 +6,7 @@ import {GemiddeldVerbruikInPeriod} from './gemiddeldVerbruikInPeriod';
 import {VerbruikInUur} from './verbruikInUur';
 import {VerbruikInMaand} from './verbruikInMaand';
 import {VerbruikInJaar} from './verbruikInJaar';
-import {Dayjs} from 'dayjs';
+import {Dayjs} from 'dayjs/esm';
 
 @Injectable()
 export class EnergieVerbruikService {
