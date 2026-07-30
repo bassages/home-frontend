@@ -7,21 +7,24 @@
     <div class="phase-power-grid mb-2">
       <div class="phase-power-card">
         <span class="phase-power-label">L1</span>
-        <span class="phase-power-value">{{opgenomenVermogen ? opgenomenVermogen.activePowerL1InWatts : '-'}} w</span>
+        <span class="phase-power-value">{{opgenomenVermogen?.activePowerL1InWatts ?? 0}} w</span>
+        <span class="phase-power-voltage">{{opgenomenVermogen?.voltageL1 ?? 0}} V</span>
+        <span class="phase-power-current">{{opgenomenVermogen?.instantaneousCurrentL1Ampere ?? 0}} A</span>
         <span class="phase-power-share">{{opgenomenVermogen ? getPhaseShareLabel(opgenomenVermogen.activePowerL1InWatts) : '-'}}</span>
-        <span class="phase-power-voltage">{{opgenomenVermogen ? opgenomenVermogen.voltageL1 : '-'}} V</span>
       </div>
       <div class="phase-power-card">
         <span class="phase-power-label">L2</span>
-        <span class="phase-power-value">{{opgenomenVermogen ? opgenomenVermogen.activePowerL2InWatts : '-'}} w</span>
+        <span class="phase-power-value">{{opgenomenVermogen?.activePowerL2InWatts ?? 0}} w</span>
+        <span class="phase-power-voltage">{{opgenomenVermogen?.voltageL2 ?? 0}} V</span>
+        <span class="phase-power-current">{{opgenomenVermogen?.instantaneousCurrentL2Ampere ?? 0}} A</span>
         <span class="phase-power-share">{{opgenomenVermogen ? getPhaseShareLabel(opgenomenVermogen.activePowerL2InWatts) : '-'}}</span>
-        <span class="phase-power-voltage">{{opgenomenVermogen ? opgenomenVermogen.voltageL2 : '-'}} V</span>
       </div>
       <div class="phase-power-card">
         <span class="phase-power-label">L3</span>
-        <span class="phase-power-value">{{opgenomenVermogen ? opgenomenVermogen.activePowerL3InWatts : '-'}} w</span>
+        <span class="phase-power-value">{{opgenomenVermogen?.activePowerL3InWatts ?? 0}} w</span>
+        <span class="phase-power-voltage">{{opgenomenVermogen?.voltageL3 ?? 0}} V</span>
+        <span class="phase-power-current">{{opgenomenVermogen?.instantaneousCurrentL3Ampere ?? 0}} A</span>
         <span class="phase-power-share">{{opgenomenVermogen ? getPhaseShareLabel(opgenomenVermogen.activePowerL3InWatts) : '-'}}</span>
-        <span class="phase-power-voltage">{{opgenomenVermogen ? opgenomenVermogen.voltageL3 : '-'}} V</span>
       </div>
     </div>
   </div>

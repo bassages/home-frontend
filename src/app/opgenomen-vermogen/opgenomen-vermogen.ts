@@ -7,5 +7,8 @@ export class OpgenomenVermogen {
   public voltageL1: number;
   public voltageL2: number;
   public voltageL3: number;
+  public instantaneousCurrentL1Ampere: number;
+  public instantaneousCurrentL2Ampere: number;
+  public instantaneousCurrentL3Ampere: number;
   public tariefIndicator: string;
 }

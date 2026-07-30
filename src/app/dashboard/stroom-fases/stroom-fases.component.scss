@@ -23,12 +23,17 @@
 }
 
 .phase-power-share {
-  font-weight: 600;
   color: #6c757d;
   line-height: 1.1;
 }
 
 .phase-power-voltage {
+  font-size: 0.9rem;
+  color: #495057;
+  line-height: 1.1;
+}
+
+.phase-power-current {
   font-size: 0.9rem;
   color: #495057;
   line-height: 1.1;
