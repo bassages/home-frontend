@@ -48,6 +48,9 @@ export class StroomFasesComponent implements OnInit, OnDestroy {
       opgenomenVermogen.activePowerL1InWatts = json['activePowerL1InWatts'];
       opgenomenVermogen.activePowerL2InWatts = json['activePowerL2InWatts'];
       opgenomenVermogen.activePowerL3InWatts = json['activePowerL3InWatts'];
+      opgenomenVermogen.voltageL1 = json['voltageL1'];
+      opgenomenVermogen.voltageL2 = json['voltageL2'];
+      opgenomenVermogen.voltageL3 = json['voltageL3'];
       opgenomenVermogen.tariefIndicator = json['tariefIndicator'];
       opgenomenVermogen.datumtijd = new Date(json['datumtijd']);
       this.opgenomenVermogen = opgenomenVermogen;
