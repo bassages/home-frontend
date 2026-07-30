@@ -102,20 +102,4 @@ export class StroomVerbruikComponent implements OnInit, OnDestroy {
   public navigateToVerbruikDetails() {
     this.router.navigate(['/energie', 'verbruik', 'uur'], {queryParams: { energiesoort: 'stroom' }});
   }
-
-  public getPhaseShareInPercent(phasePowerInWatts: number): number | null {
-    const totalPowerInWatts = this.opgenomenVermogen?.activePowerTotalInWatts ?? 0;
-    if (totalPowerInWatts <= 0 || phasePowerInWatts == null) {
-      return null;
-    }
-    return (phasePowerInWatts / totalPowerInWatts) * 100;
-  }
-
-  public getPhaseShareLabel(phasePowerInWatts: number): string {
-    const share = this.getPhaseShareInPercent(phasePowerInWatts);
-    if (share == null) {
-      return '-';
-    }
-    return `${share.toFixed(1)}%`;
-  }
 }

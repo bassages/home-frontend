@@ -38,33 +38,4 @@
   background: #2b9234;
 }
 
-.phase-power-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.5rem;
-}
-
-.phase-power-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0.4rem 0.5rem;
-  border-radius: 0.375rem;
-  background: #f5f5f5;
-}
-
-.phase-power-label {
-  font-weight: 700;
-  line-height: 1.1;
-}
-
-.phase-power-value {
-  line-height: 1.2;
-}
-
-.phase-power-share {
-  font-weight: 600;
-  color: #6c757d;
-  line-height: 1.1;
-}
 
