@@ -33,6 +33,7 @@ import {StandbyPowerService} from './standby-power/standby-power.service';
 import {environment} from '../environments/environment';
 import {appRoutes} from './app.routes';
 import {DecimalPipe} from '@angular/common';
+import {ApplicationConfigService} from './application-config';
 
 export function socketProvider() {
   return new SockJS('/ws');
@@ -72,6 +73,7 @@ export const appConfig: ApplicationConfig = {
       FontAwesomeModule
     ),
     AuthService,
+    ApplicationConfigService,
     DecimalPipe,
     ChartService,
     ChartStatisticsService,
@@ -114,4 +116,3 @@ export const appConfig: ApplicationConfig = {
     provideRouter(appRoutes, withHashLocation())
   ]
 };
-
