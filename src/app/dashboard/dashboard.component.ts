@@ -18,7 +18,6 @@ export class DashboardComponent implements OnInit {
     constructor(private readonly applicationConfigService: ApplicationConfigService) { }
 
     public ngOnInit(): void {
-      alert(":");
         this.applicationConfigService.getConfig().subscribe(config => {
             this.showClimate = config.dashboardClimateEnabled;
             this.showGas = config.dashboardGasEnabled;
