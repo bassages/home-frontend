@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-header h3">
+    <fa-icon [icon]="faPlugCircleBolt"></fa-icon> Vandaag tot nu toe
+  </div>
+  <div class="card-body">
+    <p class="mb-1">Verbruik</p>
+    <p class="h3">{{verbruikKwh === null || verbruikKwh === undefined ? '-' : (verbruikKwh | number: '1.3-3')}} kWh</p>
+
+    <p class="mb-1">Kosten</p>
+    <p class="h3">{{kostenEuro === null || kostenEuro === undefined ? '-' : (kostenEuro | currency:'EUR':'symbol':'1.2-2')}}</p>
+  </div>
+</div>
