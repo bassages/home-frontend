@@ -54,7 +54,6 @@
     <div class="col-sm-9 col-md-7 col-lg-5">
       <input matInput type="text" class="form-control" id="fromDate" name="fromDate"
         [formControl]="selectedDate"
-        [max]="maxDate"
         [matDatepicker]="fromDatePicker"
         [ngClass]="{'is-invalid': selectedDate.invalid}"
         required

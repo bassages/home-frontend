@@ -204,10 +204,6 @@ export class EnergiecontractComponent implements OnInit {
     });
   }
 
-  public get maxDate(): Date {
-    return new Date();
-  }
-
   public openDatePicker(event: MouseEvent): void {
     event.preventDefault();
     this.setDateAdapterMode('day');
