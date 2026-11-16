@@ -1,0 +1,49 @@
+<div class="card h-100">
+  <div class="card-header h3">
+    <fa-icon [icon]="faEuroSign"></fa-icon> Afgelopen 4 weken
+  </div>
+  <div class="card-body">
+    @if (loading) {
+      <p class="mb-0">Vergelijking laden...</p>
+    } @else if (error) {
+      <p class="mb-0">De vergelijking kon niet worden geladen.</p>
+    } @else {
+      <table class="table table-sm mb-2">
+        <thead>
+          <tr>
+            <th scope="col">Jaar</th>
+            <th scope="col" class="text-end">Totale kosten</th>
+            <th scope="col" class="text-end">
+              Verschil
+              <fa-icon [icon]="faCircleInfo"
+                       ngbTooltip="De kosten van de afgelopen 4 weken worden vergeleken met elk historisch jaar. Een pijl omlaag betekent dat de afgelopen 4 weken minder kosten dan dat historische jaar."
+                       tabindex="0"
+                       role="img"
+                       aria-label="De procentuele verandering vergelijkt de kosten van de afgelopen 4 weken met elk historisch jaar. Een pijl omlaag betekent dat de afgelopen 4 weken minder kosten dan dat historische jaar."></fa-icon>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (vergelijking of vergelijkingen; track vergelijking.jaar; let first = $first) {
+            <tr [class.fw-bold]="first">
+              <th scope="row">{{vergelijking.jaar}}</th>
+              <td class="text-end">
+                {{vergelijking.kostenEuro === null ? '-' : (vergelijking.kostenEuro | currency:'EUR':'symbol':'1.2-2')}}
+              </td>
+              <td class="text-end">
+                @if (vergelijking.kostenVeranderingProcent === null) {
+                  -
+                } @else {
+                  <span class="text-muted">
+                    {{getChangeArrow(vergelijking.kostenVeranderingProcent)}}
+                    {{getAbsoluteChange(vergelijking.kostenVeranderingProcent) | number: '1.1-1'}}%
+                  </span>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </div>
+</div>

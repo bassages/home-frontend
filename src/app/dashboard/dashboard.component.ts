@@ -6,11 +6,12 @@ import { KlimaatLuchtvochtigheidComponent } from './klimaat-luchtvochtigheid/kli
 import { StroomFasesComponent } from './stroom-fases/stroom-fases.component';
 import {ApplicationConfigService} from '../application-config';
 import {StroomVandaagComponent} from './stroom-vandaag/stroom-vandaag.component';
+import {EnergieKostenVergelijkingComponent} from './energie-kosten-vergelijking/energie-kosten-vergelijking.component';
 
 @Component({
     selector: 'home-dashboard',
     templateUrl: './dashboard.component.html',
-    imports: [StroomVerbruikComponent, StroomFasesComponent, StroomVandaagComponent, GasVerbruikComponent, KlimaatTemperatuurComponent, KlimaatLuchtvochtigheidComponent]
+    imports: [StroomVerbruikComponent, StroomFasesComponent, StroomVandaagComponent, EnergieKostenVergelijkingComponent, GasVerbruikComponent, KlimaatTemperatuurComponent, KlimaatLuchtvochtigheidComponent]
 })
 export class DashboardComponent implements OnInit {
     public showClimate = false;
